@@ -47,4 +47,9 @@ program og ranglister uden dem.
 2. **Kampprogrammet er ikke symmetrisk:** The Eternal Sages har Black Mountain Slavers som kamp 1, men
    Black Mountain Slavers har Fright Night Fumblers som kamp 1. "Kamp N" er altså ikke en fælles runde.
 3. Hvorfor har hver kamp to faner ("A vs. B" og "B vs. A")? Udfylder hver coach sin egen?
-4. Findes der et Sort pulje-ark?
+4. **Sort pulje-arket mangler.** Kommissæren siger, der er seks ark. Tjekket i Peters Drive 3. nov.:
+   det er ikke delt med Peter, og det kan ikke findes uden link. Stillingen for Sort pulje står dog i turneringsarket.
+
+## Andet delt materiale
+- Google Doc "Bud på opbygning af liga" (`1KrB-Q-GpUalk81khfPlMBhfYGEItIMQmYy-qR1gytPo`), delt 13. okt.
+  Mulig kilde til husregler på siden. Ikke læst endnu.
