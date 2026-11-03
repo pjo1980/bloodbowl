@@ -5,6 +5,8 @@
 //
 // BRUG_LOKALE_DATA: true = siden bruger eksempelfilerne i data/ (til test uden net).
 window.CONFIG = {
+  LIGA: "Semper Fortuna Blood Bowl Liga",  // navn indtil videre
+  KOMMISSAER: "Mikkel Steen",
   BRUG_LOKALE_DATA: false,
   ARK: {
     turnering: "1sYVF9bm5XaG8sHLOOU8SGHGvMKqWEBPfR9ZL46oudtA",

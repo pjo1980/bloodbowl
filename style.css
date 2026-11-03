@@ -1,0 +1,160 @@
+:root {
+  --bg: #14100e;
+  --panel: #1f1815;
+  --panel-2: #2a201b;
+  --line: #3b2e27;
+  --text: #f3e9dc;
+  --muted: #b5a291;
+  --accent: #f28c28;
+  --blood: #b3261e;
+  --gold: #e5b53a;
+  --pulje-sort: #8f8f8f;
+  --pulje-roed: #d9443a;
+  --pulje-blaa: #3f7fe0;
+  --pulje-gul: #e5b53a;
+  --radius: 10px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image: radial-gradient(ellipse at top, #2a1712 0%, var(--bg) 60%);
+  background-attachment: fixed;
+  color: var(--text);
+  font: 16px/1.5 "Barlow", system-ui, sans-serif;
+  min-height: 100vh;
+}
+a { color: var(--accent); }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- Top ---------- */
+.top {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(20, 16, 14, .94);
+  backdrop-filter: blur(6px);
+  border-bottom: 3px solid var(--blood);
+}
+.top-inner { display: flex; align-items: center; gap: 16px; padding-top: 10px; padding-bottom: 10px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); min-width: 0; }
+.logo { width: 40px; height: 40px; flex: none; }
+.brand-name { display: block; font-family: "Bangers", Impact, sans-serif; font-size: 24px; letter-spacing: 1px; line-height: 1.05; }
+.brand-sub { display: block; font-size: 13px; color: var(--muted); }
+.tabs { display: flex; gap: 4px; margin-left: auto; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs a {
+  flex: none; padding: 7px 12px; border-radius: 999px;
+  color: var(--muted); text-decoration: none; font-weight: 600; font-size: 15px;
+}
+.tabs a:hover { color: var(--text); background: var(--panel-2); }
+.tabs a.on { color: #1a120d; background: var(--accent); }
+@media (max-width: 720px) {
+  .tabs { margin-left: 0; width: 100%; }
+}
+
+/* ---------- Typografi ---------- */
+main { padding-top: 24px; padding-bottom: 32px; }
+h1, h2, h3 { font-family: "Bangers", Impact, sans-serif; font-weight: 400; letter-spacing: 1px; margin: 0 0 8px; line-height: 1.1; }
+h1 { font-size: clamp(34px, 7vw, 56px); }
+h2 { font-size: 30px; margin-top: 32px; }
+h3 { font-size: 22px; }
+.kicker { text-transform: uppercase; letter-spacing: 2px; font-size: 13px; font-weight: 700; color: var(--accent); margin: 0 0 4px; }
+.lead { color: var(--muted); font-size: 18px; margin: 0 0 16px; max-width: 62ch; }
+.muted { color: var(--muted); }
+.small { font-size: 14px; }
+.loading { color: var(--muted); font-style: italic; padding: 40px 0; }
+
+/* ---------- Kort og gitter ---------- */
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.grid-2 { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+.card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 16px; min-width: 0;
+}
+.card h3 { margin-bottom: 10px; }
+a.card { display: block; color: inherit; text-decoration: none; transition: border-color .15s, transform .15s; }
+a.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+.hero {
+  background: linear-gradient(135deg, #3a1410 0%, #1f1815 70%);
+  border: 1px solid var(--line); border-left: 6px solid var(--blood);
+  border-radius: var(--radius); padding: 24px 20px; margin-bottom: 24px;
+}
+.hero .regler { display: inline-block; margin-top: 8px; padding: 6px 12px; border-radius: 6px; background: rgba(0,0,0,.35); font-weight: 600; }
+
+/* Podie */
+.podie { display: grid; gap: 12px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 560px) { .podie { grid-template-columns: 1fr; } }
+.podie .card { text-align: center; position: relative; padding-top: 22px; }
+.plads { font-family: "Bangers", Impact, sans-serif; font-size: 44px; line-height: 1; color: var(--gold); }
+.podie .card:nth-child(2) .plads { color: #c9c9c9; }
+.podie .card:nth-child(3) .plads { color: #c98a4a; }
+.podie .navn { font-weight: 700; font-size: 18px; margin: 4px 0; }
+.stor { font-family: "Bangers", Impact, sans-serif; font-size: 32px; color: var(--accent); }
+
+/* Fremdrift */
+.bar { height: 10px; background: var(--panel-2); border-radius: 999px; overflow: hidden; margin-top: 6px; }
+.bar > span { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+.fremdrift { display: grid; gap: 12px; }
+.fremdrift-row { display: flex; justify-content: space-between; gap: 8px; font-weight: 600; }
+
+/* Puljemærke */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px; padding: 2px 8px; border-radius: 999px;
+  background: var(--panel-2); color: var(--muted); white-space: nowrap;
+}
+.chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--muted)); }
+.p-sort { --c: var(--pulje-sort); }
+.p-roed { --c: var(--pulje-roed); }
+.p-blaa { --c: var(--pulje-blaa); }
+.p-gul  { --c: var(--pulje-gul); }
+.card.pulje { border-top: 4px solid var(--c, var(--line)); }
+
+/* ---------- Tabeller ---------- */
+.tabel-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius); border: 1px solid var(--line); background: var(--panel); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); background: var(--panel-2); font-weight: 700; }
+tr:last-child td { border-bottom: 0; }
+tbody tr:hover td { background: rgba(242, 140, 40, .06); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.pts { font-weight: 700; color: var(--accent); }
+td.rank { color: var(--muted); width: 1%; }
+td.wrap-ok { white-space: normal; min-width: 220px; color: var(--muted); font-size: 14px; }
+td a { color: var(--text); text-decoration: none; font-weight: 600; }
+td a:hover { color: var(--accent); }
+.card .tabel-wrap { border: 0; background: transparent; border-radius: 0; margin: 0 -16px -16px; }
+.oversidder { color: var(--muted); }
+.mng { color: var(--blood); font-weight: 700; }
+
+/* Topliste */
+.top5 { list-style: none; margin: 0; padding: 0; }
+.top5 li { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px dashed var(--line); }
+.top5 li:last-child { border-bottom: 0; }
+.top5 .v { font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+.top5 .nr { color: var(--muted); font-size: 13px; margin-right: 6px; }
+
+/* Holdside */
+.fakta { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); margin-bottom: 20px; }
+.fakta .card { padding: 12px; }
+.fakta .lbl { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+.fakta .val { font-size: 20px; font-weight: 700; }
+.stats { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; font-size: 14px; color: var(--muted); }
+.stats b { color: var(--text); }
+.tilbage { display: inline-block; margin-bottom: 12px; font-weight: 600; text-decoration: none; }
+
+/* Nyheder */
+.nyhed { margin-bottom: 16px; }
+.nyhed .dato { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.nyhed p { margin: 8px 0 0; white-space: pre-line; }
+
+/* Fejl */
+.fejl { background: #2c1311; border: 1px solid var(--blood); border-radius: var(--radius); padding: 12px 14px; color: #f6cfc9; }
+
+/* Footer */
+.foot { border-top: 1px solid var(--line); padding-top: 16px; padding-bottom: 32px; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
+.knap { font: inherit; font-weight: 600; color: var(--text); background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.knap:hover { border-color: var(--accent); }

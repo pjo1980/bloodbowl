@@ -20,16 +20,19 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
   Skal virke på mobil (coaches kigger på telefonen).
 
 ## Mappestruktur
-- `index.html` – skal, sidens skelet (header, faner Forside/Stilling/Kampe/Hold/Nyheder, `#main`).
+- `index.html` – skelet (header, faner Forside/Stilling/Kampe/Hold/Ranglister/Nyheder). Hæv `?v=N` på css/js ved ændringer (GitHub Pages cacher).
 - `config.js` – ark-ID'er, fanenavne og holdnavn→fane-afvigelser.
 - `DATAKORT.md` – hvad der ligger i hvilket ark og hvilken fane, og åbne uklarheder i data.
-- `style.css`, `app.js` – mangler (se PLAN.md).
+- `style.css` – design. `app.js` – hentning, CSV-parser, én læser pr. fanetype, sider og router.
+- `nyheder.csv` – nyheder (dato, overskrift, tekst); ligger i repoet, ikke i arket.
 - `data/` – kopier af kommissærens faner (hentet 3. nov. 2026) til test uden net.
 - `.claude/launch.json` – lokal test: `python -m http.server 8765` (fetch virker ikke fra file://).
+  Navn: Semper Fortuna Blood Bowl Liga (foreløbigt). Kommissær: Mikkel Steen.
 - `.nojekyll` – GitHub Pages skal servere filerne råt.
 
 ## Regler for arbejdet
 - Rør aldrig kommissærens ark uden Peters ja; læs det kun.
 - Alt brugerdata fra arket HTML-escapes før visning.
+- Google sender den FØRSTE fane, hvis et fanenavn er forkert. Hver læser i app.js tjekker derfor fanens form.
 - Vis venlige fejl på dansk (fx "Arket er ikke delt offentligt"), ikke tekniske stakke.
 - Spørg Peter før: oprettelse af GitHub-repo (offentligt), ændring af deling på ark, kontakt til kommissæren.

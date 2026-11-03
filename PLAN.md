@@ -4,7 +4,9 @@
 - Trin 1 er **færdigt**: alle ark er læst og kortlagt i `DATAKORT.md`. Alle er delt offentligt.
 - Konklusion: **intet bro-ark**. Siden læser turneringsarket og hold-arket direkte.
 - `config.js` har ark-ID'er og fanenavne. `data/` har kopier af fanerne til test.
-- Mangler: `style.css`, `app.js`, guide til Peter. Næste skridt er trin 2.
+- Trin 2 (version 1) er **bygget og testet lokalt** samme aften med rigtige data: alle seks faner,
+  alle 13 holdlister, mobilbredde uden vandret scroll. Ikke udgivet endnu.
+- Navn: Semper Fortuna Blood Bowl Liga (foreløbigt). Kommissær: Mikkel Steen.
 
 ## Trin 2 – Byg siden (version 1)
 - `app.js`: CSV-parser (anførselstegn, kommaer i tal som "12,50%"), loader (gviz eller `data/`),
@@ -32,7 +34,6 @@ eller en `nyheder.csv` i repoet, som Peter sender tekst til. Vælg med Peter.
 - Kampresultater pr. kamp fra kampfanerne i puljearkene (faste celler, kræver omhu).
 
 ## Åbne spørgsmål til Peter
-- Liganavn og kommissærens navn til siden?
 - Må kommissæren vide, at siden findes, før den er færdig?
 - github.io-adressen fin, eller eget domæne senere?
 - Uklarhederne i data (se DATAKORT.md): hvilke kampe er spillet, kampprogrammets rækkefølge, de dobbelte kampfaner, Sort pulje-arket.
