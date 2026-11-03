@@ -14,16 +14,17 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
   `https://docs.google.com/spreadsheets/d/<SHEET_ID>/gviz/tq?tqx=out:csv&sheet=<fanenavn>`
   (kræver at arket er delt "Anyone with the link → Viewer"). Tom SHEET_ID i `config.js` = lokale filer i `data/`.
 - **Læsning af data:** app.js skal have et **mapping-lag** (fanenavn + kolonnenavne → sidens felter), så siden
-  tilpasses kommissærens kolonner, ikke omvendt. Stilling beregnes i browseren ud fra kampresultater
-  (point for sejr/uafgjort/nederlag skal kunne sættes; standard 3/1/0, derefter TD-forskel, så casualties).
+  tilpasses kommissærens kolonner, ikke omvendt. **Stillingen beregnes IKKE i browseren**: kommissæren regner
+  den selv i arket (30 sejr / 10 uafgjort / +1 pr. TD og CAS), og siden viser hans tal. Se DATAKORT.md.
 - **Udseende:** mørk, "sports-tabloid"-stemning i Blood Bowl-stil (orange/blodrød/guld), fonte Bangers + Barlow.
   Skal virke på mobil (coaches kigger på telefonen).
 
 ## Mappestruktur
 - `index.html` – skal, sidens skelet (header, faner Forside/Stilling/Kampe/Hold/Nyheder, `#main`).
-- `config.js` – SHEET_ID og senere mapping.
+- `config.js` – ark-ID'er, fanenavne og holdnavn→fane-afvigelser.
+- `DATAKORT.md` – hvad der ligger i hvilket ark og hvilken fane, og åbne uklarheder i data.
 - `style.css`, `app.js` – mangler (se PLAN.md).
-- `data/` – lokale eksempel-CSV'er til udvikling/test, samme kolonner som kommissærens ark.
+- `data/` – kopier af kommissærens faner (hentet 3. nov. 2026) til test uden net.
 - `.claude/launch.json` – lokal test: `python -m http.server 8765` (fetch virker ikke fra file://).
 - `.nojekyll` – GitHub Pages skal servere filerne råt.
 
