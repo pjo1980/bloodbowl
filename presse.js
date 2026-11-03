@@ -35,7 +35,7 @@ window.PRESSE = [
     sted: "The Gutpit, presserummet",
     citat: { hvem: "Otto Overbelly", tekst: "Du godeste, nej. Vi er ikke barbarer!" },
     replikker: [
-      { hvem: "Gunnar Grådig", rolle: "Ligaens pressechef", tekst: "Velkommen til sæsonens første pressekonference. Der er endnu ikke sparket en bold, men presseafdelingen er allerede neutral. Første spørgsmål går til ligaens bedste coach. Otto, hvordan føles det at gå ind i sæsonen som favorit?" },
+      { hvem: "Gunnar Grådig", rolle: "Ligaens pressechef", tekst: "Velkommen til sæsonens første pressekonference. Presseafdelingen er naturligvis 100 % neutral i sin dækning af ligaen. Og nu: ligaens klart bedste coach, Otto Overbelly! Otto, hvordan føles det at have vundet prisen som ligaens bedste coach, inden sæsonen er gået i gang?" },
       { hvem: "Otto Overbelly", rolle: "Coach", tekst: "Er der frokost bagefter?" },
       { hvem: "Gunnar Grådig", tekst: "Ja." },
       { hvem: "Otto Overbelly", tekst: "Så føles det godt." },
