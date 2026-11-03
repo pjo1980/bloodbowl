@@ -62,3 +62,8 @@ satire-note i bunden. Pressechefen hedder Gunnar Grådig (godkendt af Peter 3. n
 - Må kommissæren vide, at siden findes, før den er færdig?
 - Eget domæne senere, eller er github.io fint?
 - Uklarhederne i data (se DATAKORT.md): hvad kampprogrammet er i forhold til puljekampene, og kampprogrammets rækkefølge.
+
+## Logo (idéer 3. nov.)
+Klubben hedder Semper Fortuna og ligger i **Odder**. Logoet skal kombinere SF/Semper Fortuna, Blood Bowl-stemning og "ODDER BLOOD BOWL".
+Anbefalet retning: pigget skjold med SF-monogram og en blokterning ("altid held" på latin, ironisk med blokterninger).
+Andre idéer: laurbærkrans med S·F (latinsk/romersk), lykkehjul. Kopiér ikke Games Workshops officielle Blood Bowl-logo.
