@@ -38,7 +38,7 @@ Venter på, at Mikkel opretter fanen. Peter har fået en besked at sende ham. In
 ## Humor (bygget 3. nov., version 3)
 Sponsorbjælke under menuen (skifter hvert 12. sek.), "Fra pressetribunen" på forsiden (Spike!, Star Player-citat,
 pressechefen), pressechefen på Stilling og Puljekampe, Spike!-banner på GutBuster Gluttons' holdside, citat på Ranglister,
-satire-note i bunden. Pressechefens navn (Gunnar Grådig) er foreløbigt.
+satire-note i bunden. Pressechefen hedder Gunnar Grådig (godkendt af Peter 3. nov.).
 
 ## Idéer og ønsker (Peters ønsker 3. nov.)
 - **Blood Bowl-humor rundt omkring:** sponsorer fra Blood Bowl-universet, "citater" fra kendte Star Players.
@@ -48,7 +48,7 @@ satire-note i bunden. Pressechefens navn (Gunnar Grådig) er foreløbigt.
   medieopmærksomhed også, så det ikke bliver ondt.
 - **Stående joke: ligaens pressechef er (ikke så hemmeligt) GutBuster Gluttons-fan.** En opdigtet figur (ikke en rigtig
   person), der skriver pressemeddelelser, kommentarer og "objektive" analyser, som altid ender med at hylde Gluttons.
-  Navn vælges med Peter. Holdes adskilt fra kommissæren, hvis ord altid er Mikkels egne.
+  Navn: Gunnar Grådig (godkendt). Holdes adskilt fra kommissæren, hvis ord altid er Mikkels egne.
 - **Kommissærens ord:** kun hans egne ord (fx fra Nyheder-fanen eller en fane/kolonne han selv skriver i). Opdigt aldrig citater fra Mikkel.
 - **Mere statistik** på sigt fra ligaens egne spillere (fx flest SPP, flest skader, MVP-konge, "mest farlige fouler").
 - Evt. "Seneste resultater" på forsiden (kræver at forsiden henter kampskemaerne, 26 små hentninger).
