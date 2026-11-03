@@ -14,7 +14,8 @@
     "turnering|Holdranglister": "holdranglister.csv",
     "turnering|Spiller ranglister": "spillerranglister.csv",
     "hold|Holdstats ud": "holdstats-ud.csv",
-    "hold|GutBuster Gluttons": "roster-gutbuster-gluttons.csv"
+    "hold|GutBuster Gluttons": "roster-gutbuster-gluttons.csv",
+    "turnering|Nyheder": "nyheder-fane-eksempel.csv"
   };
 
   // ---------- Hjælpere ----------
@@ -229,7 +230,8 @@
       holdrang: hent("turnering", F.holdrang).then((r) => læsRanglister(r, F.holdrang, 3)),
       spillerrang: hent("turnering", F.spillerrang).then((r) => læsRanglister(r, F.spillerrang, 4)),
       holdstats: hent("hold", F.holdstats).then((r) => læsHoldstats(r, F.holdstats)),
-      nyheder: fetch("nyheder.csv", { cache: "no-store" }).then((r) => r.ok ? r.text() : "").then(parseCSV)
+      nyheder: fetch("nyheder.csv", { cache: "no-store" }).then((r) => r.ok ? r.text() : "").then(parseCSV),
+      nyhedsfane: hent("turnering", F.nyheder) // valgfri: Mikkels fane "Nyheder" i turneringsarket
     };
     F.puljer.forEach((p) => { job["pulje:" + p] = hent("turnering", p).then((r) => læsStilling(r, p)); });
     const navne = Object.keys(job);
@@ -435,18 +437,38 @@
       <p class="small muted">Top 5 pr. kategori. Nuller vises ikke.</p>`;
   }
 
+  // Datoer som Mikkel skriver dem: 2026-11-05, 5-11-2026, 5.11.2026 eller 5/11/26 (dag først).
+  function læsDato(s) {
+    s = (s || "").trim();
+    let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (m) return new Date(+m[1], m[2] - 1, +m[3]);
+    m = s.match(/^(\d{1,2})[./-](\d{1,2})[./-](\d{2,4})/);
+    if (m) return new Date(+m[3] < 100 ? 2000 + +m[3] : +m[3], m[2] - 1, +m[1]);
+    return null;
+  }
+  // Nyheder fra én kilde: kræver kolonnerne Dato, Overskrift, Tekst (store/små bogstaver er ligegyldige).
+  // Hvis fanen ikke findes, sender Google den første fane; den har ingen "Overskrift" og giver derfor ingen nyheder.
+  function læsNyheder(rows) {
+    if (!rows || !rows.length) return [];
+    const h = rows.findIndex((r) => r.some((c) => /^(overskrift|titel)$/i.test(c)));
+    if (h < 0) return [];
+    const hr = rows[h].map((x) => x.toLowerCase());
+    const i = (...n) => hr.findIndex((x) => n.includes(x));
+    const iD = i("dato"), iO = i("overskrift", "titel"), iT = i("tekst", "nyhed");
+    return rows.slice(h + 1).filter((r) => r[iO]).map((r) => {
+      const dt = iD >= 0 ? læsDato(r[iD]) : null;
+      return { dato: dt, datoTekst: iD >= 0 ? r[iD] : "", overskrift: r[iO], tekst: iT >= 0 ? r[iT] : "" };
+    });
+  }
   function nyheder() {
-    const d = D.nyheder && D.nyheder.ok;
-    if (!d || !d.length) return [];
-    const hr = d[0].map((x) => x.toLowerCase());
-    const i = (n) => hr.indexOf(n);
-    return d.slice(1).filter((r) => r[i("overskrift")])
-      .map((r) => ({ dato: r[i("dato")], overskrift: r[i("overskrift")], tekst: r[i("tekst")] }))
-      .sort((a, b) => (b.dato || "").localeCompare(a.dato || ""));
+    const alle = [
+      ...læsNyheder(D.nyhedsfane && D.nyhedsfane.ok),
+      ...læsNyheder(D.nyheder && D.nyheder.ok)
+    ];
+    return alle.sort((a, b) => (b.dato ? b.dato.getTime() : 0) - (a.dato ? a.dato.getTime() : 0));
   }
   function nyhedKort(n) {
-    const dt = n.dato ? new Date(n.dato + "T12:00:00") : null;
-    const dato = dt && !isNaN(dt) ? dt.toLocaleDateString("da-DK", { day: "numeric", month: "long", year: "numeric" }) : n.dato;
+    const dato = n.dato && !isNaN(n.dato) ? n.dato.toLocaleDateString("da-DK", { day: "numeric", month: "long", year: "numeric" }) : n.datoTekst;
     return `<article class="card nyhed"><div class="dato">${esc(dato)}</div><h3>${esc(n.overskrift)}</h3><p>${esc(n.tekst)}</p></article>`;
   }
   function sideNyheder() {

@@ -24,8 +24,8 @@
 - Test: preview_start "bloodbowl" (port 8765), også i mobilbredde.
 
 ## Trin 3 – Nyheder og husregler
-Ingen nyhedsfane i arkene. Forslag: en fane "Nyheder" (dato, overskrift, tekst) i turneringsarket,
-eller en `nyheder.csv` i repoet, som Peter sender tekst til. Vælg med Peter.
+Bygget 3. nov.: siden læser en valgfri fane "Nyheder" i turneringsarket (Dato | Overskrift | Tekst).
+Venter på, at Mikkel opretter fanen. Peter har fået en besked at sende ham. Indtil da vises kun velkomstnyheden.
 
 ## Trin 4 – Udgiv
 - Repo og Pages er oprettet (se status).

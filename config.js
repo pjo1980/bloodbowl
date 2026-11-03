@@ -22,7 +22,8 @@ window.CONFIG = {
     program: "Kampprogram Regnbuepiljen",
     holdrang: "Holdranglister",
     spillerrang: "Spiller ranglister",
-    holdstats: "Holdstats ud"
+    holdstats: "Holdstats ud",
+    nyheder: "Nyheder"          // valgfri fane i turneringsarket: Dato | Overskrift | Tekst
   },
   // Holdnavn på siden -> fanenavn i hold-arket, hvor de afviger.
   ROSTER_FANE: {

@@ -25,7 +25,8 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
 - `config.js` – ark-ID'er, fanenavne og holdnavn→fane-afvigelser.
 - `DATAKORT.md` – hvad der ligger i hvilket ark og hvilken fane, og åbne uklarheder i data.
 - `style.css` – design. `app.js` – hentning, CSV-parser, én læser pr. fanetype, sider og router.
-- `nyheder.csv` – nyheder (dato, overskrift, tekst); ligger i repoet, ikke i arket.
+- Nyheder: Mikkel skriver dem i en fane **"Nyheder"** i turneringsarket (kolonner Dato | Overskrift | Tekst, dato med dag først).
+  `nyheder.csv` i repoet er en ekstra kilde (velkomstnyheden); begge flettes og sorteres efter dato.
 - `data/` – kopier af kommissærens faner (hentet 3. nov. 2026) til test uden net.
 - `.claude/launch.json` – lokal test: `python -m http.server 8765` (fetch virker ikke fra file://).
   Navn: Semper Fortuna Blood Bowl Liga (foreløbigt). Kommissær: Mikkel Steen.
