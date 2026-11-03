@@ -277,6 +277,49 @@
       ${kampeKol ? '<th class="num" title="Kampe spillet">K</th>' : ""}<th class="num">Point</th></tr></thead><tbody>${rækker}</tbody></table></div>`;
   }
 
+  // ---------- Humor (indholdet står i humor.js) ----------
+  const H = window.HUMOR || { sponsorer: [], citater: [], spike: [], pressechef: { navn: "Pressechefen", titel: "" }, yndlingshold: "" };
+  const tilfældig = (a) => (a && a.length ? a[Math.floor(Math.random() * a.length)] : null);
+
+  // Pressechefens "analyse" bygger på de rigtige tal, men ender altid med at hylde yndlingsholdet.
+  function pressechefAnalyse() {
+    const s = D.stilling.ok, Y = H.yndlingshold;
+    const y = s && Y ? s.hold.find((h) => h.navn === Y) : null;
+    if (!y) return "";
+    const fører = s.hold[0];
+    const plads = s.hold.findIndex((h) => h.p === y.p) + 1;
+    const delt = s.hold.filter((h) => h.p === y.p).length > 1;
+    if (plads === 1) return tilfældig([
+      `Som forventet ligger ${Y} øverst. Pressechefen har intet at tilføje, udover at han havde ret hele tiden.`,
+      `${Y} fører ligaen. Pressechefen har bestilt kage til hele pressekorpset. Gluttons har allerede spist den.`
+    ]);
+    const valg = [
+      `Ja, ${fører.navn} fører med ${fører.p} point. Men lad os være ærlige: Alle taler om ${Y} på en ${delt ? "delt " : ""}${plads}.-plads. Det kaldes at lure.`,
+      `Tabellen lyver ikke. Den er bare ikke færdig med at fortælle, hvor gode ${Y} er.`,
+      `${fører.navn} fører. Pressechefen har bedt tabellen om en kommentar, men den henviser til ${Y}' imponerende appetit.`,
+      `${y.p} point til ${Y}. Pressechefen understreger, at det er ${y.p} meget tunge point.`
+    ];
+    if (y.w + y.d + y.l === 0) valg.push(`${Y} har ikke tabt en eneste kamp i år. De har heller ikke spillet nogen, men det er en detalje.`);
+    return tilfældig(valg);
+  }
+  const pressechefKort = (tekst) => tekst ? `<aside class="card presse"><p class="kicker">Pressechefens hjørne</p>
+    <p class="presse-tekst">»${esc(tekst)}«</p><div class="small muted">${esc(H.pressechef.navn)}, ${esc(H.pressechef.titel)}</div></aside>` : "";
+  function citatKort() {
+    const c = tilfældig(H.citater);
+    return c ? `<figure class="card citat"><p class="kicker">Star Player-citatet</p><blockquote>»${esc(c.tekst)}«</blockquote>
+      <figcaption>${esc(c.hvem)}</figcaption></figure>` : "";
+  }
+  function spikeKort(overskrift) {
+    const t = tilfældig(H.spike);
+    return t ? `<div class="card spike"><span class="spike-logo">Spike!</span><span class="kicker">${esc(overskrift || "Magazine")}</span>
+      <p>${esc(t)}</p></div>` : "";
+  }
+  function visSponsor() {
+    const el = document.getElementById("sponsor");
+    const s = tilfældig(H.sponsorer);
+    if (el && s) el.innerHTML = `Sponsoreret af <b>${esc(s.navn)}</b>: ${esc(s.tekst)}`;
+  }
+
   function sideForside() {
     const s = D.stilling.ok;
     const top = s ? s.hold.slice(0, 3) : [];
@@ -323,7 +366,10 @@
         </div>
       </div>
 
-      ${nyhed ? `<h2>Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p><a href="#nyheder">Alle nyheder</a></p>` : ""}`;
+      <h2>Fra pressetribunen</h2>
+      <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}</div>
+
+      ${nyhed ?`<h2>Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p><a href="#nyheder">Alle nyheder</a></p>` : ""}`;
   }
 
   function førsteMed(d, kat) {
@@ -338,6 +384,7 @@
       <p class="kicker">Hvem bløder mest?</p>
       <h1>Stilling</h1>
       ${s.ok && s.ok.regler ? `<p class="lead">${esc(s.ok.regler)}</p>` : ""}
+      ${pressechefKort(pressechefAnalyse())}
       <h2>Samlet</h2>
       ${s.ok ? stillingTabel(s.ok.hold, true) : fejlboks(s.fejl)}
       <h2>Puljerne</h2>
@@ -379,7 +426,18 @@
         <span class="score">${k.spillet ? `${esc(k.s1)} – ${esc(k.s2)}` : "–"}</span>
         <span class="u${v2 ? " vinder" : ""}">${holdLink(k.ude)}</span></li>`;
     };
-    return hoved + `<div class="grid-2">${puljer.map((p) => {
+    // Pressechefen kommenterer yndlingsholdets puljekampe ud fra de rigtige resultater.
+    const Y = H.yndlingshold;
+    const yk = puljer.flatMap((p) => p.kampe).filter((k) => !k.fejl && k.spillet && (k.hjemme === Y || k.ude === Y));
+    const yv = yk.filter((k) => (k.hjemme === Y ? tal(k.s1) > tal(k.s2) : tal(k.s2) > tal(k.s1))).length;
+    const presse = !Y ? "" : yk.length === 0
+      ? `${Y} har endnu ikke spillet en puljekamp. Pressechefen kalder det den perfekte sæson: ubesejrede.`
+      : yv === yk.length
+        ? `${Y} har spillet ${yk.length} og vundet ${yv}. Pressechefen arbejder allerede på biografien.`
+        : yv === 0
+          ? `${Y} har spillet ${yk.length} og vundet ${yv}. Pressechefen kalder det taktisk opvarmning.`
+          : `${Y} har spillet ${yk.length} og vundet ${yv}. Pressechefen tæller kun de vundne.`;
+    return hoved + pressechefKort(presse) + `<div class="grid-2" style="margin-top:16px">${puljer.map((p) => {
       const spillet = p.kampe.filter((k) => k.spillet).length;
       return `<div class="card pulje ${puljeKl(p.pulje)}"><h3>${esc(titel(p.pulje))}</h3>
         <p class="small muted" style="margin:0 0 8px">${spillet} af ${p.kampe.length} kampe spillet</p>
@@ -455,6 +513,7 @@
     catch (e) { return hoved + fejlboks(e.message); }
     const f = (lbl, val) => val ? `<div class="card"><div class="lbl">${lbl}</div><div class="val">${esc(val)}</div></div>` : "";
     return `${hoved}
+      ${navn === H.yndlingshold ? `<div class="spike-bane">${spikeKort("Pressens yndlinge")}</div>` : ""}
       ${r.race || r.liga ? `<p class="lead">${esc([r.race, r.liga].filter(Boolean).join(" · "))}</p>` : ""}
       <div class="fakta">
         ${p ? f("Point", String(p.p)) + f("V-U-T", `${p.w}-${p.d}-${p.l}`) : ""}
@@ -494,7 +553,8 @@
       <h1>Ranglister</h1>
       <h2>Spillere</h2>${D.spillerrang.ok ? rangKort(D.spillerrang.ok, true) : fejlboks(D.spillerrang.fejl)}
       <h2>Hold</h2>${D.holdrang.ok ? rangKort(D.holdrang.ok, false) : fejlboks(D.holdrang.fejl)}
-      <p class="small muted">Top 5 pr. kategori. Nuller vises ikke.</p>`;
+      <p class="small muted">Top 5 pr. kategori. Nuller vises ikke.</p>
+      <div style="max-width:560px;margin-top:24px">${citatKort()}</div>`;
   }
 
   // Datoer som Mikkel skriver dem: 2026-11-05, 5-11-2026, 5.11.2026 eller 5/11/26 (dag først).
@@ -508,7 +568,7 @@
   }
   // Nyheder fra én kilde: kræver kolonnerne Dato, Overskrift, Tekst (store/små bogstaver er ligegyldige).
   // Hvis fanen ikke findes, sender Google den første fane; den har ingen "Overskrift" og giver derfor ingen nyheder.
-  function læsNyheder(rows) {
+  function læsNyheder(rows, kilde) {
     if (!rows || !rows.length) return [];
     const h = rows.findIndex((r) => r.some((c) => /^(overskrift|titel)$/i.test(c)));
     if (h < 0) return [];
@@ -517,19 +577,19 @@
     const iD = i("dato"), iO = i("overskrift", "titel"), iT = i("tekst", "nyhed");
     return rows.slice(h + 1).filter((r) => r[iO]).map((r) => {
       const dt = iD >= 0 ? læsDato(r[iD]) : null;
-      return { dato: dt, datoTekst: iD >= 0 ? r[iD] : "", overskrift: r[iO], tekst: iT >= 0 ? r[iT] : "" };
+      return { dato: dt, datoTekst: iD >= 0 ? r[iD] : "", overskrift: r[iO], tekst: iT >= 0 ? r[iT] : "", kilde };
     });
   }
   function nyheder() {
     const alle = [
-      ...læsNyheder(D.nyhedsfane && D.nyhedsfane.ok),
-      ...læsNyheder(D.nyheder && D.nyheder.ok)
+      ...læsNyheder(D.nyhedsfane && D.nyhedsfane.ok, "kommissaer"),
+      ...læsNyheder(D.nyheder && D.nyheder.ok, "redaktion")
     ];
     return alle.sort((a, b) => (b.dato ? b.dato.getTime() : 0) - (a.dato ? a.dato.getTime() : 0));
   }
   function nyhedKort(n) {
     const dato = n.dato && !isNaN(n.dato) ? n.dato.toLocaleDateString("da-DK", { day: "numeric", month: "long", year: "numeric" }) : n.datoTekst;
-    return `<article class="card nyhed"><div class="dato">${esc(dato)}</div><h3>${esc(n.overskrift)}</h3><p>${esc(n.tekst)}</p></article>`;
+    return `<article class="card nyhed"><div class="dato">${esc(dato)} · ${n.kilde === "kommissaer" ? `Kommissær ${esc(C.KOMMISSAER || "")} skriver` : "Redaktionen"}</div><h3>${esc(n.overskrift)}</h3><p>${esc(n.tekst)}</p></article>`;
   }
   function sideNyheder() {
     const liste = nyheder();
@@ -565,7 +625,7 @@
   function visFod() {
     const kl = D.hentet ? D.hentet.toLocaleTimeString("da-DK", { hour: "2-digit", minute: "2-digit" }) : "";
     $foot.innerHTML = `<span>Data hentes direkte fra kommissærens Google Sheets${kl ? `. Sidst hentet kl. ${kl}` : ""}.
-      ${C.BRUG_LOKALE_DATA ? "<b>Testdata.</b>" : ""}</span>
+      ${C.BRUG_LOKALE_DATA ? "<b>Testdata.</b>" : ""}<br>Sponsorer, Star Player-citater, Spike! og pressechefen er satire. Kommissærens ord er hans egne.</span>
       <button class="knap" id="opdater" type="button">Hent igen</button>`;
     document.getElementById("opdater").onclick = start;
   }
@@ -581,5 +641,7 @@
   document.getElementById("liganavn").textContent = liga;
   document.getElementById("saeson").textContent = C.KOMMISSAER ? "Kommissær: " + C.KOMMISSAER : "";
   window.addEventListener("hashchange", vis);
+  visSponsor();
+  setInterval(visSponsor, 12000);
   start();
 })();

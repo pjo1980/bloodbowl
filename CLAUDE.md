@@ -38,3 +38,5 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
 - Google sender den FØRSTE fane, hvis et fanenavn er forkert. Hver læser i app.js tjekker derfor fanens form.
 - Vis venlige fejl på dansk (fx "Arket er ikke delt offentligt"), ikke tekniske stakke.
 - Spørg Peter før: ændring af deling på ark, kontakt til kommissæren, eget domæne.
+
+- `humor.js` – humorindhold (se PLAN.md).

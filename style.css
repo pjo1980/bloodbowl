@@ -176,3 +176,20 @@ td a:hover { color: var(--accent); }
 .kamp .score { font-family: "Bangers", Impact, sans-serif; font-size: 22px; letter-spacing: 1px; min-width: 58px; text-align: center; color: var(--muted); }
 .kamp.spillet .score { color: var(--text); }
 .kamp .fejl { grid-column: 1 / -1; }
+
+/* ---------- Humor ---------- */
+.sponsorbar { background: #0e0b0a; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+#sponsor { padding-top: 5px; padding-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#sponsor b { color: var(--gold); text-transform: uppercase; letter-spacing: .5px; }
+.presse { border-left: 4px solid var(--gold); }
+.presse-tekst { font-style: italic; font-size: 17px; margin: 6px 0 8px; }
+.citat { margin: 0; }
+.citat blockquote { margin: 4px 0 8px; font-size: 18px; font-weight: 600; }
+.citat figcaption { color: var(--accent); font-weight: 700; }
+.spike { background: linear-gradient(135deg, #f28c28 0%, #b3261e 100%); border: 0; color: #1a0d08; }
+.spike .kicker { color: #1a0d08; display: inline; }
+.spike-logo { display: inline-block; font-family: "Bangers", Impact, sans-serif; font-size: 34px; line-height: 1; color: #fff;
+  text-shadow: 2px 2px 0 #1a0d08; transform: rotate(-4deg); margin-right: 8px; }
+.spike p { font-weight: 700; font-size: 17px; margin: 8px 0 0; }
+.spike-bane { margin-bottom: 16px; }
+@media (max-width: 560px) { #sponsor { white-space: normal; } }

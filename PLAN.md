@@ -35,7 +35,12 @@ Venter på, at Mikkel opretter fanen. Peter har fået en besked at sende ham. In
 - Holdliste-fejl rettet (4 hold viste kun 1 spiller). Skills fra level-up vises.
 - Kampe delt op: **Puljekampe** (resultater fra kampskemaerne) og **Regnbuepuljen** (foreløbigt program).
 
-## Næste gang vi ændrer (Peters ønsker 3. nov.)
+## Humor (bygget 3. nov., version 3)
+Sponsorbjælke under menuen (skifter hvert 12. sek.), "Fra pressetribunen" på forsiden (Spike!, Star Player-citat,
+pressechefen), pressechefen på Stilling og Puljekampe, Spike!-banner på GutBuster Gluttons' holdside, citat på Ranglister,
+satire-note i bunden. Pressechefens navn (Gunnar Grådig) er foreløbigt.
+
+## Idéer og ønsker (Peters ønsker 3. nov.)
 - **Blood Bowl-humor rundt omkring:** sponsorer fra Blood Bowl-universet, "citater" fra kendte Star Players.
   Skriv selv originale gags i Blood Bowl-stil; kopiér ikke tekst fra Games Workshops bøger.
 - **Peters hold er GutBuster Gluttons (Ogres, Blå pulje), og pressen elsker dem.** Fx Spike! Magazine
