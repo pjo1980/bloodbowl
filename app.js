@@ -368,6 +368,7 @@
 
       <h2>Fra pressetribunen</h2>
       <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}</div>
+      ${PRESSE.length ? `<div style="margin-top:16px">${pkTeaser(PRESSE[0])}</div>` : ""}
 
       ${nyhed ?`<h2>Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p><a href="#nyheder">Alle nyheder</a></p>` : ""}`;
   }
@@ -526,12 +527,13 @@
         <th class="num">MA</th><th class="num">ST</th><th class="num">AG</th><th class="num">PA</th><th class="num">AV</th>
         <th>Skills</th><th class="num">SPP</th><th class="num">TD</th><th class="num">CAS</th><th class="num">MVP</th><th>Skader</th></tr></thead>
         <tbody>${r.spillere.map((s) => `<tr>
-          <td class="rank">${esc(s.nr)}</td><td><b>${esc(s.navn)}</b>${s.niveau && s.niveau !== "Rookie" ? ` <span class="chip">${esc(s.niveau)}</span>` : ""}</td>
+          <td class="rank">${esc(s.nr)}</td><td><b>${esc(s.navn === "Runt" ? "Runt #" + s.nr : s.navn)}</b>${s.niveau && s.niveau !== "Rookie" ? ` <span class="chip">${esc(s.niveau)}</span>` : ""}</td>
           <td>${esc(s.pos)}</td><td class="num">${esc(s.MA)}</td><td class="num">${esc(s.ST)}</td><td class="num">${esc(s.AG)}</td>
           <td class="num">${esc(s.PA)}</td><td class="num">${esc(s.AV)}</td><td class="wrap-ok">${esc(s.skills === "None" && s.nye.length ? "" : s.skills)}${s.nye.length ? `${s.skills && s.skills !== "None" ? ", " : ""}<span class="ny" title="Ny skill fra level-up">${s.nye.map(esc).join(", ")}</span>` : ""}</td>
           <td class="num">${esc(s.spp)}</td><td class="num">${esc(s.td)}</td><td class="num">${esc(s.cas)}</td><td class="num">${esc(s.mvp)}</td>
           <td>${s.mng === "Y" ? '<span class="mng">Misser næste kamp</span>' : ""}${tal(s.nig) > 0 ? ` <span class="mng">Niggling ×${esc(s.nig)}</span>` : ""}</td>
-        </tr>`).join("") || '<tr><td colspan="14" class="muted">Ingen spillere på holdlisten endnu.</td></tr>'}</tbody></table></div>`;
+        </tr>`).join("") || '<tr><td colspan="14" class="muted">Ingen spillere på holdlisten endnu.</td></tr>'}</tbody></table></div>
+      ${holdLore(navn)}`;
   }
 
   const KAT = {
@@ -602,11 +604,74 @@
       <div class="card">${s && s.regler ? esc(s.regler) : '<span class="muted">Kunne ikke hente reglerne fra arket.</span>'}</div>`;
   }
 
+  // ---------- Presse og holdlore (indholdet står i presse.js) ----------
+  const LORE = window.LORE || {};
+  const PRESSE = (window.PRESSE || []).slice().sort((a, b) => (b.dato || "").localeCompare(a.dato || ""));
+  const pkDato = (pk) => { const d = læsDato(pk.dato); return d ? d.toLocaleDateString("da-DK", { day: "numeric", month: "long", year: "numeric" }) : pk.dato || ""; };
+
+  function pressekonference(pk) {
+    const set = new Set();
+    const linjer = pk.replikker.map((r) => {
+      if (r.scene) return `<p class="scene">${esc(r.scene)}</p>`;
+      const rolle = r.rolle && !set.has(r.hvem) ? ` <span class="rolle">${esc(r.rolle)}</span>` : "";
+      set.add(r.hvem);
+      const kl = r.hvem === H.pressechef.navn ? " formand" : r.hvem === (LORE[pk.hold] || {}).coach ? " coach" : "";
+      return `<div class="replik${kl}"><div class="taler">${esc(r.hvem)}${rolle}${r.note ? ` <span class="note">(${esc(r.note)})</span>` : ""}</div>
+        <p>${esc(r.tekst)}</p></div>`;
+    }).join("");
+    return `<article class="card pk" id="pk-${esc(pk.id)}">
+      <p class="kicker">${esc(pk.undertitel || "Pressekonference")} · ${esc(pkDato(pk))}</p>
+      <h2 class="pk-titel">${esc(pk.titel)}</h2>
+      <p class="small muted">${holdLink(pk.hold)} ${chip(puljeAf[pk.hold])}${pk.sted ? ` · ${esc(pk.sted)}` : ""}</p>
+      <div class="pk-tekst">${linjer}</div></article>`;
+  }
+
+  function pkTeaser(pk) {
+    return pk ? `<a class="card pk-teaser" href="#presse/${encodeURIComponent(pk.id)}">
+      <p class="kicker">Seneste pressekonference · ${esc(pk.hold)}</p>
+      <h3>${esc(pk.titel)}</h3>
+      ${pk.citat ? `<blockquote>»${esc(pk.citat.tekst)}«</blockquote><div class="small muted">${esc(pk.citat.hvem)}</div>` : ""}
+      <p class="small" style="margin:10px 0 0">Læs hele pressekonferencen →</p></a>` : "";
+  }
+
+  function sidePresse(id) {
+    const valgt = id ? PRESSE.find((p) => p.id === id) : null;
+    const liste = valgt ? [valgt] : PRESSE;
+    return `
+      <p class="kicker">Pressetribunen</p>
+      <h1>Pressekonferencer</h1>
+      <p class="lead">Ledet af ${esc(H.pressechef.navn)}, ${esc(H.pressechef.titel.toLowerCase())}. Coaches kan indsende lore og
+        pressekonferencer for deres hold.</p>
+      ${valgt && PRESSE.length > 1 ? '<p><a href="#presse">← Alle pressekonferencer</a></p>' : ""}
+      ${liste.length ? liste.map(pressekonference).join("") : '<p class="muted">Ingen pressekonferencer endnu.</p>'}
+      <p class="small muted">Satire. Skrevet ud fra holdets egen lore.</p>`;
+  }
+
+  function holdLore(navn) {
+    const L = LORE[navn];
+    if (!L) return "";
+    const pk = PRESSE.filter((p) => p.hold === navn);
+    return `
+      <h2>Om holdet</h2>
+      <div class="fakta">
+        ${L.coach ? `<div class="card"><div class="lbl">Coach</div><div class="val">${esc(L.coach)}</div></div>` : ""}
+        ${L.hjemmebane ? `<div class="card"><div class="lbl">Hjemmebane</div><div class="val">${esc(L.hjemmebane)}</div></div>` : ""}
+      </div>
+      ${L.motto ? `<div class="card motto"><div class="lbl">Klubbens motto</div><div class="motto-tekst">${esc(L.motto)}</div>
+        ${L.mottoDa ? `<div class="small muted">${esc(L.mottoDa)}</div>` : ""}</div>` : ""}
+      <div class="grid" style="margin-top:16px">${(L.afsnit || []).map((a) => `<div class="card"><h3>${esc(a.titel)}</h3><p style="margin:0">${esc(a.tekst)}</p></div>`).join("")}
+        ${L.spillebog ? `<div class="card"><h3>Den officielle spillebog</h3><ol class="spillebog">${L.spillebog.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>
+          <p class="small muted" style="margin:8px 0 0">Komplet. Der findes ingen side 2.</p></div>` : ""}
+        ${L.ottoCitater && L.coach ? `<figure class="card citat"><p class="kicker">Coachen siger</p><blockquote>»${esc(tilfældig(L.ottoCitater))}«</blockquote><figcaption>${esc(L.coach)}</figcaption></figure>` : ""}
+      </div>
+      ${pk.length ? `<h2>Pressekonferencer</h2><div class="grid">${pk.map(pkTeaser).join("")}</div>` : ""}`;
+  }
+
   // ---------- Router ----------
   const SIDER = { forside: sideForside, stilling: sideStilling, puljekampe: sidePuljekampe, regnbue: sideRegnbue,
-    hold: sideHoldListe, ranglister: sideRanglister, nyheder: sideNyheder };
+    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder };
   const ALIAS = { kampe: "puljekampe" }; // gamle links
-  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen" };
+  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Pressekonferencer" };
   let visNr = 0;
   async function vis() {
     const nr = ++visNr;
@@ -616,10 +681,11 @@
     const key = SIDER[side] ? side : "forside";
     document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("on", a.dataset.page === key));
     if (!navn) window.scrollTo(0, 0);
-    const html = key === "hold" && navn ? await sideHold(navn) : await SIDER[key]();
+    const html = key === "hold" && navn ? await sideHold(navn) : key === "presse" && navn ? sidePresse(navn) : await SIDER[key]();
     if (nr !== visNr) return; // brugeren har skiftet side imens
     $main.innerHTML = html;
-    document.title = (key === "forside" ? "" : (navn || SIDENAVN[key] || titel(key)) + " · ") + liga;
+    const pkTitel = key === "presse" && navn ? (PRESSE.find((p) => p.id === navn) || {}).titel : "";
+    document.title = (key === "forside" ? "" : (pkTitel || navn || SIDENAVN[key] || titel(key)) + " · ") + liga;
   }
 
   function visFod() {

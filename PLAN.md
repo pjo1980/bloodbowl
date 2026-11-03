@@ -53,7 +53,8 @@ satire-note i bunden. Pressechefen hedder Gunnar Grådig (godkendt af Peter 3. n
 - **Coaches indsender lore, interviews og især pressekonferencer** for deres hold (Peters idé 3. nov.).
   Forslag: en Google Formular (hold, type, overskrift, tekst) der skriver i et ark, som siden læser.
   Indsendt tekst vises først, når Peter eller Mikkel har sat "Godkendt" i arket. Vises på holdsiden og som pressekonference på forsiden.
-  Peter har en lorepakke klar til GutBuster Gluttons; den kan blive første indhold.
+  **Gjort 3. nov.:** Peters lorepakke ligger i `lore/gutbuster-gluttons.md` (kopi i Google Drive: My Drive/Blood Bowl).
+  Første pressekonference + "Om holdet" er bygget ud fra den (`presse.js`, side #presse). Formular til coaches mangler stadig.
 - **Mere statistik** på sigt fra ligaens egne spillere (fx flest SPP, flest skader, MVP-konge, "mest farlige fouler").
 - Evt. "Seneste resultater" på forsiden (kræver at forsiden henter kampskemaerne, 26 små hentninger).
 

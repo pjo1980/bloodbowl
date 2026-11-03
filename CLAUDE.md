@@ -39,4 +39,7 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
 - Vis venlige fejl på dansk (fx "Arket er ikke delt offentligt"), ikke tekniske stakke.
 - Spørg Peter før: ændring af deling på ark, kontakt til kommissæren, eget domæne.
 
-- `humor.js` – humorindhold (se PLAN.md).
+- `humor.js` – sponsorer, Star Player-citater, Spike!-overskrifter, pressechef Gunnar Grådig (opdigtet, Gluttons-fan).
+- `presse.js` – holdlore (`LORE`) og pressekonferencer (`PRESSE`). Vises på #presse, holdsider og forsiden.
+- `lore/` – coachernes egne lorepakker. Ny tekst om et hold skal følge holdets kanon-principper.
+- Kommissærens ord kommer KUN fra hans Nyheder-fane. Opdigt aldrig citater fra Mikkel eller andre rigtige personer.

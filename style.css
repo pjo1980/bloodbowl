@@ -193,3 +193,21 @@ td a:hover { color: var(--accent); }
 .spike p { font-weight: 700; font-size: 17px; margin: 8px 0 0; }
 .spike-bane { margin-bottom: 16px; }
 @media (max-width: 560px) { #sponsor { white-space: normal; } }
+
+/* ---------- Presse og holdlore ---------- */
+.pk { margin-bottom: 20px; }
+.pk-titel { margin-top: 4px; }
+.pk-tekst { margin-top: 16px; max-width: 70ch; }
+.replik { margin: 0 0 14px; padding-left: 12px; border-left: 3px solid var(--line); }
+.replik.formand { border-left-color: var(--gold); }
+.replik.coach { border-left-color: var(--accent); }
+.replik p { margin: 2px 0 0; }
+.taler { font-weight: 700; }
+.rolle { font-weight: 400; font-size: 13px; color: var(--muted); }
+.note { font-weight: 400; font-style: italic; color: var(--muted); }
+.scene { font-style: italic; color: var(--muted); margin: 0 0 14px; }
+a.pk-teaser blockquote { margin: 6px 0 4px; font-size: 19px; font-weight: 600; font-style: italic; }
+.motto { border-left: 4px solid var(--accent); }
+.motto .lbl { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+.motto-tekst { font-family: "Bangers", Impact, sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--accent); line-height: 1.15; margin: 4px 0; }
+.spillebog { margin: 0; padding-left: 22px; font-weight: 600; }
