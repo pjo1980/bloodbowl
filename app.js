@@ -341,15 +341,22 @@
     const d = D.program;
     if (!d.ok) return `<h1>Kampe</h1>${fejlboks(d.fejl)}`;
     const p = d.ok;
+    // Prik i modstanderens puljefarve, så man kan se, at modstanderen kommer fra en anden pulje.
+    const prik = (navn) => puljeAf[navn]
+      ? `<span class="prik ${puljeKl(puljeAf[navn])}" title="${esc(puljeAf[navn])}" aria-label="${esc(puljeAf[navn])}"></span>` : "";
+    const forklaring = Object.values(puljeAf).filter((v, i, a) => a.indexOf(v) === i)
+      .sort((a, b) => C.FANER.puljer.findIndex((x) => titel(x) === a) - C.FANER.puljer.findIndex((x) => titel(x) === b))
+      .map((v) => chip(v)).join(" ");
     return `
       <p class="kicker">Hvem skal knuses hvornår</p>
       <h1>Kampprogram</h1>
       ${p.info.slice(1).map((t) => `<p class="lead">${esc(t)}</p>`).join("")}
+      <p class="small muted">Modstanderne kommer fra alle puljer. Prikken viser modstanderens egen pulje: ${forklaring}</p>
       <div class="grid-2">${p.puljer.map((pu) => `
         <div class="card pulje ${puljeKl(pu.navn)}"><h3>${esc(pu.navn || "Hold")}</h3>
           <div class="tabel-wrap"><table><thead><tr><th>Hold</th>${p.kolonner.map((k) => `<th>${esc(titel(k))}</th>`).join("")}</tr></thead>
           <tbody>${pu.hold.map((h) => `<tr><td>${holdLink(h.navn)}</td>${h.kampe.map((m) =>
-            !m || /^[—–-]$/.test(m) ? '<td class="oversidder">Oversidder</td>' : `<td>${holdLink(m)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+            !m || /^[—–-]$/.test(m) ? '<td class="oversidder">Oversidder</td>' : `<td>${prik(m)}${holdLink(m)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
         </div>`).join("")}</div>
       <p class="small muted">Programmet vises, som det står i kommissærens ark.</p>`;
   }
