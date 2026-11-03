@@ -12,7 +12,7 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
 - **Hosting:** offentlig og gratis på GitHub Pages (konto pjo1980). Ingen server, ingen build, ingen login.
 - **Teknik:** ren HTML + CSS + JavaScript. Ingen frameworks, ingen npm. Data hentes i browseren som CSV via
   `https://docs.google.com/spreadsheets/d/<SHEET_ID>/gviz/tq?tqx=out:csv&sheet=<fanenavn>`
-  (kræver at arket er delt "Anyone with the link → Viewer"). Tom SHEET_ID i `config.js` = lokale filer i `data/`.
+  (kræver at arket er delt "Anyone with the link → Viewer"). `BRUG_LOKALE_DATA: true` i `config.js` = lokale filer i `data/`.
 - **Læsning af data:** app.js skal have et **mapping-lag** (fanenavn + kolonnenavne → sidens felter), så siden
   tilpasses kommissærens kolonner, ikke omvendt. **Stillingen beregnes IKKE i browseren**: kommissæren regner
   den selv i arket (30 sejr / 10 uafgjort / +1 pr. TD og CAS), og siden viser hans tal. Se DATAKORT.md.
