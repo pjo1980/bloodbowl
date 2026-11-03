@@ -9,7 +9,8 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
 - **Data:** siden læser **direkte fra kommissærens eksisterende Google Sheets**. Vi laver ikke et nyt ark,
   medmindre hans ark er umuligt at læse maskinelt (så laver vi et "bro-ark" i Peters Drive med IMPORTRANGE,
   der rydder op, og kommissæren rører stadig kun sit eget ark).
-- **Hosting:** offentlig og gratis på GitHub Pages (konto pjo1980). Ingen server, ingen build, ingen login.
+- **Hosting:** offentlig og gratis på GitHub Pages: https://pjo1980.github.io/bloodbowl/ (repo pjo1980/bloodbowl, branch main).
+  Push til main = udgivelse. Ingen server, ingen build, ingen login.
 - **Teknik:** ren HTML + CSS + JavaScript. Ingen frameworks, ingen npm. Data hentes i browseren som CSV via
   `https://docs.google.com/spreadsheets/d/<SHEET_ID>/gviz/tq?tqx=out:csv&sheet=<fanenavn>`
   (kræver at arket er delt "Anyone with the link → Viewer"). `BRUG_LOKALE_DATA: true` i `config.js` = lokale filer i `data/`.
@@ -35,4 +36,4 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
 - Alt brugerdata fra arket HTML-escapes før visning.
 - Google sender den FØRSTE fane, hvis et fanenavn er forkert. Hver læser i app.js tjekker derfor fanens form.
 - Vis venlige fejl på dansk (fx "Arket er ikke delt offentligt"), ikke tekniske stakke.
-- Spørg Peter før: oprettelse af GitHub-repo (offentligt), ændring af deling på ark, kontakt til kommissæren.
+- Spørg Peter før: ændring af deling på ark, kontakt til kommissæren, eget domæne.
