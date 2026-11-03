@@ -50,6 +50,10 @@ satire-note i bunden. Pressechefen hedder Gunnar Grådig (godkendt af Peter 3. n
   person), der skriver pressemeddelelser, kommentarer og "objektive" analyser, som altid ender med at hylde Gluttons.
   Navn: Gunnar Grådig (godkendt). Holdes adskilt fra kommissæren, hvis ord altid er Mikkels egne.
 - **Kommissærens ord:** kun hans egne ord (fx fra Nyheder-fanen eller en fane/kolonne han selv skriver i). Opdigt aldrig citater fra Mikkel.
+- **Coaches indsender lore, interviews og især pressekonferencer** for deres hold (Peters idé 3. nov.).
+  Forslag: en Google Formular (hold, type, overskrift, tekst) der skriver i et ark, som siden læser.
+  Indsendt tekst vises først, når Peter eller Mikkel har sat "Godkendt" i arket. Vises på holdsiden og som pressekonference på forsiden.
+  Peter har en lorepakke klar til GutBuster Gluttons; den kan blive første indhold.
 - **Mere statistik** på sigt fra ligaens egne spillere (fx flest SPP, flest skader, MVP-konge, "mest farlige fouler").
 - Evt. "Seneste resultater" på forsiden (kræver at forsiden henter kampskemaerne, 26 små hentninger).
 
