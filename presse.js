@@ -76,8 +76,9 @@ window.PRESSE = [
       { hvem: "Spike!", tekst: "Sidste spørgsmål. Bookmakerne giver jer odds 40 til 1 på at vinde ligaen. Kommentar?" },
       { hvem: "Otto Overbelly", tekst: "Statistik slår ikke folk." },
       { hvem: "Spike!", tekst: "Statistik som irrelevant størrelse. Revolutionerende." },
-      { hvem: "Otto Overbelly", tekst: "Er det frokost nu?" },
-      { hvem: "Gunnar Grådig", tekst: "Det er frokost nu. Vi ses til kick-off. Winning is optional. Lunch is mandatory." }
+      { hvem: "Gunnar Grådig", tekst: "Det var sidste spørgsmål. Vi ses til kick-off. Der er frokost nu." },
+      { hvem: "Otto Overbelly", tekst: "Endelig." },
+      { hvem: "Gunnar Grådig", tekst: "Pressen er velkommen til at spise med. Jeg anbefaler salaten. Det er den eneste ret, vi kan garantere indholdet af." }
     ]
   }
 ];
