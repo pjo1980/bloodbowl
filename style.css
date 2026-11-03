@@ -232,3 +232,10 @@ a.score:hover { color: var(--accent); }
 .stor-score { font-family: "Bangers", Impact, sans-serif; font-size: clamp(40px, 9vw, 72px); line-height: 1; }
 .referat { border-left: 4px solid var(--accent); margin-bottom: 16px; }
 .referat-tekst { font-size: 18px; margin: 4px 0 10px; max-width: 70ch; }
+
+/* ---------- BETA-stempel ---------- */
+.beta { display: inline-block; font-family: "Bangers", Impact, sans-serif; font-size: 14px; letter-spacing: 1.5px; line-height: 1.2;
+  text-transform: uppercase; color: #1a120d; background: var(--gold); padding: 1px 7px; border-radius: 4px;
+  transform: rotate(-7deg); vertical-align: 3px; box-shadow: 2px 2px 0 var(--blood); cursor: help; }
+.beta-note { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+.beta-note .beta { margin-right: 6px; cursor: default; }

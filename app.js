@@ -331,6 +331,7 @@
         <div class="hero-logo" aria-hidden="true">${(document.getElementById("logo-stor") || {}).innerHTML || ""}</div>
         <div class="hero-tekst">
         <p class="kicker">Officielt fra kommissærens kontor</p>
+        ${H.beta && H.beta.length ? `<p class="beta-note"><span class="beta">Beta</span> ${esc(tilfældig(H.beta))}</p>` : ""}
         <h1>${esc(liga)}</h1>
         <p class="lead">Kommissær: <b>${esc(C.KOMMISSAER || "")}</b>. Stilling, kampprogram, hold og ranglister,
           hentet direkte fra kommissærens egne ark. Blod på banen, orden i papirerne.</p>
@@ -811,5 +812,7 @@
   window.addEventListener("hashchange", vis);
   visSponsor();
   setInterval(visSponsor, 12000);
+  const $beta = document.getElementById("beta");
+  if ($beta && H.beta) $beta.title = "BETA: " + tilfældig(H.beta);
   start();
 })();

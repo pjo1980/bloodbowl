@@ -18,6 +18,18 @@ window.HUMOR = {
     { navn: "Gnoblar-Ekspressen", tekst: "Hurtig levering. Pakken lander. Budet gør måske ikke." }
   ],
 
+  // BETA-undskyldninger: vises ved BETA-stemplet og på forsiden.
+  beta: [
+    "Fejl på siden skyldes Nuffle.",
+    "Testet af gnoblarer. De fleste overlevede.",
+    "Går noget i stykker, er det en feature. Spørg Otto.",
+    "Kodet med Mighty Blow. Fejlene har Regeneration.",
+    "Siden er ikke godkendt af dommeren. Han blev bestukket af en anden side.",
+    "Får du en fejl, er det en turnover. Næste coach.",
+    "Klager over siden modtages efter kick-off. Af Gunnar Grådig. Måske.",
+    "Rul en d6. På 1 virker siden ikke. På 2-6 virker den sikkert heller ikke helt."
+  ],
+
   // "Citater" fra kendte Star Players. Opdigtede, med et glimt i øjet.
   citater: [
     { hvem: "Morg 'n' Thorg", tekst: "Jeg tæller ikke touchdowns. Jeg tæller dem, der stadig står op." },
