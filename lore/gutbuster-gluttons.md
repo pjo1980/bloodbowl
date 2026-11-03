@@ -3,6 +3,12 @@
 Modtaget fra Peter 3. november 2026 (sammenfattet med Codex). Kilde til holdafsnit, pressekonferencer og Spike!-overskrifter.
 Ny tekst om holdet skal følge **kanon-principperne** nederst. Teksten nedenfor er Peters egen.
 
+**Peters rettelser 3. nov. (gælder før teksten nedenfor):**
+- "Family Isn't Food" er **ikke officielt**. Brug det ikke på siden.
+- Gnoblarer (Runts) **taler ikke** i pressekonferencer.
+- Runts er som Fraggle Rocks Doozers: De er der hele tiden, men ingen lægger mærke til dem, før de **ikke** er der.
+  Ting "ordner sig selv", fordi Runts ordner dem i det skjulte.
+
 ---
 
 GUTBUSTER GLUTTONS — TEAM LORE

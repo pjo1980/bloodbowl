@@ -64,7 +64,9 @@ satire-note i bunden. Pressechefen hedder Gunnar Grådig (godkendt af Peter 3. n
 - Uklarhederne i data (se DATAKORT.md): hvad kampprogrammet er i forhold til puljekampene, og kampprogrammets rækkefølge.
 
 ## Stil for pressekonferencer (Peters feedback 3. nov.)
-- Gnoblarer taler ikke. De kan nævnes, men har ingen replikker.
+- Gnoblarer taler ikke. De kan nævnes, men har ingen replikker. De er som Doozers i Fraggle Rock: usynlige, indtil de mangler.
+- "Family Isn't Food" er ikke officielt. Brug det ikke.
+- Hold dem omkring 40 korte replikker.
 - Korte, tætte replikker. Meget få eller ingen beskrivelser af omgivelser og handlinger.
 - Passer til sæsonens fase (fx pre-season: forberedelser, nyindkøb, mål, odds).
 - Replikker, der nævner tal (point, spillere, kasse), skal passe med Mikkels ark.
