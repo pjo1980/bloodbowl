@@ -328,11 +328,14 @@
     const cas = førsteMed(D.spillerrang, "CASUALTIES");
     return `
       <section class="hero">
+        <div class="hero-logo" aria-hidden="true">${(document.getElementById("logo-stor") || {}).innerHTML || ""}</div>
+        <div class="hero-tekst">
         <p class="kicker">Officielt fra kommissærens kontor</p>
         <h1>${esc(liga)}</h1>
         <p class="lead">Kommissær: <b>${esc(C.KOMMISSAER || "")}</b>. Stilling, kampprogram, hold og ranglister,
           hentet direkte fra kommissærens egne ark. Blod på banen, orden i papirerne.</p>
         ${s && s.regler ? `<span class="regler">${esc(s.regler)}</span>` : ""}
+        </div>
       </section>
 
       <h2>Toppen af tabellen</h2>

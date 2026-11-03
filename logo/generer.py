@@ -177,3 +177,8 @@ html = f'''<!doctype html>
 </div></body></html>'''
 open(os.path.join(OUT, "udkast.html"), "w", encoding="utf-8").write(html)
 print("ok")
+
+# ---------- Valgt logo (A, 3. nov.): gem som filer ----------
+open(os.path.join(OUT, "logo.svg"), "w", encoding="utf-8").write(logo_a())
+open(os.path.join(OUT, "ikon.svg"), "w", encoding="utf-8").write(icon_a())
+print("logo.svg og ikon.svg gemt")
