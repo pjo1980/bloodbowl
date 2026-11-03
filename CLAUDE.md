@@ -1,0 +1,34 @@
+# Kommissærens Kontor – hjemmeside til Peters Blood Bowl-liga
+
+Peter er strategisk, ikke teknisk: forklar enkelt og kort, på dansk. Menunavne i Google/GitHub på engelsk.
+Kommissæren (ligaens leder, en anden person end Peter) er heller ikke teknisk og skal **ikke lære noget nyt**:
+han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved med.
+
+## Beslutninger (3. november 2026)
+- **Formål:** rigtig ligadata (stilling, kampe, hold, nyheder/husregler) pakket ind i kommissærens stemme og humor.
+- **Data:** siden læser **direkte fra kommissærens eksisterende Google Sheets**. Vi laver ikke et nyt ark,
+  medmindre hans ark er umuligt at læse maskinelt (så laver vi et "bro-ark" i Peters Drive med IMPORTRANGE,
+  der rydder op, og kommissæren rører stadig kun sit eget ark).
+- **Hosting:** offentlig og gratis på GitHub Pages (konto pjo1980). Ingen server, ingen build, ingen login.
+- **Teknik:** ren HTML + CSS + JavaScript. Ingen frameworks, ingen npm. Data hentes i browseren som CSV via
+  `https://docs.google.com/spreadsheets/d/<SHEET_ID>/gviz/tq?tqx=out:csv&sheet=<fanenavn>`
+  (kræver at arket er delt "Anyone with the link → Viewer"). Tom SHEET_ID i `config.js` = lokale filer i `data/`.
+- **Læsning af data:** app.js skal have et **mapping-lag** (fanenavn + kolonnenavne → sidens felter), så siden
+  tilpasses kommissærens kolonner, ikke omvendt. Stilling beregnes i browseren ud fra kampresultater
+  (point for sejr/uafgjort/nederlag skal kunne sættes; standard 3/1/0, derefter TD-forskel, så casualties).
+- **Udseende:** mørk, "sports-tabloid"-stemning i Blood Bowl-stil (orange/blodrød/guld), fonte Bangers + Barlow.
+  Skal virke på mobil (coaches kigger på telefonen).
+
+## Mappestruktur
+- `index.html` – skal, sidens skelet (header, faner Forside/Stilling/Kampe/Hold/Nyheder, `#main`).
+- `config.js` – SHEET_ID og senere mapping.
+- `style.css`, `app.js` – mangler (se PLAN.md).
+- `data/` – lokale eksempel-CSV'er til udvikling/test, samme kolonner som kommissærens ark.
+- `.claude/launch.json` – lokal test: `python -m http.server 8765` (fetch virker ikke fra file://).
+- `.nojekyll` – GitHub Pages skal servere filerne råt.
+
+## Regler for arbejdet
+- Rør aldrig kommissærens ark uden Peters ja; læs det kun.
+- Alt brugerdata fra arket HTML-escapes før visning.
+- Vis venlige fejl på dansk (fx "Arket er ikke delt offentligt"), ikke tekniske stakke.
+- Spørg Peter før: oprettelse af GitHub-repo (offentligt), ændring af deling på ark, kontakt til kommissæren.
