@@ -43,10 +43,11 @@ Puljeturnering, 13 hold, 4 puljer (Sort 4 hold, Rød 3, Gul 3, Blå 3). Point: *
 program og ranglister uden dem.
 
 ## Uklarheder (spørg Peter/kommissæren, ret ikke selv)
-1. **Hvilke kampe er spillet?** De spillede kampe (Sages–Elmtree, Slavers–Besudlere) er puljekampe, men
-   Kampprogram Regnbuepilen parrer hold på tværs af puljer. Er programmet en senere fase?
-2. **Kampprogrammet er ikke symmetrisk:** The Eternal Sages har Black Mountain Slavers som kamp 1, men
-   Black Mountain Slavers har Fright Night Fumblers som kamp 1. "Kamp N" er altså ikke en fælles runde.
+1. **Hvornår spilles Regnbuepilen?** Analyse 3. nov.: Puljekampene er 26 kampe (4 pr. hold, kun inden for puljen).
+   Regnbuepilen er 26 andre kampe (4 pr. hold, **kun på tværs** af puljer, ingen gentagelser af puljekampe).
+   De spillede kampe er puljekampe. Sandsynligvis: puljer først, så Regnbuepilen. Bekræftes af Mikkel.
+2. ~~Kampprogrammet er ikke symmetrisk~~: forkert. Alle 26 par står hos begge hold, bare i forskellige kolonner.
+   "Kamp N" er holdets egen nummerering, ikke en fælles runde. Ingen oversiddere i programmet.
 3. ~~To faner pr. kamp~~: ser ud til at være hjemme/ude (se puljeark ovenfor). Bekræftes af Mikkel.
 4. ~~Sort pulje-arket mangler~~: modtaget 3. nov. og tilføjet.
 
