@@ -59,3 +59,10 @@ program og ranglister uden dem.
 ## Holdlister: skills fra level-up
 Står på en ekstra linje under spilleren (ingen nummer, intet navn) i kolonnerne fra "Skills and Improvements".
 Siden sætter dem på spilleren ovenover og viser dem med guld. Stavning vises som i arket.
+
+## Kampskemaer: spillerstats (til kampsiden)
+To spillerblokke, hver med en række der indeholder "Player". Kolonnerne efter spillernavnet står altid i rækkefølgen
+Miss Next Game, TD, Completion, Interception, Foul, Casualties, MVP (Google mister nogle overskrifter, så læs efter placering).
+Kolonnen to pladser efter MVP er spillerens SPP. Første blok hører til holdet i række 2 kolonne C (normalt det første hold
+i fanenavnet), og det hold ejer også venstre scorecelle og venstre "Winnings". Coaches står i række 1 kolonne C og D.
+Bemærk: Bedstefars–Slavers har 4 MVP'er (2 pr. hold). Siden viser, hvad skemaet siger.

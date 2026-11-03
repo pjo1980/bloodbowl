@@ -220,3 +220,15 @@ a.pk-teaser blockquote { margin: 6px 0 4px; font-size: 19px; font-weight: 600; f
   .hero-logo svg { width: 150px; margin: 0 auto; }
   .hero .lead { margin-left: auto; margin-right: auto; }
 }
+
+/* ---------- Kampside ---------- */
+a.score { text-decoration: none; color: var(--text); border-bottom: 2px solid var(--accent); }
+a.score:hover { color: var(--accent); }
+.kamp-hoved { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; margin: 8px 0 20px; }
+.kamp-hoved .side { display: flex; flex-direction: column; gap: 2px; }
+.kamp-hoved .side a { font-family: "Bangers", Impact, sans-serif; font-size: clamp(22px, 4vw, 34px); letter-spacing: 1px; color: var(--muted); text-decoration: none; line-height: 1.1; }
+.kamp-hoved .side.vinder a { color: var(--accent); }
+.kamp-hoved .side.u { text-align: right; }
+.stor-score { font-family: "Bangers", Impact, sans-serif; font-size: clamp(40px, 9vw, 72px); line-height: 1; }
+.referat { border-left: 4px solid var(--accent); margin-bottom: 16px; }
+.referat-tekst { font-size: 18px; margin: 4px 0 10px; max-width: 70ch; }

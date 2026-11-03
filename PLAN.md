@@ -35,6 +35,10 @@ Venter på, at Mikkel opretter fanen. Peter har fået en besked at sende ham. In
 - Holdliste-fejl rettet (4 hold viste kun 1 spiller). Skills fra level-up vises.
 - Kampe delt op: **Puljekampe** (resultater fra kampskemaerne) og **Regnbuepuljen** (foreløbigt program).
 
+## Kampsider (bygget 3. nov.)
+Tryk på et resultat under Puljekampe: score, coaches, winnings, spillerstats og et automatisk referat (kun fakta fra skemaet)
++ en markeret kommentar fra pressechefen. Idé senere: coaches kan skrive deres eget referat via formularen.
+
 ## Humor (bygget 3. nov., version 3)
 Sponsorbjælke under menuen (skifter hvert 12. sek.), "Fra pressetribunen" på forsiden (Spike!, Star Player-citat,
 pressechefen), pressechefen på Stilling og Puljekampe, Spike!-banner på GutBuster Gluttons' holdside, citat på Ranglister,

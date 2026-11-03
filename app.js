@@ -408,9 +408,35 @@
     const r = rows.find((x) => x.includes("Score"));
     if (!r || !ude) throw new Error(`Fanen "${fane}" ligner ikke et kampskema.`);
     const i = r.indexOf("Score");
-    const s1 = r[i + 1], s2 = r[i + 3];
-    const flueben = (rows[0] || []).filter((x) => /^Tjekbokse/i.test(x)).some((x) => /Y$/i.test(x));
-    return { hjemme, ude, s1, s2, spillet: flueben || tal(s1) > 0 || tal(s2) > 0 };
+    const hold1 = (rows[1] || [])[2] === ude ? ude : hjemme; // holdet i skemaets venstre kolonne
+    const hold2 = hold1 === hjemme ? ude : hjemme;
+    const venstre = (lbl) => { const x = rows.find((y) => y.includes(lbl)); if (!x) return ["", ""]; const j = x.indexOf(lbl); return [x[j + 1] || "", x[j + 3] || ""]; };
+    const [sc1, sc2] = [r[i + 1], r[i + 3]];
+    const score = { [hold1]: sc1, [hold2]: sc2 };
+    const [w1, w2] = venstre("Winnings");
+    const c0 = rows[0] || [];
+    const coach = { [hold1]: c0[2] || "", [hold2]: c0[3] || "" };
+    // Spillerblokke: to rækker med "Player". Kolonnerne står altid i samme rækkefølge efter spillernavnet:
+    // Miss Next Game, TD, Completion, Interception, Foul, Casualties, MVP. (Google mister nogle af overskrifterne.)
+    const blokke = [];
+    rows.forEach((x, idx) => { if (x.includes("Player")) blokke.push(idx); });
+    const spillere = {};
+    blokke.slice(0, 2).forEach((h, b) => {
+      const iN = rows[h].indexOf("Player");
+      const c = (n) => iN + { "Miss Next Game": 1, TD: 2, Completion: 3, Interception: 4, Foul: 5, Casualties: 6, MVP: 7 }[n];
+      const liste = [];
+      for (let k = h + 1; k < rows.length && /^\d+$/.test(rows[k][0] || ""); k++) {
+        const x = rows[k];
+        if (!x[iN]) continue;
+        const v = (j) => (j >= 0 ? tal(x[j]) : 0);
+        liste.push({ nr: x[0], navn: x[iN], td: v(c("TD")), comp: v(c("Completion")), int: v(c("Interception")), foul: v(c("Foul")),
+          cas: v(c("Casualties")), mvp: v(c("MVP")), mng: x[c("Miss Next Game")] === "Y" });
+      }
+      spillere[b === 0 ? hold1 : hold2] = liste;
+    });
+    const flueben = c0.filter((x) => /^Tjekbokse/i.test(x)).some((x) => /Y$/i.test(x));
+    return { fane, hjemme, ude, s1: score[hjemme], s2: score[ude], coach, spillere,
+      winnings: { [hold1]: w1, [hold2]: w2 }, spillet: flueben || tal(sc1) > 0 || tal(sc2) > 0 };
   }
 
   async function sidePuljekampe() {
@@ -427,7 +453,7 @@
       const v1 = k.spillet && tal(k.s1) > tal(k.s2), v2 = k.spillet && tal(k.s2) > tal(k.s1);
       return `<li class="kamp${k.spillet ? " spillet" : ""}">
         <span class="h${v1 ? " vinder" : ""}">${holdLink(k.hjemme)}</span>
-        <span class="score">${k.spillet ? `${esc(k.s1)} – ${esc(k.s2)}` : "–"}</span>
+        ${k.spillet ? `<a class="score" href="#kamp/${encodeURIComponent(k.fane)}" title="Se kampen">${esc(k.s1)} – ${esc(k.s2)}</a>` : '<span class="score">–</span>'}
         <span class="u${v2 ? " vinder" : ""}">${holdLink(k.ude)}</span></li>`;
     };
     // Pressechefen kommenterer yndlingsholdets puljekampe ud fra de rigtige resultater.
@@ -670,9 +696,80 @@
       ${pk.length ? `<h2>Pressekonferencer</h2><div class="grid">${pk.map(pkTeaser).join("")}</div>` : ""}`;
   }
 
+  // ---------- Kampside ----------
+  const listeTekst = (a) => a.length <= 1 ? (a[0] || "") : a.slice(0, -1).join(", ") + " og " + a[a.length - 1];
+  const hashTal = (t) => [...t].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+
+  // Referatet skrives automatisk ud fra kampskemaets tal. Kun fakta, plus en markeret kommentar fra pressechefen.
+  function referat(k) {
+    const A = k.hjemme, B = k.ude, a = tal(k.s1), b = tal(k.s2);
+    const sp = (h) => k.spillere[h] || [];
+    const navne = (h, felt) => sp(h).filter((p) => p[felt] > 0).map((p) => (p[felt] > 1 ? `${p.navn} (${p[felt]})` : p.navn));
+    const vinder = a > b ? A : b > a ? B : null, taber = vinder === A ? B : vinder === B ? A : null;
+    const linjer = [];
+    linjer.push(vinder ? `${vinder} vandt ${Math.max(a, b)}-${Math.min(a, b)} over ${taber}.` : `${A} og ${B} spillede ${a}-${b}.`);
+    const tdV = navne(vinder || A, "td"), tdT = navne(taber || B, "td");
+    if (tdV.length && tdT.length) linjer.push(`${listeTekst(tdV)} scorede for ${vinder || A}, mens ${listeTekst(tdT)} scorede for ${taber || B}.`);
+    else if (tdV.length) linjer.push(`${listeTekst(tdV)} scorede for ${vinder || A}.`);
+    else if (tdT.length) linjer.push(`${listeTekst(tdT)} scorede for ${taber || B}.`);
+    const cas = [...navne(A, "cas"), ...navne(B, "cas")];
+    const casTal = [...sp(A), ...sp(B)].reduce((n, p) => n + p.cas, 0);
+    if (cas.length) linjer.push(`${listeTekst(cas)} stod for ${casTal === 1 ? "kampens eneste casualty" : `kampens ${casTal} casualties`}.`);
+    const passer = [...sp(A), ...sp(B)].filter((p) => p.comp >= 2).sort((x, y) => y.comp - x.comp)[0];
+    if (passer) linjer.push(`${passer.navn} leverede ${passer.comp} completions${taber && sp(taber).includes(passer) ? " i nederlaget" : ""}.`);
+    const ints = [...navne(A, "int"), ...navne(B, "int")];
+    if (ints.length) linjer.push(`${listeTekst(ints)} snuppede bolden med en interception.`);
+    const fouls = [...navne(A, "foul"), ...navne(B, "foul")];
+    if (fouls.length) linjer.push(`${listeTekst(fouls)} gik efter manden med en foul.`);
+    const mvp = [...navne(A, "mvp"), ...navne(B, "mvp")];
+    if (mvp.length) linjer.push(`${mvp.length > 1 ? "Kampens MVP'er" : "Kampens MVP"}: ${listeTekst(mvp)}.`);
+    const Y = H.yndlingshold;
+    const presse = [A, B].includes(Y)
+      ? (vinder === Y ? `En historisk aften for ${Y}. Pressechefen har allerede bestilt statuen.` : vinder ? `Et resultat, der ikke afspejler ${Y}' enorme overlegenhed. Pressechefen har klaget til Nuffle.` : `Uafgjort, men moralsk en sejr til ${Y}.`)
+      : [`Pressechefen kalder kampen solid, men bemærker, at den havde været bedre med ${Y} på banen.`,
+         `Pressechefen konstaterer, at ${Y} fortsat er ubesejrede i denne kamp.`,
+         `Pressechefen roser begge hold og minder om, at ${Y} også findes.`][hashTal(k.fane) % 3];
+    return { tekst: linjer.join(" "), presse };
+  }
+
+  async function sideKamp(fane) {
+    const def = (C.PULJEKAMPE || []).find((p) => p.faner.includes(fane));
+    const tilbage = '<a class="tilbage" href="#puljekampe">← Alle puljekampe</a>';
+    if (!def) return tilbage + fejlboks("Kampen findes ikke.");
+    $main.innerHTML = tilbage + '<p class="loading">Henter kampskemaet …</p>';
+    let k;
+    try { k = læsKamp(await hent(def.ark, fane), fane); } catch (e) { return tilbage + fejlboks(e.message); }
+    const A = k.hjemme, B = k.ude, a = tal(k.s1), b = tal(k.s2);
+    const hoved = `${tilbage}<p class="kicker">${chip(titel(def.pulje))} Puljekamp</p>
+      <div class="kamp-hoved">
+        <div class="side${k.spillet && a > b ? " vinder" : ""}">${holdLink(A)}<span class="small muted">Hjemme${k.coach[A] ? ` · Coach ${esc(k.coach[A])}` : ""}</span></div>
+        <div class="stor-score">${k.spillet ? `${esc(k.s1)} – ${esc(k.s2)}` : "–"}</div>
+        <div class="side u${k.spillet && b > a ? " vinder" : ""}">${holdLink(B)}<span class="small muted">Ude${k.coach[B] ? ` · Coach ${esc(k.coach[B])}` : ""}</span></div>
+      </div>`;
+    if (!k.spillet) return hoved + '<p class="muted">Kampen er ikke spillet endnu.</p>';
+    const r = referat(k);
+    const holdTabel = (h) => {
+      const aktive = (k.spillere[h] || []).filter((p) => p.td || p.comp || p.int || p.foul || p.cas || p.mvp || p.mng);
+      const n = (v) => (v ? esc(v) : '<span class="muted">·</span>');
+      return `<div class="card"><h3>${esc(h)}</h3>
+        <p class="small muted" style="margin:0 0 8px">Winnings: ${esc(k.winnings[h] ? Number(tal(k.winnings[h])).toLocaleString("da-DK") + " GP" : "–")}</p>
+        ${aktive.length ? `<div class="tabel-wrap"><table><thead><tr><th>#</th><th>Spiller</th><th class="num">TD</th><th class="num">Comp</th>
+          <th class="num">Int</th><th class="num">Foul</th><th class="num">CAS</th><th class="num">MVP</th></tr></thead><tbody>
+          ${aktive.map((p) => `<tr><td class="rank">${esc(p.nr)}</td><td><b>${esc(p.navn === "Runt" ? "Runt #" + p.nr : p.navn)}</b>${p.mng ? ' <span class="mng">Misser næste kamp</span>' : ""}</td>
+            <td class="num">${n(p.td)}</td><td class="num">${n(p.comp)}</td><td class="num">${n(p.int)}</td><td class="num">${n(p.foul)}</td>
+            <td class="num">${n(p.cas)}</td><td class="num">${n(p.mvp)}</td></tr>`).join("")}</tbody></table></div>`
+          : '<p class="muted small" style="margin:0">Ingen spillere med stats i kampen.</p>'}</div>`;
+    };
+    return `${hoved}
+      <article class="card referat"><p class="kicker">Kampreferat</p><p class="referat-tekst">${esc(r.tekst)}</p>
+        <p class="small muted" style="margin:0">Skrevet automatisk ud fra kommissærens kampskema.</p></article>
+      ${pressechefKort(r.presse)}
+      <h2>Stats</h2><div class="grid-2">${holdTabel(A)}${holdTabel(B)}</div>`;
+  }
+
   // ---------- Router ----------
   const SIDER = { forside: sideForside, stilling: sideStilling, puljekampe: sidePuljekampe, regnbue: sideRegnbue,
-    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder };
+    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe };
   const ALIAS = { kampe: "puljekampe" }; // gamle links
   const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Pressekonferencer" };
   let visNr = 0;
@@ -682,12 +779,14 @@
     const side = ALIAS[rå] || rå;
     const navn = rest.length ? decodeURIComponent(rest.join("/")) : "";
     const key = SIDER[side] ? side : "forside";
-    document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("on", a.dataset.page === key));
+    const fane = key === "kamp" ? "puljekampe" : key;
+    document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("on", a.dataset.page === fane));
     if (!navn) window.scrollTo(0, 0);
-    const html = key === "hold" && navn ? await sideHold(navn) : key === "presse" && navn ? sidePresse(navn) : await SIDER[key]();
+    const html = key === "hold" && navn ? await sideHold(navn) : key === "presse" && navn ? sidePresse(navn)
+      : key === "kamp" && navn ? await sideKamp(navn) : await SIDER[key]();
     if (nr !== visNr) return; // brugeren har skiftet side imens
     $main.innerHTML = html;
-    const pkTitel = key === "presse" && navn ? (PRESSE.find((p) => p.id === navn) || {}).titel : "";
+    const pkTitel = key === "presse" && navn ? (PRESSE.find((p) => p.id === navn) || {}).titel : key === "kamp" && navn ? navn : "";
     document.title = (key === "forside" ? "" : (pkTitel || navn || SIDENAVN[key] || titel(key)) + " · ") + liga;
   }
 
