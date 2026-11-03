@@ -63,6 +63,12 @@ satire-note i bunden. Pressechefen hedder Gunnar Grådig (godkendt af Peter 3. n
 - Eget domæne senere, eller er github.io fint?
 - Uklarhederne i data (se DATAKORT.md): hvad kampprogrammet er i forhold til puljekampene, og kampprogrammets rækkefølge.
 
+## Stil for pressekonferencer (Peters feedback 3. nov.)
+- Gnoblarer taler ikke. De kan nævnes, men har ingen replikker.
+- Korte, tætte replikker. Meget få eller ingen beskrivelser af omgivelser og handlinger.
+- Passer til sæsonens fase (fx pre-season: forberedelser, nyindkøb, mål, odds).
+- Replikker, der nævner tal (point, spillere, kasse), skal passe med Mikkels ark.
+
 ## Logo (idéer 3. nov.)
 Klubben hedder Semper Fortuna og ligger i **Odder**. Logoet skal kombinere SF/Semper Fortuna, Blood Bowl-stemning og "ODDER BLOOD BOWL".
 Anbefalet retning: pigget skjold med SF-monogram og en blokterning ("altid held" på latin, ironisk med blokterninger).
