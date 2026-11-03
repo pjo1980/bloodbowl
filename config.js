@@ -13,8 +13,8 @@ window.CONFIG = {
     hold:      "1wqXQfoZ2DZdCUSWBF0o1tgtiycztq8NuJ2f_nUif46o",
     puljeGul:  "1vzKPfw-2WmsEEfPjgJPqEBeVN08ODg36qQ1GH3SXVbI",
     puljeBlaa: "1t-ZntRFVAy79VqMz-G6dJwhLalMWs8rHFjPDNsh3ARY",
-    puljeRoed: "1-AdI1rklMUmDNp9wiJWRyE6FJfqc1y2Hrp2QDVVaxLs"
-    // puljeSort: mangler link
+    puljeRoed: "1-AdI1rklMUmDNp9wiJWRyE6FJfqc1y2Hrp2QDVVaxLs",
+    puljeSort: "1rucYUGovKDidPORuZyOO2HxyEYdG7Qg62Q0a-lX3ARc"
   },
   FANER: {
     stilling: "Turneringsstilling",

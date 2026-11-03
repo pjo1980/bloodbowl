@@ -30,11 +30,12 @@ Puljeturnering, 13 hold, 4 puljer (Sort 4 hold, Rød 3, Gul 3, Blå 3). Point: *
 - **TeamData**: officielle holdtyper med positioner, priser og skills (opslagsdata, ikke ligadata).
 - Øvrige faner (HOW TO USE, Master, Passing Calculator, Injury Tables …) er værktøjer. Ignorér.
 
-### Puljeark – Gul `1vzKPfw-2WmsEEfPjgJPqEBeVN08ODg36qQ1GH3SXVbI`, Blå `1t-ZntRFVAy79VqMz-G6dJwhLalMWs8rHFjPDNsh3ARY`, Rød `1-AdI1rklMUmDNp9wiJWRyE6FJfqc1y2Hrp2QDVVaxLs`
+### Puljeark – Gul `1vzKPfw-2WmsEEfPjgJPqEBeVN08ODg36qQ1GH3SXVbI`, Blå `1t-ZntRFVAy79VqMz-G6dJwhLalMWs8rHFjPDNsh3ARY`, Rød `1-AdI1rklMUmDNp9wiJWRyE6FJfqc1y2Hrp2QDVVaxLs`, Sort `1rucYUGovKDidPORuZyOO2HxyEYdG7Qg62Q0a-lX3ARc`
 - Fane "Stilling <farve> Pulje", **en fane pr. kamp og pr. side** ("A vs. B" og "B vs. A") og "Holddata".
 - Kampfanerne er kommissærens kampskema (pre-/post-match, score, winnings, skader pr. spiller).
   Layout med faste celler, fx score i række 4 kolonne G og I. Rodet, men læsbart, hvis vi får brug for kampresultater.
-- **Sort pulje har intet puljeark i de links, Peter sendte.**
+- Sort pulje (4 hold) har 8 kampfaner, så hvert hold har 4 puljekampe. De 3-holds-puljer har 6 kampfaner: hvert hold møder
+  de to andre to gange ("A vs. B" og "B vs. A"). **Sandsynligvis hjemme/ude, altså to forskellige kampe**, ikke én kamp pr. coach.
 
 ## Konklusion
 **Ingen bro-ark nødvendigt.** Siden læser turneringsarket (stilling, puljer, program, ranglister) og hold-arket
@@ -46,9 +47,8 @@ program og ranglister uden dem.
    Kampprogram Regnbuepilen parrer hold på tværs af puljer. Er programmet en senere fase?
 2. **Kampprogrammet er ikke symmetrisk:** The Eternal Sages har Black Mountain Slavers som kamp 1, men
    Black Mountain Slavers har Fright Night Fumblers som kamp 1. "Kamp N" er altså ikke en fælles runde.
-3. Hvorfor har hver kamp to faner ("A vs. B" og "B vs. A")? Udfylder hver coach sin egen?
-4. **Sort pulje-arket mangler.** Kommissæren siger, der er seks ark. Tjekket i Peters Drive 3. nov.:
-   det er ikke delt med Peter, og det kan ikke findes uden link. Stillingen for Sort pulje står dog i turneringsarket.
+3. ~~To faner pr. kamp~~: ser ud til at være hjemme/ude (se puljeark ovenfor). Bekræftes af Mikkel.
+4. ~~Sort pulje-arket mangler~~: modtaget 3. nov. og tilføjet.
 
 ## Andet delt materiale
 - Google Doc "Bud på opbygning af liga" (`1KrB-Q-GpUalk81khfPlMBhfYGEItIMQmYy-qR1gytPo`), delt 13. okt.

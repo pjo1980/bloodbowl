@@ -37,4 +37,4 @@ Venter på, at Mikkel opretter fanen. Peter har fået en besked at sende ham. In
 ## Åbne spørgsmål til Peter
 - Må kommissæren vide, at siden findes, før den er færdig?
 - Eget domæne senere, eller er github.io fint?
-- Uklarhederne i data (se DATAKORT.md): hvilke kampe er spillet, kampprogrammets rækkefølge, de dobbelte kampfaner, Sort pulje-arket.
+- Uklarhederne i data (se DATAKORT.md): hvad kampprogrammet er i forhold til puljekampene, og kampprogrammets rækkefølge.
