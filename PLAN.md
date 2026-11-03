@@ -41,6 +41,9 @@ Venter på, at Mikkel opretter fanen. Peter har fået en besked at sende ham. In
 - **Peters hold er GutBuster Gluttons (Ogres, Blå pulje), og pressen elsker dem.** Fx Spike! Magazine
   der hylder dem, overskrifter, "eksklusive interviews". En kærlig running gag; de andre hold må gerne få lidt
   medieopmærksomhed også, så det ikke bliver ondt.
+- **Stående joke: ligaens pressechef er (ikke så hemmeligt) GutBuster Gluttons-fan.** En opdigtet figur (ikke en rigtig
+  person), der skriver pressemeddelelser, kommentarer og "objektive" analyser, som altid ender med at hylde Gluttons.
+  Navn vælges med Peter. Holdes adskilt fra kommissæren, hvis ord altid er Mikkels egne.
 - **Kommissærens ord:** kun hans egne ord (fx fra Nyheder-fanen eller en fane/kolonne han selv skriver i). Opdigt aldrig citater fra Mikkel.
 - **Mere statistik** på sigt fra ligaens egne spillere (fx flest SPP, flest skader, MVP-konge, "mest farlige fouler").
 - Evt. "Seneste resultater" på forsiden (kræver at forsiden henter kampskemaerne, 26 små hentninger).
