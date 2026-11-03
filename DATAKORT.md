@@ -33,7 +33,8 @@ Puljeturnering, 13 hold, 4 puljer (Sort 4 hold, Rød 3, Gul 3, Blå 3). Point: *
 ### Puljeark – Gul `1vzKPfw-2WmsEEfPjgJPqEBeVN08ODg36qQ1GH3SXVbI`, Blå `1t-ZntRFVAy79VqMz-G6dJwhLalMWs8rHFjPDNsh3ARY`, Rød `1-AdI1rklMUmDNp9wiJWRyE6FJfqc1y2Hrp2QDVVaxLs`, Sort `1rucYUGovKDidPORuZyOO2HxyEYdG7Qg62Q0a-lX3ARc`
 - Fane "Stilling <farve> Pulje", **en fane pr. kamp og pr. side** ("A vs. B" og "B vs. A") og "Holddata".
 - Kampfanerne er kommissærens kampskema (pre-/post-match, score, winnings, skader pr. spiller).
-  Layout med faste celler, fx score i række 4 kolonne G og I. Rodet, men læsbart, hvis vi får brug for kampresultater.
+  Siden læser rækken "Score" (hjemme i cellen til højre, ude to celler længere) og "Tjekbokse Y" i række 1 = coach har afsluttet.
+  Fanenavnene står i `config.js` under PULJEKAMPE, fordi en browser ikke kan liste et arks faner.
 - Sort pulje (4 hold) har 8 kampfaner, så hvert hold har 4 puljekampe. De 3-holds-puljer har 6 kampfaner: hvert hold møder
   de to andre to gange ("A vs. B" og "B vs. A"). **Sandsynligvis hjemme/ude, altså to forskellige kampe**, ikke én kamp pr. coach.
 
@@ -43,14 +44,18 @@ Puljeturnering, 13 hold, 4 puljer (Sort 4 hold, Rød 3, Gul 3, Blå 3). Point: *
 program og ranglister uden dem.
 
 ## Uklarheder (spørg Peter/kommissæren, ret ikke selv)
-1. **Hvornår spilles Regnbuepilen?** Analyse 3. nov.: Puljekampene er 26 kampe (4 pr. hold, kun inden for puljen).
-   Regnbuepilen er 26 andre kampe (4 pr. hold, **kun på tværs** af puljer, ingen gentagelser af puljekampe).
-   De spillede kampe er puljekampe. Sandsynligvis: puljer først, så Regnbuepilen. Bekræftes af Mikkel.
+1. ~~Hvornår spilles Regnbuepuljen?~~ **Bekræftet af Mikkel 3. nov.:** først puljespil (Sort/Rød/Blå/Gul), derefter
+   "regnbuepuljen". Hvem der møder hvem i regnbuepuljen, afgøres af puljespillet, så fanen
+   "Kampprogram Regnbuepiljen" er foreløbig. Puljekampe: 26 kampe, 4 pr. hold. Regnbuepuljen: 26 kampe, 4 pr. hold, kun på tværs.
 2. ~~Kampprogrammet er ikke symmetrisk~~: forkert. Alle 26 par står hos begge hold, bare i forskellige kolonner.
    "Kamp N" er holdets egen nummerering, ikke en fælles runde. Ingen oversiddere i programmet.
-3. ~~To faner pr. kamp~~: ser ud til at være hjemme/ude (se puljeark ovenfor). Bekræftes af Mikkel.
+3. ~~To faner pr. kamp~~: to forskellige kampe (hjemme/ude). Set i data: Sages–Elmtree spillet 2-1, Elmtree–Sages ikke spillet.
 4. ~~Sort pulje-arket mangler~~: modtaget 3. nov. og tilføjet.
 
 ## Andet delt materiale
 - Google Doc "Bud på opbygning af liga" (`1KrB-Q-GpUalk81khfPlMBhfYGEItIMQmYy-qR1gytPo`), delt 13. okt.
   Mulig kilde til husregler på siden. Ikke læst endnu.
+
+## Holdlister: skills fra level-up
+Står på en ekstra linje under spilleren (ingen nummer, intet navn) i kolonnerne fra "Skills and Improvements".
+Siden sætter dem på spilleren ovenover og viser dem med guld. Stavning vises som i arket.

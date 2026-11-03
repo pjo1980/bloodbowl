@@ -28,5 +28,26 @@ window.CONFIG = {
   // Holdnavn på siden -> fanenavn i hold-arket, hvor de afviger.
   ROSTER_FANE: {
     "Return Of The Living Deadbeats": "Living Deadbeats"
-  }
+  },
+  // Puljekampe: én fane pr. kamp i hvert puljeark, PRÆCIS som fanerne hedder (også stavefejl som "vs,").
+  // "A vs. B" og "B vs. A" er to forskellige kampe (hjemme/ude). Kommer der nye kampfaner, skal de skrives her.
+  PULJEKAMPE: [
+    { pulje: "Sort Pulje", ark: "puljeSort", faner: [
+      "The Eternal Sages vs. Elmtree Evaders", "The Maurading Ocras vs. Mörkley Crüe",
+      "The Eternal Sages vs. Mörkley Crüe", "Elmtree Evaders vs. The Eternal Sages",
+      "Mörkley Crüe vs. The Maurading Ocras", "Mörkley Crüe vs. Elmtree Evaders",
+      "The Maurading Ocras vs. Elmtree Evaders", "The Maurading Ocras vs. The Eternal Sages"] },
+    { pulje: "Rød pulje", ark: "puljeRoed", faner: [
+      "The Full Moon Foulers vs. The FumbleBoyz", "The FumbleBoyz vs. The Full Moon Foulers",
+      "The Full Moon Foulers vs, Fright Night Fumblers", "Fright Night Fumblers vs. The Full Moon Foulers",
+      "The FumbleBoyz vs, Fright Night Fumblers", "Fright Night Fumblers vs. The FumbleBoyz"] },
+    { pulje: "Blå pulje", ark: "puljeBlaa", faner: [
+      "Da Demolitionaz vs. Return Of The Living Deadbeats", "Return Of The Living Deadbeats vs. Da Demolitionaz",
+      "Return Of The Living Deadbeats vs. GutBuster Gluttons", "GutBuster Gluttons vs. Return Of The Living Deadbeats",
+      "Da Demolitionaz vs. GutBuster Gluttons", "GutBuster Gluttons vs. Da Demolitionaz"] },
+    { pulje: "Gul pulje", ark: "puljeGul", faner: [
+      "Bros Being Bros vs. Black Mountain Slavers", "Black Mountain Slavers vs. Bros Being Bros",
+      "Black Mountain Slavers vs. Bedstefars Besudlere", "Bedstefars Besudlere vs. Black Mountain Slavers",
+      "Bedstefars Besudlere vs. Bros Being Bros", "Bros Being Bros vs. Bedstefars Besudlere"] }
+  ]
 };

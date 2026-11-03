@@ -31,8 +31,16 @@ Venter på, at Mikkel opretter fanen. Peter har fået en besked at sende ham. In
 - Repo og Pages er oprettet (se status).
 - `GUIDE.md` til Peter og kort `KOMMISSAER.md` ("du gør som du plejer, siden følger med inden for ca. 5 minutter").
 
-## Senere (version 2)
-- Kampresultater pr. kamp fra kampfanerne i puljearkene (faste celler, kræver omhu).
+## Gjort 3. nov. (version 2)
+- Holdliste-fejl rettet (4 hold viste kun 1 spiller). Skills fra level-up vises.
+- Kampe delt op: **Puljekampe** (resultater fra kampskemaerne) og **Regnbuepuljen** (foreløbigt program).
+
+## Næste gang vi ændrer (Peters ønsker 3. nov.)
+- **Blood Bowl-humor rundt omkring:** sponsorer fra Blood Bowl-universet, "citater" fra kendte Star Players.
+  Skriv selv originale gags i Blood Bowl-stil; kopiér ikke tekst fra Games Workshops bøger.
+- **Kommissærens ord:** kun hans egne ord (fx fra Nyheder-fanen eller en fane/kolonne han selv skriver i). Opdigt aldrig citater fra Mikkel.
+- **Mere statistik** på sigt fra ligaens egne spillere (fx flest SPP, flest skader, MVP-konge, "mest farlige fouler").
+- Evt. "Seneste resultater" på forsiden (kræver at forsiden henter kampskemaerne, 26 små hentninger).
 
 ## Åbne spørgsmål til Peter
 - Må kommissæren vide, at siden findes, før den er færdig?

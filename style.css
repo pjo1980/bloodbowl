@@ -161,3 +161,18 @@ td a:hover { color: var(--accent); }
 
 /* Puljeprik foran modstandere i kampprogrammet */
 .prik { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--c, var(--muted)); margin-right: 7px; vertical-align: 1px; box-shadow: 0 0 0 2px rgba(0,0,0,.35); }
+
+/* Skills fra level-up */
+.ny { color: var(--gold); font-weight: 600; }
+
+/* Puljekampe */
+.kampe { list-style: none; margin: 0; padding: 0; }
+.kamp { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+.kamp:last-child { border-bottom: 0; }
+.kamp .u { text-align: right; }
+.kamp a { color: var(--muted); text-decoration: none; font-weight: 600; }
+.kamp.spillet a { color: var(--text); }
+.kamp .vinder a { color: var(--accent); }
+.kamp .score { font-family: "Bangers", Impact, sans-serif; font-size: 22px; letter-spacing: 1px; min-width: 58px; text-align: center; color: var(--muted); }
+.kamp.spillet .score { color: var(--text); }
+.kamp .fejl { grid-column: 1 / -1; }
