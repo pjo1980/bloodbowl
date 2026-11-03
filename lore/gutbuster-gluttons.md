@@ -6,6 +6,7 @@ Ny tekst om holdet skal følge **kanon-principperne** nederst. Teksten nedenfor 
 **Peters rettelser 3. nov. (gælder før teksten nedenfor):**
 - "Family Isn't Food" er **ikke officielt**. Brug det ikke på siden.
 - Gnoblarer (Runts) **taler ikke** i pressekonferencer.
+- **Runts' Union er uofficiel.** Nævn den ikke på siden. Gnoblarerne kan godt klage, men ikke som union.
 - Runts er som Fraggle Rocks Doozers: De er der hele tiden, men ingen lægger mærke til dem, før de **ikke** er der.
   Ting "ordner sig selv", fordi Runts ordner dem i det skjulte.
 

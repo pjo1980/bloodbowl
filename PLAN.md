@@ -65,7 +65,7 @@ satire-note i bunden. Pressechefen hedder Gunnar Grådig (godkendt af Peter 3. n
 
 ## Stil for pressekonferencer (Peters feedback 3. nov.)
 - Gnoblarer taler ikke. De kan nævnes, men har ingen replikker. De er som Doozers i Fraggle Rock: usynlige, indtil de mangler.
-- "Family Isn't Food" er ikke officielt. Brug det ikke.
+- "Family Isn't Food" og "Runts' Union" er ikke officielle. Brug dem ikke.
 - Hold dem omkring 40 korte replikker.
 - Korte, tætte replikker. Meget få eller ingen beskrivelser af omgivelser og handlinger.
 - Passer til sæsonens fase (fx pre-season: forberedelser, nyindkøb, mål, odds).

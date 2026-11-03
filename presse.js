@@ -11,7 +11,7 @@ window.LORE = {
     afsnit: [
       { titel: "Fra slagter til sportsklub", tekst: "Før Blood Bowl drev Otto Overbelly en omrejsende slagterforretning, Overbelly's Prime Cuts. Den gik fallit. Otto så det ikke som en fiasko. Han omorganiserede bare: Ogrerne blev spillere, gnoblarerne blev personale, og slagtervognene blev holdets infrastruktur." },
       { titel: "The Gutpit", tekst: "Hjemmebanen er bygget i resterne af en slagtergård, et fælleskøkken og en ogrelejr. Der er store jerngryder, huggeblokke, kødkroge og røg fra kogebål. Den er kaotisk, farlig og dårligt reguleret. Den er også hjemme." },
-      { titel: "Runts' Union", tekst: "Ogrerne er officielt holdet. Gnoblarerne, kaldet Runts, er i praksis embedsværket. De står for logistik, udstyr, forplejning, skadesrapporter og papirarbejde. Ingen lægger mærke til dem. Man opdager dem først, når de ikke er der, og hele klubben går i stå. Det forstår Otto aldrig helt." },
+      { titel: "Runts", tekst: "Ogrerne er officielt holdet. Gnoblarerne, kaldet Runts, er i praksis embedsværket. De står for logistik, udstyr, forplejning, skadesrapporter og papirarbejde. Ingen lægger mærke til dem. Man opdager dem først, når de ikke er der, og hele klubben går i stå. Det forstår Otto aldrig helt." },
       { titel: "Navnetraditionen", tekst: "En gnoblar hos Gluttons får ikke et rigtigt navn. Den hedder Runt #7 eller Git #3. Et navn skal fortjenes, og grænsen er enkel: En gnoblar får et navn, når den lærer en skill. Det betragtes som helt normalt." },
       { titel: "Rygterne", tekst: "Modstandere har det med at forsvinde efter besøg i The Gutpit. Klubben afviser alle rygter. Hjelmene ved gryderne er et tilfælde, og kødet er officielt bare svinekød." }
     ],
@@ -61,10 +61,10 @@ window.PRESSE = [
       { hvem: "Otto Overbelly", tekst: "Du godeste, nej. Vi er ikke barbarer!", note: "fornærmet" },
       { hvem: "Cabalvision", tekst: "Hvad er der så i gryden bag dig?" },
       { hvem: "Gunnar Grådig", tekst: "Officielt er det bare svinekød. Næste." },
-      { hvem: "Spike!", tekst: "Runts' Union har klaget over Throw Team-mate. Kommentar?" },
-      { hvem: "Otto Overbelly", tekst: "Hvem?" },
-      { hvem: "Gunnar Grådig", tekst: "Gnoblarerne, Otto." },
-      { hvem: "Otto Overbelly", tekst: "Nå. Dem. Klagen er noteret." },
+      { hvem: "Spike!", tekst: "Holdets gnoblarer har klaget over Throw Team-mate. Kommentar?" },
+      { hvem: "Otto Overbelly", tekst: "Har vi gnoblarer?" },
+      { hvem: "Gunnar Grådig", tekst: "Fem, Otto." },
+      { hvem: "Otto Overbelly", tekst: "Nå. Klagen er noteret." },
       { hvem: "Spike!", tekst: "Af hvem?" },
       { hvem: "Otto Overbelly", tekst: "Det plejer at ordne sig selv." },
       { hvem: "Cabalvision", tekst: "Sommerens store nyindkøb er Lugga Longkicker. Hans job er at sparke gnoblarer." },
