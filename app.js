@@ -15,7 +15,8 @@
     "turnering|Spiller ranglister": "spillerranglister.csv",
     "hold|Holdstats ud": "holdstats-ud.csv",
     "hold|GutBuster Gluttons": "roster-gutbuster-gluttons.csv",
-    "turnering|Nyheder": "nyheder-fane-eksempel.csv"
+    "turnering|Nyheder": "nyheder-fane-eksempel.csv",
+    "presse|Udgivet": "pressemail-eksempel.csv"
   };
 
   // ---------- Hjælpere ----------
@@ -243,7 +244,8 @@
       spillerrang: hent("turnering", F.spillerrang).then((r) => læsRanglister(r, F.spillerrang, 4)),
       holdstats: hent("hold", F.holdstats).then((r) => læsHoldstats(r, F.holdstats)),
       nyheder: fetch("nyheder.csv", { cache: "no-store" }).then((r) => r.ok ? r.text() : "").then(parseCSV),
-      nyhedsfane: hent("turnering", F.nyheder) // valgfri: Mikkels fane "Nyheder" i turneringsarket
+      nyhedsfane: hent("turnering", F.nyheder), // valgfri: Mikkels fane "Nyheder" i turneringsarket
+      pressemail: C.ARK.presse || C.BRUG_LOKALE_DATA ? hent("presse", F.presseUdgivet || "Udgivet") : Promise.resolve([])
     };
     F.puljer.forEach((p) => { job["pulje:" + p] = hent("turnering", p).then((r) => læsStilling(r, p)); });
     const navne = Object.keys(job);
@@ -257,6 +259,9 @@
       const d = D["pulje:" + p];
       if (d && d.ok) d.ok.hold.forEach((h) => { puljeAf[h.navn] = titel(p); });
     });
+    // Pressemeddelelser fra pressechefens mail (godkendte) flettes med dem i presse.js.
+    PRESSE = [...(window.PRESSE || []), ...læsPressemail(D.pressemail && D.pressemail.ok)]
+      .sort((a, b) => (b.dato || "").localeCompare(a.dato || ""));
     D.hentet = new Date();
   }
 
@@ -646,7 +651,55 @@
 
   // ---------- Presse og holdlore (indholdet står i presse.js) ----------
   const LORE = window.LORE || {};
-  const PRESSE = (window.PRESSE || []).slice().sort((a, b) => (b.dato || "").localeCompare(a.dato || ""));
+  let PRESSE = (window.PRESSE || []).slice().sort((a, b) => (b.dato || "").localeCompare(a.dato || ""));
+
+  // Tekst fra en coach-mail -> replikker. Regler (står også i coach-beskeden i pressechef/GUIDE.md):
+  //   "NAVN: tekst"           -> replik (navnet højst 4 ord, ikke et klokkeslæt)
+  //   linje i anførselstegn  -> mellemoverskrift (også linjer der starter med en emoji)
+  //   linje i (parentes)     -> regi
+  //   andre linjer           -> fortsættelse af replikken ovenover, ellers et almindeligt afsnit
+  const pæntNavn = (n) => (n === n.toUpperCase() && /\p{Lu}/u.test(n) ? n.toLowerCase().replace(/(^|\s)\S/g, (m) => m.toUpperCase()) : n);
+  function tekstTilReplikker(t) {
+    const ud = [];
+    let cur = null;
+    const emoji = /^[\u{1F000}-\u{1FFFF}\u2600-\u27BF\u2B50\uFE0F\s]+/u;
+    for (let l of String(t || "").split(/\n/)) {
+      l = l.trim();
+      if (!l) continue;
+      const m = l.match(/^([^:]{1,40}):\s*(.+)$/);
+      const navn = m ? m[1].trim() : "";
+      if (m && navn.split(/\s+/).length <= 4 && /^\p{L}/u.test(navn) && !/\d$/.test(navn)) {
+        cur = { hvem: pæntNavn(navn), tekst: m[2].trim() };
+        ud.push(cur);
+      } else if (emoji.test(l) || /^[“"«»].+[”"«»]$/.test(l)) {
+        ud.push({ afsnit: l.replace(emoji, "").trim() }); cur = null;
+      } else if (/^\(.+\)$/.test(l)) {
+        ud.push({ scene: l.slice(1, -1).trim() });
+      } else if (cur) {
+        cur.tekst += "\n" + l;
+      } else {
+        ud.push({ p: l });
+      }
+    }
+    return ud;
+  }
+  function læsPressemail(rows) {
+    if (!rows || !rows.length) return [];
+    const h = rows.findIndex((r) => r.includes("Overskrift") && r.includes("Hold"));
+    if (h < 0) return [];
+    const c = (n) => rows[h].indexOf(n);
+    return rows.slice(h + 1).filter((r) => r[c("Hold")] && r[c("Overskrift")]).map((r) => {
+      const replikker = tekstTilReplikker(r[c("Tekst")]);
+      const første = replikker.find((x) => x.hvem || x.p);
+      const kort = (s) => (s.length > 160 ? s.slice(0, 157).replace(/\s+\S*$/, "") + " …" : s);
+      return {
+        id: "mail-" + String(r[c("ID")] || "").replace(/[^\w-]/g, ""),
+        hold: r[c("Hold")], dato: r[c("Dato")], titel: r[c("Overskrift")],
+        undertitel: "Pressemeddelelse", indsendt: "Indsendt af holdets coach", replikker,
+        citat: første ? { hvem: første.hvem || r[c("Hold")], tekst: kort((første.tekst || første.p).split("\n")[0]) } : null
+      };
+    });
+  }
   const pkDato = (pk) => { const d = læsDato(pk.dato); return d ? bbDato(d) : pk.dato || ""; };
 
   function pressekonference(pk) {
@@ -654,6 +707,7 @@
     const coachNavn = pk.coach || (LORE[pk.hold] || {}).coach;
     const linjer = pk.replikker.map((r) => {
       if (r.afsnit) return `<h3 class="pk-afsnit">${esc(r.afsnit)}</h3>`;
+      if (r.p) return `<p class="pk-p">${esc(r.p)}</p>`;
       if (r.scene) return `<p class="scene">${esc(r.scene)}</p>`;
       const rolle = r.rolle && !set.has(r.hvem) ? ` <span class="rolle">${esc(r.rolle)}</span>` : "";
       set.add(r.hvem);

@@ -43,5 +43,7 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
 
 - `humor.js` – sponsorer, Star Player-citater, Spike!-overskrifter, pressechef Gunnar Grådig (opdigtet, Gluttons-fan).
 - `presse.js` – holdlore (`LORE`) og pressekonferencer (`PRESSE`). Vises på #presse, holdsider og forsiden.
+- `pressechef/` – Apps Script (Kode.gs) og guide til pressechefens Gmail-indbakke. Mailadresser må ALDRIG i det offentlige ark eller på siden.
+- `plakater/` – holdplakater (stor + -lille). Data og slogans i presse.js → PLAKATER.
 - `lore/` – coachernes egne lorepakker. Ny tekst om et hold skal følge holdets kanon-principper.
 - Kommissærens ord kommer KUN fra hans Nyheder-fane. Opdigt aldrig citater fra Mikkel eller andre rigtige personer.

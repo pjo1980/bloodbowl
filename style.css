@@ -270,3 +270,5 @@ a.hold-kort { padding-top: 0; overflow: hidden; }
 a.plakat-kort { display: grid; grid-template-columns: 96px 1fr; gap: 12px; align-items: center; }
 a.plakat-kort img { width: 96px; height: 130px; object-fit: cover; object-position: top; border-radius: 6px; }
 a.plakat-kort .slogan { font-size: 18px; font-weight: 600; margin: 4px 0; }
+
+.pk-p { margin: 0 0 12px; max-width: 70ch; }

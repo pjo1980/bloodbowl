@@ -14,7 +14,9 @@ window.CONFIG = {
     puljeGul:  "1vzKPfw-2WmsEEfPjgJPqEBeVN08ODg36qQ1GH3SXVbI",
     puljeBlaa: "1t-ZntRFVAy79VqMz-G6dJwhLalMWs8rHFjPDNsh3ARY",
     puljeRoed: "1-AdI1rklMUmDNp9wiJWRyE6FJfqc1y2Hrp2QDVVaxLs",
-    puljeSort: "1rucYUGovKDidPORuZyOO2HxyEYdG7Qg62Q0a-lX3ARc"
+    puljeSort: "1rucYUGovKDidPORuZyOO2HxyEYdG7Qg62Q0a-lX3ARc",
+    // Pressechefens offentlige ark "Pressechefens udgivelser" (laves af pressechef/Kode.gs). Tomt = slået fra.
+    presse: ""
   },
   FANER: {
     stilling: "Turneringsstilling",
@@ -23,7 +25,8 @@ window.CONFIG = {
     holdrang: "Holdranglister",
     spillerrang: "Spiller ranglister",
     holdstats: "Holdstats ud",
-    nyheder: "Nyheder"          // valgfri fane i turneringsarket: Dato | Overskrift | Tekst
+    nyheder: "Nyheder",         // valgfri fane i turneringsarket: Dato | Overskrift | Tekst
+    presseUdgivet: "Udgivet"    // fane i pressechefens offentlige ark: ID | Dato | Hold | Overskrift | Tekst
   },
   // Holdnavn på siden -> fanenavn i hold-arket, hvor de afviger.
   ROSTER_FANE: {
