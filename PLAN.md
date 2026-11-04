@@ -83,6 +83,11 @@ satire-note i bunden. Pressechefen hedder Gunnar Grådig (godkendt af Peter 3. n
 - Passer til sæsonens fase (fx pre-season: forberedelser, nyindkøb, mål, odds).
 - Replikker, der nævner tal (point, spillere, kasse), skal passe med Mikkels ark.
 
+## Nyt logo (4. nov.)
+Klubbens officielle logo "Odder Brætspilsklub Semper Fortuna – Blood Bowl Liga" (fra Peter): `logo/semper-fortuna.jpg`.
+Vises øverst på forsiden. `logo/delebillede.jpg` (1200x630) er forhåndsbillede i Messenger/Facebook (og:image).
+Skjoldet (nedenfor) bruges stadig som lille ikon i toppen og i browserfanen, fordi det nye logo ikke kan læses i lille størrelse.
+
 ## Logo (idéer 3. nov.)
 Klubben hedder Semper Fortuna og ligger i **Odder**. Logoet skal kombinere SF/Semper Fortuna, Blood Bowl-stemning og "ODDER BLOOD BOWL".
 **Valgt 3. nov.: A, skjoldet med blokterningen.** Filer: `logo/logo.svg` (stor), `logo/ikon.svg` (top og browserfane).

@@ -328,9 +328,10 @@
     const cas = førsteMed(D.spillerrang, "CASUALTIES");
     return `
       <section class="hero">
-        <div class="hero-logo" aria-hidden="true">${(document.getElementById("logo-stor") || {}).innerHTML || ""}</div>
+        <img class="hero-billede" src="logo/semper-fortuna.jpg" width="1536" height="1024"
+          alt="Odder Brætspilsklub Semper Fortuna – Blood Bowl Liga">
         <div class="hero-tekst">
-        <p class="kicker">Officielt fra kommissærens kontor</p>
+        <p class="kicker">Odder Brætspilsklub · Officielt fra kommissærens kontor</p>
         ${H.beta && H.beta.length ? `<p class="beta-note"><span class="beta">Beta</span> ${esc(tilfældig(H.beta))}</p>` : ""}
         <h1>${esc(liga)}</h1>
         <p class="lead">Kommissær: <b>${esc(C.KOMMISSAER || "")}</b>. Stilling, kampprogram, hold og ranglister,

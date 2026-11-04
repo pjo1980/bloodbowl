@@ -246,3 +246,9 @@ a.score:hover { color: var(--accent); }
 .traening .top5 a { color: var(--text); font-weight: 600; text-decoration: none; }
 .traening .top5 a:hover { color: var(--accent); }
 .traening .top5 li { align-items: baseline; }
+
+/* ---------- Nyt logo på forsiden (4. nov.) ---------- */
+.hero { display: block; padding: 0; overflow: hidden; }
+.hero-billede { display: block; width: 100%; height: auto; max-height: 520px; object-fit: contain; background: #000; }
+.hero-tekst { padding: 20px; }
+@media (max-width: 640px) { .hero { text-align: left; } .hero-tekst { padding: 16px; } }
