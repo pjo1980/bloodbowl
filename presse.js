@@ -305,6 +305,6 @@ window.PLAKATER = {
   "Elmtree Evaders": { fil: "elmtree-evaders", slogans: ["Speed. Agility. Elegance.", "We dance. You fall.", "We don't hit hard. We don't need to."] },
   "The FumbleBoyz": { fil: "fumbleboyz", slogans: ["Honor. Team. Glory.", "More than a game.", "Legends play here."] },
   "Mörkley Crüe": { fil: "morkley-crue", slogans: ["Smash. Stomp. Score."] },
-  "Bros Being Bros": { fil: "bros-being-bros", slogans: ["Good friends. Cold beer. Hard hits. Great times."] }
-  // "Fright Night Fumblers": mangler plakat (Goblin-hold).
+  "Bros Being Bros": { fil: "bros-being-bros", slogans: ["Good friends. Cold beer. Hard hits. Great times."] },
+  "Fright Night Fumblers": { fil: "fright-night-fumblers", slogans: ["Lower than a goblin's gutter. Meaner than your nightmares.", "They'll stab you. Poison you. Eat you.", "No fans. Just victims.", "Death is only a turnover away!"] }
 };
