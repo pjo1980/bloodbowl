@@ -642,27 +642,29 @@
 
   function pressekonference(pk) {
     const set = new Set();
+    const coachNavn = pk.coach || (LORE[pk.hold] || {}).coach;
     const linjer = pk.replikker.map((r) => {
+      if (r.afsnit) return `<h3 class="pk-afsnit">${esc(r.afsnit)}</h3>`;
       if (r.scene) return `<p class="scene">${esc(r.scene)}</p>`;
       const rolle = r.rolle && !set.has(r.hvem) ? ` <span class="rolle">${esc(r.rolle)}</span>` : "";
       set.add(r.hvem);
-      const kl = r.hvem === H.pressechef.navn ? " formand" : r.hvem === (LORE[pk.hold] || {}).coach ? " coach" : "";
+      const kl = r.hvem === H.pressechef.navn ? " formand" : r.hvem === coachNavn ? " coach" : "";
       return `<div class="replik${kl}"><div class="taler">${esc(r.hvem)}${rolle}${r.note ? ` <span class="note">(${esc(r.note)})</span>` : ""}</div>
-        <p>${esc(r.tekst)}</p></div>`;
+        ${String(r.tekst || "").split("\n").map((t) => `<p>${esc(t)}</p>`).join("")}</div>`;
     }).join("");
     return `<article class="card pk" id="pk-${esc(pk.id)}">
       <p class="kicker">${esc(pk.undertitel || "Pressekonference")} · ${esc(pkDato(pk))}</p>
       <h2 class="pk-titel">${esc(pk.titel)}</h2>
-      <p class="small muted">${holdLink(pk.hold)} ${chip(puljeAf[pk.hold])}${pk.sted ? ` · ${esc(pk.sted)}` : ""}</p>
+      <p class="small muted">${holdLink(pk.hold)} ${chip(puljeAf[pk.hold])}${pk.sted ? ` · ${esc(pk.sted)}` : ""}${pk.indsendt ? ` · ${esc(pk.indsendt)}` : ""}</p>
       <div class="pk-tekst">${linjer}</div></article>`;
   }
 
   function pkTeaser(pk) {
     return pk ? `<a class="card pk-teaser" href="#presse/${encodeURIComponent(pk.id)}">
-      <p class="kicker">Seneste pressekonference · ${esc(pk.hold)}</p>
+      <p class="kicker">${esc(pk.undertitel || "Pressekonference")} · ${esc(pk.hold)}</p>
       <h3>${esc(pk.titel)}</h3>
       ${pk.citat ? `<blockquote>»${esc(pk.citat.tekst)}«</blockquote><div class="small muted">${esc(pk.citat.hvem)}</div>` : ""}
-      <p class="small" style="margin:10px 0 0">Læs hele pressekonferencen →</p></a>` : "";
+      <p class="small" style="margin:10px 0 0">Læs det hele →</p></a>` : "";
   }
 
   function sidePresse(id) {
@@ -670,18 +672,18 @@
     const liste = valgt ? [valgt] : PRESSE;
     return `
       <p class="kicker">Pressetribunen</p>
-      <h1>Pressekonferencer</h1>
-      <p class="lead">Ledet af ${esc(H.pressechef.navn)}, ${esc(H.pressechef.titel.toLowerCase())}. Coaches kan indsende lore og
+      <h1>Presse</h1>
+      <p class="lead">Pressekonferencer og interviews fra ligaens hold. Coaches kan indsende lore, interviews og
         pressekonferencer for deres hold.</p>
-      ${valgt && PRESSE.length > 1 ? '<p><a href="#presse">← Alle pressekonferencer</a></p>' : ""}
+      ${valgt && PRESSE.length > 1 ? '<p><a href="#presse">← Alt fra pressetribunen</a></p>' : ""}
       ${liste.length ? liste.map(pressekonference).join("") : '<p class="muted">Ingen pressekonferencer endnu.</p>'}
-      <p class="small muted">Satire. Skrevet ud fra holdets egen lore.</p>`;
+      <p class="small muted">Satire. Skrevet af eller ud fra holdenes egne coaches.</p>`;
   }
 
   function holdLore(navn) {
     const L = LORE[navn];
-    if (!L) return "";
     const pk = PRESSE.filter((p) => p.hold === navn);
+    if (!L) return pk.length ? `<h2>Presse</h2><div class="grid">${pk.map(pkTeaser).join("")}</div>` : "";
     return `
       <h2>Om holdet</h2>
       <div class="fakta">
@@ -695,7 +697,7 @@
           <p class="small muted" style="margin:8px 0 0">Komplet. Der findes ingen side 2.</p></div>` : ""}
         ${L.ottoCitater && L.coach ? `<figure class="card citat"><p class="kicker">Coachen siger</p><blockquote>»${esc(tilfældig(L.ottoCitater))}«</blockquote><figcaption>${esc(L.coach)}</figcaption></figure>` : ""}
       </div>
-      ${pk.length ? `<h2>Pressekonferencer</h2><div class="grid">${pk.map(pkTeaser).join("")}</div>` : ""}`;
+      ${pk.length ? `<h2>Presse</h2><div class="grid">${pk.map(pkTeaser).join("")}</div>` : ""}`;
   }
 
   // ---------- Kampside ----------
@@ -788,7 +790,7 @@
   const SIDER = { forside: sideForside, stilling: sideStilling, puljekampe: sidePuljekampe, regnbue: sideRegnbue,
     hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening };
   const ALIAS = { kampe: "puljekampe" }; // gamle links
-  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Pressekonferencer", traening: "Off pitch training" };
+  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Presse", traening: "Off pitch training" };
   let visNr = 0;
   async function vis() {
     const nr = ++visNr;

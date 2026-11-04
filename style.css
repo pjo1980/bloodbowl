@@ -252,3 +252,7 @@ a.score:hover { color: var(--accent); }
 .hero-billede { display: block; width: 100%; height: auto; max-height: 520px; object-fit: contain; background: #000; }
 .hero-tekst { padding: 20px; }
 @media (max-width: 640px) { .hero { text-align: left; } .hero-tekst { padding: 16px; } }
+
+/* Interviews: mellemoverskrifter og svar med flere afsnit */
+.pk-afsnit { margin: 22px 0 10px; color: var(--gold); font-size: 22px; }
+.replik p + p { margin-top: 6px; }
