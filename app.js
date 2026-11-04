@@ -590,6 +590,12 @@
       <div style="max-width:560px;margin-top:24px">${citatKort()}</div>`;
   }
 
+  // Ingen datoer fra den virkelige verden på siden: alt vises i Warhammers Imperial Calendar.
+  // Rigtig dato -> samme dag i den tilsvarende Imperial-måned, år + 500. Fx 4. nov. 2026 = 4. Ulriczeit 2526 IC.
+  const IC_MÅNEDER = ["Nachexen", "Jahrdrung", "Pflugzeit", "Sigmarzeit", "Sommerzeit", "Vorgeheim",
+    "Nachgeheim", "Erntezeit", "Brauzeit", "Kaldezeit", "Ulriczeit", "Vorhexen"];
+  const bbDato = (d) => `${d.getDate()}. ${IC_MÅNEDER[d.getMonth()]} ${d.getFullYear() + 500} IC`;
+
   // Datoer som Mikkel skriver dem: 2026-11-05, 5-11-2026, 5.11.2026 eller 5/11/26 (dag først).
   function læsDato(s) {
     s = (s || "").trim();
@@ -621,7 +627,7 @@
     return alle.sort((a, b) => (b.dato ? b.dato.getTime() : 0) - (a.dato ? a.dato.getTime() : 0));
   }
   function nyhedKort(n) {
-    const dato = n.dato && !isNaN(n.dato) ? n.dato.toLocaleDateString("da-DK", { day: "numeric", month: "long", year: "numeric" }) : n.datoTekst;
+    const dato = n.dato && !isNaN(n.dato) ? bbDato(n.dato) : n.datoTekst;
     return `<article class="card nyhed"><div class="dato">${esc(dato)} · ${n.kilde === "kommissaer" ? `Kommissær ${esc(C.KOMMISSAER || "")} skriver` : "Redaktionen"}</div><h3>${esc(n.overskrift)}</h3><p>${esc(n.tekst)}</p></article>`;
   }
   function sideNyheder() {
@@ -638,7 +644,7 @@
   // ---------- Presse og holdlore (indholdet står i presse.js) ----------
   const LORE = window.LORE || {};
   const PRESSE = (window.PRESSE || []).slice().sort((a, b) => (b.dato || "").localeCompare(a.dato || ""));
-  const pkDato = (pk) => { const d = læsDato(pk.dato); return d ? d.toLocaleDateString("da-DK", { day: "numeric", month: "long", year: "numeric" }) : pk.dato || ""; };
+  const pkDato = (pk) => { const d = læsDato(pk.dato); return d ? bbDato(d) : pk.dato || ""; };
 
   function pressekonference(pk) {
     const set = new Set();

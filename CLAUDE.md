@@ -33,6 +33,8 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
 - `.nojekyll` – GitHub Pages skal servere filerne råt.
 
 ## Regler for arbejdet
+- **Ingen datoer fra den virkelige verden på siden** (Peter 4. nov.). Vis datoer med `bbDato()` i app.js: Warhammers Imperial Calendar,
+  samme dag, tilsvarende måned (Nachexen … Vorhexen), år + 500 + "IC". Datafiler må stadig gemme rigtige datoer (ÅÅÅÅ-MM-DD) til sortering.
 - Rør aldrig kommissærens ark uden Peters ja; læs det kun.
 - Alt brugerdata fra arket HTML-escapes før visning.
 - Google sender den FØRSTE fane, hvis et fanenavn er forkert. Hver læser i app.js tjekker derfor fanens form.
