@@ -239,3 +239,10 @@ a.score:hover { color: var(--accent); }
   transform: rotate(-7deg); vertical-align: 3px; box-shadow: 2px 2px 0 var(--blood); cursor: help; }
 .beta-note { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
 .beta-note .beta { margin-right: 6px; cursor: default; }
+
+/* ---------- Off pitch training ---------- */
+.traening h3 a { color: var(--accent); text-decoration: none; }
+.traening p { margin: 0 0 10px; }
+.traening .top5 a { color: var(--text); font-weight: 600; text-decoration: none; }
+.traening .top5 a:hover { color: var(--accent); }
+.traening .top5 li { align-items: baseline; }

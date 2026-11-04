@@ -35,6 +35,14 @@ Venter på, at Mikkel opretter fanen. Peter har fået en besked at sende ham. In
 - Holdliste-fejl rettet (4 hold viste kun 1 spiller). Skills fra level-up vises.
 - Kampe delt op: **Puljekampe** (resultater fra kampskemaerne) og **Regnbuepuljen** (foreløbigt program).
 
+## Bestillinger fra Mikkel (4. nov.)
+- [x] Fane **Off pitch training** (#traening) med BB School of Block (bbsob.net) og The Bonehead Podcast. Links i `config.js` (TRAENING).
+  "Bonehead" er tolket som The Bonehead Podcast. Bekræft med Mikkel.
+- [ ] Et hold mangler. Coachen "Beastie" har måske skiftet navn: plakaten har ét navn, holdet blev sendt med et andet.
+- [ ] Holdplakater med navne og slogans skal bruges på siden. Venter på links fra Peter.
+- [ ] Pressechef-mail: coaches registrerer deres mail til deres hold og sender updates til pressechefen. Løsning vælges med Peter.
+- [ ] Pressekonference fra en anden coach skal lægges op. Venter på teksten.
+
 ## Kampsider (bygget 3. nov.)
 Tryk på et resultat under Puljekampe: score, coaches, winnings, spillerstats og et automatisk referat (kun fakta fra skemaet)
 + en markeret kommentar fra pressechefen. Idé senere: coaches kan skrive deres eget referat via formularen.

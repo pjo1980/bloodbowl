@@ -768,11 +768,26 @@
       <h2>Stats</h2><div class="grid-2">${holdTabel(A)}${holdTabel(B)}</div>`;
   }
 
+  // ---------- Off pitch training ----------
+  function sideTraening() {
+    const ext = (url, tekst) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(tekst)} ↗</a>`;
+    return `
+      <p class="kicker">Uden for banen</p>
+      <h1>Off pitch training</h1>
+      <p class="lead">Bliv en bedre coach mellem kampene. Her er ligaens anbefalede steder at lære, øve og lytte.</p>
+      ${pressechefKort("Coach Otto Overbelly træner ikke uden for banen. Han siger, at det kaldes frokost. Pressechefen kalder det visionært.")}
+      <div class="grid-2" style="margin-top:16px">${(C.TRAENING || []).map((t) => `
+        <div class="card traening"><h3>${ext(t.url, t.navn)}</h3><p>${esc(t.tekst)}</p>
+          <ul class="top5">${(t.links || []).map((l) => `<li><span>${ext(l.url, l.navn)}</span><span class="muted small">${esc(l.tekst)}</span></li>`).join("")}</ul>
+        </div>`).join("")}</div>
+      <p class="small muted">Links åbner i en ny fane. Siderne er lavet af andre og har intet med ligaen at gøre.</p>`;
+  }
+
   // ---------- Router ----------
   const SIDER = { forside: sideForside, stilling: sideStilling, puljekampe: sidePuljekampe, regnbue: sideRegnbue,
-    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe };
+    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening };
   const ALIAS = { kampe: "puljekampe" }; // gamle links
-  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Pressekonferencer" };
+  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Pressekonferencer", traening: "Off pitch training" };
   let visNr = 0;
   async function vis() {
     const nr = ++visNr;

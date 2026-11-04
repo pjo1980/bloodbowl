@@ -29,6 +29,29 @@ window.CONFIG = {
   ROSTER_FANE: {
     "Return Of The Living Deadbeats": "Living Deadbeats"
   },
+  // Off pitch training: links til læring og inspiration (bestilt af Mikkel 4. nov.). Tilføj frit flere.
+  TRAENING: [
+    {
+      navn: "BB School of Block", url: "https://bbsob.net/",
+      tekst: "Gratis træningsside lavet af fans. Du lærer Blood Bowl ved at træffe valg på en digital bane og se, hvad der sker.",
+      links: [
+        { navn: "Rookie Academy", url: "https://bbsob.net/rookie/", tekst: "Start her, hvis du er ny." },
+        { navn: "Playmaker", url: "https://bbsob.net/playmaker/", tekst: "Lær at læse banen." },
+        { navn: "Head Coach", url: "https://bbsob.net/head-coach/", tekst: "Systemet bag spillet." },
+        { navn: "Toolshed", url: "https://bbsob.net/toolshed/", tekst: "Holdbygger, terningeslag og digital bane." },
+        { navn: "Om siden", url: "https://bbsob.net/about/", tekst: "Hvem står bag." }
+      ]
+    },
+    {
+      navn: "The Bonehead Podcast", url: "https://theboneheadpodcast.podbean.com/",
+      tekst: "Podcast om alt Blood Bowl: holdgennemgange, taktik, regler og turneringer. Godt selskab på vej til kamp.",
+      links: [
+        { navn: "Podbean", url: "https://theboneheadpodcast.podbean.com/", tekst: "Lyt i browseren." },
+        { navn: "Apple Podcasts", url: "https://podcasts.apple.com/podcast/id1418889092", tekst: "Lyt på iPhone." }
+      ]
+    }
+  ],
+
   // Puljekampe: én fane pr. kamp i hvert puljeark, PRÆCIS som fanerne hedder (også stavefejl som "vs,").
   // "A vs. B" og "B vs. A" er to forskellige kampe (hjemme/ude). Kommer der nye kampfaner, skal de skrives her.
   PULJEKAMPE: [
