@@ -372,7 +372,7 @@
       </div>
 
       <h2>Fra pressetribunen</h2>
-      <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}</div>
+      <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}${plakatKort()}</div>
       ${PRESSE.length ? `<div style="margin-top:16px">${pkTeaser(PRESSE[0])}</div>` : ""}
 
       ${nyhed ?`<h2>Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p><a href="#nyheder">Alle nyheder</a></p>` : ""}`;
@@ -524,8 +524,10 @@
       ${D.holdstats.fejl ? fejlboks(D.holdstats.fejl) : ""}
       <div class="grid">${navne.map((n) => {
         const s = st[n] || {}, p = point[n];
-        return `<a class="card pulje ${puljeKl(puljeAf[n])}" href="#hold/${encodeURIComponent(n)}">
+        return `<a class="card pulje hold-kort ${puljeKl(puljeAf[n])}" href="#hold/${encodeURIComponent(n)}">
+          ${PLAKATER[n] ? `<img class="hold-plakat" src="${plakatSti(n, true)}" alt="" loading="lazy">` : '<div class="hold-plakat tom">Plakat mangler</div>'}
           <h3>${esc(n)}</h3>${chip(puljeAf[n])}
+          ${PLAKATER[n] ? `<p class="slogan small">»${esc(PLAKATER[n].slogans[0])}«</p>` : ""}
           <div class="stats">
             ${p ? `<span><b>${p.p}</b> point</span><span><b>${p.w}-${p.d}-${p.l}</b></span>` : ""}
             <span><b>${esc(s["Touch Down"] ?? "–")}</b> TD</span><span><b>${esc(s["Casualties"] ?? "–")}</b> CAS</span>
@@ -546,6 +548,7 @@
     const f = (lbl, val) => val ? `<div class="card"><div class="lbl">${lbl}</div><div class="val">${esc(val)}</div></div>` : "";
     return `${hoved}
       ${navn === H.yndlingshold ? `<div class="spike-bane">${spikeKort("Pressens yndlinge")}</div>` : ""}
+      ${plakatBlok(navn)}
       ${r.race || r.liga ? `<p class="lead">${esc([r.race, r.liga].filter(Boolean).join(" · "))}</p>` : ""}
       <div class="fakta">
         ${p ? f("Point", String(p.p)) + f("V-U-T", `${p.w}-${p.d}-${p.l}`) : ""}
@@ -704,6 +707,29 @@
         ${L.ottoCitater && L.coach ? `<figure class="card citat"><p class="kicker">Coachen siger</p><blockquote>»${esc(tilfældig(L.ottoCitater))}«</blockquote><figcaption>${esc(L.coach)}</figcaption></figure>` : ""}
       </div>
       ${pk.length ? `<h2>Presse</h2><div class="grid">${pk.map(pkTeaser).join("")}</div>` : ""}`;
+  }
+
+  // ---------- Holdplakater ----------
+  const PLAKATER = window.PLAKATER || {};
+  const plakatSti = (navn, lille) => PLAKATER[navn] ? `plakater/${PLAKATER[navn].fil}${lille ? "-lille" : ""}.jpg` : "";
+  function plakatBlok(navn) {
+    const p = PLAKATER[navn];
+    if (!p) return "";
+    return `<div class="plakat-blok">
+      <a href="${plakatSti(navn)}" target="_blank" rel="noopener" title="Se plakaten i fuld størrelse">
+        <img src="${plakatSti(navn)}" alt="Holdplakat for ${esc(navn)}" loading="lazy"></a>
+      <div><p class="kicker">Fra holdets plakat</p>
+        <ul class="slogans">${p.slogans.map((t) => `<li>»${esc(t)}«</li>`).join("")}</ul>
+        <p class="small muted" style="margin:0">Tryk på plakaten for at se den i fuld størrelse.</p></div></div>`;
+  }
+  function plakatKort() {
+    const navne = Object.keys(PLAKATER);
+    const n = tilfældig(navne);
+    if (!n) return "";
+    return `<a class="card plakat-kort" href="#hold/${encodeURIComponent(n)}">
+      <img src="${plakatSti(n, true)}" alt="" loading="lazy">
+      <div><p class="kicker">Fra omklædningsrummet</p><p class="slogan">»${esc(tilfældig(PLAKATER[n].slogans))}«</p>
+      <div class="small muted">${esc(n)}</div></div></a>`;
   }
 
   // ---------- Kampside ----------

@@ -39,8 +39,9 @@ Venter på, at Mikkel opretter fanen. Peter har fået en besked at sende ham. In
 - [x] Nyt klubblogo på forsiden + delebillede (se "Nyt logo").
 - [x] Fane **Off pitch training** (#traening) med BB School of Block (bbsob.net) og The Bonehead Podcast. Links i `config.js` (TRAENING).
   "Bonehead" er tolket som The Bonehead Podcast. Bekræft med Mikkel.
-- [ ] Et hold mangler. Coachen "Beastie" har måske skiftet navn: plakaten har ét navn, holdet blev sendt med et andet.
-- [ ] Holdplakater med navne og slogans skal bruges på siden. Venter på links fra Peter.
+- [x] 12 holdplakater lagt op 4. nov. (`plakater/`, data i `presse.js` → PLAKATER med slogans). Vises på holdliste, holdside og forsiden.
+- [ ] **Fright Night Fumblers (Goblin, Rød pulje) mangler plakat.** Sandsynligvis Beasties hold; plakaten med det andet navn er ikke modtaget.
+  Plakatnavne der afviger fra arket: "The Marauding Ocras" (arket: Maurading), "FumbleBoyz OWA" (arket: The FumbleBoyz).
 - [ ] Pressechef-mail: coaches registrerer deres mail til deres hold og sender updates til pressechefen. Løsning vælges med Peter.
 - [x] Spike!-interview med Raelth (The Eternal Sages), indsendt af holdets coach, lagt op 4. nov. Original i `lore/`.
   Presse-siden understøtter nu interviews: `afsnit` (mellemoverskrift), svar med flere afsnit (

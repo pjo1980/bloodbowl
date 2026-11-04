@@ -256,3 +256,17 @@ a.score:hover { color: var(--accent); }
 /* Interviews: mellemoverskrifter og svar med flere afsnit */
 .pk-afsnit { margin: 22px 0 10px; color: var(--gold); font-size: 22px; }
 .replik p + p { margin-top: 6px; }
+
+/* ---------- Holdplakater ---------- */
+.plakat-blok { display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: 20px; align-items: start; margin: 4px 0 20px; }
+.plakat-blok img { width: 100%; height: auto; display: block; border-radius: var(--radius); border: 1px solid var(--line); }
+.slogans { list-style: none; margin: 0 0 10px; padding: 0; }
+.slogans li { font-family: "Bangers", Impact, sans-serif; font-size: 24px; letter-spacing: 1px; line-height: 1.15; color: var(--accent); margin-bottom: 8px; }
+@media (max-width: 640px) { .plakat-blok { grid-template-columns: 1fr; } .plakat-blok img { max-width: 360px; margin: 0 auto; } }
+a.hold-kort { padding-top: 0; overflow: hidden; }
+.hold-plakat { display: block; width: calc(100% + 32px); margin: 0 -16px 12px; height: 220px; object-fit: cover; object-position: top; background: #000; }
+.hold-plakat.tom { display: flex; align-items: center; justify-content: center; color: var(--muted); font-style: italic; background: var(--panel-2); }
+.slogan { font-style: italic; color: var(--accent); margin: 8px 0 0; }
+a.plakat-kort { display: grid; grid-template-columns: 96px 1fr; gap: 12px; align-items: center; }
+a.plakat-kort img { width: 96px; height: 130px; object-fit: cover; object-position: top; border-radius: 6px; }
+a.plakat-kort .slogan { font-size: 18px; font-weight: 600; margin: 4px 0; }

@@ -290,3 +290,21 @@ window.PRESSE = [
     ]
   }
 ];
+
+// Holdplakater (fra coacherne via Mikkel, 4. nov.) og slogans fra plakaterne. Filer i mappen plakater/.
+// Nøglen skal stavet præcis som holdnavnet i Mikkels ark.
+window.PLAKATER = {
+  "Da Demolitionaz": { fil: "da-demolitionaz", slogans: ["We don't build plays… we tear 'em down!", "No plans. No permits. No problems.", "100 % WAAAGH! guaranteed."] },
+  "Return Of The Living Deadbeats": { fil: "living-deadbeats", slogans: ["Same game… different kind of dead.", "No brain. No fear. Just teamwork.", "Shambling for glory."] },
+  "Black Mountain Slavers": { fil: "black-mountain-slavers", slogans: ["Same chains. Different dreams.", "The mountain demands victory.", "Slave today. Cheer tomorrow."] },
+  "The Maurading Ocras": { fil: "maurading-ocras", slogans: ["More blood. More hits. More glory."] },
+  "The Eternal Sages": { fil: "eternal-sages", slogans: ["Grace. Wisdom. Victory.", "The mind plans. The body executes. The eternity remembers."] },
+  "The Full Moon Foulers": { fil: "full-moon-foulers", slogans: ["We play. You die.", "The dead don't miss. They just foul.", "Raised. Ruthless. Relentless."] },
+  "GutBuster Gluttons": { fil: "gutbuster-gluttons", slogans: ["Winning is optional. Lunch is mandatory.", "Welcome to the feast.", "Six Ogres. Numerous Gnoblars. Absolutely no refunds."] },
+  "Bedstefars Besudlere": { fil: "bedstefars-besudlere", slogans: ["Blod, byld og bold.", "Snot, slim, sejr!", "Langsomt, men sikkert!"] },
+  "Elmtree Evaders": { fil: "elmtree-evaders", slogans: ["Speed. Agility. Elegance.", "We dance. You fall.", "We don't hit hard. We don't need to."] },
+  "The FumbleBoyz": { fil: "fumbleboyz", slogans: ["Honor. Team. Glory.", "More than a game.", "Legends play here."] },
+  "Mörkley Crüe": { fil: "morkley-crue", slogans: ["Smash. Stomp. Score."] },
+  "Bros Being Bros": { fil: "bros-being-bros", slogans: ["Good friends. Cold beer. Hard hits. Great times."] }
+  // "Fright Night Fumblers": mangler plakat (Goblin-hold).
+};
