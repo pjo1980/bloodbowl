@@ -45,7 +45,8 @@ Venter på, at Mikkel opretter fanen. Peter har fået en besked at sende ham. In
 - [x] **Pressechef-mail** (valgt af Peter 4. nov.): Gmail til Gunnar Grådig + Google Apps Script (`pressechef/Kode.gs`).
   Mails → arket "Pressechefens indbakke" (privat, Peter + Mikkel) → "Ja" i Godkendt → offentligt ark "Pressechefens udgivelser" → siden.
   **Sat op 4. nov.:** Gmail gunnar.gradig.presse@gmail.com, script kører, offentligt ark-ID i config.js → ARK.presse.
-  Mangler (Peter): coaches i fanen Coaches, del arket med Mikkel, send coach-beskeden fra guiden.
+  Coaches tilmelder sig selv (holdnavn i emnet, tåler stavefejl). Automatisk godkendelse (AUTO_GODKEND = true, Peter 4. nov.); "Nej" fjerner.
+  Mangler (Peter): indsæt nyeste Kode.gs, del arket med Mikkel, send coach-beskeden fra guiden.
 - [x] Spike!-interview med Raelth (The Eternal Sages), indsendt af holdets coach, lagt op 4. nov. Original i `lore/`.
   Presse-siden understøtter nu interviews: `afsnit` (mellemoverskrift), svar med flere afsnit (
 ), `coach`, `indsendt`.

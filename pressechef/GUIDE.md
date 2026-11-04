@@ -73,12 +73,12 @@ Mikkels skolekonto kan sandsynligvis ikke få adgang på den måde, men han beh�
 
 ---
 
-## Sådan godkender I
+## Sådan styrer I indlæggene
+Indlæg fra kendte coaches kommer **automatisk** på siden (Godkendt = Ja), inden for ca. 10 minutter.
 1. Åbn arket **Pressechefens indbakke** → fanen **Indbakke**.
-2. Nye mails dukker op inden for 10 minutter.
-3. Er kolonnen **Hold** tom, kender scriptet ikke afsenderen: skriv holdnavnet selv, eller tilføj coachen i **Coaches**.
-4. Skriv **Ja** i kolonnen **Godkendt**. Indlægget er på siden inden for få minutter.
-5. Fjern **Ja** igen for at tage et indlæg af siden. Du kan også rette overskrift og tekst direkte i arket.
+2. **Tag et indlæg af siden:** skriv **Nej** i kolonnen **Godkendt**.
+3. **Er kolonnen Hold tom**, kender scriptet ikke afsenderen (holdnavnet stod ikke i emnet). Skriv holdnavnet og **Ja**, så kommer det på.
+4. Du kan rette overskrift og tekst direkte i arket. Siden følger med.
 
 ---
 
@@ -98,5 +98,5 @@ Sådan gør du:
 • En mellemoverskrift skriver du i anførselstegn på sin egen linje, fx "Vores taktik er enkel".
 • Én pressemeddelelse pr. mail.
 
-Gunnar læser alt (han er 100 % neutral), og indlægget kommer på siden, når kommissæren har godkendt det.
+Gunnar læser alt (han er 100 % neutral), og indlægget kommer på siden inden for ca. 10 minutter.
 ```

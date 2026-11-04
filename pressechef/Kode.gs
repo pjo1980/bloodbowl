@@ -20,7 +20,7 @@ const KOLONNER = ["ID", "Modtaget", "Fra", "Hold", "Overskrift", "Tekst", "Godke
 
 // true = indlæg fra kendte coaches kommer på siden med det samme (skriv "Nej" i Godkendt for at fjerne et).
 // false = Peter eller Mikkel skal skrive "Ja" i Godkendt først.
-const AUTO_GODKEND = false;
+const AUTO_GODKEND = true; // valgt af Peter 4. nov.
 
 // Holdnavne og ord, der genkendes i emnefeltet, når en ny coach skriver første gang.
 // Står præcis ét hold i emnet, tilmeldes afsenderen automatisk til det hold i fanen Coaches.
