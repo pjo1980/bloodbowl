@@ -16,7 +16,7 @@ window.CONFIG = {
     puljeRoed: "1-AdI1rklMUmDNp9wiJWRyE6FJfqc1y2Hrp2QDVVaxLs",
     puljeSort: "1rucYUGovKDidPORuZyOO2HxyEYdG7Qg62Q0a-lX3ARc",
     // Pressechefens offentlige ark "Pressechefens udgivelser" (laves af pressechef/Kode.gs). Tomt = slået fra.
-    presse: ""
+    presse: "1ygdWehkp3nc1u9SygB7x4izSnz27ChREKevc8C-l9N8"
   },
   FANER: {
     stilling: "Turneringsstilling",

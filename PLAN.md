@@ -42,10 +42,10 @@ Venter på, at Mikkel opretter fanen. Peter har fået en besked at sende ham. In
 - [x] 12 holdplakater lagt op 4. nov. (`plakater/`, data i `presse.js` → PLAKATER med slogans). Vises på holdliste, holdside og forsiden.
 - [x] Fright Night Fumblers (Beasties Goblin-hold) fik sin plakat 4. nov. Alle 13 hold har nu plakat.
   Plakatnavne der afviger fra arket: "The Marauding Ocras" (arket: Maurading), "FumbleBoyz OWA" (arket: The FumbleBoyz).
-- [~] **Pressechef-mail** (valgt af Peter 4. nov.): Gmail til Gunnar Grådig + Google Apps Script (`pressechef/Kode.gs`).
+- [x] **Pressechef-mail** (valgt af Peter 4. nov.): Gmail til Gunnar Grådig + Google Apps Script (`pressechef/Kode.gs`).
   Mails → arket "Pressechefens indbakke" (privat, Peter + Mikkel) → "Ja" i Godkendt → offentligt ark "Pressechefens udgivelser" → siden.
-  Siden er klar (læser `CONFIG.ARK.presse`). **Venter på Peter:** opret Gmail, følg `pressechef/GUIDE.md`, send ID fra fanen Info.
-  Derefter: sæt ID i config.js → ARK.presse, udgiv, send coach-beskeden (står i guiden) med den rigtige adresse.
+  **Sat op 4. nov.:** Gmail gunnar.gradig.presse@gmail.com, script kører, offentligt ark-ID i config.js → ARK.presse.
+  Mangler (Peter): coaches i fanen Coaches, del arket med Mikkel, send coach-beskeden fra guiden.
 - [x] Spike!-interview med Raelth (The Eternal Sages), indsendt af holdets coach, lagt op 4. nov. Original i `lore/`.
   Presse-siden understøtter nu interviews: `afsnit` (mellemoverskrift), svar med flere afsnit (
 ), `coach`, `indsendt`.
