@@ -18,6 +18,29 @@ const FANE_INFO = "Info";
 const NOEGLE_UDGIVET = "UDGIVET_ID";
 const KOLONNER = ["ID", "Modtaget", "Fra", "Hold", "Overskrift", "Tekst", "Godkendt", "Udgivet"];
 
+// true = indlæg fra kendte coaches kommer på siden med det samme (skriv "Nej" i Godkendt for at fjerne et).
+// false = Peter eller Mikkel skal skrive "Ja" i Godkendt først.
+const AUTO_GODKEND = false;
+
+// Holdnavne og ord, der genkendes i emnefeltet, når en ny coach skriver første gang.
+// Står præcis ét hold i emnet, tilmeldes afsenderen automatisk til det hold i fanen Coaches.
+const HOLD = {
+  "The Eternal Sages": ["eternal sages", "sages"],
+  "Elmtree Evaders": ["elmtree"],
+  "The Maurading Ocras": ["ocras", "maurading", "marauding"],
+  "Mörkley Crüe": ["morkley"],
+  "Fright Night Fumblers": ["fright night", "fumblers"],
+  "The Full Moon Foulers": ["full moon", "foulers"],
+  "The FumbleBoyz": ["fumbleboyz", "fumble boyz"],
+  "GutBuster Gluttons": ["gutbuster", "gluttons"],
+  "Return Of The Living Deadbeats": ["deadbeats", "living dead"],
+  "Da Demolitionaz": ["demolitionaz"],
+  "Black Mountain Slavers": ["black mountain", "slavers"],
+  "Bedstefars Besudlere": ["bedstefar", "besudlere"],
+  "Bros Being Bros": ["bros being bros"]
+};
+const AUTOMATISK = /(^|[.@])(no-?reply|mailer-daemon|postmaster)|@(accounts\.)?google\.com$/;
+
 /** Kør én gang. Opretter faner, det offentlige ark og de automatiske kørsler. */
 function opsaet() {
   const ss = SpreadsheetApp.getActive();
@@ -83,6 +106,12 @@ function hentMails() {
       if (kendte.has(m.getId())) return;
       const fra = afsender(m.getFrom());
       if (fra === mig) return; // Gunnars egne svar
+      if (AUTOMATISK.test(fra)) { kendte.add(m.getId()); return; } // Googles og andres automatiske mails
+      let hold = coaches[fra] || "";
+      if (!hold) {
+        hold = findHold(m.getSubject());
+        if (hold) { tilmeld(fra, hold); coaches[fra] = hold; }
+      }
       let tekst = rens(m.getPlainBody());
       m.getAttachments().forEach((a) => {
         if (/\.docx?$/i.test(a.getName())) {
@@ -91,7 +120,7 @@ function hentMails() {
         }
       });
       const overskrift = (m.getSubject() || "").replace(/^(re|fw|fwd|vs|sv):\s*/i, "").trim() || "Pressemeddelelse";
-      indbakke.appendRow([m.getId(), m.getDate(), fra, coaches[fra] || "", overskrift, tekst.slice(0, 45000), "", ""]);
+      indbakke.appendRow([m.getId(), m.getDate(), fra, hold, overskrift, tekst.slice(0, 45000), AUTO_GODKEND && hold ? "Ja" : "", ""]);
       kendte.add(m.getId());
     });
   });
@@ -129,6 +158,42 @@ function coachKort() {
     if (mail) kort[mail] = String(r[1]).trim();
   });
   return kort;
+}
+
+const norm = (s) => String(s || "").toLowerCase().replace(/ø/g, "o").replace(/æ/g, "ae").replace(/å/g, "a").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+/** Finder præcis ét hold i en tekst (fx emnefeltet). Flere eller ingen = "". */
+function findHold(tekst) {
+  const ord = norm(tekst).replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter(Boolean);
+  const fundne = Object.keys(HOLD).filter((h) => HOLD[h].some((a) => ligner(ord, norm(a))));
+  return fundne.length === 1 ? fundne[0] : "";
+}
+
+/** Tåler stavefejl: 1 forkert bogstav i ord på 5+ tegn, 2 i ord på 9+ tegn. */
+function ligner(ord, alias) {
+  const dele = alias.split(" ");
+  const max = alias.length >= 9 ? 2 : alias.length >= 5 ? 1 : 0;
+  for (let i = 0; i + dele.length <= ord.length; i++) {
+    const bid = ord.slice(i, i + dele.length).join(" ");
+    if (afstand(bid, alias) <= max) return true;
+  }
+  return false;
+}
+
+/** Antal bogstaver, der skal rettes for at gøre a til b (Levenshtein). */
+function afstand(a, b) {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++)
+    for (let j = 1; j <= b.length; j++)
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+
+/** Skriver en ny coach i fanen Coaches. */
+function tilmeld(mail, hold) {
+  const fane = SpreadsheetApp.getActive().getSheetByName(FANE_COACHES);
+  if (fane) fane.appendRow([mail, hold, "Tilmeldt automatisk " + Utilities.formatDate(new Date(), "Europe/Copenhagen", "d/M yyyy")]);
 }
 
 function afsender(fra) {

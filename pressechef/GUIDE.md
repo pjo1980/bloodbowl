@@ -37,8 +37,10 @@ Menunavne står på engelsk, som på din pc.
 4. Gå tilbage til arket. Der er nu fanerne **Coaches**, **Indbakke** og **Info**.
 5. Åbn fanen **Info**, og **send ID'et i celle B2 til Claude**. Så kobler jeg siden på.
 
-## Trin 5 – Registrér coaches (5 min)
-Åbn fanen **Coaches**. Skriv én række pr. coach: mailadresse i kolonne A og holdnavn i kolonne B.
+## Trin 5 – Coaches (tilmelder sig selv)
+**Coaches tilmelder sig selv:** første gang de skriver, sætter de holdnavnet i emnefeltet (fx "Gluttons klar til sæsonen").
+Scriptet genkender holdet (også med små stavefejl) og skriver coachen i fanen **Coaches** automatisk.
+Du kan også skrive coaches ind selv: mailadresse i kolonne A og holdnavn i kolonne B.
 Holdnavnet skal stå **præcis** sådan (kopiér herfra):
 
 ```
@@ -87,7 +89,8 @@ Pressechef Gunnar Grådig modtager nu pressemeddelelser, interviews og pressekon
 gunnar.gradig.presse@gmail.com   ← (ret til den rigtige adresse)
 
 Sådan gør du:
-• Send fra den mailadresse, du har opgivet til Peter eller Mikkel. Så ved Gunnar, hvilket hold det er.
+• Første gang: skriv dit holdnavn i emnefeltet, fx "Gluttons: klar til sæsonen". Så husker Gunnar dig.
+  Bagefter kan emnet være hvad som helst, bare du skriver fra samme mailadresse.
 • Emnefeltet bliver overskriften.
 • Skriv teksten i mailen, eller vedhæft et Word-dokument.
 • Interview eller pressekonference? Skriv hver replik på sin egen linje som NAVN: tekst
