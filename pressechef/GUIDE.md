@@ -24,6 +24,9 @@ Menunavne står på engelsk, som på din pc.
 2. Slet alt i kodevinduet, og indsæt hele indholdet af filen `pressechef/Kode.gs`.
 3. Klik på **Untitled project** øverst, og kald det **Pressechef**.
 4. I venstre side: klik **+** ud for **Services**, vælg **Drive API**, og klik **Add**.
+   **Virker + ikke** (sker i private vinduer): klik på tandhjulet **Project Settings** → sæt flueben i
+   **Show "appsscript.json" manifest file in editor** → åbn **appsscript.json** under Files → erstat indholdet
+   med filen `pressechef/appsscript.json` → gem. Så står **Drive** under Services.
 5. Klik på disketten (**Save project**).
 
 ## Trin 4 – Start det (3 min)
