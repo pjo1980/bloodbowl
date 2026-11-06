@@ -52,9 +52,21 @@
 
   // ---------- Hentning ----------
   let cache = {};
+  // Gemt kopi i browseren: siden viser først de tal, browseren gemte sidst, og henter friske i baggrunden.
+  // Er Google langsom eller nede, ser man stadig de seneste tal. Alt i try/catch: privat browsing kan blokere lageret.
+  const LAGER = "bb-ark|";
+  let brugGemt = false;  // true = svar med den gemte kopi uden at spørge Google
+  let ændret = false;    // sat, når friske tal afviger fra den gemte kopi
+  let brugteGemt = false; // sat, når Google svigtede, og den gemte kopi blev brugt i stedet
+  const gemtTekst = (key) => { try { return localStorage.getItem(LAGER + key); } catch (e) { return null; } };
+  const gem = (key, t) => { try { localStorage.setItem(LAGER + key, t); } catch (e) { /* fuldt eller blokeret */ } };
   function hent(ark, fane) {
     const key = ark + "|" + fane;
     if (cache[key]) return cache[key];
+    if (brugGemt && !C.BRUG_LOKALE_DATA) {
+      const t = gemtTekst(key);
+      if (t != null) return (cache[key] = Promise.resolve(parseCSV(t)));
+    }
     let url;
     if (C.BRUG_LOKALE_DATA) {
       if (!LOKAL[key]) return Promise.reject(new Error(`Ingen lokal testfil for fanen "${fane}".`));
@@ -66,9 +78,15 @@
       if (!r.ok) throw new Error(`Kunne ikke hente fanen "${fane}" (fejl ${r.status}).`);
       const t = await r.text();
       if (/^\s*</.test(t)) throw new Error(`Fanen "${fane}" kunne ikke læses. Er arket stadig delt med "Anyone with the link"?`);
+      if (!C.BRUG_LOKALE_DATA) {
+        if (gemtTekst(key) !== t) ændret = true;
+        gem(key, t);
+      }
       return parseCSV(t);
     }).catch((e) => {
       delete cache[key];
+      const gemt = C.BRUG_LOKALE_DATA ? null : gemtTekst(key);
+      if (gemt != null) { brugteGemt = true; return parseCSV(gemt); }
       if (e instanceof TypeError) throw new Error(`Ingen forbindelse til Google Sheets (fanen "${fane}").`);
       throw e;
     });
@@ -984,7 +1002,10 @@
 
   function visFod() {
     const kl = D.hentet ? D.hentet.toLocaleTimeString("da-DK", { hour: "2-digit", minute: "2-digit" }) : "";
-    $foot.innerHTML = `<span>Data hentes direkte fra kommissærens Google Sheets${kl ? `. Sidst hentet kl. ${kl}` : ""}.
+    const status = D.gemt ? ". Viser sidst gemte tal, mens nye hentes"
+      : brugteGemt ? ". Google svarer ikke lige nu, så du ser de sidst gemte tal"
+      : kl ? `. Sidst hentet kl. ${kl}` : "";
+    $foot.innerHTML = `<span>Data hentes direkte fra kommissærens Google Sheets${status}.
       ${C.BRUG_LOKALE_DATA ? "<b>Testdata.</b>" : ""}<br>Sponsorer, Star Player-citater, Spike! og pressechefen er satire. Kommissærens ord er hans egne.</span>
       <button class="knap" id="opdater" type="button">Hent igen</button>`;
     document.getElementById("opdater").onclick = start;
@@ -992,6 +1013,20 @@
 
   async function start() {
     cache = {};
+    brugteGemt = false;
+    const harGemt = !C.BRUG_LOKALE_DATA && gemtTekst("turnering|" + C.FANER.stilling) != null;
+    if (harGemt) {
+      // 1) Vis den gemte kopi med det samme.
+      brugGemt = true;
+      try { await hentAlt(); D.gemt = true; visFod(); await vis(); } catch (e) { /* så venter vi på de friske */ }
+      brugGemt = false;
+      // 2) Hent friske tal i baggrunden, og tegn kun siden igen, hvis noget er ændret.
+      cache = {}; ændret = false;
+      const side = location.hash, y = window.scrollY;
+      await hentAlt(); D.gemt = false; visFod();
+      if (ændret && location.hash === side) { await vis(); window.scrollTo(0, y); }
+      return;
+    }
     $main.innerHTML = '<p class="loading">Henter papirerne fra kommissærens kontor …</p>';
     await hentAlt();
     visFod();
