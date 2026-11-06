@@ -4,7 +4,16 @@ Afløser Gunnar Grådigs Gmail, som Google lukkede 5. nov. 2026. Ingen ekstra ko
 Formularen ejes af Peters egen Google-konto. Svarene lander i et ark, og siden læser arket.
 Indlæg kommer på siden med det samme (inden for få minutter). Peter eller Mikkel kan skjule et indlæg.
 
-## Peter: sæt det op (ca. 10 min)
+## Hurtig vej: lad et script bygge det (ca. 3 min)
+
+1. Gå til **script.google.com** med din egen Google-konto, og tryk **New project**.
+2. Slet den kode, der står der, og indsæt hele `pressechef/OpretFormular.gs`.
+3. Tryk **Run** (▶). Google spørger om lov: **Review permissions** → vælg din konto →
+   **Advanced** → **Go to Untitled project (unsafe)** → **Allow**. (Det er dit eget script.)
+4. Vent til loggen nederst siger "Færdig!". Kopier linjerne **ARK:** og **FORMULAR:**, og send dem til Claude.
+5. Del arket med Mikkel som **Editor**, så han kan skjule indlæg (åbn ARK-linket → **Share**).
+
+## Manuel vej: byg formularen selv (ca. 10 min)
 
 1. Gå til **forms.google.com** med din egen Google-konto, og vælg **Blank form**.
 2. Titel: `Semper Fortuna – Pressetribunen`.
