@@ -27,6 +27,81 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "spike-the-eternal-sages-vs-elmtree-evaders",
+    "hold": "The Eternal Sages",
+    "type": "Kampreferat",
+    "dato": "2026-11-06",
+    "titel": "»Elverkrigen i Sort Pulje går til Sages«",
+    "undertitel": "Spike! kampreferat",
+    "sted": "The Eternal Sages 2-1 Elmtree Evaders",
+    "indsendt": "Skrevet af Spike! Magazine ud fra kommissærens kampskema",
+    "citat": {
+      "hvem": "Spike!",
+      "tekst": "Begge hold var for fine til at svede. Kun det ene var fint nok til at vinde."
+    },
+    "replikker": [
+      {
+        "p": "Elverkrig i Sort Pulje! The Eternal Sages slog Elmtree Evaders 2-1. Begge hold var for fine til at svede. Kun det ene var fint nok til at vinde."
+      },
+      {
+        "p": "Ilthien III og Golthorn IX scorede for Sages. Golthorn IX har tidligere fortalt Spike!, at han scorer, fordi det er hurtigere. Vi kan bekræfte, at det var det."
+      },
+      {
+        "p": "Kampens eneste skade kom fra Taln, som også blev kåret som MVP. Spike! har engang kaldt ham en usædvanligt kulturel lineman. Kulturen har åbenbart knoer."
+      },
+      {
+        "p": "Evaders gav ikke op. Oakenfist scorede holdets touchdown, og Lily Sunflower kastede tre completions. Tre! Det er flere, end de fleste katapulter klarer på en hel sæson."
+      },
+      {
+        "p": "Kassen: 80.000 til Coach Eberhard og Sages, 70.000 til Coach Lasse og Evaders. Det rækker til mange fjer i hjelmene."
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "To fremragende hold. Pressechefen er 100 % neutral og bemærker blot, at ingen af dem er GutBuster Gluttons."
+      }
+    ]
+  },
+  {
+    "id": "spike-bedstefars-besudlere-vs-black-mountain-slavers",
+    "hold": "Black Mountain Slavers",
+    "type": "Kampreferat",
+    "dato": "2026-11-06",
+    "titel": "»Ét touchdown var nok«",
+    "undertitel": "Spike! kampreferat",
+    "sted": "Bedstefars Besudlere 0-1 Black Mountain Slavers",
+    "indsendt": "Skrevet af Spike! Magazine ud fra kommissærens kampskema",
+    "citat": {
+      "hvem": "Spike!",
+      "tekst": "Ét touchdown. Præcis ét mere, end Besudlerne kunne klare."
+    },
+    "replikker": [
+      {
+        "p": "Black Mountain Slavers vandt 1-0 over Bedstefars Besudlere i Gul pulje. Kampens eneste touchdown kom fra Igor Longblade. Det var præcis ét mere, end Besudlerne kunne klare."
+      },
+      {
+        "p": "Gert Galdespreder stod for kampens eneste skade. Han kalder det angiveligt kunst. Spike! kalder det et CAS, men vi anerkender penselstrøget."
+      },
+      {
+        "p": "Arschhier noterede et foul for Slavers. Ifølge Besudlernes eget referat var dommeren ikke imponeret."
+      },
+      {
+        "p": "Ligaens husregel giver nye hold en ekstra MVP, så begge hold fik to. Razghul og Azathor for Slavers, Søren Svulmesæk og Finn Fluefjert for Besudlerne. Nuffle var gavmild. Apothecaryen var travl."
+      },
+      {
+        "p": "Kassen: 40.000 til Coach Flemse og Slavers, 30.000 til Coach Svulst-Stank og Besudlerne. Det rækker til nye bandager. Eller én rigtig god flaske desinfektion."
+      },
+      {
+        "p": "Læs også coachens eget referat på Presse-siden."
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Pressechefen er 100 % neutral. Han bemærker blot, at GutBuster Gluttons aldrig har tabt til Black Mountain Slavers. De har heller ikke mødt dem endnu."
+      }
+    ]
+  },
+  {
     "id": "besudlere-slavers-kampreferat",
     "hold": "Bedstefars Besudlere",
     "type": "Interview",
