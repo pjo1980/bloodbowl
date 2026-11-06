@@ -659,13 +659,33 @@
   //   linje i (parentes)     -> regi
   //   andre linjer           -> fortsættelse af replikken ovenover, ellers et almindeligt afsnit
   const pæntNavn = (n) => (n === n.toUpperCase() && /\p{Lu}/u.test(n) ? n.toLowerCase().replace(/(^|\s)\S/g, (m) => m.toUpperCase()) : n);
+  // Fjerner Markdown, som ChatGPT og lignende tager med, når man bruger deres kopiknap.
+  // Giver { tekst, overskrift } — overskrift = true for "## Titel" og linjer, der kun er **fed tekst**.
+  function rensMarkdown(l) {
+    let overskrift = false;
+    const h = l.match(/^#{1,6}\s+(.+?)\s*#*$/);
+    if (h) { l = h[1]; overskrift = true; }
+    if (/^(\*\*|__)[^*_]+(\*\*|__)$/.test(l) && !/:/.test(l.slice(0, -2))) overskrift = true;
+    l = l.replace(/^>\s?/, "")                                   // citat-markering
+      .replace(/^[-*+]\s+/, "• ")                                // punktopstilling
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")                   // [tekst](link)
+      .replace(/(\*\*|__)(.+?)\1/g, "$2")                      // **fed**
+      .replace(/(^|[\s(])[*_]([^*_\s][^*_]*?)[*_](?=[\s).,!?:;]|$)/g, "$1$2") // *kursiv*
+      .replace(/`([^`]+)`/g, "$1")
+      .replace(/\*\*/g, "");
+    return { tekst: l.trim(), overskrift };
+  }
   function tekstTilReplikker(t) {
     const ud = [];
     let cur = null;
     const emoji = /^[\u{1F000}-\u{1FFFF}\u2600-\u27BF\u2B50\uFE0F\s]+/u;
     for (let l of String(t || "").split(/\n/)) {
       l = l.trim();
+      if (!l || /^([-*_]\s*){3,}$/.test(l)) continue; // tomme linjer og skillestreger (---)
+      const md = rensMarkdown(l);
+      l = md.tekst;
       if (!l) continue;
+      if (md.overskrift) { ud.push({ afsnit: l.replace(emoji, "").trim() || l }); cur = null; continue; }
       const m = l.match(/^([^:]{1,40}):\s*(.+)$/);
       const navn = m ? m[1].trim() : "";
       if (m && navn.split(/\s+/).length <= 4 && /^\p{L}/u.test(navn) && !/\d$/.test(navn)) {
