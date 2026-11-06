@@ -56,6 +56,13 @@ Venter på, at Mikkel opretter fanen. Peter har fået en besked at sende ham. In
   (C:\Users\pjo19\.claude\scheduled-tasks\pressetribunen-saet-op). `pressechef/nye_indlaeg.py` finder nye indlæg;
   Claude skriver en pæn udgave i presse.js med samme id ("coach-<tidsstempel-cifre>"), som erstatter den rå på siden.
   x i Skjul fjerner begge udgaver. Kører kun, når Claude-appen er åben (ellers ved næste start).
+  Fra 6. nov. skriver den også **Spike!-kampreferater** af spillede puljekampe (`pressechef/nye_kampe.py`, id "spike-<fane>",
+  kun fakta fra kampskemaet, højst 3 pr. kørsel).
+- [x] **Kampdag** (#kampdag, 6. nov.): Mikkels kampark-guide som tjekliste med flueben (gemmes i browseren, "Ny kamp" nulstiller).
+  Teksten kommer fra regler.js (afsnittet med guide: "kampark").
+- [x] **Skadestuen** (#skadestue, 6. nov.): sygeliste (Miss Next Game i holdarkene + kampskemaerne), varige mén (Niggling),
+  slagtere (CAS i kampskemaerne) og mest voldelige hold. Afhænger af, at coaches taster skader; i dag er næsten intet tastet.
+- [x] **Gemt kopi** (6. nov.): siden viser de sidst gemte tal fra browseren med det samme og henter friske i baggrunden.
 - [x] Kampreferat fra Bedstefars Besudlere (Coach Svulst-Stank) lagt op 6. nov. fra PDF. Original i `lore/`.
 - [x] Spike!-interview med Raelth (The Eternal Sages), indsendt af holdets coach, lagt op 4. nov. Original i `lore/`.
   Presse-siden understøtter nu interviews: `afsnit` (mellemoverskrift), svar med flere afsnit (
