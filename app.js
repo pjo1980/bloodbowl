@@ -260,7 +260,13 @@
       if (d && d.ok) d.ok.hold.forEach((h) => { puljeAf[h.navn] = titel(p); });
     });
     // Indlæg fra coachernes Google-formular flettes med dem i presse.js.
-    PRESSE = [...(window.PRESSE || []), ...læsPressemail(D.pressemail && D.pressemail.ok)]
+    // Formular-indlæg: Claudes pæne udgave i presse.js (samme id) vinder over coachens rå tekst.
+    // "x" i Skjul fjerner både den rå og den pæne udgave.
+    const form = læsPressemail(D.pressemail && D.pressemail.ok);
+    const skjulte = new Set(form.filter((p) => p.skjult).map((p) => p.id));
+    const faste = (window.PRESSE || []).filter((p) => !skjulte.has(p.id));
+    const fasteId = new Set(faste.map((p) => p.id));
+    PRESSE = [...faste, ...form.filter((p) => !p.skjult && !fasteId.has(p.id))]
       .sort((a, b) => (b.dato || "").localeCompare(a.dato || ""));
     D.hentet = new Date();
   }
@@ -726,12 +732,14 @@
       titel: kol(/^overskrift/i), tekst: kol(/^tekst/i), navn: kol(/^(dit navn|navn|coach)/i), skjul: kol(/^skjul/i) };
     const v = (r, i) => (i >= 0 ? String(r[i] || "").trim() : "");
     const kort = (s) => (s.length > 160 ? s.slice(0, 157).replace(/\s+\S*$/, "") + " …" : s);
-    return rows.slice(h + 1).map((r, i) => ({ r, i })).filter(({ r }) => v(r, k.hold) && v(r, k.titel) && !v(r, k.skjul)).map(({ r, i }) => {
+    return rows.slice(h + 1).map((r, i) => ({ r, i })).filter(({ r }) => v(r, k.hold) && v(r, k.titel)).map(({ r, i }) => {
       const replikker = tekstTilReplikker(v(r, k.tekst));
       const første = replikker.find((x) => x.hvem || x.p);
       const navn = v(r, k.navn);
       return {
-        id: "coach-" + (v(r, k.id) || String(i + 1)).replace(/[^\w-]/g, ""),
+        // Fast id ud fra tidsstemplet, så Claudes pæne udgave i presse.js kan genkende indlægget.
+        id: "coach-" + (v(r, k.id) || v(r, k.dato).replace(/\D/g, "") || String(i + 1)).replace(/[^\w-]/g, ""),
+        skjult: !!v(r, k.skjul),
         hold: v(r, k.hold), dato: formularDato(v(r, k.dato)), titel: v(r, k.titel),
         undertitel: v(r, k.type) || "Pressemeddelelse", indsendt: navn ? `Indsendt af ${navn}` : "Indsendt af holdets coach", replikker,
         citat: første ? { hvem: første.hvem || v(r, k.hold), tekst: kort((første.tekst || første.p).split("\n")[0]) } : null
