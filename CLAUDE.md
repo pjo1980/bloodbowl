@@ -9,7 +9,9 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
 - **Data:** siden læser **direkte fra kommissærens eksisterende Google Sheets**. Vi laver ikke et nyt ark,
   medmindre hans ark er umuligt at læse maskinelt (så laver vi et "bro-ark" i Peters Drive med IMPORTRANGE,
   der rydder op, og kommissæren rører stadig kun sit eget ark).
-- **Hosting:** offentlig og gratis på GitHub Pages: https://pjo1980.github.io/bloodbowl/ (repo pjo1980/bloodbowl, branch main).
+- **Hosting:** gratis på **Cloudflare Pages: https://bloodbowl.pages.dev/** (hovedadresse fra 6. nov. 2026, udgiver på ~15 sek.).
+  Cloudflare henter selv fra GitHub-repoet pjo1980/bloodbowl, branch main. Push til main = udgivelse begge steder.
+  Den gamle adresse https://pjo1980.github.io/bloodbowl/ virker stadig, men GitHub Pages er langsom (3-10 min.). Vent aldrig på den.
   Push til main = udgivelse. Ingen server, ingen build, ingen login.
 - **Teknik:** ren HTML + CSS + JavaScript. Ingen frameworks, ingen npm. Data hentes i browseren som CSV via
   `https://docs.google.com/spreadsheets/d/<SHEET_ID>/gviz/tq?tqx=out:csv&sheet=<fanenavn>`
@@ -21,7 +23,7 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
   Skal virke på mobil (coaches kigger på telefonen).
 
 ## Mappestruktur
-- `index.html` – skelet (header, faner Forside/Stilling/Kampe/Hold/Ranglister/Nyheder). Hæv `?v=N` på css/js ved ændringer (GitHub Pages cacher).
+- `index.html` – skelet (header, faner Forside/Stilling/Kampe/Hold/Ranglister/Nyheder). Hæv `?v=N` på css/js ved ændringer (browsere cacher).
 - `config.js` – ark-ID'er, fanenavne og holdnavn→fane-afvigelser.
 - `DATAKORT.md` – hvad der ligger i hvilket ark og hvilken fane, og åbne uklarheder i data.
 - `style.css` – design. `app.js` – hentning, CSV-parser, én læser pr. fanetype, sider og router.

@@ -6,6 +6,7 @@
 - `config.js` har ark-ID'er og fanenavne. `data/` har kopier af fanerne til test.
 - Trin 2 (version 1) er **bygget og testet lokalt** samme aften med rigtige data: alle seks faner,
   alle 13 holdlister, mobilbredde uden vandret scroll.
+- **Flyttet 6. nov. 2026** til https://bloodbowl.pages.dev/ (Cloudflare Pages, ~15 sek. pr. udgivelse). GitHub-adressen virker stadig.
 - **Udgivet 3. november 2026** på https://pjo1980.github.io/bloodbowl/ (repo pjo1980/bloodbowl, offentligt, Pages fra main/rod).
   Ændringer udgives ved at committe og pushe til main.
 - Navn: Semper Fortuna Blood Bowl Liga (foreløbigt). Kommissær: Mikkel Steen.
@@ -85,7 +86,7 @@ satire-note i bunden. Pressechefen hedder Gunnar Grådig (godkendt af Peter 3. n
 
 ## Åbne spørgsmål til Peter
 - Må kommissæren vide, at siden findes, før den er færdig?
-- Eget domæne senere, eller er github.io fint?
+- Eget domæne senere (fx semperfortuna.dk, ca. 100 kr./år)? Kan kobles på Cloudflare Pages.
 - Uklarhederne i data (se DATAKORT.md): hvad kampprogrammet er i forhold til puljekampene, og kampprogrammets rækkefølge.
 
 ## Stil for pressekonferencer (Peters feedback 3. nov.)
