@@ -977,11 +977,120 @@
       <p class="small muted">Kilde: ${ext(R.docs.regler, "Kommissærens regeldokument")} · ${ext(R.docs.cheatsheet, "Cheat sheet til kampen")}</p>`;
   }
 
+  // Skadestuen: hvem er ude (holdarkene: Miss Next Game, Niggling) og hvem har gjort skade (kampskemaerne: CAS, MNG).
+  async function sideSkadestue() {
+    const hoved = `<p class="kicker">Lægen er ikke uddannet</p><h1>Skadestuen</h1>
+      <p class="lead">Hvem er på sygelisten, hvem har varige mén, og hvem har sendt flest modstandere på bænken.</p>`;
+    $main.innerHTML = hoved + '<p class="loading">Lægen kigger på patienterne …</p>';
+    const hold = alleHold();
+    const rostre = (await Promise.all(hold.map((n) => {
+      const fane = (C.ROSTER_FANE || {})[n] || n;
+      return hent("hold", fane).then((r) => ({ hold: n, spillere: læsRoster(r, fane).spillere })).catch(() => null);
+    }))).filter(Boolean);
+    const kampe = (await Promise.all((C.PULJEKAMPE || []).flatMap((p) => p.faner.map((f) =>
+      hent(p.ark, f).then((r) => læsKamp(r, f)).catch(() => null))))).filter((k) => k && k.spillet);
+
+    const syge = [], nig = [];
+    rostre.forEach((r) => r.spillere.forEach((s) => {
+      if (/^y/i.test(s.mng || "")) syge.push({ ...s, hold: r.hold });
+      if (tal(s.nig) > 0) nig.push({ ...s, hold: r.hold });
+    }));
+    const slagtere = [], kampMng = [];
+    kampe.forEach((k) => Object.entries(k.spillere).forEach(([h, liste]) => {
+      const mod = h === k.hjemme ? k.ude : k.hjemme;
+      liste.forEach((s) => {
+        if (s.cas > 0) slagtere.push({ navn: s.navn, hold: h, cas: s.cas, mod, fane: k.fane });
+        if (s.mng) kampMng.push({ navn: s.navn, hold: h, mod, fane: k.fane });
+      });
+    }));
+    slagtere.sort((a, b) => b.cas - a.cas);
+    const casHold = {};
+    slagtere.forEach((s) => { casHold[s.hold] = (casHold[s.hold] || 0) + s.cas; });
+    const casListe = Object.entries(casHold).sort((a, b) => b[1] - a[1]);
+
+    const kampLink = (f) => `<a href="#kamp/${encodeURIComponent(f)}">kampen</a>`;
+    const tom = (t) => `<p class="muted">${esc(t)}</p>`;
+    const liste = (rækker) => `<ul class="top5">${rækker.join("")}</ul>`;
+    const kortSyge = `<div class="card"><h2>🩹 Sygelisten</h2><p class="small muted">Spillere med Miss Next Game i holdarket.</p>
+      ${syge.length ? liste(syge.map((s) => `<li><span><b>${esc(s.navn)}</b> <span class="muted small">${esc(s.pos || "")}</span></span><span>${holdLink(s.hold)}</span></li>`))
+        : tom("Ingen er på sygelisten. Enten er alle raske, eller også har ingen tastet det.")}
+      ${kampMng.length ? `<p class="small" style="margin-top:12px"><b>Fra kampskemaerne:</b></p>` + liste(kampMng.map((s) =>
+        `<li><span><b>${esc(s.navn)}</b> ${holdLink(s.hold)}</span><span class="muted small">mod ${esc(s.mod)} · ${kampLink(s.fane)}</span></li>`)) : ""}
+    </div>`;
+    const kortNig = `<div class="card"><h2>🦴 Varige mén</h2><p class="small muted">Niggling Injuries i holdarket.</p>
+      ${nig.length ? liste(nig.map((s) => `<li><span><b>${esc(s.navn)}</b> ${holdLink(s.hold)}</span><span class="v">${esc(s.nig)}</span></li>`))
+        : tom("Ingen varige mén endnu. Sæsonen er ung.")}</div>`;
+    const kortSlagtere = `<div class="card"><h2>🪓 Slagterne</h2><p class="small muted">Spillere, der har påført skader (CAS) i puljekampene.</p>
+      ${slagtere.length ? liste(slagtere.slice(0, 10).map((s) =>
+        `<li><span><b>${esc(s.navn)}</b> ${holdLink(s.hold)} <span class="muted small">mod ${esc(s.mod)} · ${kampLink(s.fane)}</span></span><span class="v">${s.cas}</span></li>`))
+        : tom("Ingen CAS endnu. Usædvanligt fredeligt.")}</div>`;
+    const kortHold = `<div class="card"><h2>🏥 Mest voldelige hold</h2><p class="small muted">CAS påført i puljekampene.</p>
+      ${casListe.length ? liste(casListe.map(([h, n], i) => `<li><span><span class="nr">${i + 1}.</span>${holdLink(h)}</span><span class="v">${n}</span></li>`))
+        : tom("Ingen endnu.")}</div>`;
+    const værst = slagtere[0];
+    const delt = slagtere.filter((s) => værst && s.cas === værst.cas).length;
+    const gunnar = !værst ? "Skadestuen er tom. Pressechefen er skuffet. Han havde købt popcorn." : delt > 1
+      ? `${delt} spillere deler førstepladsen blandt slagterne med ${værst.cas} CAS hver. Pressechefen kalder det "fysisk spil". Lægen kalder det overarbejde.`
+      : `${værst.navn} fra ${værst.hold} topper listen over slagtere. Pressechefen kalder det "fysisk spil". Lægen kalder det overarbejde.`;
+    return hoved + pressechefKort(gunnar) + `<div class="grid-2" style="margin-top:16px">${kortSyge}${kortSlagtere}${kortNig}${kortHold}</div>
+      <p class="small muted">Skader kommer kun med, hvis de er tastet: Miss Next Game og Niggling i holdarket, CAS og Miss Next Game i kamparket.
+        Se <a href="#kampdag">Kampdag</a>.</p>`;
+  }
+
+  // Kampdag: Mikkels guide til kamparket som tjekliste. Afkrydsningerne gemmes i browseren, til man trykker "Ny kamp".
+  const KAMPDAG = "bb-kampdag";
+  const kampdagLæs = () => { try { return JSON.parse(localStorage.getItem(KAMPDAG) || "{}"); } catch (e) { return {}; } };
+  const kampdagGem = (o) => { try { localStorage.setItem(KAMPDAG, JSON.stringify(o)); } catch (e) {} };
+  function sideKampdag() {
+    const R = window.REGLER || { afsnit: [], docs: {} };
+    const g = R.afsnit.find((a) => a.guide === "kampark");
+    if (!g) return '<h1>Kampdag</h1><p class="muted">Guiden mangler.</p>';
+    const valgt = kampdagLæs();
+    const dele = g.punkter.filter((p) => typeof p !== "string");
+    const noter = g.punkter.filter((p) => typeof p === "string");
+    const ext = (url, tekst) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(tekst)} ↗</a>`;
+    const blok = (p, i) => {
+      const n = p.under.filter((_, j) => valgt[`${i}-${j}`]).length;
+      return `<section class="card tjek" data-del="${i}">
+        <h2>${esc(p.tekst.replace(/:$/, ""))} <span class="tjek-tal">${n}/${p.under.length}</span></h2>
+        <ul>${p.under.map((u, j) => `<li><label><input type="checkbox" data-id="${i}-${j}"${valgt[`${i}-${j}`] ? " checked" : ""}>
+          <span>${esc(u)}</span></label></li>`).join("")}</ul></section>`;
+    };
+    return `
+      <p class="kicker">Til bordet</p>
+      <h1>Kampdag</h1>
+      <p class="lead">Tjeklisten til kamparket. Sæt flueben undervejs, så glemmer du ikke noget. Fluebenene huskes på denne
+        telefon eller tablet, til du trykker "Ny kamp".</p>
+      <p><button class="knap" type="button" id="ny-kamp">🔄 Ny kamp</button>
+        ${R.docs.cheatsheet ? ` · ${ext(R.docs.cheatsheet, "Cheat sheet")}` : ""}
+        ${R.docs.kampark ? ` · ${ext(R.docs.kampark, "Guide med billeder")}` : ""}</p>
+      <div class="tjekliste">${dele.map(blok).join("")}</div>
+      ${noter.map((t) => `<p class="tjek-note">✅ ${esc(t)}</p>`).join("")}
+      <p class="small muted">Reglerne står under <a href="#regler">Regler</a>.</p>`;
+  }
+  document.addEventListener("change", (e) => {
+    const cb = e.target.closest && e.target.closest(".tjek input[type=checkbox]");
+    if (!cb) return;
+    const o = kampdagLæs();
+    if (cb.checked) o[cb.dataset.id] = 1; else delete o[cb.dataset.id];
+    kampdagGem(o);
+    const sek = cb.closest(".tjek");
+    const alle = sek.querySelectorAll("input[type=checkbox]");
+    sek.querySelector(".tjek-tal").textContent = `${[...alle].filter((x) => x.checked).length}/${alle.length}`;
+    sek.classList.toggle("faerdig", [...alle].every((x) => x.checked));
+  });
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest || !e.target.closest("#ny-kamp")) return;
+    if (!confirm("Fjern alle flueben og start en ny kamp?")) return;
+    kampdagGem({});
+    vis();
+  });
+
   // ---------- Router ----------
   const SIDER = { forside: sideForside, stilling: sideStilling, puljekampe: sidePuljekampe, regnbue: sideRegnbue,
-    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening, regler: sideRegler };
+    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening, regler: sideRegler, kampdag: sideKampdag, skadestue: sideSkadestue };
   const ALIAS = { kampe: "puljekampe", regel: "regler", guide: "regler" }; // gamle og nemme links
-  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Presse", traening: "Off pitch training", regler: "Regler og guider" };
+  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Presse", traening: "Off pitch training", regler: "Regler og guider", kampdag: "Kampdag", skadestue: "Skadestuen" };
   let visNr = 0;
   async function vis() {
     const nr = ++visNr;
@@ -996,6 +1105,10 @@
       : key === "kamp" && navn ? await sideKamp(navn) : await SIDER[key]();
     if (nr !== visNr) return; // brugeren har skiftet side imens
     $main.innerHTML = html;
+    $main.querySelectorAll(".tjek").forEach((sek) => {
+      const alle = sek.querySelectorAll("input[type=checkbox]");
+      sek.classList.toggle("faerdig", alle.length > 0 && [...alle].every((x) => x.checked));
+    });
     const pkTitel = key === "presse" && navn ? (PRESSE.find((p) => p.id === navn) || {}).titel : key === "kamp" && navn ? navn : "";
     document.title = (key === "forside" ? "" : (pkTitel || navn || SIDENAVN[key] || titel(key)) + " · ") + liga;
   }

@@ -216,6 +216,17 @@ details.regel > summary h2 { margin: 0; font-size: 24px; }
 .regel-liste li { margin: 6px 0; }
 .regel-liste ul { margin: 4px 0 8px; padding-left: 18px; color: var(--muted); }
 .regel-liste ul li { margin: 4px 0; }
+.tjekliste { display: grid; gap: 12px; margin: 16px 0; }
+.tjek h2 { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 0 0 8px; font-size: 24px; }
+.tjek-tal { font-size: 16px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tjek.faerdig { border-color: #3fa34d; }
+.tjek.faerdig .tjek-tal { color: #3fa34d; font-weight: 700; }
+.tjek ul { list-style: none; margin: 0; padding: 0; }
+.tjek li { border-top: 1px dashed var(--line); }
+.tjek label { display: flex; gap: 12px; align-items: flex-start; padding: 10px 2px; cursor: pointer; }
+.tjek input { width: 22px; height: 22px; flex: none; margin-top: 1px; accent-color: var(--accent); }
+.tjek input:checked + span { color: var(--muted); text-decoration: line-through; }
+.tjek-note { font-weight: 600; }
 .pk-forside { display: block; width: 100%; max-width: 440px; height: auto; margin: 16px 0 4px; border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,.45); }
 .pk-liste { display: grid; gap: 12px; margin: 16px 0; }
 a.pk-linje { display: grid; grid-template-columns: 72px 1fr; gap: 14px; align-items: center; }
