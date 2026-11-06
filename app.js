@@ -16,7 +16,7 @@
     "hold|Holdstats ud": "holdstats-ud.csv",
     "hold|GutBuster Gluttons": "roster-gutbuster-gluttons.csv",
     "turnering|Nyheder": "nyheder-fane-eksempel.csv",
-    "presse|Udgivet": "pressemail-eksempel.csv"
+    "presse|Form Responses 1": "presseformular-eksempel.csv"
   };
 
   // ---------- Hjælpere ----------
@@ -259,7 +259,7 @@
       const d = D["pulje:" + p];
       if (d && d.ok) d.ok.hold.forEach((h) => { puljeAf[h.navn] = titel(p); });
     });
-    // Pressemeddelelser fra pressechefens mail (godkendte) flettes med dem i presse.js.
+    // Indlæg fra coachernes Google-formular flettes med dem i presse.js.
     PRESSE = [...(window.PRESSE || []), ...læsPressemail(D.pressemail && D.pressemail.ok)]
       .sort((a, b) => (b.dato || "").localeCompare(a.dato || ""));
     D.hentet = new Date();
@@ -653,7 +653,7 @@
   const LORE = window.LORE || {};
   let PRESSE = (window.PRESSE || []).slice().sort((a, b) => (b.dato || "").localeCompare(a.dato || ""));
 
-  // Tekst fra en coach-mail -> replikker. Regler (står også i coach-beskeden i pressechef/GUIDE.md):
+  // Tekst fra coachens formular -> replikker. Regler (står også i coach-beskeden i pressechef/FORMULAR.md):
   //   "NAVN: tekst"           -> replik (navnet højst 4 ord, ikke et klokkeslæt)
   //   linje i anførselstegn  -> mellemoverskrift (også linjer der starter med en emoji)
   //   linje i (parentes)     -> regi
@@ -683,20 +683,38 @@
     }
     return ud;
   }
+  // Formularens tidsstempel: "6/11/2026 14.03.22" (dansk) eller "11/6/2026 14:03:22" (amerikansk). Et indlæg kan
+  // aldrig være fra fremtiden, så den læsning, der ikke ligger i fremtiden, vinder.
+  function formularDato(s) {
+    s = String(s || "").trim();
+    if (/^\d{4}-/.test(s)) return s.slice(0, 10);
+    const m = s.match(/^(\d{1,2})[./-](\d{1,2})[./-](\d{4})(?:\s+\d{1,2}([:.]))?/);
+    if (!m) return s;
+    const iso = (y, mo, d) => `${y}-${String(mo).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+    const dk = iso(m[3], m[2], m[1]), us = iso(m[3], m[1], m[2]);
+    const imorgen = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+    const gyldig = (d) => +d.slice(5, 7) <= 12 && d <= imorgen;
+    const først = m[4] === ":" ? [us, dk] : [dk, us];
+    return først.find(gyldig) || først[0];
+  }
   function læsPressemail(rows) {
     if (!rows || !rows.length) return [];
-    const h = rows.findIndex((r) => r.includes("Overskrift") && r.includes("Hold"));
+    const h = rows.findIndex((r) => r.some((x) => /^overskrift/i.test(x)) && r.some((x) => /^hold$/i.test(x.trim())));
     if (h < 0) return [];
-    const c = (n) => rows[h].indexOf(n);
-    return rows.slice(h + 1).filter((r) => r[c("Hold")] && r[c("Overskrift")]).map((r) => {
-      const replikker = tekstTilReplikker(r[c("Tekst")]);
+    const kol = (re) => rows[h].findIndex((x) => re.test(String(x).trim()));
+    const k = { id: kol(/^id$/i), dato: kol(/^(dato|timestamp|tidsstempel)$/i), hold: kol(/^hold$/i), type: kol(/^type/i),
+      titel: kol(/^overskrift/i), tekst: kol(/^tekst/i), navn: kol(/^(dit navn|navn|coach)/i), skjul: kol(/^skjul/i) };
+    const v = (r, i) => (i >= 0 ? String(r[i] || "").trim() : "");
+    const kort = (s) => (s.length > 160 ? s.slice(0, 157).replace(/\s+\S*$/, "") + " …" : s);
+    return rows.slice(h + 1).map((r, i) => ({ r, i })).filter(({ r }) => v(r, k.hold) && v(r, k.titel) && !v(r, k.skjul)).map(({ r, i }) => {
+      const replikker = tekstTilReplikker(v(r, k.tekst));
       const første = replikker.find((x) => x.hvem || x.p);
-      const kort = (s) => (s.length > 160 ? s.slice(0, 157).replace(/\s+\S*$/, "") + " …" : s);
+      const navn = v(r, k.navn);
       return {
-        id: "mail-" + String(r[c("ID")] || "").replace(/[^\w-]/g, ""),
-        hold: r[c("Hold")], dato: r[c("Dato")], titel: r[c("Overskrift")],
-        undertitel: "Pressemeddelelse", indsendt: "Indsendt af holdets coach", replikker,
-        citat: første ? { hvem: første.hvem || r[c("Hold")], tekst: kort((første.tekst || første.p).split("\n")[0]) } : null
+        id: "coach-" + (v(r, k.id) || String(i + 1)).replace(/[^\w-]/g, ""),
+        hold: v(r, k.hold), dato: formularDato(v(r, k.dato)), titel: v(r, k.titel),
+        undertitel: v(r, k.type) || "Pressemeddelelse", indsendt: navn ? `Indsendt af ${navn}` : "Indsendt af holdets coach", replikker,
+        citat: første ? { hvem: første.hvem || v(r, k.hold), tekst: kort((første.tekst || første.p).split("\n")[0]) } : null
       };
     });
   }
@@ -738,6 +756,7 @@
       <h1>Presse</h1>
       <p class="lead">Pressekonferencer og interviews fra ligaens hold. Coaches kan indsende lore, interviews og
         pressekonferencer for deres hold.</p>
+      ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}" target="_blank" rel="noopener">✍️ Indsend til pressetribunen</a></p>` : ""}
       ${valgt && PRESSE.length > 1 ? '<p><a href="#presse">← Alt fra pressetribunen</a></p>' : ""}
       ${liste.length ? liste.map(pressekonference).join("") : '<p class="muted">Ingen pressekonferencer endnu.</p>'}
       <p class="small muted">Satire. Skrevet af eller ud fra holdenes egne coaches.</p>`;

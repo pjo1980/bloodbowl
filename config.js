@@ -8,6 +8,8 @@ window.CONFIG = {
   LIGA: "Semper Fortuna Blood Bowl Liga",  // navn indtil videre
   KOMMISSAER: "Mikkel Steen",
   BRUG_LOKALE_DATA: false,
+  // Link til Google-formularen, hvor coaches indsender presse (vises som knap på Presse-siden). Tomt = ingen knap.
+  PRESSE_FORMULAR: "",
   ARK: {
     turnering: "1sYVF9bm5XaG8sHLOOU8SGHGvMKqWEBPfR9ZL46oudtA",
     hold:      "1wqXQfoZ2DZdCUSWBF0o1tgtiycztq8NuJ2f_nUif46o",
@@ -15,8 +17,9 @@ window.CONFIG = {
     puljeBlaa: "1t-ZntRFVAy79VqMz-G6dJwhLalMWs8rHFjPDNsh3ARY",
     puljeRoed: "1-AdI1rklMUmDNp9wiJWRyE6FJfqc1y2Hrp2QDVVaxLs",
     puljeSort: "1rucYUGovKDidPORuZyOO2HxyEYdG7Qg62Q0a-lX3ARc",
-    // Pressechefens offentlige ark "Pressechefens udgivelser" (laves af pressechef/Kode.gs). Tomt = slået fra.
-    presse: "1ygdWehkp3nc1u9SygB7x4izSnz27ChREKevc8C-l9N8"
+    // Svar-arket fra coachernes Google-formular (se pressechef/FORMULAR.md). Tomt = slået fra.
+    // (Gunnars gamle Gmail-ark 1ygdWehk… døde, da Google lukkede kontoen 5. nov.)
+    presse: ""
   },
   FANER: {
     stilling: "Turneringsstilling",
@@ -26,7 +29,7 @@ window.CONFIG = {
     spillerrang: "Spiller ranglister",
     holdstats: "Holdstats ud",
     nyheder: "Nyheder",         // valgfri fane i turneringsarket: Dato | Overskrift | Tekst
-    presseUdgivet: "Udgivet"    // fane i pressechefens offentlige ark: ID | Dato | Hold | Overskrift | Tekst
+    presseUdgivet: "Form Responses 1" // svar-fanen: Timestamp | Hold | Type | Overskrift | Tekst | Dit navn (+ Skjul)
   },
   // Holdnavn på siden -> fanenavn i hold-arket, hvor de afviger.
   ROSTER_FANE: {

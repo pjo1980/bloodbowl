@@ -1,3 +1,5 @@
+> **Forældet 6. nov. 2026:** Google lukkede Gunnars Gmail. Brug i stedet `FORMULAR.md` (Google-formular).
+
 # Pressechefens indbakke – guide til Peter
 
 Coaches sender en mail til pressechef Gunnar Grådig. Et lille script i Google lægger mailen i et ark.
