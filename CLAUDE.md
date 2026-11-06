@@ -11,7 +11,9 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
   der rydder op, og kommissæren rører stadig kun sit eget ark).
 - **Hosting:** gratis på **Cloudflare Pages: https://bloodbowl.pages.dev/** (hovedadresse fra 6. nov. 2026, udgiver på ~15 sek.).
   Cloudflare henter selv fra GitHub-repoet pjo1980/bloodbowl, branch main. Push til main = udgivelse begge steder.
-  Den gamle adresse https://pjo1980.github.io/bloodbowl/ virker stadig, men GitHub Pages er langsom (3-10 min.). Vent aldrig på den.
+  Den gamle adresse https://pjo1980.github.io/bloodbowl/ sender videre til bloodbowl.pages.dev (og beholder #side).
+  GitHub Pages udgiver fra grenen **gh-pages**, som KUN indeholder index.html/404.html med videresendelsen (6. nov. 2026).
+  Push til main udløser derfor ingen GitHub-udgivelse og ingen fejlmails. Rør ikke gh-pages uden grund.
   Push til main = udgivelse. Ingen server, ingen build, ingen login.
 - **Teknik:** ren HTML + CSS + JavaScript. Ingen frameworks, ingen npm. Data hentes i browseren som CSV via
   `https://docs.google.com/spreadsheets/d/<SHEET_ID>/gviz/tq?tqx=out:csv&sheet=<fanenavn>`
