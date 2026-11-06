@@ -119,3 +119,10 @@ Klubben hedder Semper Fortuna og ligger i **Odder**. Logoet skal kombinere SF/Se
 Tegnes af `logo/generer.py`; ret der og kør `python logo/generer.py`, og kopiér derefter ikonet ind i index.html (header) og
 `<template id="logo-stor">`. Udkast til sammenligning: `logo/udkast.html`.
 Andre idéer: laurbærkrans med S·F (latinsk/romersk), lykkehjul. Kopiér ikke Games Workshops officielle Blood Bowl-logo.
+
+## Idéer til senere (parkeret 6. nov. 2026)
+Blood Bowl-idéer bor her, ikke i Peters Idébank i Todoist.
+- **Ugens Spike!**: hver søndag en kort opsummering (resultater, topscorer, værste skade) på Presse-siden + færdig Messenger-tekst
+  i udklipsholderen, som Peter poster som Gunnar. Lille indsats; kan bygges ind i den planlagte redaktør.
+- **Slutspilstræ**: visuelt slutspil med Southland Stegadons, Lucky Loser og Tabernes taber, opdateret fra Mikkels ark.
+  Venter på Mikkels svar om antal kampe i slutspillet.
