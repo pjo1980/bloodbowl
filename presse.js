@@ -284,6 +284,7 @@ window.PRESSE = [
     "dato": "2026-11-04",
     "titel": "»Ligaen er reelt allerede afgjort«",
     "undertitel": "Spike!-interview",
+    "forside": "forsider/sages-spike-interview.jpg",
     "sted": "Et eksklusivt interview med Raelth, cheftræner for The Eternal Sages",
     "coach": "Raelth",
     "indsendt": "Indsendt af holdets coach",

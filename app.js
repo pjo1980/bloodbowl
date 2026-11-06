@@ -757,6 +757,7 @@
       <p class="kicker">${esc(pk.undertitel || "Pressekonference")} · ${esc(pkDato(pk))}</p>
       <h2 class="pk-titel">${esc(pk.titel)}</h2>
       <p class="small muted">${holdLink(pk.hold)} ${chip(puljeAf[pk.hold])}${pk.sted ? ` · ${esc(pk.sted)}` : ""}${pk.indsendt ? ` · ${esc(pk.indsendt)}` : ""}</p>
+      ${pk.forside ? `<a href="${esc(pk.forside)}" target="_blank" rel="noopener"><img class="pk-forside" src="${esc(pk.forside)}" alt="Forside til ${esc(pk.titel)}"></a>` : ""}
       <div class="pk-tekst">${linjer}</div></article>`;
   }
 
@@ -769,8 +770,9 @@
   }
 
   // Én linje i presse-oversigten: plakat, type og dato, overskrift, hold og et kort citat. Klik åbner artiklen.
+  const forsideLille = (pk) => pk.forside ? pk.forside.replace(/\.jpg$/i, "-lille.jpg") : "";
   function pkLinje(pk) {
-    const img = plakatSti(pk.hold, true);
+    const img = forsideLille(pk) || plakatSti(pk.hold, true);
     return `<a class="card pk-linje" href="#presse/${encodeURIComponent(pk.id)}">
       ${img ? `<img src="${img}" alt="" loading="lazy">` : '<div class="pk-linje-tom">📰</div>'}
       <div>
