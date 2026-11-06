@@ -36,8 +36,7 @@ Indlæg kommer på siden med det samme (inden for få minutter). Peter eller Mik
      The Maurading Ocras
      ```
    - **Type**, valgmuligheder: `Pressemeddelelse`, `Kampreferat`, `Interview`, `Rygte`, `Lore`.
-   - **Tekst**, beskrivelse (tryk ⋮ → **Description**):
-     `Skriv "NAVN: tekst" for replikker. En linje i "anførselstegn" bliver mellemoverskrift. En linje i (parentes) bliver regi.`
+   - **Tekst**, beskrivelse (tryk ⋮ → **Description**): `Sæt bare teksten ind. Vi sætter den pænt op.`
    - **Dit navn**, beskrivelse: `Coachens eller figurens navn, fx Coach Svulst-Stank.`
 4. **Settings → Responses**: sæt **Collect email addresses** til **Do not collect**.
    Slå **Limit to 1 response** FRA. (Ellers skal coaches logge ind med Google.)
@@ -56,14 +55,12 @@ Indlæg kommer på siden med det samme (inden for få minutter). Peter eller Mik
 ## Besked til coaches (kopier og send)
 
 > Hej coaches!
-> Nu kan I selv lægge sjove ting på ligasiden: pressemeddelelser, kampreferater, interviews, rygter og lore.
-> Brug knappen "✍️ Indsend til pressetribunen" på Presse-siden, eller dette link: [FORMULAR-LINK]
-> Det kommer på siden med det samme. Intet login.
+> Nu kan I selv lægge sjove ting på ligasiden: kampreferater, interviews, rygter og pressemeddelelser.
 >
-> Tips til teksten:
-> - Skriv `NAVN: tekst` for at lave en replik, fx `COACH SVULST-STANK: Det var et fejt trick!`
-> - En linje i "anførselstegn" bliver en mellemoverskrift.
-> - En linje i (parentes) bliver regi, fx (Lang stilhed.)
-> - Har I en PDF eller Word-fil, så kopier teksten ind i feltet.
+> 1. Tryk på "✍️ Indsend til pressetribunen" på Presse-siden (eller her: [FORMULAR-LINK]).
+> 2. Vælg jeres hold, og skriv en overskrift.
+> 3. Sæt teksten ind, og tryk Send.
 >
-> Hold det i ligaens ånd. Kommissæren kan skjule indlæg.
+> Intet login. Det kommer på siden af sig selv.
+> Har I skrevet det med ChatGPT eller lignende, så kopier bare teksten fra chatten ind.
+> Har I kun en PDF eller Word-fil, så send den til Peter.
