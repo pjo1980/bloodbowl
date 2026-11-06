@@ -9,7 +9,7 @@ window.CONFIG = {
   KOMMISSAER: "Mikkel Steen",
   BRUG_LOKALE_DATA: false,
   // Link til Google-formularen, hvor coaches indsender presse (vises som knap på Presse-siden). Tomt = ingen knap.
-  PRESSE_FORMULAR: "",
+  PRESSE_FORMULAR: "https://forms.gle/Lpw221vA9bsW2xv1A",
   ARK: {
     turnering: "1sYVF9bm5XaG8sHLOOU8SGHGvMKqWEBPfR9ZL46oudtA",
     hold:      "1wqXQfoZ2DZdCUSWBF0o1tgtiycztq8NuJ2f_nUif46o",
@@ -19,7 +19,7 @@ window.CONFIG = {
     puljeSort: "1rucYUGovKDidPORuZyOO2HxyEYdG7Qg62Q0a-lX3ARc",
     // Svar-arket fra coachernes Google-formular (se pressechef/FORMULAR.md). Tomt = slået fra.
     // (Gunnars gamle Gmail-ark 1ygdWehk… døde, da Google lukkede kontoen 5. nov.)
-    presse: ""
+    presse: "17LTKZiEEPYoeTRPbyIHWWXSGqa5ioQQL9n4YYVApZOA"
   },
   FANER: {
     stilling: "Turneringsstilling",

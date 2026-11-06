@@ -48,9 +48,9 @@ Venter på, at Mikkel opretter fanen. Peter har fået en besked at sende ham. In
   Coaches tilmelder sig selv (holdnavn i emnet, tåler stavefejl). Automatisk godkendelse (AUTO_GODKEND = true, Peter 4. nov.); "Nej" fjerner.
   Mangler (Peter): indsæt nyeste Kode.gs, del arket med Mikkel, send coach-beskeden fra guiden.
   **NEDE 5. nov.:** Google lukkede Gunnars konto ("lavet af en bot / flere konti"). Mail-ordningen er opgivet.
-- [ ] **Coach-formular** (6. nov., afløser mailen): Google-formular på Peters konto → svar-ark → siden (app.js læsPressemail).
+- [x] **Coach-formular** (6. nov., afløser mailen; LIVE 6. nov.: forms.gle/Lpw221vA9bsW2xv1A, ark "Pressetribunen – svar" på Peters konto): Google-formular på Peters konto → svar-ark → siden (app.js læsPressemail).
   Guide og coach-besked i `pressechef/FORMULAR.md`. Koden er klar og testet med `data/presseformular-eksempel.csv`.
-  Mangler (Peter): lav formularen, send ark-link og formular-link → config.js (ARK.presse + PRESSE_FORMULAR).
+  Mangler: Peter deler arket med Mikkel (Editor) og sender coach-beskeden. Daglig Claude-opsætning af indlæg er ikke lavet.
 - [x] Kampreferat fra Bedstefars Besudlere (Coach Svulst-Stank) lagt op 6. nov. fra PDF. Original i `lore/`.
 - [x] Spike!-interview med Raelth (The Eternal Sages), indsendt af holdets coach, lagt op 4. nov. Original i `lore/`.
   Presse-siden understøtter nu interviews: `afsnit` (mellemoverskrift), svar med flere afsnit (
