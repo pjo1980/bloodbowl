@@ -748,17 +748,33 @@
       <p class="small" style="margin:10px 0 0">Læs det hele →</p></a>` : "";
   }
 
+  // Én linje i presse-oversigten: plakat, type og dato, overskrift, hold og et kort citat. Klik åbner artiklen.
+  function pkLinje(pk) {
+    const img = plakatSti(pk.hold, true);
+    return `<a class="card pk-linje" href="#presse/${encodeURIComponent(pk.id)}">
+      ${img ? `<img src="${img}" alt="" loading="lazy">` : '<div class="pk-linje-tom">📰</div>'}
+      <div>
+        <p class="kicker">${esc(pk.undertitel || "Pressekonference")} · ${esc(pkDato(pk))}</p>
+        <h3>${esc(pk.titel)}</h3>
+        <p class="small muted">${esc(pk.hold)}</p>
+        ${pk.citat ? `<p class="pk-linje-citat">»${esc(pk.citat.tekst)}«</p>` : ""}
+      </div></a>`;
+  }
+
   function sidePresse(id) {
     const valgt = id ? PRESSE.find((p) => p.id === id) : null;
-    const liste = valgt ? [valgt] : PRESSE;
+    const tilbage = '<p><a href="#presse">← Alle artikler fra pressetribunen</a></p>';
+    if (valgt) return `
+      <p class="kicker">Pressetribunen</p>
+      ${tilbage}
+      ${pressekonference(valgt)}
+      ${tilbage}`;
     return `
       <p class="kicker">Pressetribunen</p>
       <h1>Presse</h1>
-      <p class="lead">Pressekonferencer og interviews fra ligaens hold. Coaches kan indsende lore, interviews og
-        pressekonferencer for deres hold.</p>
+      <p class="lead">Pressekonferencer, kampreferater og interviews fra ligaens hold. Tryk på en overskrift for at læse.</p>
       ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}" target="_blank" rel="noopener">✍️ Indsend til pressetribunen</a></p>` : ""}
-      ${valgt && PRESSE.length > 1 ? '<p><a href="#presse">← Alt fra pressetribunen</a></p>' : ""}
-      ${liste.length ? liste.map(pressekonference).join("") : '<p class="muted">Ingen pressekonferencer endnu.</p>'}
+      ${PRESSE.length ? `<div class="pk-liste">${PRESSE.map(pkLinje).join("")}</div>` : '<p class="muted">Ingen artikler endnu.</p>'}
       <p class="small muted">Satire. Skrevet af eller ud fra holdenes egne coaches.</p>`;
   }
 
@@ -905,7 +921,7 @@
     const key = SIDER[side] ? side : "forside";
     const fane = key === "kamp" ? "puljekampe" : key;
     document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("on", a.dataset.page === fane));
-    if (!navn) window.scrollTo(0, 0);
+    if (!navn || key === "presse") window.scrollTo(0, 0);
     const html = key === "hold" && navn ? await sideHold(navn) : key === "presse" && navn ? sidePresse(navn)
       : key === "kamp" && navn ? await sideKamp(navn) : await SIDER[key]();
     if (nr !== visNr) return; // brugeren har skiftet side imens

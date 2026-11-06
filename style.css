@@ -206,6 +206,13 @@ td a:hover { color: var(--accent); }
 .rolle { font-weight: 400; font-size: 13px; color: var(--muted); }
 .note { font-weight: 400; font-style: italic; color: var(--muted); }
 .scene { font-style: italic; color: var(--muted); margin: 0 0 14px; }
+.pk-liste { display: grid; gap: 12px; margin: 16px 0; }
+a.pk-linje { display: grid; grid-template-columns: 72px 1fr; gap: 14px; align-items: center; }
+a.pk-linje img, .pk-linje-tom { width: 72px; height: 98px; object-fit: cover; object-position: top; border-radius: 6px; background: var(--panel-2); }
+.pk-linje-tom { display: flex; align-items: center; justify-content: center; font-size: 28px; }
+a.pk-linje h3 { margin: 2px 0 2px; font-size: 20px; line-height: 1.2; }
+a.pk-linje .kicker, a.pk-linje .small { margin: 0; }
+.pk-linje-citat { margin: 6px 0 0; font-style: italic; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 a.pk-teaser blockquote { margin: 6px 0 4px; font-size: 19px; font-weight: 600; font-style: italic; }
 .motto { border-left: 4px solid var(--accent); }
 .motto .lbl { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
