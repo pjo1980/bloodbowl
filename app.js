@@ -929,11 +929,33 @@
       <p class="small muted">Links åbner i en ny fane. Siderne er lavet af andre og har intet med ligaen at gøre.</p>`;
   }
 
+  // Regler og guider (indholdet står i regler.js). Hvert afsnit kan foldes ud og sammen.
+  function sideRegler() {
+    const R = window.REGLER || { afsnit: [], docs: {} };
+    const ext = (url, tekst) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(tekst)} ↗</a>`;
+    const punkt = (p) => typeof p === "string" ? `<li>${esc(p)}</li>`
+      : `<li>${esc(p.tekst)}${p.under ? `<ul>${p.under.map((u) => `<li>${esc(u)}</li>`).join("")}</ul>` : ""}</li>`;
+    const afsnit = R.afsnit.map((a) => `
+      <details class="card regel"${a.aaben ? " open" : ""}>
+        <summary><h2>${esc(a.titel)}</h2></summary>
+        ${a.intro ? `<p>${esc(a.intro)}</p>` : ""}
+        <ul class="regel-liste">${a.punkter.map(punkt).join("")}</ul>
+        ${a.guide && R.docs[a.guide] ? `<p class="small">${ext(R.docs[a.guide], "Kommissærens guide med billeder")}</p>` : ""}
+      </details>`).join("");
+    return `
+      <p class="kicker">Kommissærens kontor</p>
+      <h1>Regler og guider</h1>
+      <p class="lead">Ligaens husregler, slutspillet og hjælp til kamparket og holdarket. Tryk på en overskrift for at folde den ud.</p>
+      ${pressechefKort("Pressechefen har læst alle reglerne. Han forstod dem ikke, men han er helt enig.")}
+      <div class="regler">${afsnit}</div>
+      <p class="small muted">Kilde: ${ext(R.docs.regler, "Kommissærens regeldokument")} · ${ext(R.docs.cheatsheet, "Cheat sheet til kampen")}</p>`;
+  }
+
   // ---------- Router ----------
   const SIDER = { forside: sideForside, stilling: sideStilling, puljekampe: sidePuljekampe, regnbue: sideRegnbue,
-    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening };
-  const ALIAS = { kampe: "puljekampe" }; // gamle links
-  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Presse", traening: "Off pitch training" };
+    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening, regler: sideRegler };
+  const ALIAS = { kampe: "puljekampe", regel: "regler", guide: "regler" }; // gamle og nemme links
+  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Presse", traening: "Off pitch training", regler: "Regler og guider" };
   let visNr = 0;
   async function vis() {
     const nr = ++visNr;
