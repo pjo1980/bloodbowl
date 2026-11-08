@@ -27,6 +27,95 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "coach-118202660211",
+    "hold": "Black Mountain Slavers",
+    "type": "Rygte",
+    "dato": "2026-11-08",
+    "titel": "Knæk, knas og korruption! Taskmaster Flemming vil have flere elvere at smadre!",
+    "undertitel": "Rygte",
+    "sted": "Af Gunnar Grådig, pressechef og indehaver af ligaens mest upålidelige kilder",
+    "coach": "Taskmaster Flemming",
+    "indsendt": "Indsendt af holdets coach",
+    "citat": {
+      "hvem": "Taskmaster Flemming",
+      "tekst": "Det lyder så skønt, når deres knogler knækker. Det kan kendes på knækket!"
+    },
+    "replikker": [
+      {
+        "p": "Der går grimme rygter i Ligaens mørke omklædningsrum. Og denne gang handler det hverken om ulovlige våben, dopede gobliner eller en halfling, der er blevet spist af sin egen holdkammerat."
+      },
+      {
+        "p": "Nej, denne gang handler det om Taskmaster Flemming og hans angiveligt sygelige fascination af lyden af knækkende elverknogler!"
+      },
+      {
+        "p": "Ifølge flere særdeles tvivlsomme kilder har Taskmasteren højlydt beklaget sig over, at der kun er TO elverhold i Ligaen, og ingen i hans pulje."
+      },
+      {
+        "hvem": "Taskmaster Flemming",
+        "rolle": "Black Mountain Slavers",
+        "tekst": "Det er simpelthen for dårligt! Hvordan skal man kunne nyde en ordentlig Blood Bowl-sæson, når der næsten ikke er nogen elvere at trampe på?"
+      },
+      {
+        "scene": "Råbt under et møde, hvor flere tilstedeværende efterfølgende måtte behandles for høreskader."
+      },
+      {
+        "p": "Og Flemming lægger som bekendt ikke skjul på sin kærlighed til elvernes skrøbelige anatomi."
+      },
+      {
+        "hvem": "Taskmaster Flemming",
+        "tekst": "Det lyder så skønt, når deres knogler knækker. Det kan kendes på knækket!"
+      },
+      {
+        "p": "Et citat, der efter sigende er blevet gentaget så ofte, at selv Nuffle er begyndt at blive bekymret."
+      },
+      {
+        "afsnit": "Bestikkelse i kommissærens lommer?"
+      },
+      {
+        "p": "Men historien stopper ikke her!"
+      },
+      {
+        "p": "Gunnar Grådig er kommet i besiddelse af oplysninger fra en anonym kilde, der hævder at have set Taskmaster Flemming forlade kommissærens kontor med et mistænkeligt tomt pengebælte og et endnu mere mistænkeligt stort smil."
+      },
+      {
+        "p": "Rygtet vil vide, at Flemming har bestukket selveste kommissæren for at sikre sig kampe mod BEGGE ligaens elverhold!"
+      },
+      {
+        "p": "Tilfældighed? Næppe!"
+      },
+      {
+        "p": "Kommissæren afviser indtil videre alle beskyldninger, men har angiveligt netop fået råd til en ny guldbelagt Bloodweiser-tønde og en sommerresidens i Lustria."
+      },
+      {
+        "p": "Da Gunnar Grådig forsøgte at få en kommentar fra Flemming, lød svaret angiveligt blot:"
+      },
+      {
+        "hvem": "Taskmaster Flemming",
+        "tekst": "Bestikkelse? Sikke noget vrøvl! Jeg støtter bare elvernes deltagelse i ligaen. De fortjener alle sammen en chance for at komme på banen ... og blive båret af den igen!"
+      },
+      {
+        "afsnit": "Elverne frygter det værste"
+      },
+      {
+        "p": "De to elverhold er endnu ikke kommet med en officiel udtalelse, men lokale apotekere melder allerede om stigende efterspørgsel på bandager, benskinner og testamentformularer."
+      },
+      {
+        "p": "Om der virkelig er tale om korruption, eller om Nuffle blot har velsignet Flemmings blodtørstige ønsker, må tiden vise."
+      },
+      {
+        "p": "Én ting er dog sikkert: Når Taskmaster Flemming siger, at han glæder sig til at møde elverne, er det næppe for at udveksle trøjer efter kampen."
+      },
+      {
+        "p": "Dog kan der ingen tvivl være om, at de to elverhold også begge skal spille mod GutBuster Gluttons. Det har Nuffle skrevet i stjernerne."
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Pressechef",
+        "tekst": "Vi bringer sandheden. Især når den kan sælge billetter."
+      }
+    ]
+  },
+  {
     "id": "spike-the-eternal-sages-vs-elmtree-evaders",
     "hold": "The Eternal Sages",
     "type": "Kampreferat",
