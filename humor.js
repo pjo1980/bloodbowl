@@ -7,6 +7,33 @@ window.HUMOR = {
   // Opdigtet figur. Navnet kan frit skiftes.
   pressechef: { navn: "Gunnar Grådig", titel: "Ligaens pressechef (100 % neutral)" },
 
+  // Gunnar har "opdaget", at han er i familie med The Eternal Sages, og fedter for elverne (Peter 9. nov.).
+  // Spillernavnene (Golthorn IX, Taln, Bradur VI, Raelth) kommer fra coachens eget Spike!-interview.
+  // Vises på forsiden og stillingen (af og til), på Sages' holdside og i Sages' kampreferater.
+  elverfamilie: {
+    hold: "The Eternal Sages",
+    linjer: [
+      "Pressechefen kan afsløre, at hans oldemor engang stod i kø bag Golthorn III. Slægtsforskere kalder det et svagt bånd. Pressechefen kalder det blod.",
+      "Golthorn IX er min fætter. En meget fjern fætter. Så fjern, at han ikke ved det endnu.",
+      "Mine ører er spidse. Det kan bare ikke ses under hatten.",
+      "Pressechefen er stadig 100 % neutral. Han er bare også 3 % elver.",
+      "Taln tackler ikke. Han omfavner med eftertryk. Det ligger til familien.",
+      "Bradur VI kaster som min farfar. Han kastede også med ting. Mest tallerkener.",
+      "GutBuster Gluttons er mit hjerte. The Eternal Sages er bare min stamtavle.",
+      "Pressechefen har sendt Raelth et julekort, underskrevet “Din kære fætter, Gunnar Grådig-Golthorn”.",
+      "Raelth har ikke svaret på mine breve. Det er typisk elverbeskedenhed. Det har jeg også.",
+      "Pressechefen har spist med kniv og gaffel en hel uge for at øve sig i at være elver. Gaflen overlevede ikke.",
+      "Pressechefen har bestilt et stamtræ. Det er ikke færdigt, men grenene mod The Eternal Sages er allerede malet med guld.",
+      "Elvere ældes ikke. Det gør jeg heller ikke. Jeg bliver bare bredere. Det er samme gen.",
+      "Jeg er ikke blevet elverfan. Jeg er blevet elverfamilie. Det er noget helt andet, og det er helt neutralt.",
+      "Pressechefen har lært at sige “tillykke” på elversk. Han har endnu ikke lært at sige det uden smuler i skægget."
+    ],
+    // Til kampreferater, hvor Sages er med (vinder / taber / uafgjort).
+    vandt: "Pressechefen fældede en tåre over sejren. “Blod er tykkere end sovs,” siger han. Det er første gang, han har sagt det.",
+    tabte: "Pressechefen kalder nederlaget et familieanliggende og vil ikke kommentere det yderligere. Han har sendt blomster.",
+    uafgjort: "Uafgjort. Pressechefen ser det som en moralsk sejr til sine slægtninge, The Eternal Sages."
+  },
+
   sponsorer: [
     { navn: "Bloodweiser", tekst: "Den officielle øl for folk, der allerede har mistet tre tænder." },
     { navn: "Orcidas", tekst: "Støvler med pigge. Til at sparke bolden. Eller noget andet." },
@@ -15,7 +42,8 @@ window.HUMOR = {
     { navn: "Spike! Magazine", tekst: "Ligaens mest pålidelige kilde til rygter om GutBuster Gluttons." },
     { navn: "Nuffles Bandager", tekst: "Til når apotekeren er løbet hjem i første halvleg." },
     { navn: "Trolddommerforeningen", tekst: "Vi ser intet. Vi hører intet. Vi tager imod bestikkelse." },
-    { navn: "Gnoblar-Ekspressen", tekst: "Hurtig levering. Pakken lander. Budet gør måske ikke." }
+    { navn: "Gnoblar-Ekspressen", tekst: "Hurtig levering. Pakken lander. Budet gør måske ikke." },
+    { navn: "Golthorns Slægtsforskning", tekst: "Vi finder elverblod i alle, der betaler. Spørg pressechefen." }
   ],
 
   // BETA-undskyldninger: vises ved BETA-stemplet og på forsiden.
@@ -27,7 +55,8 @@ window.HUMOR = {
     "Siden er ikke godkendt af dommeren. Han blev bestukket af en anden side.",
     "Får du en fejl, er det en turnover. Næste coach.",
     "Klager over siden modtages efter kick-off. Af Gunnar Grådig. Måske.",
-    "Rul en d6. På 1 virker siden ikke. På 2-6 virker den sikkert heller ikke helt."
+    "Rul en d6. På 1 virker siden ikke. På 2-6 virker den sikkert heller ikke helt.",
+    "Siden er bygget med elverpræcision. Pressechefen siger, at det ligger til familien."
   ],
 
   // "Citater" fra kendte Star Players. Opdigtede, med et glimt i øjet.
@@ -51,6 +80,7 @@ window.HUMOR = {
 
   // Spike! Magazine elsker GutBuster Gluttons. Det er ikke til at skjule.
   spike: [
+    "AFSLØRET: Pressechef Gunnar Grådig påstår at være i familie med The Eternal Sages. Elverne har ikke kommenteret. De har ikke opdaget ham.",
     "EKSKLUSIVT: GutBuster Gluttons spiste hele buffeten FØR kick-off. Eksperter kalder det mental opvarmning.",
     "Spike! kårer GutBuster Gluttons til ligaens mest fotogene hold. For 14. uge i træk.",
     "Læserafstemning: 97 % mener, at Gluttons fortjener flere point. De sidste 3 % ligger stadig på skadestuen.",

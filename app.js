@@ -313,7 +313,9 @@
   const tilfældig = (a) => (a && a.length ? a[Math.floor(Math.random() * a.length)] : null);
 
   // Pressechefens "analyse" bygger på de rigtige tal, men ender altid med at hylde yndlingsholdet.
+  const EF = H.elverfamilie;
   function pressechefAnalyse() {
+    if (EF && Math.random() < 0.35) return tilfældig(EF.linjer); // af og til fedter han for elverne i stedet
     const s = D.stilling.ok, Y = H.yndlingshold;
     const y = s && Y ? s.hold.find((h) => h.navn === Y) : null;
     if (!y) return "";
@@ -854,6 +856,9 @@
   }
 
   function holdLore(navn) {
+    return (EF && navn === EF.hold ? pressechefKort(tilfældig(EF.linjer)) : "") + holdLoreIndhold(navn);
+  }
+  function holdLoreIndhold(navn) {
     const L = LORE[navn];
     const pk = PRESSE.filter((p) => p.hold === navn);
     if (!L) return pk.length ? `<h2>Presse</h2><div class="grid">${pk.map(pkTeaser).join("")}</div>` : "";
@@ -924,7 +929,9 @@
     const mvp = [...navne(A, "mvp"), ...navne(B, "mvp")];
     if (mvp.length) linjer.push(`${mvp.length > 1 ? "Kampens MVP'er" : "Kampens MVP"}: ${listeTekst(mvp)}.`);
     const Y = H.yndlingshold;
-    const presse = [A, B].includes(Y)
+    const presse = EF && [A, B].includes(EF.hold) && ![A, B].includes(Y)
+      ? (vinder === EF.hold ? EF.vandt : vinder ? EF.tabte : EF.uafgjort)
+      : [A, B].includes(Y)
       ? (vinder === Y ? `En historisk aften for ${Y}. Pressechefen har allerede bestilt statuen.` : vinder ? `Et resultat, der ikke afspejler ${Y}' enorme overlegenhed. Pressechefen har klaget til Nuffle.` : `Uafgjort, men moralsk en sejr til ${Y}.`)
       : [`Pressechefen kalder kampen solid, men bemærker, at den havde været bedre med ${Y} på banen.`,
          `Pressechefen konstaterer, at ${Y} fortsat er ubesejrede i denne kamp.`,
