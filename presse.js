@@ -27,6 +27,30 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "coach-1192026153042",
+    "hold": "The Eternal Sages",
+    "type": "Rygte",
+    "dato": "2026-11-09",
+    "titel": "Ligaens bedste mod ligaens vildeste!",
+    "undertitel": "Rygte",
+    "indsendt": "Indsendt af Rygte Rasmus",
+    "citat": {
+      "hvem": "Rygte Rasmus",
+      "tekst": "Træneren for Ocras lignede et frådende vilddyr."
+    },
+    "replikker": [
+      {
+        "p": "Der er lagt op til et brag af en kamp, når The Eternal Sages og The Marauding Ocras efter planen møder hinanden på tirsdag."
+      },
+      {
+        "p": "Det bliver den elegante og spektakulære spillestil mod det brutale, dødsensfarlige voldsorgie."
+      },
+      {
+        "p": "Desværre har det ikke været muligt at tale med hverken den ene eller den anden træner. Raelth var stadig i gang med at feste efter sejren over Elmtree Evaders. Træneren for Ocras lignede et frådende vilddyr, og vi har ikke set vores udsendte reporter, siden han forsøgte at stille træneren nogle spørgsmål."
+      }
+    ]
+  },
+  {
     "id": "coach-118202660211",
     "hold": "Black Mountain Slavers",
     "type": "Rygte",
