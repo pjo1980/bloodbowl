@@ -7,6 +7,36 @@ window.HUMOR = {
   // Opdigtet figur. Navnet kan frit skiftes.
   pressechef: { navn: "Gunnar Grådig", titel: "Ligaens pressechef (100 % neutral)" },
 
+  // Citater fra coachernes EGNE indlæg, ordret (kun forkortet). Vises skiftevis med Star Player-citaterne og på holdsiden.
+  // Den daglige pressechef-opgave tilføjer 1-2 nye, når en coach skriver noget citatværdigt.
+  holdCitater: [
+    { hold: "Black Mountain Slavers", hvem: "Taskmaster Flemming", tekst: "Det lyder så skønt, når deres knogler knækker. Det kan kendes på knækket!" },
+    { hold: "Black Mountain Slavers", hvem: "Taskmaster Flemming", tekst: "Hvordan skal man kunne nyde en ordentlig Blood Bowl-sæson, når der næsten ikke er nogen elvere at trampe på?" },
+    { hold: "Black Mountain Slavers", hvem: "Taskmaster Flemming", tekst: "Bestikkelse? Sikke noget vrøvl! Jeg støtter bare elvernes deltagelse i ligaen. De fortjener alle sammen en chance for at komme på banen ... og blive båret af den igen!" },
+    { hold: "Bedstefars Besudlere", hvem: "Coach Svulst-Stank", tekst: "Han. Snublede." },
+    { hold: "Bedstefars Besudlere", hvem: "Coach Svulst-Stank", tekst: "Jeg har set zombier uden ben bevæge sig mere elegant!" },
+    { hold: "Bedstefars Besudlere", hvem: "Coach Svulst-Stank", tekst: "Man kan ikke vinde en kamp ved bare at stå og rådne! Tro mig, vi har prøvet!" },
+    { hold: "Bedstefars Besudlere", hvem: "Coach Svulst-Stank", tekst: "Jeg har aldrig været så stolt og så skuffet på samme tid." },
+    { hold: "Bedstefars Besudlere", hvem: "Coach Svulst-Stank", tekst: "PRAISE NURGLE! OG HUSK AT VASKE HÆNDER... NEJ, VENT! LAD VÆRE MED DET! HAHAHAHAHA!" },
+    { hold: "The Eternal Sages", hvem: "Raelth", tekst: "Man lykønsker jo heller ikke solen med at stå op om morgenen." },
+    { hold: "The Eternal Sages", hvem: "Raelth", tekst: "Mesterskabet er minimumskravet." },
+    { hold: "The Eternal Sages", hvem: "Raelth", tekst: "Det er forskellen på vold og kultur." },
+    { hold: "The Eternal Sages", hvem: "Raelth", tekst: "Det kan umuligt være vores skyld. Vi er High Elves." },
+    { hold: "The Eternal Sages", hvem: "Raelth", tekst: "Send mig artiklen inden udgivelse. Jeg går ud fra, at I har nogen, der kan rette fejlene." }
+  ],
+
+  // Rygter om kommissæren og bestikkelse (Peter 9. nov.; bygger på Taskmaster Flemmings eget rygte).
+  // Altid fortalt af pressechefen eller Spike!. Læg ALDRIG ord i munden på kommissæren: han er en rigtig person.
+  kommissaerRygter: [
+    "Kampprogrammet er lagt helt neutralt. At Taskmaster Flemming fik begge elverhold, er ren tilfældighed og en meget stor kasse Bloodweiser.",
+    "Ifølge rygterne tager kommissærens kontor imod bestikkelse i guld, øl og kage. Pressechefen har tilbudt sovs. Det blev afvist.",
+    "En anonym gnoblar har set kommissæren tælle guldmønter i stillingsarket. Ifølge kilden hed det »formler«.",
+    "Kommissæren afviser alle rygter om bestikkelse. Det gør hans nye sommerresidens i Lustria også.",
+    "Uofficiel prisliste fra kommissærens kontor: at flytte en kamp koster tre tønder Bugman's. At flytte den tilbage koster fire.",
+    "Pressechefen spurgte kommissæren om Taskmaster Flemmings tomme pengebælte. Han fik intet svar, men en mistænkeligt god plads ved næste kamp.",
+    "Kommissærens nye guldbelagte Bloodweiser-tønde er efter sigende en gave fra »en anonym elverelsker«. Elverne benægter. Flemming smiler."
+  ],
+
   // Gunnar har "opdaget", at han er i familie med The Eternal Sages, og fedter for elverne (Peter 9. nov.).
   // Spillernavnene (Golthorn IX, Taln, Bradur VI, Raelth) kommer fra coachens eget Spike!-interview.
   // Vises på forsiden og stillingen (af og til), på Sages' holdside og i Sages' kampreferater.
@@ -26,6 +56,8 @@ window.HUMOR = {
       "Pressechefen har bestilt et stamtræ. Det er ikke færdigt, men grenene mod The Eternal Sages er allerede malet med guld.",
       "Elvere ældes ikke. Det gør jeg heller ikke. Jeg bliver bare bredere. Det er samme gen.",
       "Jeg er ikke blevet elverfan. Jeg er blevet elverfamilie. Det er noget helt andet, og det er helt neutralt.",
+      "Pressechefen har bedt Taskmaster Flemming holde fingrene fra hans elverfamilie. Flemming spurgte bare, hvor de bor.",
+      "Pressechefen sover nu med benskinner på. Man ved aldrig, hvornår Taskmaster Flemming opdager, at han er 3 % elver.",
       "Pressechefen har lært at sige “tillykke” på elversk. Han har endnu ikke lært at sige det uden smuler i skægget."
     ],
     // Til kampreferater, hvor Sages er med (vinder / taber / uafgjort).
@@ -80,6 +112,10 @@ window.HUMOR = {
 
   // Spike! Magazine elsker GutBuster Gluttons. Det er ikke til at skjule.
   spike: [
+    "ELVERKNÆK-ALARM: Taskmaster Flemming set med stetoskop ved elvernes træningsbane. Han »lytter efter den rigtige lyd«.",
+    "Apotekere melder om rekordsalg af benskinner i elverkvarteret. Taskmaster Flemming nægter at kommentere, men han smiler.",
+    "Black Mountain Slavers' nye kampråb er afsløret: »Det kan kendes på knækket!« Elverne er ikke imponerede. De er bange.",
+    "BESTIKKELSE? Spike! har fulgt pengebæltet fra Taskmaster Flemming til kommissærens kontor. Derefter mistede vi sporet. Og vores reporter.",
     "AFSLØRET: Pressechef Gunnar Grådig påstår at være i familie med The Eternal Sages. Elverne har ikke kommenteret. De har ikke opdaget ham.",
     "EKSKLUSIVT: GutBuster Gluttons spiste hele buffeten FØR kick-off. Eksperter kalder det mental opvarmning.",
     "Spike! kårer GutBuster Gluttons til ligaens mest fotogene hold. For 14. uge i træk.",

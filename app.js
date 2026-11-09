@@ -337,11 +337,22 @@
   }
   const pressechefKort = (tekst) => tekst ? `<aside class="card presse"><p class="kicker">Pressechefens hjørne</p>
     <p class="presse-tekst">»${esc(tekst)}«</p><div class="small muted">${esc(H.pressechef.navn)}, ${esc(H.pressechef.titel)}</div></aside>` : "";
+  // Skiftevis et Star Player-citat og et ordret citat fra en af ligaens egne coaches.
   function citatKort() {
+    const hc = H.holdCitater || [];
+    if (hc.length && Math.random() < 0.5) return holdCitatKort(tilfældig(hc));
     const c = tilfældig(H.citater);
     return c ? `<figure class="card citat"><p class="kicker">Star Player-citatet</p><blockquote>»${esc(c.tekst)}«</blockquote>
       <figcaption>${esc(c.hvem)}</figcaption></figure>` : "";
   }
+  const holdCitatKort = (c) => c ? `<figure class="card citat"><p class="kicker">Coachen har ordet</p><blockquote>»${esc(c.tekst)}«</blockquote>
+      <figcaption>${esc(c.hvem)}, ${holdLink(c.hold)}</figcaption></figure>` : "";
+  // Rygter om kommissæren: altid fra pressechefen, aldrig kommissærens egne ord.
+  const rygteKort = () => {
+    const t = tilfældig(H.kommissaerRygter);
+    return t ? `<aside class="card presse"><p class="kicker">Rygter fra gangene</p><p class="presse-tekst">${esc(t)}</p>
+      <div class="small muted">Ubekræftet. Kilde: ${esc(H.pressechef.navn)}s mest upålidelige kilder.</div></aside>` : "";
+  };
   function spikeKort(overskrift) {
     const t = tilfældig(H.spike);
     return t ? `<div class="card spike"><span class="spike-logo">Spike!</span><span class="kicker">${esc(overskrift || "Magazine")}</span>
@@ -405,7 +416,7 @@
       </div>
 
       <h2>Fra pressetribunen</h2>
-      <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}${plakatKort()}</div>
+      <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}${rygteKort()}${plakatKort()}</div>
       ${PRESSE.length ? `<div style="margin-top:16px">${pkTeaser(PRESSE[0])}</div>` : ""}
 
       ${nyhed ?`<h2>Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p><a href="#nyheder">Alle nyheder</a></p>` : ""}`;
@@ -502,7 +513,7 @@
         : yv === 0
           ? `${Y} har spillet ${yk.length} og vundet ${yv}. Pressechefen kalder det taktisk opvarmning.`
           : `${Y} har spillet ${yk.length} og vundet ${yv}. Pressechefen tæller kun de vundne.`;
-    return hoved + pressechefKort(presse) + `<div class="grid-2" style="margin-top:16px">${puljer.map((p) => {
+    return hoved + `<div class="grid-2">${pressechefKort(presse)}${rygteKort()}</div>` + `<div class="grid-2" style="margin-top:16px">${puljer.map((p) => {
       const spillet = p.kampe.filter((k) => k.spillet).length;
       return `<div class="card pulje ${puljeKl(p.pulje)}"><h3>${esc(titel(p.pulje))}</h3>
         <p class="small muted" style="margin:0 0 8px">${spillet} af ${p.kampe.length} kampe spillet</p>
@@ -856,7 +867,9 @@
   }
 
   function holdLore(navn) {
-    return (EF && navn === EF.hold ? pressechefKort(tilfældig(EF.linjer)) : "") + holdLoreIndhold(navn);
+    const egne = (H.holdCitater || []).filter((c) => c.hold === navn);
+    const kort = [EF && navn === EF.hold ? pressechefKort(tilfældig(EF.linjer)) : "", egne.length ? holdCitatKort(tilfældig(egne)) : ""].filter(Boolean);
+    return (kort.length ? `<div class="grid-2" style="margin-bottom:16px">${kort.join("")}</div>` : "") + holdLoreIndhold(navn);
   }
   function holdLoreIndhold(navn) {
     const L = LORE[navn];
