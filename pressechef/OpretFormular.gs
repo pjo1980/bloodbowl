@@ -52,3 +52,34 @@ function opretPressetribunen() {
   Logger.log("ARK: " + ark.getUrl());
   Logger.log("FORMULAR: " + kort);
 }
+
+/**
+ * BILLEDUPLOAD (tilføjet 9. nov. 2026). Kør "opsaetBilleddeling" én gang, når spørgsmålet "Billede"
+ * er lagt i formularen (se FORMULAR.md). Derefter deles hvert uploadet billede automatisk med
+ * "alle med linket" (kun læse), så ligasiden kan vise det. Andre filer i dit Drev røres ikke.
+ */
+function opsaetBilleddeling() {
+  const filer = DriveApp.getFilesByName("Semper Fortuna – Pressetribunen");
+  let form = null;
+  while (filer.hasNext() && !form) {
+    const f = filer.next();
+    if (f.getMimeType() === MimeType.GOOGLE_FORMS) form = FormApp.openById(f.getId());
+  }
+  if (!form) throw new Error("Fandt ikke formularen 'Semper Fortuna – Pressetribunen' i dit Drev.");
+  ScriptApp.getProjectTriggers().filter((t) => t.getHandlerFunction() === "delBilleder").forEach((t) => ScriptApp.deleteTrigger(t));
+  ScriptApp.newTrigger("delBilleder").forForm(form).onFormSubmit().create();
+  // Del også billeder, der allerede er sendt ind.
+  form.getResponses().forEach((svar) => delSvar(svar));
+  Logger.log("Færdig! Billeder fra formularen deles nu automatisk.");
+}
+
+function delBilleder(e) { delSvar(e.response); }
+
+function delSvar(svar) {
+  svar.getItemResponses()
+    .filter((ir) => ir.getItem().getType() === FormApp.ItemType.FILE_UPLOAD)
+    .forEach((ir) => [].concat(ir.getResponse() || []).forEach((id) => {
+      try { DriveApp.getFileById(id).setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW); }
+      catch (err) { Logger.log("Kunne ikke dele " + id + ": " + err); }
+    }));
+}

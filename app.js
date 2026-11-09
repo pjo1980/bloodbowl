@@ -741,13 +741,21 @@
     const først = m[4] === ":" ? [us, dk] : [dk, us];
     return først.find(gyldig) || først[0];
   }
+  // Billede fra formularen: et Google Drive-upload (deles offentligt af pressechef/OpretFormular.gs) eller et link.
+  function billedUrl(s) {
+    const u = String(s || "").split(/[,\s]+/)[0];
+    const id = (u.match(/drive\.google\.com\/.*?(?:[?&]id=|\/d\/)([\w-]{20,})/) || [])[1];
+    if (id) return `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
+    return /^https:\/\//.test(u) ? u : "";
+  }
   function læsPressemail(rows) {
     if (!rows || !rows.length) return [];
     const h = rows.findIndex((r) => r.some((x) => /^overskrift/i.test(x)) && r.some((x) => /^hold$/i.test(x.trim())));
     if (h < 0) return [];
     const kol = (re) => rows[h].findIndex((x) => re.test(String(x).trim()));
     const k = { id: kol(/^id$/i), dato: kol(/^(dato|timestamp|tidsstempel)$/i), hold: kol(/^hold$/i), type: kol(/^type/i),
-      titel: kol(/^overskrift/i), tekst: kol(/^tekst/i), navn: kol(/^(dit navn|navn|coach)/i), skjul: kol(/^skjul/i) };
+      titel: kol(/^overskrift/i), tekst: kol(/^tekst/i), navn: kol(/^(dit navn|navn|coach)/i), skjul: kol(/^skjul/i),
+      billede: kol(/^billede/i) };
     const v = (r, i) => (i >= 0 ? String(r[i] || "").trim() : "");
     const kort = (s) => (s.length > 160 ? s.slice(0, 157).replace(/\s+\S*$/, "") + " …" : s);
     return rows.slice(h + 1).map((r, i) => ({ r, i })).filter(({ r }) => v(r, k.hold) && v(r, k.titel)).map(({ r, i }) => {
@@ -760,6 +768,7 @@
         skjult: !!v(r, k.skjul),
         hold: v(r, k.hold), dato: formularDato(v(r, k.dato)), titel: v(r, k.titel),
         undertitel: v(r, k.type) || "Pressemeddelelse", indsendt: navn ? `Indsendt af ${navn}` : "Indsendt af holdets coach", replikker,
+        forside: billedUrl(v(r, k.billede)),
         citat: første ? { hvem: første.hvem || v(r, k.hold), tekst: kort((første.tekst || første.p).split("\n")[0]) } : null
       };
     });
@@ -796,7 +805,8 @@
   }
 
   // Én linje i presse-oversigten: plakat, type og dato, overskrift, hold og et kort citat. Klik åbner artiklen.
-  const forsideLille = (pk) => pk.forside ? pk.forside.replace(/\.jpg$/i, "-lille.jpg") : "";
+  const forsideLille = (pk) => !pk.forside ? "" : /^forsider\//.test(pk.forside) ? pk.forside.replace(/\.jpg$/i, "-lille.jpg")
+    : pk.forside.replace(/sz=w1600$/, "sz=w400");
   function pkLinje(pk) {
     const img = forsideLille(pk) || plakatSti(pk.hold, true);
     return `<a class="card pk-linje" href="#presse/${encodeURIComponent(pk.id)}">

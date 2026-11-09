@@ -61,6 +61,23 @@ Indlæg kommer på siden med det samme (inden for få minutter). Peter eller Mik
 **Skjul et indlæg:** skriv `x` i kolonnen Skjul ud for rækken. Det forsvinder fra siden inden for få minutter.
 **Vigtigt:** slå aldrig "Collect email addresses" til. Arket er offentligt, så mailadresserne ville kunne ses.
 
+## Billedupload (tilføjet 9. nov. 2026, ca. 5 min)
+
+Google kan ikke lægge et upload-spørgsmål ind via script, så det gøres i hånden én gang:
+
+1. Åbn formularen på **forms.google.com** → tryk **+** (Add question).
+2. Titel: `Billede` (præcis sådan). Type: **File upload** → **Continue**.
+   Slå **Allow only specific file types** til → **Image**. **Maximum number of files**: 1. **Maximum file size**: 10 MB.
+   Påkrævet: **Nej**. Beskrivelse: `Valgfrit. Fx et AI-billede til indlægget.`
+3. Gå til **script.google.com**, åbn projektet fra før (eller lav et nyt med hele `OpretFormular.gs`),
+   vælg funktionen **opsaetBilleddeling** i menuen øverst, og tryk **Run**. Giv lov, som første gang.
+   Nu deles hvert uploadet billede automatisk med "alle med linket", så siden kan vise det.
+
+**Pris for det:** Google kræver, at man er logget ind med en Google-konto for at bruge en formular
+med upload. Coaches uden Google-konto kan sende billedet til Peter i stedet.
+Billederne ligger i dit Drev i mappen "Semper Fortuna – Pressetribunen (File responses)".
+Siden viser billedet med det samme; den daglige pressechef-opgave gemmer en kopi i `forsider/`.
+
 ## Besked til coaches (kopier og send)
 
 > Hej coaches!
@@ -68,8 +85,8 @@ Indlæg kommer på siden med det samme (inden for få minutter). Peter eller Mik
 >
 > 1. Tryk på "✍️ Indsend til pressetribunen" på Presse-siden (eller her: [FORMULAR-LINK]).
 > 2. Vælg jeres hold, og skriv en overskrift.
-> 3. Sæt teksten ind, og tryk Send.
+> 3. Sæt teksten ind, vedhæft gerne et billede (fx lavet med AI), og tryk Send.
 >
-> Intet login. Det kommer på siden af sig selv.
+> I skal være logget ind med Google. Det kommer på siden af sig selv.
 > Har I skrevet det med ChatGPT eller lignende, så kopier bare teksten fra chatten ind.
 > Har I kun en PDF eller Word-fil, så send den til Peter.
