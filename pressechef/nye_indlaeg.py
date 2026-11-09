@@ -1,4 +1,4 @@
-"""Finder coach-indlæg fra formularen, som endnu ikke har en pæn udgave i presse.js.
+"""Finder coach-indlæg (sidens indsend-side på bloodbowl.pages.dev og den gamle Google-formular), som endnu ikke har en pæn udgave i presse.js.
 
 Bruges af den daglige Claude-opgave "Pressetribunen: sæt nye indlæg op".
 Kør fra projektmappen:  python -X utf8 pressechef/nye_indlaeg.py
@@ -72,12 +72,37 @@ def hent_billede(link, id_):
     return f"forsider/{id_}.jpg"
 
 
+SIDE = "https://bloodbowl.pages.dev"
+
+
+def web_indlaeg(kendte):
+    """Indlæg fra sidens egen indsend-side (functions/api/presse). Id'et er "web-<tal>"."""
+    req = urllib.request.Request(f"{SIDE}/api/presse", headers={"User-Agent": "Mozilla/5.0 (pressechef)"})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as svar:
+            liste = json.loads(svar.read().decode("utf-8"))
+    except Exception as e:
+        print(f"Kunne ikke hente indlæg fra indsend-siden: {e}", file=sys.stderr)
+        return []
+    nye = []
+    for p in liste:
+        if p.get("skjult") or not p.get("id") or p["id"] in kendte:
+            continue
+        o = {"id": p["id"], "dato": p.get("dato", ""), "hold": p.get("hold", ""),
+             "type": p.get("type") or "Pressemeddelelse", "overskrift": p.get("overskrift", ""),
+             "tekst": p.get("tekst", ""), "navn": p.get("navn", "")}
+        if p.get("billede"):
+            o["forside"] = hent_billede(f"{SIDE}/api/presse/billede/{p['id']}", p["id"])
+        nye.append(o)
+    return nye
+
+
 def main():
     url = f"https://docs.google.com/spreadsheets/d/{ark_id()}/gviz/tq?tqx=out:csv"
     with urllib.request.urlopen(url, timeout=60) as svar:
         rows = list(csv.reader(io.StringIO(svar.read().decode("utf-8"))))
     if not rows:
-        print("[]")
+        print(json.dumps(web_indlaeg(faste_id()), ensure_ascii=False, indent=2))
         return
     hoved = [h.strip().lower() for h in rows[0]]
 
@@ -93,7 +118,7 @@ def main():
     v = lambda r, i: (r[i].strip() if 0 <= i < len(r) else "")
 
     kendte = faste_id()
-    nye = []
+    nye = web_indlaeg(kendte)
     for nr, r in enumerate(rows[1:], start=1):
         if not v(r, k["hold"]) or not v(r, k["titel"]) or v(r, k["skjul"]):
             continue

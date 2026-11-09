@@ -301,3 +301,16 @@ a.plakat-kort img { width: 96px; height: 130px; object-fit: cover; object-positi
 a.plakat-kort .slogan { font-size: 18px; font-weight: 600; margin: 4px 0; }
 
 .pk-p { margin: 0 0 12px; max-width: 70ch; }
+
+/* Indsend til pressetribunen (#indsend) */
+.indsend label, #redaktoer label { display: block; font-weight: 600; margin: 0 0 14px; }
+.indsend input, .indsend select, .indsend textarea, #redaktoer input {
+  display: block; width: 100%; box-sizing: border-box; margin-top: 6px; font: inherit; font-weight: 400;
+  color: var(--text); background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.indsend textarea { resize: vertical; min-height: 200px; }
+.indsend input[type=file] { padding: 8px; }
+.indsend input:focus, .indsend select:focus, .indsend textarea:focus, #redaktoer input:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
+.indsend .knap { font-size: 1.05em; padding: 10px 20px; }
+#redaktoer { margin-top: 16px; }
+#redaktoer summary { cursor: pointer; font-weight: 600; }
+#admin-liste .knap { padding: 3px 10px; margin-right: 6px; }

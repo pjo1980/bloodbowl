@@ -8,8 +8,9 @@ window.CONFIG = {
   LIGA: "Semper Fortuna Blood Bowl Liga",  // navn indtil videre
   KOMMISSAER: "Mikkel Steen",
   BRUG_LOKALE_DATA: false,
-  // Link til Google-formularen, hvor coaches indsender presse (vises som knap på Presse-siden). Tomt = ingen knap.
-  PRESSE_FORMULAR: "https://forms.gle/Lpw221vA9bsW2xv1A",
+  // Hvor knappen "Indsend til pressetribunen" på Presse-siden fører hen. "#indsend" = sidens egen formular (Cloudflare,
+  // se pressechef/INDSEND.md). Den gamle Google-formular: https://forms.gle/Lpw221vA9bsW2xv1A. Tomt = ingen knap.
+  PRESSE_FORMULAR: "#indsend",
   ARK: {
     turnering: "1sYVF9bm5XaG8sHLOOU8SGHGvMKqWEBPfR9ZL46oudtA",
     hold:      "1wqXQfoZ2DZdCUSWBF0o1tgtiycztq8NuJ2f_nUif46o",

@@ -1,5 +1,7 @@
 # Pressetribunen: coaches indsender selv via Google-formular
 
+**Afløst 9. nov. 2026 af sidens egen indsend-side, se INDSEND.md.** Arket læses stadig, så gamle indlæg bliver på siden.
+
 Afløser Gunnar Grådigs Gmail, som Google lukkede 5. nov. 2026. Ingen ekstra konto, intet script.
 Formularen ejes af Peters egen Google-konto. Svarene lander i et ark, og siden læser arket.
 Indlæg kommer på siden med det samme (inden for få minutter). Peter eller Mikkel kan skjule et indlæg.
@@ -61,7 +63,7 @@ Indlæg kommer på siden med det samme (inden for få minutter). Peter eller Mik
 **Skjul et indlæg:** skriv `x` i kolonnen Skjul ud for rækken. Det forsvinder fra siden inden for få minutter.
 **Vigtigt:** slå aldrig "Collect email addresses" til. Arket er offentligt, så mailadresserne ville kunne ses.
 
-## Billedupload (tilføjet 9. nov. 2026, ca. 5 min)
+## Billedupload (droppet: kræver Google-login. Brug INDSEND.md i stedet)
 
 Google kan ikke lægge et upload-spørgsmål ind via script, så det gøres i hånden én gang:
 

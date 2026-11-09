@@ -263,7 +263,9 @@
       holdstats: hent("hold", F.holdstats).then((r) => læsHoldstats(r, F.holdstats)),
       nyheder: fetch("nyheder.csv", { cache: "no-store" }).then((r) => r.ok ? r.text() : "").then(parseCSV),
       nyhedsfane: hent("turnering", F.nyheder), // valgfri: Mikkels fane "Nyheder" i turneringsarket
-      pressemail: C.ARK.presse || C.BRUG_LOKALE_DATA ? hent("presse", F.presseUdgivet || "Udgivet") : Promise.resolve([])
+      pressemail: C.ARK.presse || C.BRUG_LOKALE_DATA ? hent("presse", F.presseUdgivet || "Udgivet") : Promise.resolve([]),
+      // Indlæg fra sidens egen indsend-side (Cloudflare, functions/api/presse). Lokalt findes den ikke -> tom liste.
+      webpresse: fetch("/api/presse", { cache: "no-store" }).then((r) => r.ok ? r.json() : []).catch(() => [])
     };
     F.puljer.forEach((p) => { job["pulje:" + p] = hent("turnering", p).then((r) => læsStilling(r, p)); });
     const navne = Object.keys(job);
@@ -280,7 +282,7 @@
     // Indlæg fra coachernes Google-formular flettes med dem i presse.js.
     // Formular-indlæg: Claudes pæne udgave i presse.js (samme id) vinder over coachens rå tekst.
     // "x" i Skjul fjerner både den rå og den pæne udgave.
-    const form = læsPressemail(D.pressemail && D.pressemail.ok);
+    const form = [...læsWebPresse(D.webpresse && D.webpresse.ok), ...læsPressemail(D.pressemail && D.pressemail.ok)];
     const skjulte = new Set(form.filter((p) => p.skjult).map((p) => p.id));
     const faste = (window.PRESSE || []).filter((p) => !skjulte.has(p.id));
     const fasteId = new Set(faste.map((p) => p.id));
@@ -748,6 +750,21 @@
     if (id) return `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
     return /^https:\/\//.test(u) ? u : "";
   }
+  const kortCitat = (s) => (s.length > 160 ? s.slice(0, 157).replace(/\s+\S*$/, "") + " …" : s);
+  // Indlæg fra indsend-siden: { id, dato, hold, type, overskrift, tekst, navn, billede, skjult }.
+  function læsWebPresse(liste) {
+    return (Array.isArray(liste) ? liste : []).filter((p) => p && p.id).map((p) => {
+      if (p.skjult) return { id: p.id, skjult: true };
+      const replikker = tekstTilReplikker(p.tekst);
+      const første = replikker.find((x) => x.hvem || x.p);
+      return {
+        id: p.id, skjult: false, hold: p.hold, dato: p.dato, titel: p.overskrift,
+        undertitel: p.type || "Pressemeddelelse", indsendt: p.navn ? `Indsendt af ${p.navn}` : "Indsendt af holdets coach", replikker,
+        forside: p.billede ? `/api/presse/billede/${encodeURIComponent(p.id)}` : "",
+        citat: første ? { hvem: første.hvem || p.hold, tekst: kortCitat((første.tekst || første.p).split("\n")[0]) } : null
+      };
+    });
+  }
   function læsPressemail(rows) {
     if (!rows || !rows.length) return [];
     const h = rows.findIndex((r) => r.some((x) => /^overskrift/i.test(x)) && r.some((x) => /^hold$/i.test(x.trim())));
@@ -831,7 +848,7 @@
       <p class="kicker">Pressetribunen</p>
       <h1>Presse</h1>
       <p class="lead">Pressekonferencer, kampreferater og interviews fra ligaens hold. Tryk på en overskrift for at læse.</p>
-      ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}" target="_blank" rel="noopener">✍️ Indsend til pressetribunen</a></p>` : ""}
+      ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}"${/^#/.test(C.PRESSE_FORMULAR) ? "" : ' target="_blank" rel="noopener"'}>✍️ Indsend til pressetribunen</a></p>` : ""}
       ${PRESSE.length ? `<div class="pk-liste">${PRESSE.map(pkLinje).join("")}</div>` : '<p class="muted">Ingen artikler endnu.</p>'}
       <p class="small muted">Satire. Skrevet af eller ud fra holdenes egne coaches.</p>`;
   }
@@ -1096,11 +1113,103 @@
     vis();
   });
 
+  // ---------- Indsend til pressetribunen (sidens egen formular; serveren er functions/api/presse) ----------
+  const gemt = (k, v) => { try { if (v === undefined) return localStorage.getItem(k) || ""; localStorage.setItem(k, v); } catch (e) {} return ""; };
+  function sideIndsend() {
+    const hold = Object.keys(puljeAf).sort((a, b) => a.localeCompare(b, "da"));
+    const typer = ["Pressemeddelelse", "Kampreferat", "Interview", "Rygte", "Lore"];
+    return `
+      <p class="kicker">Pressetribunen</p>
+      <p><a href="#presse">← Tilbage til Presse</a></p>
+      <h1>Indsend til pressetribunen</h1>
+      <p class="lead">Kampreferater, interviews, rygter og pressemeddelelser. Gerne med et billede, fx lavet med AI.
+        Det kommer på siden med det samme, og pressechefen sætter det pænt op senere.</p>
+      <form id="indsend" class="card indsend" autocomplete="off">
+        <label>Hold<select name="hold" required><option value="">Vælg hold</option>
+          ${hold.map((h) => `<option${gemt("bb-hold") === h ? " selected" : ""}>${esc(h)}</option>`).join("")}</select></label>
+        <label>Type<select name="type">${typer.map((t) => `<option>${t}</option>`).join("")}</select></label>
+        <label>Overskrift<input name="overskrift" maxlength="150" required></label>
+        <label>Tekst<textarea name="tekst" rows="12" maxlength="20000" required placeholder="Sæt bare teksten ind. Også tekst fra ChatGPT."></textarea></label>
+        <label>Billede (valgfrit)<input name="billede" type="file" accept="image/*"></label>
+        <label>Dit navn (valgfrit)<input name="navn" maxlength="60" placeholder="Coachens eller figurens navn" value="${esc(gemt("bb-navn"))}"></label>
+        <label>Liga-kode<input name="kode" required placeholder="Fås hos Peter eller Mikkel" value="${esc(gemt("bb-kode"))}"></label>
+        <input name="hjemmeside" tabindex="-1" aria-hidden="true" autocomplete="off" style="position:absolute;left:-9999px">
+        <button class="knap" type="submit">Send til pressetribunen</button>
+        <p class="small" id="indsend-status" role="status"></p>
+      </form>
+      <details class="card" id="redaktoer"><summary>Redaktør (Peter og Mikkel)</summary>
+        <p class="small muted">Skriv redaktør-koden for at skjule eller vise indlæg fra denne side.</p>
+        <label>Redaktør-kode<input id="admin-kode" value="${esc(gemt("bb-admin"))}"></label>
+        <button class="knap" type="button" id="admin-hent">Vis indlæg</button>
+        <div id="admin-liste"></div>
+      </details>`;
+  }
+  // Skalerer billedet ned i browseren (højst 1600 px, JPEG). Fjerner samtidig skjulte data som GPS-position.
+  async function lilleBillede(fil) {
+    const bmp = await createImageBitmap(fil);
+    const f = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
+    const c = document.createElement("canvas");
+    c.width = Math.round(bmp.width * f); c.height = Math.round(bmp.height * f);
+    c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+    return new Promise((ok) => c.toBlob(ok, "image/jpeg", 0.85));
+  }
+  function indsendKlar() {
+    const form = document.getElementById("indsend");
+    const status = document.getElementById("indsend-status");
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const knap = form.querySelector("button[type=submit]");
+      const fd = new FormData(form);
+      fd.delete("billede");
+      const fil = form.billede.files[0];
+      knap.disabled = true; status.textContent = "Sender …";
+      try {
+        if (fil) {
+          const b = await lilleBillede(fil).catch(() => null);
+          if (!b) throw new Error("Billedet kunne ikke læses. Prøv et JPG- eller PNG-billede.");
+          fd.append("billede", b, "billede.jpg");
+        }
+        const r = await fetch("/api/presse", { method: "POST", body: fd });
+        const d = await r.json().catch(() => ({}));
+        if (!r.ok || !d.ok) throw new Error(d.fejl || "Det gik galt. Prøv igen om lidt.");
+        gemt("bb-kode", fd.get("kode")); gemt("bb-navn", fd.get("navn")); gemt("bb-hold", fd.get("hold"));
+        status.textContent = "Tak! Indlægget er på siden.";
+        await hentAlt();
+        location.hash = d.id ? "#presse/" + d.id : "#presse";
+      } catch (err) {
+        status.textContent = err.message;
+        knap.disabled = false;
+      }
+    };
+    const adminKode = document.getElementById("admin-kode");
+    const listeEl = document.getElementById("admin-liste");
+    async function visListe() {
+      gemt("bb-admin", adminKode.value.trim());
+      const r = await fetch("/api/presse", { cache: "no-store", headers: { "x-admin-kode": adminKode.value.trim() } });
+      const alle = r.ok ? await r.json() : [];
+      const fuld = alle.filter((p) => p.overskrift !== undefined);
+      if (alle.length && !fuld.length) { listeEl.innerHTML = '<p class="small">Forkert redaktør-kode.</p>'; return; }
+      listeEl.innerHTML = fuld.length ? fuld.map((p) => `<p class="small"><button class="knap" type="button" data-id="${esc(p.id)}" data-skjul="${p.skjult ? "" : "1"}">${p.skjult ? "Vis" : "Skjul"}</button>
+        ${p.skjult ? "<s>" : ""}${esc(p.hold)}: ${esc(p.overskrift)}${p.skjult ? "</s>" : ""} <span class="muted">${esc(p.dato)}</span></p>`).join("")
+        : '<p class="small muted">Ingen indlæg fra denne side endnu.</p>';
+    }
+    document.getElementById("admin-hent").onclick = visListe;
+    listeEl.onclick = async (e) => {
+      const b = e.target.closest("button[data-id]");
+      if (!b) return;
+      b.disabled = true;
+      const r = await fetch("/api/presse/skjul", { method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ id: b.dataset.id, kode: adminKode.value.trim(), skjul: !!b.dataset.skjul }) });
+      if (!r.ok) { const d = await r.json().catch(() => ({})); alert(d.fejl || "Det gik galt."); }
+      await visListe(); hentAlt();
+    };
+  }
+
   // ---------- Router ----------
   const SIDER = { forside: sideForside, stilling: sideStilling, puljekampe: sidePuljekampe, regnbue: sideRegnbue,
-    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening, regler: sideRegler, kampdag: sideKampdag, skadestue: sideSkadestue };
+    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening, regler: sideRegler, kampdag: sideKampdag, skadestue: sideSkadestue, indsend: sideIndsend };
   const ALIAS = { kampe: "puljekampe", regel: "regler", guide: "regler" }; // gamle og nemme links
-  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Presse", traening: "Off pitch training", regler: "Regler og guider", kampdag: "Kampdag", skadestue: "Skadestuen" };
+  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Presse", traening: "Off pitch training", regler: "Regler og guider", kampdag: "Kampdag", skadestue: "Skadestuen", indsend: "Indsend til pressetribunen" };
   let visNr = 0;
   async function vis() {
     const nr = ++visNr;
@@ -1109,12 +1218,13 @@
     const navn = rest.length ? decodeURIComponent(rest.join("/")) : "";
     const key = SIDER[side] ? side : "forside";
     const fane = key === "kamp" ? "puljekampe" : key;
-    document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("on", a.dataset.page === fane));
+    document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("on", a.dataset.page === (fane === "indsend" ? "presse" : fane)));
     if (!navn || key === "presse") window.scrollTo(0, 0);
     const html = key === "hold" && navn ? await sideHold(navn) : key === "presse" && navn ? sidePresse(navn)
       : key === "kamp" && navn ? await sideKamp(navn) : await SIDER[key]();
     if (nr !== visNr) return; // brugeren har skiftet side imens
     $main.innerHTML = html;
+    if (key === "indsend") indsendKlar();
     $main.querySelectorAll(".tjek").forEach((sek) => {
       const alle = sek.querySelectorAll("input[type=checkbox]");
       sek.classList.toggle("faerdig", alle.length > 0 && [...alle].every((x) => x.checked));
