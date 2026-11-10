@@ -27,6 +27,58 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "web-1794313556304",
+    "hold": "Bros Being Bros",
+    "type": "Rygte",
+    "dato": "2026-11-10",
+    "titel": "Bagstive Bros havnet i træningsopgør mod orker!",
+    "undertitel": "Rygte",
+    "indsendt": "Indsendt af Rygte Rasmus",
+    "forside": "forsider/web-1794313556304.jpg",
+    "citat": {
+      "hvem": "Rygte Rasmus",
+      "tekst": "Det bliver latterligt eller LEGENDARISK!"
+    },
+    "replikker": [
+      {
+        "p": "Efter en mega hed fest til langt ud på den efterfølgende eftermiddag har Bros Being Bros åbenbart rodet sig ud i et væddemål om at spille mod ligaens smadrehold, Da Demolitionaz."
+      },
+      {
+        "p": "Det bliver latterligt eller LEGENDARISK!"
+      }
+    ]
+  },
+  {
+    "id": "web-1794249217162",
+    "hold": "GutBuster Gluttons",
+    "type": "Rygte",
+    "dato": "2026-11-09",
+    "titel": "Breaking! Gnoblars nedlægger arbejdet! Ogres i panik!",
+    "undertitel": "Rygte",
+    "indsendt": "Indsendt af holdets coach",
+    "forside": "forsider/web-1794249217162.jpg",
+    "citat": {
+      "hvem": "Gunnar Grådig",
+      "tekst": "Jeg er 100 % neutral, men det her er en humanitær katastrofe. Send sovs."
+    },
+    "replikker": [
+      {
+        "p": "GutBuster Gluttons’ ogrer har nu misset både frokost og aftensmad, fordi gnoblarerne strejker."
+      },
+      {
+        "p": "Køkkenet står koldt, spisekammeret er låst, og ingen ved, hvor nøglen er."
+      },
+      {
+        "p": "Det er første gang i holdets historie, at en ogre har været sulten i mere end en halv time. Holdlægen betegner situationen som kritisk og frygter for både moralen og mavesækkene."
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Jeg er 100 % neutral, men det her er en humanitær katastrofe. Send sovs."
+      }
+    ]
+  },
+  {
     "id": "coach-1192026153042",
     "hold": "The Eternal Sages",
     "type": "Rygte",
