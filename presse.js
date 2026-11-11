@@ -27,6 +27,351 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "spike-the-maurading-ocras-vs-the-eternal-sages",
+    "hold": "The Eternal Sages",
+    "type": "Kampreferat",
+    "dato": "2026-11-11",
+    "titel": "»Golthorn IX tager sagen i egne hænder – to gange!«",
+    "undertitel": "Spike! kampreferat",
+    "sted": "The Maurading Ocras 1-2 The Eternal Sages",
+    "indsendt": "Skrevet af Spike! Magazine ud fra kommissærens kampskema",
+    "citat": {
+      "hvem": "Spike!",
+      "tekst": "Tre skader til Ocras, ét touchdown. Tre skader giver altså ikke tre point, drenge – vi har tjekket regelbogen!"
+    },
+    "replikker": [
+      {
+        "p": "DAMER OG HERRER, TROLDE OG GOBLINS! The Eternal Sages har snoet sig ud af Khornes favntag med en 2-1-sejr over The Maurading Ocras!"
+      },
+      {
+        "p": "Manden i centrum: Golthorn IX! Begge Sages-touchdowns kom fra den elegante elvers fingerspidser. To scoringer, nul hårtotter i uorden. Bradur VI leverede kampens eneste completion, og hvis man kun har brug for én, hvorfor så spilde flere?"
+      },
+      {
+        "p": "Ocras gjorde, hvad Ocras gør: de slog! Snuggles, Sweetums og Peaches stod for én skade hver – et nydeligt hattrick af knusende omfavnelser fra spillere med navne som plyslegetøj. Tre skader til Ocras, ét touchdown. Tre skader giver altså ikke tre point, drenge – vi har tjekket regelbogen! Honeybun scorede Ocras’ eneste touchdown, og Dreamboat blev kåret som holdets MVP."
+      },
+      {
+        "p": "Hos Sages fik Ilthien III MVP-æren, mens Malth må tilbringe næste kamp i apothecariens telt med en kop urtete. Nuffle giver, Nuffle tager!"
+      },
+      {
+        "p": "Kassen: 70.000 guld til Eberhards Sages og 60.000 til GrimStones Ocras. Hvis Ocras investerer det i en regelbog, kan det blive farligt."
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Jeg er selvfølgelig 100 % neutral. Men at min kære fætter Golthorn IX scorer to gange, og at onkel Bradur VI kaster præcis så mange afleveringer, som der er brug for … det siger vel bare noget om familiens gener. Hilsen til Raelth!"
+      },
+      {
+        "p": "Læs også coachens eget referat på Presse-siden."
+      }
+    ]
+  },
+  {
+    "id": "web-1794404445437",
+    "hold": "The Full Moon Foulers",
+    "type": "Interview",
+    "dato": "2026-11-11",
+    "titel": "»Et lig? Nein, nein ... en råvare!«",
+    "undertitel": "Interview",
+    "coach": "Herr Doktor von Cünthenstien",
+    "indsendt": "Indsendt af Herr Doktor von Cünthenstien",
+    "forside": "forsider/web-1794404445437.jpg",
+    "citat": {
+      "hvem": "Herr Doktor von Cünthenstien",
+      "tekst": "Jeg forsøgte etik én gang. Den nægtede at rejse sig fra operationsbordet."
+    },
+    "replikker": [
+      {
+        "hvem": "Spike!",
+        "rolle": "Spike! Magazine",
+        "tekst": "Herr Doktor von Cünthenstien, hvad er Deres ambitioner for The Full Moon Foulers denne sæson?"
+      },
+      {
+        "hvem": "Herr Doktor von Cünthenstien",
+        "tekst": "Ambitioner? ACH! Jeg ønsker resultater! Data! Og friske lig! Især det sidste. Pokaler samler støv. Zombier samler … reservedele.",
+        "rolle": "Cheftræner, The Full Moon Foulers"
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Så De håber på sejre?"
+      },
+      {
+        "hvem": "Herr Doktor von Cünthenstien",
+        "tekst": "Jaa jaa. Men jeg studerer mest modstanderne. Orker har fremragende skuldre. Dværge har vidunderligt kompakte knogler. Elvere … mmm, lange lemmer, lav fedtprocent. Meget elegant zombiemateriale!"
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Det lyder ikke særligt etisk."
+      },
+      {
+        "hvem": "Herr Doktor von Cünthenstien",
+        "tekst": "Etik?! HAHAHA! Jeg forsøgte etik én gang. Den nægtede at rejse sig fra operationsbordet. Ubrugeligt fagområde."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Er der nogen modstandere, De særligt glæder Dem til at møde?"
+      },
+      {
+        "hvem": "Herr Doktor von Cünthenstien",
+        "tekst": "Absolut! Jeg mangler stadig en Skaven-zombie. Forestil Dem det! Hurtig, rådden og muligvis med halen stadig funktionel! Og en Ogre-zombie ville være magnifik. Jeg skal bare bruge en meget stor spand … og flere elektroder."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Har spillerne selv noget at skulle have sagt?"
+      },
+      {
+        "hvem": "Herr Doktor von Cünthenstien",
+        "tekst": "Natürlich! De må vælge mellem »Ja, Herr Doktor« og »AAAAARGH!« Begge svar betragtes som informeret samtykke."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Et sidste ord til ligaens øvrige hold?"
+      },
+      {
+        "hvem": "Herr Doktor von Cünthenstien",
+        "tekst": "Ja. Spil hårdt. Tag chancer. Og hvis De føler en pludselig smerte i brystet … PRØV VENLIGST IKKE AT BESKADIGE ORGANERNE!"
+      },
+      {
+        "scene": "Interviewet sluttede, da Herr Doktor begyndte at måle reporterens lårben og mumle: »Hmm … perfekt til en reserve-runner.«"
+      }
+    ]
+  },
+  {
+    "id": "web-1794396696309",
+    "hold": "The Eternal Sages",
+    "type": "Kampreferat",
+    "dato": "2026-11-11",
+    "titel": "De slog os ned. Vi vandt kampen. Forskellen er tydelig",
+    "undertitel": "Kampreferat",
+    "sted": "The Maurading Ocras 1-2 The Eternal Sages",
+    "coach": "Raelth",
+    "indsendt": "Indsendt af holdets coach",
+    "forside": "forsider/web-1794396696309.jpg",
+    "citat": {
+      "hvem": "Raelth",
+      "tekst": "Hvorfor skulle mine spillere risikere deres fine hænder, når der sidder tusindvis af frivillige på tribunen? Det kaldes delegering."
+    },
+    "replikker": [
+      {
+        "p": "Spike! møder Raelth efter The Eternal Sages’ dramatiske 2-1-sejr over The Maurading Ocras."
+      },
+      {
+        "scene": "Der lugter af blod, sved og dyr parfume uden for The Eternal Sages’ omklædningsrum. Indenfor ligger flere High Elves på brikse, mens holdets healere arbejder febrilsk. Midt i kaosset står cheftræner Raelth upåvirket med et glas vin i hånden."
+      },
+      {
+        "hvem": "Spike!",
+        "rolle": "Spike! Magazine",
+        "tekst": "Raelth, tillykke! 2-1 over Khorne-holdet The Maurading Ocras. Det blev langt mere dramatisk, end mange havde forventet."
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Gjorde det?\nJeg synes egentlig, kampen fulgte den forventede udvikling ganske præcist.\nDe slog på os. Vi spillede Blood Bowl. Vi vandt 2-1.",
+        "rolle": "Cheftræner, The Eternal Sages"
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "I skal dog have ros for at holde stand. Flere af dine spillere blev slået ud under kampen."
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Ja, Khorne-hold er meget stolte af den slags."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "De slog en hel del af dine spillere ud."
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Og hvor mange touchdowns fik de for det?"
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "1."
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Netop.\nMan får heller ikke ligapoint for savlen, råben eller imponerende armomkreds. Ellers ville Khorne naturligvis være en alvorlig konkurrent."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Til gengæld lykkedes det kun jer at skade én af deres spillere."
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "»Kun«?\nVi gjorde det med præcision."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Han blev skubbet ud over sidelinjen, hvorefter publikum slog ham til plukfisk."
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Præcis.\nHvorfor skulle mine spillere risikere deres fine hænder, når der sidder tusindvis af frivillige på tribunen?\nDet kaldes delegering. Jeg forstår godt, hvis Khorne ikke kender konceptet."
+      },
+      {
+        "afsnit": "Golthorn IX og bolden"
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Lad os tale om kampens måske største chok. Golthorn IX tabte en bold!"
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Ja."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "En bold, der blev kastet direkte til ham."
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Jeg var der."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Og han tabte den."
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Det er korrekt."
+      },
+      {
+        "scene": "Raelth tager en lang slurk af sit glas."
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Vi har iværksat en undersøgelse."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "En undersøgelse?"
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Bolden var tydeligvis manipuleret."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Af hvem?"
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Formentlig en Skaven.\nJeg bemærkede straks en svag lugt af rotteolie."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Rotteolie?"
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Meget glat. Meget Skaven."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Kunne Golthorn IX ikke bare have … tabt bolden?"
+      },
+      {
+        "scene": "Lang stilhed."
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Jeg vil bede Spike! Magazine om ikke at sprede den slags absurde konspirationsteorier."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Men Golthorn kom stærkt tilbage. To touchdowns og begge jeres scoringer."
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Naturligvis.\nStore spillere laver ikke fejl. De skaber dramatiske narrative forløb.\nGolthorn forstod tydeligvis, at publikum havde brug for spænding."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Det sidste touchdown var især bemærkelsesværdigt. Kampens sidste øjeblik, og næsten alt var imod ham."
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Næsten alt.\nGolthorn IX var stadig på banen. Det gjorde beregningen ganske enkel."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "De fleste ville nok sige, at oddsene var imod ham."
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Odds er noget, mennesker bruger til at beskrive ting, High Elves endnu ikke har gjort.\nSekunder tilbage. Khorne-spillere overalt. Kampen på vippen. Og Golthorn scorer.\nJeg tror ærligt talt, at han gjorde det sværere med vilje."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Hvorfor?"
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Man husker ikke almindelige touchdowns."
+      },
+      {
+        "afsnit": "Mesterskabet"
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Efter endnu en sejr må selvtilliden være høj?"
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Selvtillid antyder en tro på egne evner.\nVi behøver ikke tro. Vi har beviser."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Så The Eternal Sages er stadig dine favoritter til mesterskabet?"
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Naturligvis.\nVi har nu bevist, at vi kan besejre Wood Elves i Blood Bowl og Khorne i noget, der kun lejlighedsvis mindede om Blood Bowl.\nJeg er faktisk ikke sikker på, hvad ligaen ellers ønsker af os."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "Og hvis I taber næste kamp?"
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Så må vi undersøge boldene."
+      },
+      {
+        "hvem": "Spike!",
+        "tekst": "For rotteolie?"
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Det er rart at se, at du endelig begynder at forstå sporten."
+      }
+    ]
+  },
+  {
+    "id": "web-1794387977022",
+    "hold": "Bros Being Bros",
+    "type": "Kampreferat",
+    "dato": "2026-11-11",
+    "titel": "Tømmermænd og en dum trold?",
+    "undertitel": "Kampreferat",
+    "sted": "Træningskamp: Da Demolitionaz 1-1 Bros Being Bros",
+    "indsendt": "Indsendt af Rygte Rasmus",
+    "forside": "forsider/web-1794387977022.jpg",
+    "citat": {
+      "hvem": "Rygte Rasmus",
+      "tekst": "Kampen sluttede 1-1 og før tid, fordi man ikke gad mere."
+    },
+    "replikker": [
+      {
+        "p": "Vi havde vores udsendte reporter på pletten til træningskampen mellem Da Demolitionaz og Bros Being Bros. Men han faldt i søvn af kedsomhed. Det gjorde nogle af spillerne vist også. De stod bare op og ned ad hinanden hele tiden."
+      },
+      {
+        "p": "Kampen sluttede 1-1 og før tid, fordi man ikke gad mere."
+      },
+      {
+        "p": "Det mest spændende var, at en goblin landede helt fint på fødderne efter at være kastet igennem luften."
+      }
+    ]
+  },
+  {
     "id": "web-1794313556304",
     "hold": "Bros Being Bros",
     "type": "Rygte",

@@ -10,6 +10,9 @@ window.HUMOR = {
   // Citater fra coachernes EGNE indlæg, ordret (kun forkortet). Vises skiftevis med Star Player-citaterne og på holdsiden.
   // Den daglige pressechef-opgave tilføjer 1-2 nye, når en coach skriver noget citatværdigt.
   holdCitater: [
+    { hold: "The Full Moon Foulers", hvem: "Herr Doktor von Cünthenstien", tekst: "Etik?! HAHAHA! Jeg forsøgte etik én gang. Den nægtede at rejse sig fra operationsbordet." },
+    { hold: "The Full Moon Foulers", hvem: "Herr Doktor von Cünthenstien", tekst: "De må vælge mellem »Ja, Herr Doktor« og »AAAAARGH!« Begge svar betragtes som informeret samtykke." },
+    { hold: "The Eternal Sages", hvem: "Raelth", tekst: "Odds er noget, mennesker bruger til at beskrive ting, High Elves endnu ikke har gjort." },
     { hold: "Black Mountain Slavers", hvem: "Taskmaster Flemming", tekst: "Det lyder så skønt, når deres knogler knækker. Det kan kendes på knækket!" },
     { hold: "Black Mountain Slavers", hvem: "Taskmaster Flemming", tekst: "Hvordan skal man kunne nyde en ordentlig Blood Bowl-sæson, når der næsten ikke er nogen elvere at trampe på?" },
     { hold: "Black Mountain Slavers", hvem: "Taskmaster Flemming", tekst: "Bestikkelse? Sikke noget vrøvl! Jeg støtter bare elvernes deltagelse i ligaen. De fortjener alle sammen en chance for at komme på banen ... og blive båret af den igen!" },
