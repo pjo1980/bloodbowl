@@ -27,6 +27,539 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "web-1794636044885",
+    "hold": "The Maurading Ocras",
+    "type": "Interview",
+    "dato": "2026-11-14",
+    "titel": "Blod, løgne og en meget lang ferie",
+    "undertitel": "Interview",
+    "sted": "Kenny Clickbaits sidste interview med GrimStone the Merciless",
+    "coach": "GrimStone the Merciless",
+    "indsendt": "Indsendt af holdets coach",
+    "citat": {
+      "hvem": "GrimStone",
+      "tekst": "Kenny, jeg forventer ikke vold. Jeg forlanger den."
+    },
+    "replikker": [
+      {
+        "p": "En eksklusiv udsendelse fra Gunnar Grådigs sportsredaktion – fire dage efter Marauding Ocras' nederlag på 1-2 til The Eternal Sages."
+      },
+      {
+        "afsnit": "Redaktionel meddelelse fra Gunnar Grådig"
+      },
+      {
+        "p": "Det følgende interview blev gennemført af vores udsendte journalist, Kenny Clickbait, fire dage efter Marauding Ocras' seneste kamp."
+      },
+      {
+        "p": "Interviewet skulle oprindeligt have været bragt direkte på Cabalvision, men cheftræner GrimStone the Merciless havde insisteret på, at der skulle gå mindst fire dage efter kampen, før han ville modtage pressen."
+      },
+      {
+        "p": "Vi antager, at dette var for at give ham tid til at falde til ro."
+      },
+      {
+        "p": "Tre dage efter det planlagte interview modtog redaktionen en pakke indeholdende Kennys Whisper-Boks, indsmurt i noget, som vores retsmedicinske afdeling har identificeret som blod. Sandsynligvis menneskeblod."
+      },
+      {
+        "p": "Vedlagt var en lille seddel, skrevet med en påfaldende barnagtig håndskrift:"
+      },
+      {
+        "p": "\"Kenny Clickbait har sagt op. Han er taget på ferie. Han kommer ikke tilbage. Hilsen Kenny.\""
+      },
+      {
+        "p": "Efter adskillige timers overtalelse, to eksorcister og en betydelig mængde helligt vand lykkedes det redaktionen at få den stærkt traumatiserede ånd i Whisper-Boksen til at gengive interviewet."
+      },
+      {
+        "p": "Ånden nægter efterfølgende at tale mere og skriger, hver gang nogen nævner ordet \"GrimStone\"."
+      },
+      {
+        "p": "Vi bringer her interviewet i sin helhed."
+      },
+      {
+        "afsnit": "Interviewet"
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Først og fremmest, GrimStone, tak fordi du ville tage dig tid til at tale med os. Hvordan har du det her fire dage efter nederlaget til The Eternal Sages?",
+        "rolle": "Udsendt journalist, Gunnar Grådigs sportsredaktion"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Bedre.",
+        "rolle": "Cheftræner, The Maurading Ocras"
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Det er godt at høre!"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Lægen siger, at jeg snart må begynde at bruge min højre hånd igen."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Åh... var du kommet til skade under kampen?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Nej."
+      },
+      {
+        "scene": "En længere pause følger. Ifølge Whisper-Boksen kan man høre Kenny rømme sig."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Nå, men lad os tale lidt om kampen. I tabte 1-2 til The Eternal Sages, men det lykkedes jer trods alt at påføre dem hele tre casualties i anden halvleg. Er det noget, du er tilfreds med?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Tilfreds? Nej. Men tre casualties er tre smukke små ofringer til Blodguden. Tre øjeblikke, hvor mine små englebasser endelig huskede, hvad de var skabt til."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Så du ser det som et fremskridt?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Sidste sæson kunne mine spillere ikke engang knække en tør kiks uden at få en forstuvning. Så ja, Kenny. Jeg vil kalde det et fremskridt."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Det må være en lettelse efter sidste sæsons resultater?"
+      },
+      {
+        "scene": "Der bliver stille."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Kenny..."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Ja?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Vi taler ikke om sidste sæson."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Nej. Selvfølgelig ikke."
+      },
+      {
+        "afsnit": "En meget uheldig Lovebug"
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Lad os skifte emne. Rygterne vil vide, at du fyrede Kragor umiddelbart efter kampen?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Hvem?"
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Kragor. Nummer 7. Lovebug?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Åååh, Lovebug! Ja, naturligvis. Min lille Lovebug."
+      },
+      {
+        "scene": "GrimStone sukker næsten kærligt."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Det er sandt. Han blev fyret lige efter kampen. Faktisk var han død for mig i samme sekund, han lod sig skubbe ud over sidelinjen af en elver."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Ja, netop. Og rygterne vil vide, at Lovebug pådrog sig nogle frygtelige skader, da han landede blandt publikum."
+      },
+      {
+        "scene": "GrimStone løfter langsomt det ene øjenbryn og stirrer på Kenny."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Ja, altså... det er bare fordi... det var jo Marauding Ocras' egne fans, han landede iblandt. Så jeg undrer mig lidt..."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Jeg forstår ikke, hvad du mener."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Nej, naturligvis. Det var heller ikke for at antyde noget. Men jeg har faktisk haft svært ved at få historien bekræftet. Jeg har ikke kunnet finde Kragor... undskyld, Lovebug... nogen steder under mine forberedelser."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Jeg hører, at han er taget på ferie. Måske et sted i området omkring Caledor."
+      },
+      {
+        "scene": "Ifølge Whisper-Boksen begynder GrimStone her ganske henkastet at nusse et kranie, der står på hans skrivebord."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Ja... øhh... Caledor? I Ulthuan?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Smukt sted, har jeg hørt. Elverne sætter stor pris på personlige gaver."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Og... er det et nyt kranie, du har stående dér?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Ja. En afskedsgave fra en gammel ven."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Nå... hvor betænksomt."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Han var altid sådan en sød lille Lovebug."
+      },
+      {
+        "scene": "Der følger elleve sekunders stilhed."
+      },
+      {
+        "afsnit": "Sweetums og den døde elver"
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Hvis vi vender tilbage til kampen, så må vi tale om Sweetums. Sikke en tackling, han lavede på Ilthien III! Et øjeblik så det ud, som om Ilthiens karriere i Blood Bowl var slut."
+      },
+      {
+        "scene": "En svag, tilfreds latter høres fra GrimStone."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Den elver var død."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Undskyld?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Død, Kenny. Ikke skadet. Ikke bevidstløs. DØD. Jeg ved ikke, hvad elverne gjorde ved ham bagefter, men han var død. Det ved jeg."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Hvordan kan du være så sikker?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Jeg har set nok sjæle forlade deres kroppe til at genkende det, når jeg ser det. Og det, Sweetums gjorde ved den elver, overlever man ikke."
+      },
+      {
+        "scene": "GrimStone læner sig frem."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Jeg så lyset forlade hans øjne. Det smukke, vidunderlige øjeblik, hvor kroppen indser, at den ikke længere har brug for sin ejer."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Men Ilthien overlevede jo?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Det påstår elverne."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Så du mener, de har snydt?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Jeg mener, at nogen har blandet sig i et fuldendt stykke arbejde. Om det var magi, nekromanti eller en af deres forbandede elverguder, ved jeg ikke. Men Sweetums slog ham ihjel. Det var et smukt øjeblik, og de stjal det fra os."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Hvordan tog Sweetums det?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Han græd."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Græd?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Af skuffelse, Kenny. Min lille Sweetums havde endelig gjort far stolt, og så rejser hans gave til Khorne sig bare op igen."
+      },
+      {
+        "scene": "GrimStone sukker."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Jeg måtte love ham, at han nok skulle få lov at prøve igen."
+      },
+      {
+        "afsnit": "Khornes små kæledægger"
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Der er noget andet, vores seere længe har undret sig over. Hvorfor giver du dine spillere navne som Sweetums, Honeybun og Snuggles? Det er jo trods alt frygtindgydende krigere i Khornes tjeneste."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Frygtindgydende? Har du SET dem spille, Kenny?"
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Øh... ja?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Så ved du også, hvorfor de ikke fortjener deres gamle navne."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Men hvorfor lige kælenavne?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Fordi jeg elsker mine små drenge, Kenny."
+      },
+      {
+        "scene": "Whisper-Boksen registrerer en langsom, metallisk skraben."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Når en kriger træder ind på mit hold, efterlader han sit gamle navn, sin stolthed og enhver forestilling om personlig værdighed ved døren. Han bliver min. Og jeg bestemmer, hvad mine små kæledægger skal hedde."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Men bliver de ikke ydmyget af det?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Jo."
+      },
+      {
+        "scene": "En kort pause."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Er det ikke vidunderligt?"
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Og spillerne accepterer det?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Honeybun protesterede engang. Han mente, at navnet ikke passede til en kriger af hans kaliber."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Hvad skete der?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Nu elsker han sit navn."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Hvordan fik du ham overtalt?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Vi havde en lang samtale. Meget intim. Meget lærerig."
+      },
+      {
+        "scene": "GrimStone ler sagte."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Han kan stadig ikke høre ordet 'skat' uden at begynde at ryste. Det er ganske bedårende."
+      },
+      {
+        "afsnit": "Tre casualties. En halvleg for sent."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Lad os afslutningsvis tale om fremtiden. De tre casualties i anden halvleg må trods alt give dig noget at bygge videre på?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Bestemt. Mine små sukkertoppe har vist, at der stadig flyder blod i deres årer. Og endnu vigtigere, at de er i stand til at få det til at flyde ud af andres."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Så vi kan forvente et mere voldsomt Marauding Ocras fremover?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Kenny, jeg forventer ikke vold. Jeg forlanger den."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Og målet er stadig at vinde ligaen?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Selvfølgelig. Men jeg vil hellere tabe en kamp med elleve modstandere på lazarettet end vinde en kamp, hvor alle elverne kan danse hjem til deres små silkepuder bagefter."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Det er jo en interessant prioritering."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Det er ikke en prioritering. Det er en trosbekendelse."
+      },
+      {
+        "p": "Her burde interviewet være afsluttet."
+      },
+      {
+        "p": "Men Kenny Clickbait var aldrig en mand, der lod en god overskrift gå til spilde."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Bare ét sidste spørgsmål, GrimStone."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Du har allerede stillet flere, end jeg havde håbet."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Jo, men nu nævnte du selv volden. I fik ganske rigtigt tre casualties i anden halvleg mod The Eternal Sages, men i første halvleg fik I jo ikke en eneste."
+      },
+      {
+        "scene": "Stilhed."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Og hvis vi nu ser på sidste sæson, hvor I heller ikke rigtig formåede at skade nogen, og hvor I til sidst tabte selve tabernes taberkamp..."
+      },
+      {
+        "scene": "En stol knirker."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "... så er spørgsmålet vel, hvordan du vil sikre dig, at Marauding Ocras ikke igen ender som ligaens absolutte tabere? For er der ikke en reel risiko for, at holdet endnu en gang bliver mere kendt for at få tæsk end for at dele dem ud?"
+      },
+      {
+        "scene": "Whisper-Boksen registrerer 19 sekunders fuldstændig stilhed."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Kenny."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Ja?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Ved du, hvad forskellen er på første og anden halvleg?"
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Øh... nej?"
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "I første halvleg var jeg tålmodig."
+      },
+      {
+        "scene": "Lyden af en tung stol, der bliver skubbet bagud."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "I pausen forklarede jeg mine små skattemus, hvad der ville ske, hvis de ikke begyndte at levere blod til Blodguden."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Ja, og det virkede jo tydeligvis..."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Tre casualties, Kenny. Tre. Og alligevel sidder du her og spørger mig, hvordan jeg vil undgå endnu en ydmygelse."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "Jeg mener bare, at seerne nok gerne vil vide..."
+      },
+      {
+        "hvem": "GrimStone",
+        "tekst": "Så lad os give dem et svar."
+      },
+      {
+        "scene": "Lyden af tunge skridt."
+      },
+      {
+        "hvem": "Kenny Clickbait",
+        "tekst": "GrimStone? Hvad laver du?"
+      },
+      {
+        "p": "Herefter fik vi ikke mere ud af ånden, og har måttet kassere whisper-boksen."
+      },
+      {
+        "afsnit": "Efterskrift fra Gunnar Grådigs redaktion"
+      },
+      {
+        "p": "Gunnar Grådig ønsker at understrege, at Kenny Clickbait officielt er registreret som værende på ubestemt ferie."
+      },
+      {
+        "p": "Vi har forsøgt at kontakte Marauding Ocras for en kommentar til interviewet, men modtog alene følgende skriftlige svar:"
+      },
+      {
+        "p": "\"Kenny havde en dejlig tid. Han var meget åben til sidst. Vi ønsker ham alt godt på hans rejse.\""
+      },
+      {
+        "p": "Svaret var underskrevet: GrimStone the Merciless, cheftræner, Marauding Ocras"
+      },
+      {
+        "p": "Gunnar Grådigs sportsredaktion søger i øjeblikket en ny Blood Bowl-korrespondent."
+      },
+      {
+        "p": "Erfaring er ikke nødvendig. Livsforsikring anbefales."
+      },
+      {
+        "p": "Blod til Blodguden. Kranier til Kranietronen."
+      }
+    ]
+  },
+  {
+    "id": "web-1794637498029",
+    "hold": "The Eternal Sages",
+    "type": "Rygte",
+    "dato": "2026-11-14",
+    "titel": "Mystisk udskiftning? Er Ilthien III i virkeligheden død?",
+    "undertitel": "Rygte",
+    "indsendt": "Indsendt af holdets coach",
+    "citat": {
+      "hvem": "Rygtet",
+      "tekst": "Hvad indeholdt kassen? Og hvorfor ligner Ilthien pludselig ikke helt sig selv?"
+    },
+    "replikker": [
+      {
+        "p": "Vedholdende rygter hævder, at Ilthien III har lidt en permanent skæbne og i al hemmelighed er blevet erstattet af sin yngre bror!"
+      },
+      {
+        "p": "Flere fans har bemærket, at Ilthien på det seneste ser mistænkeligt anderledes ud. Mistanken blev kun yderligere næret, da øjenvidner berettede om en mystisk kasse, der blev leveret til Return Of The Living Deadbeats' træningsfaciliteter midt om natten efter opgøret mellem The Marauding Ocras og The Eternal Sages."
+      },
+      {
+        "p": "Hvad indeholdt kassen? Og hvorfor ligner Ilthien pludselig ikke helt sig selv?"
+      },
+      {
+        "p": "Hverken coach Raelth eller Michael Moulder har ønsket at kommentere sagen, og ingen har endnu haft modet til at stille GrimStone et eneste spørgsmål."
+      },
+      {
+        "p": "Om der er tale om et kynisk identitetstyveri, en familiehemmelighed eller blot endnu et tilfælde af usædvanligt fremskreden nekromantisk personalepolitik, står hen i det uvisse."
+      }
+    ]
+  },
+  {
     "id": "spike-the-maurading-ocras-vs-the-eternal-sages",
     "hold": "The Eternal Sages",
     "type": "Kampreferat",
