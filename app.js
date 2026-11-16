@@ -284,7 +284,10 @@
     // "x" i Skjul fjerner både den rå og den pæne udgave.
     const form = [...læsWebPresse(D.webpresse && D.webpresse.ok), ...læsPressemail(D.pressemail && D.pressemail.ok)];
     const skjulte = new Set(form.filter((p) => p.skjult).map((p) => p.id));
-    const faste = (window.PRESSE || []).filter((p) => !skjulte.has(p.id));
+    // Svar på Gunnars tre spørgsmål hører til en kamp. Den pæne udgave i presse.js arver feltet fra coachens rå indlæg.
+    const kampAf = new Map(form.filter((p) => p.kamp).map((p) => [p.id, p.kamp]));
+    const faste = (window.PRESSE || []).filter((p) => !skjulte.has(p.id))
+      .map((p) => (!p.kamp && kampAf.has(p.id) ? { ...p, kamp: kampAf.get(p.id) } : p));
     const fasteId = new Set(faste.map((p) => p.id));
     PRESSE = [...faste, ...form.filter((p) => !p.skjult && !fasteId.has(p.id))]
       .sort((a, b) => (b.dato || "").localeCompare(a.dato || ""));
@@ -416,7 +419,7 @@
       </div>
 
       <h2>Fra pressetribunen</h2>
-      <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}${rygteKort()}${plakatKort()}</div>
+      <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}${rygteKort()}${ingenKommentarKort(tilfældig(stilleHold()))}${plakatKort()}</div>
       ${PRESSE.length ? `<div style="margin-top:16px">${pkTeaser(PRESSE[0])}</div>` : ""}
 
       ${nyhed ?`<h2>Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p><a href="#nyheder">Alle nyheder</a></p>` : ""}`;
@@ -771,7 +774,7 @@
       const replikker = tekstTilReplikker(p.tekst);
       const første = replikker.find((x) => x.hvem || x.p);
       return {
-        id: p.id, skjult: false, hold: p.hold, dato: p.dato, titel: p.overskrift,
+        id: p.id, skjult: false, hold: p.hold, dato: p.dato, titel: p.overskrift, kamp: p.kamp || "",
         undertitel: p.type || "Pressemeddelelse", indsendt: p.navn ? `Indsendt af ${p.navn}` : "Indsendt af holdets coach", replikker,
         forside: p.billede ? `/api/presse/billede/${encodeURIComponent(p.id)}` : "",
         citat: første ? { hvem: første.hvem || p.hold, tekst: kortCitat((første.tekst || første.p).split("\n")[0]) } : null
@@ -805,10 +808,10 @@
   }
   const pkDato = (pk) => { const d = læsDato(pk.dato); return d ? bbDato(d) : pk.dato || ""; };
 
-  function pressekonference(pk) {
+  function pkLinjer(pk) {
     const set = new Set();
     const coachNavn = pk.coach || (LORE[pk.hold] || {}).coach;
-    const linjer = pk.replikker.map((r) => {
+    return pk.replikker.map((r) => {
       if (r.afsnit) return `<h3 class="pk-afsnit">${esc(r.afsnit)}</h3>`;
       if (r.p) return `<p class="pk-p">${esc(r.p)}</p>`;
       if (r.scene) return `<p class="scene">${esc(r.scene)}</p>`;
@@ -818,6 +821,9 @@
       return `<div class="replik${kl}"><div class="taler">${esc(r.hvem)}${rolle}${r.note ? ` <span class="note">(${esc(r.note)})</span>` : ""}</div>
         ${String(r.tekst || "").split("\n").map((t) => `<p>${esc(t)}</p>`).join("")}</div>`;
     }).join("");
+  }
+  function pressekonference(pk) {
+    const linjer = pkLinjer(pk);
     return `<article class="card pk" id="pk-${esc(pk.id)}">
       <p class="kicker">${esc(pk.undertitel || "Pressekonference")} · ${esc(pkDato(pk))}</p>
       <h2 class="pk-titel">${esc(pk.titel)}</h2>
@@ -856,19 +862,22 @@
       <p class="kicker">Pressetribunen</p>
       ${tilbage}
       ${pressekonference(valgt)}
+      ${fraSpike(valgt) && faneAfSpike(valgt) ? treSpørgsmålBoks(faneAfSpike(valgt)) : ""}
       ${tilbage}`;
     return `
       <p class="kicker">Pressetribunen</p>
       <h1>Presse</h1>
       <p class="lead">Pressekonferencer, kampreferater og interviews fra ligaens hold. Tryk på en overskrift for at læse.</p>
       ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}"${/^#/.test(C.PRESSE_FORMULAR) ? "" : ' target="_blank" rel="noopener"'}>✍️ Indsend til pressetribunen</a></p>` : ""}
+      ${efterlysning()}
       ${PRESSE.length ? `<div class="pk-liste">${PRESSE.map(pkLinje).join("")}</div>` : '<p class="muted">Ingen artikler endnu.</p>'}
       <p class="small muted">Satire. Skrevet af eller ud fra holdenes egne coaches.</p>`;
   }
 
   function holdLore(navn) {
     const egne = (H.holdCitater || []).filter((c) => c.hold === navn);
-    const kort = [EF && navn === EF.hold ? pressechefKort(tilfældig(EF.linjer)) : "", egne.length ? holdCitatKort(tilfældig(egne)) : ""].filter(Boolean);
+    const kort = [stilleHold().includes(navn) ? ingenKommentarKort(navn) : "",
+      EF && navn === EF.hold ? pressechefKort(tilfældig(EF.linjer)) : "", egne.length ? holdCitatKort(tilfældig(egne)) : ""].filter(Boolean);
     return (kort.length ? `<div class="grid-2" style="margin-bottom:16px">${kort.join("")}</div>` : "") + holdLoreIndhold(navn);
   }
   function holdLoreIndhold(navn) {
@@ -889,6 +898,89 @@
         ${L.ottoCitater && L.coach ? `<figure class="card citat"><p class="kicker">Coachen siger</p><blockquote>»${esc(tilfældig(L.ottoCitater))}«</blockquote><figcaption>${esc(L.coach)}</figcaption></figure>` : ""}
       </div>
       ${pk.length ? `<h2>Presse</h2><div class="grid">${pk.map(pkTeaser).join("")}</div>` : ""}`;
+  }
+
+  // ---------- Gunnar opsøger holdene: "Ingen kommentar" og de tre spørgsmål (tekster i humor.js) ----------
+  const IK = H.ingenKommentar, TS = H.treSpoergsmaal;
+  // Samme slug som pressechef/nye_kampe.py: Spike!s referat af en kamp har id "spike-<slug af fanenavnet>".
+  const slug = (s) => s.toLowerCase().replace(/æ/g, "ae").replace(/ø/g, "oe").replace(/å/g, "aa").replace(/ö/g, "o").replace(/ü/g, "u")
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  const fraSpike = (p) => /^spike-/.test(p.id);
+  const alleFaner = () => (C.PULJEKAMPE || []).flatMap((p) => p.faner);
+  const faneAfSpike = (p) => alleFaner().find((f) => "spike-" + slug(f) === p.id) || "";
+  const kampHold = (fane) => fane.split(/\s+vs[.,]\s*/i).map((s) => s.trim());
+  const svarPå = (fane, hold) => PRESSE.find((p) => p.kamp === fane && p.hold === hold);
+  const kampNavn = (fane) => (PRESSE.find((p) => p.id === "spike-" + slug(fane)) || {}).sted || fane;
+  // En kamp regnes som spillet her, når Spike! har skrevet om den, eller et hold har svaret på spørgsmålene.
+  const spilledeFaner = () => alleFaner().filter((f) => PRESSE.some((p) => p.id === "spike-" + slug(f) || p.kamp === f));
+  const indsendLink = (hold) => `#indsend/hold/${encodeURIComponent(hold)}`;
+  const svarLink = (fane, hold) => `#indsend/svar/${encodeURIComponent(fane)}/${encodeURIComponent(hold)}`;
+  const gunnar = () => `${esc(H.pressechef.navn)}, ${esc(H.pressechef.titel)}`;
+
+  // Hold, der endnu ikke selv har sendt noget til pressetribunen. Spike!s egne kampreferater tæller ikke.
+  function stilleHold() {
+    if (!IK) return [];
+    const harTalt = new Set(PRESSE.filter((p) => !fraSpike(p)).map((p) => p.hold));
+    return alleHold().filter((h) => !harTalt.has(h) && !/^#/.test(h)); // "#REF!" o.l. er regnefejl i arket, ikke hold
+  }
+  const ikTekst = (hold) => {
+    const egne = (IK.hold || {})[hold];
+    return (tilfældig(egne && egne.length ? egne : IK.generelle) || "").replace(/\{hold\}/g, hold);
+  };
+  function ingenKommentarKort(hold) {
+    if (!IK || !hold) return "";
+    return `<aside class="card presse"><p class="kicker">Ingen kommentar · ${esc(hold)}</p>
+      <p class="presse-tekst">»${esc(ikTekst(hold))}«</p><div class="small muted">${gunnar()}</div>
+      <p style="margin:10px 0 0"><a class="knap knap-link" href="${indsendLink(hold)}">🎤 ${esc(IK.knap)}</a></p></aside>`;
+  }
+
+  // Boksen på kampsiden og under Spike!s referat: spørgsmålene, og for hvert hold enten svarene eller en knap.
+  function treSpørgsmålBoks(fane) {
+    if (!TS || !alleFaner().includes(fane)) return "";
+    const del = (hold, nr) => {
+      const s = svarPå(fane, hold);
+      if (s) return `<div class="ts-hold"><h3>${holdLink(hold)}</h3>${pkLinjer(s)}
+        <p class="small" style="margin:0"><a href="#presse/${encodeURIComponent(s.id)}">Læs som artikel →</a></p></div>`;
+      return `<div class="ts-hold"><h3>${holdLink(hold)}</h3>
+        <p class="presse-tekst">»${esc((TS.venter[(hashTal(fane) + nr) % TS.venter.length] || "").replace(/\{hold\}/g, hold))}«</p>
+        <p style="margin:0"><a class="knap knap-link" href="${svarLink(fane, hold)}">🎤 Svar som ${esc(hold)}</a></p></div>`;
+    };
+    return `<section class="card presse ts"><p class="kicker">Gunnars tre spørgsmål</p>
+      <ol class="ts-q">${TS.spoergsmaal.map((q) => `<li>${esc(q)}</li>`).join("")}</ol>
+      <div class="grid-2">${kampHold(fane).map(del).join("")}</div>
+      <div class="small muted" style="margin-top:10px">${gunnar()}</div></section>`;
+  }
+
+  // Hvem mangler pressechefen at høre fra? Bruges på Presse-siden og i beskeden til Messenger.
+  function mangler() {
+    const svar = TS ? spilledeFaner().map((f) => ({ fane: f, hold: kampHold(f).filter((h) => !svarPå(f, h)) })).filter((x) => x.hold.length) : [];
+    return { stille: stilleHold(), svar };
+  }
+  function efterlysning() {
+    const m = mangler();
+    if (!m.stille.length && !m.svar.length) return "";
+    const et = tilfældig(m.stille);
+    return `<section class="card presse efterlys"><p class="kicker">Pressechefen efterlyser</p>
+      ${et ? `<p class="presse-tekst">»${esc(ikTekst(et))}«</p>
+        <p class="small muted efterlys-lbl">Ingen kommentar endnu fra (tryk på dit hold):</p>
+        <p class="ik-hold">${m.stille.map((h) => `<a class="knap knap-link" href="${indsendLink(h)}">${esc(h)}</a>`).join("")}</p>` : ""}
+      ${m.svar.length ? `<p class="small muted efterlys-lbl">Gunnars tre spørgsmål venter på svar efter:</p>
+        <ul class="ts-venter">${m.svar.map((x) => `<li><a href="#kamp/${encodeURIComponent(x.fane)}">${esc(kampNavn(x.fane))}</a>
+          <span class="muted">· mangler</span> ${x.hold.map((h) => `<a href="${svarLink(x.fane, h)}">${esc(h)}</a>`).join(" og ")}</li>`).join("")}</ul>` : ""}
+      <div class="small muted" style="margin-top:10px">Mikrofonen er tændt. ${gunnar()}</div></section>`;
+  }
+  // Færdig besked, som Peter kan poste som Gunnar i Messenger-gruppen.
+  function gunnarBesked() {
+    const m = mangler();
+    const rod = /^(localhost|127\.)/.test(location.hostname) ? "https://bloodbowl.pages.dev" : location.origin;
+    const l = [`📣 Pressechef ${H.pressechef.navn} efterlyser!`];
+    if (m.stille.length) l.push("", `🤐 Ingen kommentar endnu fra: ${listeTekst(m.stille)}.`,
+      `Mikrofonen er tændt, og forsiden er holdt fri: ${rod}/#indsend`);
+    if (m.svar.length) l.push("", "🎤 Tre hurtige spørgsmål venter (én linje pr. svar er nok):",
+      ...m.svar.map((x) => `• ${kampNavn(x.fane)}: mangler ${listeTekst(x.hold)}\n  ${rod}/#kamp/${encodeURIComponent(x.fane)}`));
+    if (l.length === 1) l.push("", "Alle hold har svaret. Pressechefen er rørt og en smule mistænksom.");
+    l.push("", `Hilsen ${H.pressechef.navn.split(" ")[0]} (100 % neutral)`);
+    return l.join("\n");
   }
 
   // ---------- Holdplakater ----------
@@ -984,6 +1076,7 @@
       <article class="card referat"><p class="kicker">Kampreferat</p><p class="referat-tekst">${esc(r.tekst)}</p>
         <p class="small muted" style="margin:0">Skrevet automatisk ud fra kommissærens kampskema.</p></article>
       ${pressechefKort(r.presse)}
+      ${treSpørgsmålBoks(fane)}
       <h2>Stats</h2><div class="grid-2">${holdTabel(A)}${holdTabel(B)}</div>`;
   }
 
@@ -1135,9 +1228,44 @@
 
   // ---------- Indsend til pressetribunen (sidens egen formular; serveren er functions/api/presse) ----------
   const gemt = (k, v) => { try { if (v === undefined) return localStorage.getItem(k) || ""; localStorage.setItem(k, v); } catch (e) {} return ""; };
-  function sideIndsend() {
-    const hold = Object.keys(puljeAf).sort((a, b) => a.localeCompare(b, "da"));
+  function sideIndsend(navn) {
+    // Alle hold fra både puljer og stilling, så et hold ikke mangler, hvis en celle i arket viser en regnefejl (#REF!).
+    const hold = [...new Set([...Object.keys(puljeAf), ...alleHold()])].filter((h) => !/^#/.test(h)).sort((a, b) => a.localeCompare(b, "da"));
     const typer = ["Pressemeddelelse", "Kampreferat", "Interview", "Rygte", "Lore"];
+    const [måde, a1, a2] = String(navn || "").split("/");
+    const valgt = måde === "hold" && hold.includes(a1) ? a1 : gemt("bb-hold");
+    const redaktør = `<details class="card" id="redaktoer"><summary>Redaktør (Peter og Mikkel)</summary>
+        <p class="small muted">Skriv redaktør-koden for at skjule eller vise indlæg fra denne side.</p>
+        <label>Redaktør-kode<input id="admin-kode" value="${esc(gemt("bb-admin"))}"></label>
+        <button class="knap" type="button" id="admin-hent">Vis indlæg</button>
+        <div id="admin-liste"></div>
+        <p class="small muted" style="margin-top:16px">Gunnars efterlysning: en færdig besked til Messenger-gruppen om de hold, pressechefen mangler at høre fra.</p>
+        <textarea id="gunnar-besked" rows="9" readonly>${esc(gunnarBesked())}</textarea>
+        <button class="knap" type="button" id="gunnar-kopi">Kopiér beskeden</button> <span class="small" id="gunnar-kopi-status" role="status"></span>
+      </details>`;
+    // Svar på Gunnars tre spørgsmål: ét felt pr. spørgsmål. Hold, type, overskrift og kamp er givet på forhånd.
+    if (TS && måde === "svar" && alleFaner().includes(a1) && kampHold(a1).includes(a2)) {
+      const modstander = kampHold(a1).find((h) => h !== a2);
+      return `
+      <p class="kicker">Pressetribunen</p>
+      <p><a href="#kamp/${encodeURIComponent(a1)}">← Tilbage til kampen</a></p>
+      <h1>Gunnars tre spørgsmål</h1>
+      <p class="lead">Tre hurtige til ${esc(a2)} efter ${esc(kampNavn(a1))}. ${esc(TS.intro)}</p>
+      <form id="indsend" class="card indsend" autocomplete="off" data-svar="${esc(a1)}">
+        <input type="hidden" name="hold" value="${esc(a2)}">
+        <input type="hidden" name="type" value="Interview">
+        <input type="hidden" name="kamp" value="${esc(a1)}">
+        <input type="hidden" name="overskrift" value="${esc(`Tre hurtige: ${a2} efter kampen mod ${modstander}`.slice(0, 150))}">
+        ${TS.spoergsmaal.map((q, i) => `<label>${i + 1}. ${esc(q)}<textarea class="kort" name="svar${i + 1}" rows="2" maxlength="600"></textarea></label>`).join("")}
+        <label>Hvem svarer? (valgfrit)<input name="navn" maxlength="60" placeholder="Coachens eller figurens navn" value="${esc(gemt("bb-navn"))}"></label>
+        <label>Liga-kode<input name="kode" required placeholder="Fås hos Peter eller Mikkel" value="${esc(gemt("bb-kode"))}"></label>
+        <input name="hjemmeside" tabindex="-1" aria-hidden="true" autocomplete="off" style="position:absolute;left:-9999px">
+        <button class="knap" type="submit">Send svarene til Gunnar</button>
+        <p class="small" id="indsend-status" role="status"></p>
+      </form>
+      <p class="small muted">Vil du hellere skrive et helt indlæg? <a href="${indsendLink(a2)}">Brug den almindelige formular</a>.</p>
+      ${redaktør}`;
+    }
     return `
       <p class="kicker">Pressetribunen</p>
       <p><a href="#presse">← Tilbage til Presse</a></p>
@@ -1146,7 +1274,7 @@
         Det kommer på siden med det samme, og pressechefen sætter det pænt op senere.</p>
       <form id="indsend" class="card indsend" autocomplete="off">
         <label>Hold<select name="hold" required><option value="">Vælg hold</option>
-          ${hold.map((h) => `<option${gemt("bb-hold") === h ? " selected" : ""}>${esc(h)}</option>`).join("")}</select></label>
+          ${hold.map((h) => `<option${valgt === h ? " selected" : ""}>${esc(h)}</option>`).join("")}</select></label>
         <label>Type<select name="type">${typer.map((t) => `<option>${t}</option>`).join("")}</select></label>
         <label>Overskrift<input name="overskrift" maxlength="150" required></label>
         <label>Tekst<textarea name="tekst" rows="12" maxlength="20000" required placeholder="Sæt bare teksten ind. Også tekst fra ChatGPT."></textarea></label>
@@ -1157,12 +1285,7 @@
         <button class="knap" type="submit">Send til pressetribunen</button>
         <p class="small" id="indsend-status" role="status"></p>
       </form>
-      <details class="card" id="redaktoer"><summary>Redaktør (Peter og Mikkel)</summary>
-        <p class="small muted">Skriv redaktør-koden for at skjule eller vise indlæg fra denne side.</p>
-        <label>Redaktør-kode<input id="admin-kode" value="${esc(gemt("bb-admin"))}"></label>
-        <button class="knap" type="button" id="admin-hent">Vis indlæg</button>
-        <div id="admin-liste"></div>
-      </details>`;
+      ${redaktør}`;
   }
   // Skalerer billedet ned i browseren (højst 1600 px, JPEG). Fjerner samtidig skjulte data som GPS-position.
   async function lilleBillede(fil) {
@@ -1181,9 +1304,22 @@
       const knap = form.querySelector("button[type=submit]");
       const fd = new FormData(form);
       fd.delete("billede");
-      const fil = form.billede.files[0];
+      const fil = form.billede && form.billede.files[0];
       knap.disabled = true; status.textContent = "Sender …";
       try {
+        if (form.dataset.svar) {
+          // "Navn: tekst" bliver til replikker på siden. Et navn, der ikke kan stå foran et kolon, bliver til "Coachen".
+          const n = String(fd.get("navn") || "").trim();
+          const taler = /^\p{L}[^:]{0,39}$/u.test(n) && n.split(/\s+/).length <= 4 && !/\d$/.test(n) ? n : "Coachen";
+          const linjer = [];
+          TS.spoergsmaal.forEach((q, i) => {
+            const a = String(fd.get("svar" + (i + 1)) || "").replace(/\s*\n+\s*/g, " ").trim();
+            fd.delete("svar" + (i + 1));
+            if (a) linjer.push(`${H.pressechef.navn}: ${q}`, `${taler}: ${a}`);
+          });
+          if (!linjer.length) throw new Error("Svar på mindst ét af spørgsmålene.");
+          fd.set("tekst", linjer.join("\n"));
+        }
         if (fil) {
           const b = await lilleBillede(fil).catch(() => null);
           if (!b) throw new Error("Billedet kunne ikke læses. Prøv et JPG- eller PNG-billede.");
@@ -1195,11 +1331,17 @@
         gemt("bb-kode", fd.get("kode")); gemt("bb-navn", fd.get("navn")); gemt("bb-hold", fd.get("hold"));
         status.textContent = "Tak! Indlægget er på siden.";
         await hentAlt();
-        location.hash = d.id ? "#presse/" + d.id : "#presse";
+        location.hash = form.dataset.svar ? "#kamp/" + encodeURIComponent(form.dataset.svar) : d.id ? "#presse/" + d.id : "#presse";
       } catch (err) {
         status.textContent = err.message;
         knap.disabled = false;
       }
+    };
+    document.getElementById("gunnar-kopi").onclick = async () => {
+      const felt = document.getElementById("gunnar-besked"), st = document.getElementById("gunnar-kopi-status");
+      felt.select();
+      try { await navigator.clipboard.writeText(felt.value); st.textContent = "Kopieret. Sæt den ind i Messenger."; }
+      catch (e) { st.textContent = "Markér teksten, og kopiér den selv (Ctrl + C)."; }
     };
     const adminKode = document.getElementById("admin-kode");
     const listeEl = document.getElementById("admin-liste");
@@ -1239,9 +1381,9 @@
     const key = SIDER[side] ? side : "forside";
     const fane = key === "kamp" ? "puljekampe" : key;
     document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("on", a.dataset.page === (fane === "indsend" ? "presse" : fane)));
-    if (!navn || key === "presse") window.scrollTo(0, 0);
+    if (!navn || key === "presse" || key === "indsend") window.scrollTo(0, 0);
     const html = key === "hold" && navn ? await sideHold(navn) : key === "presse" && navn ? sidePresse(navn)
-      : key === "kamp" && navn ? await sideKamp(navn) : await SIDER[key]();
+      : key === "kamp" && navn ? await sideKamp(navn) : key === "indsend" ? sideIndsend(navn) : await SIDER[key]();
     if (nr !== visNr) return; // brugeren har skiftet side imens
     $main.innerHTML = html;
     if (key === "indsend") indsendKlar();
@@ -1249,7 +1391,8 @@
       const alle = sek.querySelectorAll("input[type=checkbox]");
       sek.classList.toggle("faerdig", alle.length > 0 && [...alle].every((x) => x.checked));
     });
-    const pkTitel = key === "presse" && navn ? (PRESSE.find((p) => p.id === navn) || {}).titel : key === "kamp" && navn ? navn : "";
+    const pkTitel = key === "presse" && navn ? (PRESSE.find((p) => p.id === navn) || {}).titel : key === "kamp" && navn ? navn
+      : key === "indsend" ? SIDENAVN.indsend : "";
     document.title = (key === "forside" ? "" : (pkTitel || navn || SIDENAVN[key] || titel(key)) + " · ") + liga;
   }
 

@@ -38,3 +38,9 @@ Gratis grænser: 100.000 læsninger og 1.000 skrivninger om dagen, 1 GB lager. L
 > 3. Vedhæft gerne et billede, skriv liga-koden: [LIGA-KODE], og tryk Send.
 >
 > Intet login. Det kommer på siden med det samme.
+
+## Gunnars tre spørgsmål og "Ingen kommentar" (16. nov. 2026)
+- `#indsend/hold/<hold>` åbner formularen med holdet valgt på forhånd (knappen "Bryd tavsheden").
+- `#indsend/svar/<fane>/<hold>` er svar-formularen til Gunnars tre spørgsmål efter en kamp. Den sender et Interview med
+  det ekstra felt `kamp` (kampens fanenavn). Feltet skal følge med uændret i den pæne udgave i presse.js.
+- Under **Redaktør** ligger Gunnars efterlysning som færdig Messenger-besked.

@@ -120,6 +120,19 @@ Tegnes af `logo/generer.py`; ret der og kør `python logo/generer.py`, og kopié
 `<template id="logo-stor">`. Udkast til sammenligning: `logo/udkast.html`.
 Andre idéer: laurbærkrans med S·F (latinsk/romersk), lykkehjul. Kopiér ikke Games Workshops officielle Blood Bowl-logo.
 
+## Gunnar opsøger holdene (bygget 16. nov. 2026, Peters ønske)
+Mål: forstærke og opmuntre engagement på en humoristisk Blood Bowl-måde. Regler: drilleriet rammer HOLDET, aldrig coachen
+som person; Gunnar lægger aldrig ord i munden på nogen; det er en invitation, ikke en skideballe. Tekster i `humor.js`.
+- **Ingen kommentar**: hold uden egne indlæg i Pressetribunen (Spike!s referater tæller ikke) får en note fra Gunnar på
+  forsiden, holdsiden og øverst på Presse ("Pressechefen efterlyser") med knappen "Bryd tavsheden" → `#indsend/hold/<hold>`.
+  Forsvinder af sig selv, når holdet indsender noget.
+- **Gunnars tre spørgsmål**: tre faste spørgsmål på kampsiden og under Spike!s referat. Knappen "Svar som <hold>" →
+  `#indsend/svar/<fane>/<hold>` med ét felt pr. spørgsmål. Svaret gemmes som Interview med feltet `kamp` (fanenavnet)
+  og vises ordret på kampsiden. En kamp regnes som spillet her, når Spike! har skrevet om den (id `spike-<slug af fane>`).
+- **Besked til Messenger**: under Redaktør på #indsend ligger en færdig efterlysning, som Peter kan poste som Gunnar.
+- Flere idéer fra samme snak (ikke bygget): ugens rygte, optakt til kampen med forudsigelser, ret til genmæle,
+  Gunnars power ranking (Gluttons altid nr. 1), ugens spørgsmål til alle, afstemning om ugens spiller.
+
 ## Idéer til senere (parkeret 6. nov. 2026)
 Blood Bowl-idéer bor her, ikke i Peters Idébank i Todoist.
 - **Ugens Spike!**: hver søndag en kort opsummering (resultater, topscorer, værste skade) på Presse-siden + færdig Messenger-tekst

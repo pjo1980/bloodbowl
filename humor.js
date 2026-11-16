@@ -7,6 +7,66 @@ window.HUMOR = {
   // Opdigtet figur. Navnet kan frit skiftes.
   pressechef: { navn: "Gunnar Grådig", titel: "Ligaens pressechef (100 % neutral)" },
 
+  // "INGEN KOMMENTAR" (Peter 16. nov.): Gunnar opsøger de hold, der endnu ikke har skrevet til pressetribunen.
+  // Venligt drilleri, der skal give lyst til at svare. Reglerne:
+  //   - Drilleriet rammer HOLDET (navn, plakat, slogans), aldrig coachen som person.
+  //   - Gunnar lægger aldrig ord i munden på nogen. Han gætter, venter og holder mikrofonen.
+  //   - Det skal være en invitation, ikke en skideballe.
+  // {hold} erstattes med holdnavnet. Noten forsvinder af sig selv, når holdet har indsendt noget.
+  ingenKommentar: {
+    knap: "Bryd tavsheden",
+    generelle: [
+      "{hold} har endnu ikke udtalt sig. Pressechefen har pudset mikrofonen og holdt forsiden fri.",
+      "Ingen kommentar fra {hold} endnu. Pressechefen modtager alt: sejrstaler, undskyldninger og hilsner til dommeren.",
+      "{hold} er stadig tavse. Pressechefen minder om, at tavshed ikke giver point. Det gør pressemeddelelser heller ikke, men de er sjovere."
+    ],
+    hold: {
+      "Elmtree Evaders": [
+        "Elmtree Evaders har endnu ikke udtalt sig. Pressechefen formoder, at de også undviger journalister.",
+        "Ingen kommentar fra Elmtree Evaders. Pressechefen har stillet en mikrofon i skovbrynet og venter tålmodigt."
+      ],
+      "Mörkley Crüe": [
+        "Mörkley Crüe har ikke givet lyd fra sig. Det er usædvanligt for et band.",
+        "Ingen kommentar fra Mörkley Crüe. Pressechefen venter på, at lydprøven bliver færdig."
+      ],
+      "Fright Night Fumblers": [
+        "Fright Night Fumblers har ikke svaret. Pressechefen ringede, men nogen trak bare vejret i røret.",
+        "Ingen kommentar fra Fright Night Fumblers. Pressechefen tør ikke banke på efter mørkets frembrud, men postkassen er åben."
+      ],
+      "The FumbleBoyz": [
+        "The FumbleBoyz har endnu ikke udtalt sig. Pressechefen går ud fra, at pressemeddelelsen blev tabt på vej til postkassen.",
+        "Ingen kommentar fra The FumbleBoyz. »Legends play here« står der på banneret. Pressechefen vil gerne høre legenden."
+      ],
+      "Return Of The Living Deadbeats": [
+        "Return Of The Living Deadbeats tier som graven. Pressechefen har banket høfligt på kistelåget.",
+        "Ingen kommentar fra Deadbeats. Pressechefen ved, at de er oppe. Det står på plakaten."
+      ],
+      "Da Demolitionaz": [
+        "Da Demolitionaz har ingen planer, ingen tilladelser og indtil videre ingen kommentarer.",
+        "Ingen kommentar fra Da Demolitionaz. Pressechefen hører kun larm fra byggepladsen og har stillet mikrofonen ved hegnet."
+      ],
+      "GutBuster Gluttons": [
+        "GutBuster Gluttons har ikke udtalt sig. Pressechefen forstår det godt: Storhed taler for sig selv. Men han lytter gerne."
+      ]
+    }
+  },
+
+  // GUNNARS TRE SPØRGSMÅL (Peter 16. nov.): efter hver spillet kamp får begge hold de samme tre faste spørgsmål.
+  // Coachen svarer med én linje pr. spørgsmål på kampsiden. Svarene er coachens egne ord og vises ordret.
+  treSpoergsmaal: {
+    spoergsmaal: [
+      "Hvem var jeres helt i kampen, og hvad er belønningen?",
+      "Hvem skuffede mest, og hvad bliver straffen?",
+      "Har I en hilsen til modstanderen, dommeren eller Nuffle?"
+    ],
+    intro: "Én linje pr. svar er nok. Pressechefen citerer ordret. Det er nyt for ham.",
+    venter: [
+      "{hold} har ikke svaret endnu. Pressechefen holder mikrofonen og bliver stående.",
+      "Ingen kommentar fra {hold} endnu. Pressechefen har sat kaffe over og venter gerne.",
+      "{hold} tænker stadig over svarene. Pressechefen minder om, at tre linjer er nok."
+    ]
+  },
+
   // Citater fra coachernes EGNE indlæg, ordret (kun forkortet). Vises skiftevis med Star Player-citaterne og på holdsiden.
   // Den daglige pressechef-opgave tilføjer 1-2 nye, når en coach skriver noget citatværdigt.
   holdCitater: [

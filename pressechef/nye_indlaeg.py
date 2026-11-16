@@ -91,6 +91,8 @@ def web_indlaeg(kendte):
         o = {"id": p["id"], "dato": p.get("dato", ""), "hold": p.get("hold", ""),
              "type": p.get("type") or "Pressemeddelelse", "overskrift": p.get("overskrift", ""),
              "tekst": p.get("tekst", ""), "navn": p.get("navn", "")}
+        if p.get("kamp"):
+            o["kamp"] = p["kamp"]  # svar på Gunnars tre spørgsmål: skal med uændret i presse.js
         if p.get("billede"):
             o["forside"] = hent_billede(f"{SIDE}/api/presse/billede/{p['id']}", p["id"])
         nye.append(o)

@@ -1,6 +1,6 @@
 // Pressetribunens indbakke på Cloudflare (Pages Functions). Erstatter Google-formularen: intet Google, intet login.
 //   GET  /api/presse                 -> alle indlæg (skjulte kun som { id, skjult: true }; med x-admin-kode: det hele)
-//   POST /api/presse                 -> nyt indlæg (multipart: kode, hold, type, overskrift, tekst, navn, billede)
+//   POST /api/presse                 -> nyt indlæg (multipart: kode, hold, type, overskrift, tekst, navn, billede, kamp)
 //   GET  /api/presse/billede/<id>    -> indlæggets billede
 //   POST /api/presse/skjul           -> JSON { id, kode, skjul: true|false } (kræver ADMIN_KODE)
 //   POST /api/presse/tjek            -> JSON { kode } -> { admin: true|false } (til redaktør-feltet)
@@ -46,6 +46,7 @@ async function indsend(env, request) {
   const overskrift = ren(f.get("overskrift"), 150);
   const tekst = ren(f.get("tekst"), MAX_TEKST);
   const navn = ren(f.get("navn"), 60);
+  const kamp = ren(f.get("kamp"), 150); // kun ved svar på Gunnars tre spørgsmål: kampens fanenavn
   if (!hold || !overskrift || !tekst) return fejl("Hold, overskrift og tekst skal udfyldes.");
 
   const id = "web-" + Date.now();
@@ -62,7 +63,7 @@ async function indsend(env, request) {
 
   const dato = new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Copenhagen" }); // ÅÅÅÅ-MM-DD
   const alle = await hentListe(env);
-  alle.unshift({ id, dato, hold, type, overskrift, tekst, navn, billede, skjult: false });
+  alle.unshift({ id, dato, hold, type, overskrift, tekst, navn, billede, skjult: false, ...(kamp ? { kamp } : {}) });
   await env.PRESSE_KV.put("indlaeg", JSON.stringify(alle));
   return svar({ ok: true, id });
 }
