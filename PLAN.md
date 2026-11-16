@@ -138,6 +138,8 @@ som person; Gunnar lægger aldrig ord i munden på nogen; det er en invitation, 
   ved pointlighed vinder holdet med flest egne indlæg (pressebonus), så det kan betale sig at tale med pressen.
   Begrundelser i `humor.js` → powerRanking, valgt ud fra holdets rigtige tal. Viser også holdets plads i den rigtige stilling.
   Opdaterer sig selv. Indgange: forsiden, Stilling og Presse. Færdig Messenger-besked nederst på siden.
+- **Gunnar Grådig har fået ansigt** (16. nov., billede fra Peter): `figurer/gunnar-graadig.jpg` (+ -lille). Vises i signaturen på
+  alle hans kort, ved hans replikker og øverst på power rankingen. Billedprompten står i chatten fra 16. nov.
 - **Rygte Rasmus har fået ansigt** (16. nov., billede fra Peter): `figurer/rygte-rasmus.jpg` (+ -lille). `humor.js` → figurer.
   Vises som forfatter på hans artikler og i Presse-listen. Nye figurer tilføjes samme sted.
 - Flere idéer fra samme snak (ikke bygget): ugens rygte, optakt til kampen med forudsigelser, ret til genmæle,

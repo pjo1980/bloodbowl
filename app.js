@@ -339,8 +339,14 @@
     if (y.w + y.d + y.l === 0) valg.push(`${Y} har ikke tabt en eneste kamp i år. De har heller ikke spillet nogen, men det er en detalje.`);
     return tilfældig(valg);
   }
+  // Pressechefens signatur med ansigt (humor.js -> figurer). Tryk på ansigtet for at se hele portrættet.
+  const gunnarAnsigt = (kl) => {
+    const f = (H.figurer || {})[H.pressechef.navn];
+    return f ? `<a href="${esc(f.billede)}" target="_blank" rel="noopener" title="Se hele portrættet"><img class="figur ${kl || ""}" src="${esc(f.lille)}" alt="${esc(H.pressechef.navn)}" loading="lazy"></a>` : "";
+  };
+  const gunnar = () => `${gunnarAnsigt()}${esc(H.pressechef.navn)}, ${esc(H.pressechef.titel)}`;
   const pressechefKort = (tekst) => tekst ? `<aside class="card presse"><p class="kicker">Pressechefens hjørne</p>
-    <p class="presse-tekst">»${esc(tekst)}«</p><div class="small muted">${esc(H.pressechef.navn)}, ${esc(H.pressechef.titel)}</div></aside>` : "";
+    <p class="presse-tekst">»${esc(tekst)}«</p><div class="small muted">${gunnar()}</div></aside>` : "";
   // Skiftevis et Star Player-citat og et ordret citat fra en af ligaens egne coaches.
   function citatKort() {
     const hc = H.holdCitater || [];
@@ -355,7 +361,7 @@
   const rygteKort = () => {
     const t = tilfældig(H.kommissaerRygter);
     return t ? `<aside class="card presse"><p class="kicker">Rygter fra gangene</p><p class="presse-tekst">${esc(t)}</p>
-      <div class="small muted">Ubekræftet. Kilde: ${esc(H.pressechef.navn)}s mest upålidelige kilder.</div></aside>` : "";
+      <div class="small muted">${gunnarAnsigt()}Ubekræftet. Kilde: ${esc(H.pressechef.navn)}s mest upålidelige kilder.</div></aside>` : "";
   };
   function spikeKort(overskrift) {
     const t = tilfældig(H.spike);
@@ -928,7 +934,6 @@
   const spilledeFaner = () => alleFaner().filter((f) => PRESSE.some((p) => p.id === "spike-" + slug(f) || p.kamp === f));
   const indsendLink = (hold) => `#indsend/hold/${encodeURIComponent(hold)}`;
   const svarLink = (fane, hold) => `#indsend/svar/${encodeURIComponent(fane)}/${encodeURIComponent(hold)}`;
-  const gunnar = () => `${esc(H.pressechef.navn)}, ${esc(H.pressechef.titel)}`;
 
   // Hold, der endnu ikke selv har sendt noget til pressetribunen. Spike!s egne kampreferater tæller ikke.
   function stilleHold() {
@@ -980,7 +985,7 @@
       ${m.svar.length ? `<p class="small muted efterlys-lbl">Gunnars tre spørgsmål venter på svar efter:</p>
         <ul class="ts-venter">${m.svar.map((x) => `<li><a href="#kamp/${encodeURIComponent(x.fane)}">${esc(kampNavn(x.fane))}</a>
           <span class="muted">· mangler</span> ${x.hold.map((h) => `<a href="${svarLink(x.fane, h)}">${esc(h)}</a>`).join(" og ")}</li>`).join("")}</ul>` : ""}
-      <div class="small muted" style="margin-top:10px">Mikrofonen er tændt. ${gunnar()}</div></section>`;
+      <div class="small muted" style="margin-top:10px">${gunnar()}. Mikrofonen er tændt.</div></section>`;
   }
   // Færdig besked, som Peter kan poste som Gunnar i Messenger-gruppen.
   function gunnarBesked() {
@@ -1413,6 +1418,7 @@
     return `
       <p class="kicker">Pressechefens hjørne</p>
       <h1>Gunnars power ranking</h1>
+      <p class="forfatter">${gunnarAnsigt("figur-stor")}<span><b>${esc(H.pressechef.navn)}</b><br><span class="small muted">${esc(H.pressechef.titel)}</span></span></p>
       <p class="lead">${esc(PR.intro)}</p>
       <p class="small muted">Opdateret efter ${kampe.toLocaleString("da-DK")} spillede kampe. Point og resultater er kommissærens egne tal. Rækkefølgen er Gunnars.</p>
       <ol class="pr-liste">${liste.map((h) => `<li class="card pr-linje${h.er === "yndling" ? " pr-et" : ""}">
@@ -1424,7 +1430,7 @@
           <p class="small pr-bund">${h.presse ? `🎤 ${esc(PR.bonus)}: ${h.presse} indlæg` : `<span class="muted">${esc(PR.ingenBonus)}</span>`}
             · <a href="${indsendLink(h.navn)}">${h.presse ? "Uenig? Send et genmæle" : "Bryd tavsheden"}</a></p>
         </div></li>`).join("")}</ol>
-      <p class="small muted">${gunnar()}. Satire: den rigtige stilling står under <a href="#stilling">Stilling</a>.</p>
+      <p class="small muted">Satire. Den rigtige stilling står under <a href="#stilling">Stilling</a>.</p>
       <details class="card"><summary>Del ranglisten i Messenger</summary>
         <textarea id="gunnar-besked" rows="12" readonly>${esc(powerBesked(liste))}</textarea>
         <button class="knap" type="button" id="gunnar-kopi">Kopiér beskeden</button> <span class="small" id="gunnar-kopi-status" role="status"></span>

@@ -57,6 +57,7 @@ window.HUMOR = {
   // FIGURER MED ANSIGT: pressetribunens faste skribenter. Billedet vises ved deres replikker og som byline.
   // Nøglen er navnet, præcis som det står som taler eller i "Indsendt af ...". Billeder ligger i figurer/.
   figurer: {
+    "Gunnar Grådig": { billede: "figurer/gunnar-graadig.jpg", lille: "figurer/gunnar-graadig-lille.jpg", titel: "Ligaens pressechef (100 % neutral)" },
     "Rygte Rasmus": { billede: "figurer/rygte-rasmus.jpg", lille: "figurer/rygte-rasmus-lille.jpg", titel: "Rygtereporter, Spike! Magazine" }
   },
 
