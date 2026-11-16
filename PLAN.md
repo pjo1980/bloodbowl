@@ -120,6 +120,10 @@ Tegnes af `logo/generer.py`; ret der og kør `python logo/generer.py`, og kopié
 `<template id="logo-stor">`. Udkast til sammenligning: `logo/udkast.html`.
 Andre idéer: laurbærkrans med S·F (latinsk/romersk), lykkehjul. Kopiér ikke Games Workshops officielle Blood Bowl-logo.
 
+## Gunnars stemme (Peter 16. nov. 2026)
+I faste noter og kort omtaler Gunnar sig selv som "Pressechefen", aldrig "jeg". Kun i replikker i interviews og
+pressekonferencer taler han i jeg-form. Sproglig gennemgang af alle hans faste tekster er lavet 16. nov.
+
 ## Gunnar opsøger holdene (bygget 16. nov. 2026, Peters ønske)
 Mål: forstærke og opmuntre engagement på en humoristisk Blood Bowl-måde. Regler: drilleriet rammer HOLDET, aldrig coachen
 som person; Gunnar lægger aldrig ord i munden på nogen; det er en invitation, ikke en skideballe. Tekster i `humor.js`.

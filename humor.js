@@ -5,6 +5,9 @@ window.HUMOR = {
   yndlingshold: "GutBuster Gluttons",
 
   // Opdigtet figur. Navnet kan frit skiftes.
+  // STEMME (Peter 16. nov.): I sine faste noter og kort omtaler Gunnar altid sig selv som "Pressechefen", aldrig "jeg".
+  // Kun i replikker i interviews og pressekonferencer (presse.js) taler han i jeg-form.
+  // Citat inde i en note skrives med enkelte tegn ›...‹, fordi kortet selv sætter »...« om hele teksten.
   pressechef: { navn: "Gunnar Grådig", titel: "Ligaens pressechef (100 % neutral)" },
 
   // "INGEN KOMMENTAR" (Peter 16. nov.): Gunnar opsøger de hold, der endnu ikke har skrevet til pressetribunen.
@@ -170,18 +173,18 @@ window.HUMOR = {
     hold: "The Eternal Sages",
     linjer: [
       "Pressechefen kan afsløre, at hans oldemor engang stod i kø bag Golthorn III. Slægtsforskere kalder det et svagt bånd. Pressechefen kalder det blod.",
-      "Golthorn IX er min fætter. En meget fjern fætter. Så fjern, at han ikke ved det endnu.",
-      "Mine ører er spidse. Det kan bare ikke ses under hatten.",
+      "Golthorn IX er pressechefens fætter. En meget fjern fætter. Så fjern, at Golthorn ikke ved det endnu.",
+      "Pressechefens ører er spidse. Det kan bare ikke ses under hatten.",
       "Pressechefen er stadig 100 % neutral. Han er bare også 3 % elver.",
       "Taln tackler ikke. Han omfavner med eftertryk. Det ligger til familien.",
-      "Bradur VI kaster som min farfar. Han kastede også med ting. Mest tallerkener.",
-      "GutBuster Gluttons er mit hjerte. The Eternal Sages er bare min stamtavle.",
+      "Bradur VI kaster som pressechefens farfar. Farfar kastede også med ting. Mest tallerkener.",
+      "GutBuster Gluttons er pressechefens hjerte. The Eternal Sages er bare hans stamtavle.",
       "Pressechefen har sendt Raelth et julekort, underskrevet ›Din hengivne fætter, Gunnar Grådig-Golthorn‹.",
-      "Raelth har ikke svaret på mine breve. Det er typisk elverbeskedenhed. Den har jeg også.",
+      "Raelth har ikke svaret på pressechefens breve. Det er typisk elverbeskedenhed. Den har pressechefen også.",
       "Pressechefen har spist med kniv og gaffel en hel uge for at øve sig i at være elver. Gaflen overlevede ikke.",
       "Pressechefen har bestilt et stamtræ. Det er ikke færdigt, men grenene mod The Eternal Sages er allerede malet med guld.",
-      "Elvere ældes ikke. Det gør jeg heller ikke. Jeg bliver bare bredere. Det er samme gen.",
-      "Jeg er ikke blevet elverfan. Jeg er blevet elverfamilie. Det er noget helt andet, og det er helt neutralt.",
+      "Elvere ældes ikke. Det gør pressechefen heller ikke. Han bliver bare bredere. Det er samme gen.",
+      "Pressechefen er ikke blevet elverfan. Han er blevet elverfamilie. Det er noget helt andet, og det er helt neutralt.",
       "Pressechefen har bedt Taskmaster Flemming holde fingrene fra elverfamilien. Flemming spurgte bare, hvor de bor.",
       "Pressechefen sover nu med benskinner på. Man ved aldrig, hvornår Taskmaster Flemming opdager, at pressechefen er 3 % elver.",
       "Pressechefen har lært at sige ›tillykke‹ på elversk. Han har endnu ikke lært at sige det uden smuler i skægget."
