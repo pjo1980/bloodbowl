@@ -1597,6 +1597,7 @@
     const top = powerRanking().slice(0, 3);
     return top.length ? `<a class="card presse pr-kort" href="#power"><p class="kicker">Gunnars power ranking</p>
       <ol>${top.map((h) => `<li>${esc(h.navn)}</li>`).join("")}</ol>
+      <p class="small muted" style="margin:0">Pressechefen om nummer et, ${esc(top[0].navn)}:</p>
       <p class="presse-tekst">»${esc(top[0].tekst)}«</p><p class="small" style="margin:0">Se hele ranglisten →</p></a>` : "";
   }
   function kopiKnap() {

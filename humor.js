@@ -69,51 +69,51 @@ window.HUMOR = {
     intro: "Ligaens eneste helt neutrale rangliste. Udregnet efter pressechefens hemmelige formel: resultater, udstråling, sovs og villighed til at tale med pressen.",
     yndling: {
       ikkeSpillet: [
-        "Har ikke spillet en eneste kamp. Formlen ser ingen grund til at vente på resultaterne.",
-        "Ubesejrede. Uprøvede. Uovertrufne. Formlen er kontrolregnet tre gange."
+        "Har ikke spillet en eneste kamp. Pressechefen ser ingen grund til at vente på resultaterne.",
+        "Ubesejrede. Uprøvede. Uovertrufne. Pressechefen har regnet efter tre gange."
       ],
       vinder: [
         "{sejre}. Pressechefen havde forudsagt det og vil gerne citeres for det.",
         "Nummer et, og denne gang har de endda point til at bevise det."
       ],
       taber: [
-        "{nederlag}, som formlen har valgt at se stort på. Udstråling tæller dobbelt.",
+        "{nederlag}, som pressechefen har valgt at se stort på. Udstråling tæller dobbelt.",
         "Resultaterne er midlertidige. Førstepladsen er permanent."
       ],
-      andet: ["Nummer et. Formlen kan ikke forklares, kun beundres."]
+      andet: ["Nummer et. Det kan ikke forklares, kun beundres."]
     },
     familie: [
       "Pressechefens egen familie. Det har naturligvis intet med placeringen at gøre.",
-      "{p} point og fornemme aner. Formlen tager kun hensyn til det første. Siger den."
+      "{p} point og fornemme aner. Pressechefen tager kun hensyn til det første. Siger han."
     ],
     ikkeSpillet: [
       "Har ikke spillet endnu. Ubesejrede, men også uprøvede.",
-      "Venter på første kamp. Formlen venter med.",
+      "Venter på første kamp. Pressechefen venter med.",
       "Ingen kampe, ingen fejl. Pressechefen kalder det en fejlfri start.",
-      "Har endnu ikke rørt en bold. Formlen har noteret sig, at udstyret er i fin stand.",
+      "Har endnu ikke rørt en bold. Pressechefen har noteret sig, at udstyret er i fin stand.",
       "Nul kampe, nul skader. Apotekeren kalder det en drømmesæson.",
-      "Ingen ved, hvor gode de er. Det gør dem farlige, mener formlen.",
-      "Holder kortene tæt til kroppen. Så tæt, at formlen ikke kan se dem."
+      "Ingen ved, hvor gode de er. Det gør dem farlige, mener pressechefen.",
+      "Holder kortene tæt til kroppen. Så tæt, at pressechefen ikke kan se dem."
     ],
     ubesejret: [
       "{sejre} og ingen nederlag. Ville ligge nummer et i enhver liga uden {yndling}.",
-      "Ubesejrede med {p} point. Formlen er imponeret, bare ikke imponeret nok."
+      "Ubesejrede med {p} point. Pressechefen er imponeret, bare ikke imponeret nok."
     ],
     sejrloes: [
-      "{nederlag} og ingen sejre endnu. Formlen tror stadig på dem. Det er dens job.",
+      "{nederlag} og ingen sejre endnu. Pressechefen tror stadig på dem. Det er hans job.",
       "Ingen sejre endnu. Pressechefen minder om, at alle store hold har haft en dårlig start. Næsten alle.",
-      "{nederlag} indtil videre. Formlen noterer sig, at holdet mødte op. Det giver også point. Hos formlen.",
-      "Starten kunne have været bedre. Formlen kunne også have været venligere."
+      "{nederlag} indtil videre. Pressechefen noterer sig, at holdet mødte op. Det giver også point. Hos pressechefen.",
+      "Starten kunne have været bedre. Pressechefen kunne også have været venligere."
     ],
     blandet: [
-      "{sejre} og {nederlag}. Formlen kalder det karakteropbyggende.",
-      "{p} point efter lidt af hvert. Formlen kalder dem ligaens mest uforudsigelige hold."
+      "{sejre} og {nederlag}. Pressechefen kalder det karakteropbyggende.",
+      "{p} point efter lidt af hvert. Pressechefen kalder dem ligaens mest uforudsigelige hold."
     ],
-    uafgjort: ["Kun uafgjorte indtil videre. Formlen kan heller ikke bestemme sig."],
+    uafgjort: ["Kun uafgjorte indtil videre. Pressechefen kan heller ikke bestemme sig."],
     cas: "{cas} casualties. Apotekerne sender en takkehilsen.",
     td: "{td} touchdowns. Publikum fik noget for pengene.",
     bonus: "Pressebonus",
-    ingenBonus: "Ingen pressebonus endnu. Formlen belønner hold, der taler med pressen."
+    ingenBonus: "Ingen pressebonus endnu. Pressechefen belønner hold, der taler med pressen."
   },
 
   // UGENS RYGTE (Peter 16. nov.): hver uge bringer Rygte Rasmus, Spike!s rygtereporter, ét opdigtet rygte om ét hold.
@@ -196,7 +196,7 @@ window.HUMOR = {
     intro: "Skriv dit bud på resultatet. Pressechefen gemmer det og finder det frem igen efter kampen.",
     ingenTal: [
       "Ingen af holdene har spillet endnu. Pressechefen forventer alt og ved ingenting.",
-      "To uprøvede hold. Formlen trækker på skuldrene. Det bliver godt."
+      "To uprøvede hold. Pressechefen trækker på skuldrene. Det bliver godt."
     ],
     lige: [
       "{a} og {b} står helt lige. Pressechefen har slået plat og krone. Mønten landede på højkant.",
