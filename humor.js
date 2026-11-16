@@ -35,11 +35,11 @@ window.HUMOR = {
       ],
       "The FumbleBoyz": [
         "The FumbleBoyz har endnu ikke udtalt sig. Pressechefen går ud fra, at pressemeddelelsen blev tabt på vej til postkassen.",
-        "Ingen kommentar fra The FumbleBoyz. »Legends play here« står der på banneret. Pressechefen vil gerne høre legenden."
+        "Ingen kommentar fra The FumbleBoyz. ›Legends play here‹ står der på banneret. Pressechefen vil gerne høre legenden."
       ],
       "Return Of The Living Deadbeats": [
         "Return Of The Living Deadbeats tier som graven. Pressechefen har banket høfligt på kistelåget.",
-        "Ingen kommentar fra Deadbeats. Pressechefen ved, at de er oppe. Det står på plakaten."
+        "Ingen kommentar fra Deadbeats. Pressechefen ved, at de er stået op. Det står i holdnavnet."
       ],
       "Da Demolitionaz": [
         "Da Demolitionaz har ingen planer, ingen tilladelser og indtil videre ingen kommentarer.",
@@ -93,7 +93,7 @@ window.HUMOR = {
     ],
     ubesejret: [
       "{sejre} og ingen nederlag. Ville ligge nummer et i enhver liga uden {yndling}.",
-      "Ubesejrede med {p} point. Formlen er imponeret, men ikke nok."
+      "Ubesejrede med {p} point. Formlen er imponeret, bare ikke imponeret nok."
     ],
     sejrloes: [
       "{nederlag} og ingen sejre endnu. Formlen tror stadig på dem. Det er dens job.",
@@ -158,7 +158,7 @@ window.HUMOR = {
     "Ifølge rygterne tager kommissærens kontor imod bestikkelse i guld, øl og kage. Pressechefen har tilbudt sovs. Det blev afvist.",
     "En anonym gnoblar har set kommissæren tælle guldmønter i stillingsarket. Ifølge kilden hed det »formler«.",
     "Kommissæren afviser alle rygter om bestikkelse. Det gør hans nye sommerresidens i Lustria også.",
-    "Uofficiel prisliste fra kommissærens kontor: at flytte en kamp koster tre tønder Bugman's. At flytte den tilbage koster fire.",
+    "Uofficiel prisliste fra kommissærens kontor: At flytte en kamp koster tre tønder Bugman's. At flytte den tilbage koster fire.",
     "Pressechefen spurgte kommissæren om Taskmaster Flemmings tomme pengebælte. Han fik intet svar, men en mistænkeligt god plads ved næste kamp.",
     "Kommissærens nye guldbelagte Bloodweiser-tønde er efter sigende en gave fra »en anonym elverelsker«. Elverne benægter. Flemming smiler."
   ],
@@ -176,18 +176,18 @@ window.HUMOR = {
       "Taln tackler ikke. Han omfavner med eftertryk. Det ligger til familien.",
       "Bradur VI kaster som min farfar. Han kastede også med ting. Mest tallerkener.",
       "GutBuster Gluttons er mit hjerte. The Eternal Sages er bare min stamtavle.",
-      "Pressechefen har sendt Raelth et julekort, underskrevet “Din kære fætter, Gunnar Grådig-Golthorn”.",
-      "Raelth har ikke svaret på mine breve. Det er typisk elverbeskedenhed. Det har jeg også.",
+      "Pressechefen har sendt Raelth et julekort, underskrevet ›Din hengivne fætter, Gunnar Grådig-Golthorn‹.",
+      "Raelth har ikke svaret på mine breve. Det er typisk elverbeskedenhed. Den har jeg også.",
       "Pressechefen har spist med kniv og gaffel en hel uge for at øve sig i at være elver. Gaflen overlevede ikke.",
       "Pressechefen har bestilt et stamtræ. Det er ikke færdigt, men grenene mod The Eternal Sages er allerede malet med guld.",
       "Elvere ældes ikke. Det gør jeg heller ikke. Jeg bliver bare bredere. Det er samme gen.",
       "Jeg er ikke blevet elverfan. Jeg er blevet elverfamilie. Det er noget helt andet, og det er helt neutralt.",
-      "Pressechefen har bedt Taskmaster Flemming holde fingrene fra hans elverfamilie. Flemming spurgte bare, hvor de bor.",
-      "Pressechefen sover nu med benskinner på. Man ved aldrig, hvornår Taskmaster Flemming opdager, at han er 3 % elver.",
-      "Pressechefen har lært at sige “tillykke” på elversk. Han har endnu ikke lært at sige det uden smuler i skægget."
+      "Pressechefen har bedt Taskmaster Flemming holde fingrene fra elverfamilien. Flemming spurgte bare, hvor de bor.",
+      "Pressechefen sover nu med benskinner på. Man ved aldrig, hvornår Taskmaster Flemming opdager, at pressechefen er 3 % elver.",
+      "Pressechefen har lært at sige ›tillykke‹ på elversk. Han har endnu ikke lært at sige det uden smuler i skægget."
     ],
     // Til kampreferater, hvor Sages er med (vinder / taber / uafgjort).
-    vandt: "Pressechefen fældede en tåre over sejren. “Blod er tykkere end sovs,” siger han. Det er første gang, han har sagt det.",
+    vandt: "Pressechefen fældede en tåre over sejren. ›Blod er tykkere end sovs,‹ siger han. Det er første gang, han har sagt det.",
     tabte: "Pressechefen kalder nederlaget et familieanliggende og vil ikke kommentere det yderligere. Han har sendt blomster.",
     uafgjort: "Uafgjort. Pressechefen ser det som en moralsk sejr til sine slægtninge, The Eternal Sages."
   },

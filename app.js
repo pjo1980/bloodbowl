@@ -326,14 +326,15 @@
     const plads = s.hold.findIndex((h) => h.p === y.p) + 1;
     const delt = s.hold.filter((h) => h.p === y.p).length > 1;
     if (plads === 1) return tilfældig([
-      `Som forventet ligger ${Y} øverst. Pressechefen har intet at tilføje, udover at han havde ret hele tiden.`,
+      `Som forventet ligger ${Y} øverst. Pressechefen har intet at tilføje, ud over at han havde ret hele tiden.`,
       `${Y} fører ligaen. Pressechefen har bestilt kage til hele pressekorpset. Gluttons har allerede spist den.`
     ]);
     const valg = [
-      `Ja, ${fører.navn} fører med ${fører.p} point. Men lad os være ærlige: Alle taler om ${Y} på en ${delt ? "delt " : ""}${plads}.-plads. Det kaldes at lure.`,
+      `Ja, ${fører.navn} fører med ${fører.p} point. Men lad os være ærlige: Alle taler om ${Y} på en ${delt ? "delt " : ""}${plads}.-plads. Det hedder at ligge på lur.`,
       `Tabellen lyver ikke. Den er bare ikke færdig med at fortælle, hvor gode ${Y} er.`,
       `${fører.navn} fører. Pressechefen har bedt tabellen om en kommentar, men den henviser til ${Y}' imponerende appetit.`,
-      `${y.p} point til ${Y}. Pressechefen understreger, at det er ${y.p} meget tunge point.`
+      y.p > 0 ? `${y.p} point til ${Y}. Pressechefen understreger, at det er ${y.p} meget tunge point.`
+        : `0 point til ${Y}. Pressechefen understreger, at det er ligaens tungeste 0 point.`
     ];
     if (y.w + y.d + y.l === 0) valg.push(`${Y} har ikke tabt en eneste kamp i år. De har heller ikke spillet nogen, men det er en detalje.`);
     return tilfældig(valg);
@@ -511,12 +512,12 @@
     const yk = puljer.flatMap((p) => p.kampe).filter((k) => !k.fejl && k.spillet && (k.hjemme === Y || k.ude === Y));
     const yv = yk.filter((k) => (k.hjemme === Y ? tal(k.s1) > tal(k.s2) : tal(k.s2) > tal(k.s1))).length;
     const presse = !Y ? "" : yk.length === 0
-      ? `${Y} har endnu ikke spillet en puljekamp. Pressechefen kalder det den perfekte sæson: ubesejrede.`
+      ? `${Y} har endnu ikke spillet en puljekamp. Pressechefen kalder det en perfekt sæson: De er stadig ubesejrede.`
       : yv === yk.length
-        ? `${Y} har spillet ${yk.length} og vundet ${yv}. Pressechefen arbejder allerede på biografien.`
+        ? `${Y} har ${yk.length === 1 ? "spillet én kamp og vundet den" : `spillet ${yk.length} kampe og vundet dem alle`}. Pressechefen arbejder allerede på biografien.`
         : yv === 0
-          ? `${Y} har spillet ${yk.length} og vundet ${yv}. Pressechefen kalder det taktisk opvarmning.`
-          : `${Y} har spillet ${yk.length} og vundet ${yv}. Pressechefen tæller kun de vundne.`;
+          ? `${Y} har spillet ${yk.length === 1 ? "én kamp" : `${yk.length} kampe`} uden at vinde. Pressechefen kalder det taktisk opvarmning.`
+          : `${Y} har vundet ${yv} af ${yk.length} kampe. Pressechefen tæller kun de vundne.`;
     return hoved + `<div class="grid-2">${pressechefKort(presse)}${rygteKort()}</div>` + `<div class="grid-2" style="margin-top:16px">${puljer.map((p) => {
       const spillet = p.kampe.filter((k) => k.spillet).length;
       return `<div class="card pulje ${puljeKl(p.pulje)}"><h3>${esc(titel(p.pulje))}</h3>
@@ -1049,9 +1050,9 @@
     const presse = EF && [A, B].includes(EF.hold) && ![A, B].includes(Y)
       ? (vinder === EF.hold ? EF.vandt : vinder ? EF.tabte : EF.uafgjort)
       : [A, B].includes(Y)
-      ? (vinder === Y ? `En historisk aften for ${Y}. Pressechefen har allerede bestilt statuen.` : vinder ? `Et resultat, der ikke afspejler ${Y}' enorme overlegenhed. Pressechefen har klaget til Nuffle.` : `Uafgjort, men moralsk en sejr til ${Y}.`)
+      ? (vinder === Y ? `En historisk aften for ${Y}. Pressechefen har allerede bestilt statuen.` : vinder ? `Et resultat, der ikke afspejler ${Y}' enorme overlegenhed. Pressechefen har klaget til Nuffle.` : `Uafgjort, men en moralsk sejr til ${Y}.`)
       : [`Pressechefen kalder kampen solid, men bemærker, at den havde været bedre med ${Y} på banen.`,
-         `Pressechefen konstaterer, at ${Y} fortsat er ubesejrede i denne kamp.`,
+         `Pressechefen konstaterer, at ${Y} heller ikke tabte denne kamp. De spillede den ikke, men alligevel.`,
          `Pressechefen roser begge hold og minder om, at ${Y} også findes.`][hashTal(k.fane) % 3];
     return { tekst: linjer.join(" "), presse };
   }
@@ -1099,7 +1100,7 @@
       <p class="kicker">Uden for banen</p>
       <h1>Off pitch training</h1>
       <p class="lead">Bliv en bedre coach mellem kampene. Her er ligaens anbefalede steder at lære, øve og lytte.</p>
-      ${pressechefKort("Coach Otto Overbelly træner ikke uden for banen. Han siger, at det kaldes frokost. Pressechefen kalder det visionært.")}
+      ${pressechefKort("Hos GutBuster Gluttons hedder træning uden for banen frokost. Pressechefen kalder det visionært.")}
       <div class="grid-2" style="margin-top:16px">${(C.TRAENING || []).map((t) => `
         <div class="card traening"><h3>${ext(t.url, t.navn)}</h3><p>${esc(t.tekst)}</p>
           <ul class="top5">${(t.links || []).map((l) => `<li><span>${ext(l.url, l.navn)}</span><span class="muted small">${esc(l.tekst)}</span></li>`).join("")}</ul>
@@ -1182,8 +1183,8 @@
     const værst = slagtere[0];
     const delt = slagtere.filter((s) => værst && s.cas === værst.cas).length;
     const gunnar = !værst ? "Skadestuen er tom. Pressechefen er skuffet. Han havde købt popcorn." : delt > 1
-      ? `${delt} spillere deler førstepladsen blandt slagterne med ${værst.cas} CAS hver. Pressechefen kalder det "fysisk spil". Lægen kalder det overarbejde.`
-      : `${værst.navn} fra ${værst.hold} topper listen over slagtere. Pressechefen kalder det "fysisk spil". Lægen kalder det overarbejde.`;
+      ? `${delt} spillere deler førstepladsen blandt slagterne med ${værst.cas} CAS hver. Pressechefen kalder det ›fysisk spil‹. Lægen kalder det overarbejde.`
+      : `${værst.navn} fra ${værst.hold} topper listen over slagtere. Pressechefen kalder det ›fysisk spil‹. Lægen kalder det overarbejde.`;
     return hoved + pressechefKort(gunnar) + `<div class="grid-2" style="margin-top:16px">${kortSyge}${kortSlagtere}${kortNig}${kortHold}</div>
       <p class="small muted">Skader kommer kun med, hvis de er tastet: Miss Next Game og Niggling i holdarket, CAS og Miss Next Game i kamparket.
         Se <a href="#kampdag">Kampdag</a>.</p>`;
