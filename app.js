@@ -344,9 +344,20 @@
     const f = (H.figurer || {})[H.pressechef.navn];
     return f ? `<a href="${esc(f.billede)}" target="_blank" rel="noopener" title="Se hele portrættet"><img class="figur ${kl || ""}" src="${esc(f.lille)}" alt="${esc(H.pressechef.navn)}" loading="lazy"></a>` : "";
   };
-  const gunnar = () => `${gunnarAnsigt()}${esc(H.pressechef.navn)}, ${esc(H.pressechef.titel)}`;
+  // Pressechefens dobbeltnavn, når han udtaler sig om sin "elverfamilie": Gunnar Grådig-Golthorn (humor.js -> elverfamilie).
+  const erGunnar = (navn) => navn === H.pressechef.navn || String(navn || "").startsWith(H.pressechef.navn + "-");
+  function elverNavn(tekst) {
+    const navne = (EF && EF.efternavne) || [];
+    if (!navne.length) return H.pressechef.navn;
+    const nævnt = navne.find((n) => String(tekst).includes(n));
+    return `${H.pressechef.navn}-${nævnt || navne[hashTal(String(tekst)) % navne.length]}`;
+  }
+  // Handler teksten om elverfamilien? Så er det en af de faste elverlinjer i humor.js.
+  const elverTekst = (tekst) => !!EF && !!tekst && ((EF.linjer || []).includes(tekst) || [EF.vandt, EF.tabte, EF.uafgjort].includes(tekst)
+    || ((H.optakt || {}).familie || []).includes(tekst));
+  const gunnar = (tekst) => `${gunnarAnsigt()}${esc(elverTekst(tekst) ? elverNavn(tekst) : H.pressechef.navn)}, ${esc(H.pressechef.titel)}`;
   const pressechefKort = (tekst) => tekst ? `<aside class="card presse"><p class="kicker">Pressechefens hjørne</p>
-    <p class="presse-tekst">»${esc(tekst)}«</p><div class="small muted">${gunnar()}</div></aside>` : "";
+    <p class="presse-tekst">»${esc(tekst)}«</p><div class="small muted">${gunnar(tekst)}</div></aside>` : "";
   // Skiftevis et Star Player-citat og et ordret citat fra en af ligaens egne coaches.
   function citatKort() {
     const hc = H.holdCitater || [];
@@ -819,7 +830,8 @@
 
   // Faste skribenter med ansigt (humor.js -> figurer), fx Rygte Rasmus.
   const FIGURER = H.figurer || {};
-  const figurBillede = (navn, kl) => FIGURER[navn] ? `<img class="figur ${kl || ""}" src="${esc(FIGURER[navn].lille)}" alt="" loading="lazy" title="${esc(navn)}${FIGURER[navn].titel ? ", " + esc(FIGURER[navn].titel) : ""}">` : "";
+  const figur = (navn) => FIGURER[navn] || (erGunnar(navn) ? FIGURER[H.pressechef.navn] : undefined);
+  const figurBillede = (navn, kl) => figur(navn) ? `<img class="figur ${kl || ""}" src="${esc(figur(navn).lille)}" alt="" loading="lazy" title="${esc(navn)}${figur(navn).titel ? ", " + esc(figur(navn).titel) : ""}">` : "";
   const bylineFigur = (pk) => { const n = String(pk.indsendt || "").replace(/^Indsendt af\s+/, ""); return FIGURER[n] ? n : ""; };
   // Skribentens portræt og titel under overskriften. Tryk på portrættet for at se hele billedet.
   function forfatterBlok(pk) {
@@ -836,8 +848,8 @@
       if (r.scene) return `<p class="scene">${esc(r.scene)}</p>`;
       const rolle = r.rolle && !set.has(r.hvem) ? ` <span class="rolle">${esc(r.rolle)}</span>` : "";
       set.add(r.hvem);
-      const kl = r.hvem === H.pressechef.navn ? " formand" : r.hvem === coachNavn ? " coach" : "";
-      return `<div class="replik${kl}"><div class="taler">${figurBillede(r.hvem)}${esc(r.hvem)}${rolle || (FIGURER[r.hvem] && !set.has("#" + r.hvem) && set.add("#" + r.hvem) ? ` <span class="rolle">${esc(FIGURER[r.hvem].titel || "")}</span>` : "")}${r.note ? ` <span class="note">(${esc(r.note)})</span>` : ""}</div>
+      const kl = erGunnar(r.hvem) ? " formand" : r.hvem === coachNavn ? " coach" : "";
+      return `<div class="replik${kl}"><div class="taler">${figurBillede(r.hvem)}${esc(r.hvem)}${rolle || (figur(r.hvem) && !set.has("#" + r.hvem) && set.add("#" + r.hvem) ? ` <span class="rolle">${esc(figur(r.hvem).titel || "")}</span>` : "")}${r.note ? ` <span class="note">(${esc(r.note)})</span>` : ""}</div>
         ${String(r.tekst || "").split("\n").map((t) => `<p>${esc(t)}</p>`).join("")}</div>`;
     }).join("");
   }
@@ -1463,7 +1475,7 @@
   const tipLink = (fane, hold) => `#indsend/tip/${encodeURIComponent(fane)}/${encodeURIComponent(hold)}`;
   const tipScore = (p) => { const m = String((p && p.titel) || "").match(/(\d+)\s*[-–]\s*(\d+)/); return m ? [+m[1], +m[2]] : null; };
   // Coachens egne ord i buddet. Selve resultatet ("2-1.") står allerede med store tal og tages ikke med igen.
-  const tipOrd = (p) => p.replikker.filter((r) => r.hvem && r.hvem !== H.pressechef.navn).map((r) => r.tekst).join(" ").replace(/^\d+\s*[-–]\s*\d+\.\s*/, "");
+  const tipOrd = (p) => p.replikker.filter((r) => r.hvem && !erGunnar(r.hvem)).map((r) => r.tekst).join(" ").replace(/^\d+\s*[-–]\s*\d+\.\s*/, "");
   const kommendeFaner = () => { const sp = new Set(spilledeFaner()); return alleFaner().filter((f) => !sp.has(f)); };
   const ugensOptakt = () => { const k = kommendeFaner(); return k.length ? k[ugeNr() % k.length] : ""; };
 
@@ -1527,7 +1539,7 @@
     const [A, B] = kampHold(fane);
     return `<aside class="card presse"><p class="kicker">Optakt til kampen</p>
       <h3 class="optakt-kamp">${esc(A)} <span class="muted">mod</span> ${esc(B)}</h3>
-      <p class="presse-tekst">»${esc(optaktTekst(A, B))}«</p><div class="small muted">${gunnar()}</div>
+      <p class="presse-tekst">»${esc(optaktTekst(A, B))}«</p><div class="small muted">${gunnar(optaktTekst(A, B))}</div>
       <p style="margin:10px 0 0"><a class="knap knap-link" href="#kamp/${encodeURIComponent(fane)}">🔮 Se optakten, og giv dit bud</a></p></aside>`;
   }
 

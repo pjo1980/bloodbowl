@@ -278,6 +278,9 @@ window.HUMOR = {
   // Vises på forsiden og stillingen (af og til), på Sages' holdside og i Sages' kampreferater.
   elverfamilie: {
     hold: "The Eternal Sages",
+    // Når pressechefen udtaler sig om elverfamilien, skriver han under med et dobbeltnavn (Peter 16. nov.):
+    // "Gunnar Grådig-Golthorn". Nævner teksten selv et af navnene, bruges det; ellers skiftes der mellem dem.
+    efternavne: ["Golthorn", "Bradur", "Raelth", "Taln"],
     linjer: [
       "Pressechefen kan afsløre, at hans oldemor engang stod i kø bag Golthorn III. Slægtsforskere kalder det et svagt bånd. Pressechefen kalder det blod.",
       "Golthorn IX er pressechefens fætter. En meget fjern fætter. Så fjern, at Golthorn ikke ved det endnu.",

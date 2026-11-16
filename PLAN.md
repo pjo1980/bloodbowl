@@ -121,6 +121,8 @@ Tegnes af `logo/generer.py`; ret der og kør `python logo/generer.py`, og kopié
 Andre idéer: laurbærkrans med S·F (latinsk/romersk), lykkehjul. Kopiér ikke Games Workshops officielle Blood Bowl-logo.
 
 ## Gunnars stemme (Peter 16. nov. 2026)
+Når han udtaler sig om elverfamilien (The Eternal Sages), skriver han under med dobbeltnavn: "Gunnar Grådig-Golthorn"
+(også -Bradur, -Raelth, -Taln; `humor.js` → elverfamilie.efternavne). Ellers hedder han bare Gunnar Grådig.
 I faste noter og kort omtaler Gunnar sig selv som "Pressechefen", aldrig "jeg". Kun i replikker i interviews og
 pressekonferencer taler han i jeg-form. Sproglig gennemgang af alle hans faste tekster er lavet 16. nov.
 Samme dag: sproglig gennemgang af AL AI-skrevet tekst på siden (sidens faste tekster, humor.js, Spike!s referater,

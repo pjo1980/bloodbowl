@@ -617,7 +617,7 @@ window.PRESSE = [
         "p": "Kassen: 70.000 guld til Eberhards Sages og 60.000 til GrimStones Ocras. Hvis Ocras investerer det i en regelbog, kan det blive farligt."
       },
       {
-        "hvem": "Gunnar Grådig",
+        "hvem": "Gunnar Grådig-Golthorn",
         "rolle": "Ligaens pressechef",
         "tekst": "Jeg er selvfølgelig 100 % neutral. Men at min kære fætter Golthorn IX scorer to gange, og at onkel Bradur VI kaster præcis så mange afleveringer, som der er brug for … det siger vel bare noget om familiens gener. Hilsen til Raelth!"
       },
@@ -1128,7 +1128,7 @@ window.PRESSE = [
         "p": "Kassen: 80.000 til Coach Eberhard og Sages, 70.000 til Coach Lasse og Evaders. Det rækker til mange fjer i hjelmene."
       },
       {
-        "hvem": "Gunnar Grådig",
+        "hvem": "Gunnar Grådig-Bradur",
         "rolle": "Ligaens pressechef",
         "tekst": "To fremragende hold. Pressechefen er 100 % neutral og bemærker blot, at ingen af dem er GutBuster Gluttons."
       }
