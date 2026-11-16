@@ -27,6 +27,34 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "web-1794836275919",
+    "hold": "Black Mountain Slavers",
+    "type": "Rygte",
+    "dato": "2026-11-16",
+    "titel": "Hård træning",
+    "undertitel": "Rygte",
+    "indsendt": "Indsendt af Rygte Rasmus",
+    "forside": "forsider/web-1794836275919.jpg",
+    "citat": {
+      "hvem": "Rygte Rasmus",
+      "tekst": "Deres begrænsede styrke var ikke imponerende for flammesmeden!"
+    },
+    "replikker": [
+      {
+        "p": "Rygte Rasmus har været på pletten endnu en gang."
+      },
+      {
+        "p": "Black Mountain Slavers er tilsyneladende ikke tilfredse med at være nr. 2 i ligaen og har derfor indledt en omgang HÅRD træning af forskellige slags."
+      },
+      {
+        "p": "De stakkels slaver... jeg mener goblins skulle prøve at knække noget, som mindede om knogler. Men deres begrænsede styrke var ikke imponerende for flammesmeden!"
+      },
+      {
+        "p": "Hvad dværgen lavede med koen, kan vi desværre ikke rapportere om i dette blad. Der henvises til vores germanske søsterselskabs blad: Spaß für Erwachsene mit Tieren"
+      }
+    ]
+  },
+  {
     "id": "web-1794636044885",
     "hold": "The Maurading Ocras",
     "type": "Interview",
