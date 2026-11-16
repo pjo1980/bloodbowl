@@ -147,7 +147,8 @@ som person; Gunnar lægger aldrig ord i munden på nogen; det er en invitation, 
   Vises som forfatter på hans artikler og i Presse-listen. Nye figurer tilføjes samme sted.
 - **Ugens rygte** (bygget 16. nov.): ét opdigtet rygte om ét hold, skifter hver mandag (rotation efter ugenummer, som aldrig
   vises). Tekster i `humor.js` → ugensRygte (2 pr. hold). Vises på forsiden, Presse og holdets side. Knappen åbner
-  `#indsend/hold/<hold>/Rygte` (type valgt på forhånd). Fortalt af pressechefen, ikke af Rygte Rasmus (han er en coachs figur).
+  `#indsend/hold/<hold>/Rygte` (type valgt på forhånd). Fortalt af **Rygte Rasmus** (Peter godkendte det 16. nov.),
+  med hans portræt og knappen "Tip Rygte Rasmus" → `#indsend/rygte`. Rasmus omtaler sig selv i tredje person.
 - **Optakt til kampen** (bygget 16. nov.): uspillede puljekampe viser holdene stillet op med rigtige tal, pressechefens
   kommentar og coachernes bud (`#indsend/tip/<fane>/<hold>`). Et bud gemmes som type "Forudsigelse" med kamp = "tip:<fane>"
   og resultatet i overskriften. Efter kampen fælder pressechefen dom (ramte plet / rigtig vinder / ved siden af).

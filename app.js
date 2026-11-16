@@ -888,7 +888,7 @@
       <p class="kicker">Pressetribunen</p>
       <h1>Presse</h1>
       <p class="lead">Pressekonferencer, kampreferater og interviews fra ligaens hold. Tryk på en overskrift for at læse.</p>
-      ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}"${/^#/.test(C.PRESSE_FORMULAR) ? "" : ' target="_blank" rel="noopener"'}>✍️ Indsend til pressetribunen</a> <a class="knap knap-link" href="#power">📊 Gunnars power ranking</a></p>` : ""}
+      ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}"${/^#/.test(C.PRESSE_FORMULAR) ? "" : ' target="_blank" rel="noopener"'}>✍️ Indsend til pressetribunen</a> <a class="knap knap-link" href="#power">📊 Gunnars power ranking</a>${UR ? ` <a class="knap knap-link" href="#indsend/rygte">🐀 ${esc(UR.tip)}</a>` : ""}</p>` : ""}
       ${efterlysning()}
       <div class="grid-2">${ugensRygteKort()}${optaktKort()}</div>
       ${PRESSE.length ? `<div class="pk-liste">${PRESSE.map(pkLinje).join("")}</div>` : '<p class="muted">Ingen artikler endnu.</p>'}
@@ -1000,7 +1000,8 @@
       ...m.svar.map((x) => `• ${kampNavn(x.fane)}: mangler ${listeTekst(x.hold)}\n  ${rod}/#kamp/${encodeURIComponent(x.fane)}`));
     if (l.length === 1) l.push("", "Alle hold har svaret. Pressechefen er rørt og en smule mistænksom.");
     const ry = ugensRygte(), op = ugensOptakt();
-    if (ry) l.push("", `🗣️ Ugens rygte: ${ry.tekst}`, `Bekræft, benægt eller overgå det: ${rod}/${indsendLink(ry.hold)}/Rygte`);
+    if (ry) l.push("", `🗣️ Ugens rygte fra ${UR.reporter}: ${ry.tekst}`, `Bekræft, benægt eller overgå det: ${rod}/${indsendLink(ry.hold)}/Rygte`,
+      `Har du selv hørt noget? ${UR.tip}: ${rod}/#indsend/rygte`);
     if (op) l.push("", `🔮 Optakt: ${kampHold(op).join(" mod ")}. Hvordan ender den?`, `Giv jeres bud: ${rod}/#kamp/${encodeURIComponent(op)}`);
     l.push("", `Hilsen ${H.pressechef.navn.split(" ")[0]} (100 % neutral)`);
     return l.join("\n");
@@ -1257,8 +1258,12 @@
     const hold = [...new Set([...Object.keys(puljeAf), ...alleHold()])].filter((h) => !/^#/.test(h)).sort((a, b) => a.localeCompare(b, "da"));
     const typer = ["Pressemeddelelse", "Kampreferat", "Interview", "Rygte", "Lore"];
     const [måde, a1, a2] = String(navn || "").split("/");
-    const valgtType = måde === "hold" && typer.includes(a2) ? a2 : "";
-    const valgt = måde === "hold" && hold.includes(a1) ? a1 : gemt("bb-hold");
+    const valgtType = måde === "rygte" ? "Rygte" : måde === "hold" && typer.includes(a2) ? a2 : "";
+    const rasmus = UR && (måde === "rygte" || valgtType === "Rygte") ? `<aside class="card presse" style="margin-bottom:16px">
+        <p class="kicker">${esc(UR.tip)}</p><p class="presse-tekst">${esc(UR.tipTekst)}</p>
+        <div class="small muted">${figurBillede(UR.reporter)}${esc(UR.reporter)}${(FIGURER[UR.reporter] || {}).titel ? ", " + esc(FIGURER[UR.reporter].titel) : ""}</div></aside>` : "";
+    // Ved et tip til Rygte Rasmus vælges intet hold på forhånd: rygtet kan handle om et hvilket som helst hold.
+    const valgt = måde === "rygte" ? "" : måde === "hold" && hold.includes(a1) ? a1 : gemt("bb-hold");
     const redaktør = `<details class="card" id="redaktoer"><summary>Redaktør (Peter og Mikkel)</summary>
         <p class="small muted">Skriv redaktør-koden for at skjule eller vise indlæg fra denne side.</p>
         <label>Redaktør-kode<input id="admin-kode" value="${esc(gemt("bb-admin"))}"></label>
@@ -1326,6 +1331,7 @@
       <h1>Indsend til pressetribunen</h1>
       <p class="lead">Kampreferater, interviews, rygter og pressemeddelelser. Gerne med et billede, fx lavet med AI.
         Det kommer på siden med det samme, og pressechefen sætter det pænt op senere.</p>
+      ${rasmus}
       <form id="indsend" class="card indsend" autocomplete="off">
         <label>Hold<select name="hold" required><option value="">Vælg hold</option>
           ${hold.map((h) => `<option${valgt === h ? " selected" : ""}>${esc(h)}</option>`).join("")}</select></label>
@@ -1443,10 +1449,13 @@
   function ugensRygteKort(kunHold) {
     const r = ugensRygte();
     if (!r || (kunHold && r.hold !== kunHold)) return "";
-    return `<aside class="card presse"><p class="kicker">Ugens rygte · ${esc(r.hold)}</p>
+    const R = UR.reporter, f = (H.figurer || {})[R] || {};
+    return `<aside class="card presse rygte"><p class="kicker">Ugens rygte · ${esc(r.hold)}</p>
+      ${UR.intro && UR.intro.length ? `<p class="small muted" style="margin:0">${esc(UR.intro[ugeNr() % UR.intro.length])}</p>` : ""}
       <p class="presse-tekst">»${esc(r.tekst)}«</p>
-      <div class="small muted">${gunnarAnsigt()}${esc(UR.kilde)}</div>
-      <p style="margin:10px 0 0"><a class="knap knap-link" href="${indsendLink(r.hold)}/Rygte">🗣️ ${esc(UR.knap)}</a></p></aside>`;
+      <div class="small muted">${f.billede ? `<a href="${esc(f.billede)}" target="_blank" rel="noopener" title="Se hele portrættet">${figurBillede(R)}</a>` : ""}${esc(R)}${f.titel ? ", " + esc(f.titel) : ""}. ${esc(UR.kilde)}</div>
+      <p class="rygte-knapper"><a class="knap knap-link" href="${indsendLink(r.hold)}/Rygte">🗣️ ${esc(UR.knap)}</a>
+        <a class="knap knap-link" href="#indsend/rygte">🐀 ${esc(UR.tip)}</a></p></aside>`;
   }
 
   // Et bud på en kamp gemmes som et indlæg med kamp = "tip:<fanenavn>" og resultatet i overskriften ("... 2-1 ...").

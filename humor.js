@@ -116,13 +116,23 @@ window.HUMOR = {
     ingenBonus: "Ingen pressebonus endnu. Formlen belønner hold, der taler med pressen."
   },
 
-  // UGENS RYGTE (Peter 16. nov.): hver uge bringer pressechefen ét opdigtet rygte om ét hold. Holdene skiftes i den
+  // UGENS RYGTE (Peter 16. nov.): hver uge bringer Rygte Rasmus, Spike!s rygtereporter, ét opdigtet rygte om ét hold.
+  // Peter har godkendt, at Rasmus står bag (16. nov.). Han omtaler sig selv i tredje person, som i sine egne artikler. Holdene skiftes i den
   // rækkefølge, de står her; når alle har været igennem, tages næste rygte på hvert holds liste.
   // Regler: Rygtet handler om HOLDET (navn, plakat, slogans), aldrig om coachen som person. Det skal være så
   // åbenlyst fjollet, at ingen tror på det, og det skal give lyst til at svare. Ingen ord i munden på nogen.
   ugensRygte: {
-    kilde: "Ubekræftet. Fra pressechefens mest upålidelige kilder.",
+    reporter: "Rygte Rasmus",
+    intro: [
+      "Rygte Rasmus har været på pletten igen.",
+      "Rygte Rasmus har haft øret mod døren til omklædningsrummet.",
+      "Rygte Rasmus har det fra en, der kender en.",
+      "Rygte Rasmus skriver det, de andre ikke tør."
+    ],
+    kilde: "Ubekræftet, som altid.",
     knap: "Bekræft, benægt eller overgå det",
+    tip: "Tip Rygte Rasmus",
+    tipTekst: "Rygte Rasmus lytter. Har du hørt noget om et hold, også dit eget? Vælg holdet, skriv rygtet, og lad Rasmus om resten.",
     hold: {
       "The Eternal Sages": [
         "Det forlyder, at The Eternal Sages har ansat en frisør til sidelinjen. Der må ikke sidde ét hår forkert, når der scores.",

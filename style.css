@@ -366,3 +366,4 @@ img.figur-stor { width: 56px; height: 56px; margin: 0; border: 2px solid var(--g
 .tip-score { font-family: "Bangers", Impact, sans-serif; font-size: 34px; line-height: 1; margin: 0 0 8px; color: var(--accent); }
 .tip-felter { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .kamp a.optakt-link { font-family: "Barlow", system-ui, sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); border-bottom: 0; }
+.rygte-knapper { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; }
