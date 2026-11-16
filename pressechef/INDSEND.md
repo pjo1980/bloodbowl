@@ -47,3 +47,6 @@ Gratis grænser: 100.000 læsninger og 1.000 skrivninger om dagen, 1 GB lager. L
 - `#indsend/hold/<hold>/<type>` vælger også typen på forhånd (bruges af Ugens rygte med typen Rygte).
 - `#indsend/tip/<fane>/<hold>` er bud på en kommende kamp: type "Forudsigelse", feltet `kamp` = "tip:<fanenavn>",
   og overskriften "Forudsigelse: <hjemme> 2-1 <ude>". Siden læser resultatet ud af overskriften, så den må ikke ændres.
+- `#indsend/genmaele/<artikel-id>/<hold>` er et genmæle til en artikel: type "Genmæle", feltet `kamp` = "svar:<artikel-id>".
+- `#indsend/ugens` (eller `/ugens/<hold>`) er svar på ugens spørgsmål: type "Ugens spørgsmål", feltet `kamp` = "uge:<ugenummer>".
+  Svarene vises samlet på `#ugens`, ikke i artikellisten.

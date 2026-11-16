@@ -437,9 +437,9 @@
       </div>
 
       <h2>Fra pressetribunen</h2>
-      <div class="grid-2" style="margin-bottom:16px">${ugensRygteKort()}${optaktKort()}</div>
+      <div class="grid" style="margin-bottom:16px">${ugensSpørgsmålKort()}${ugensRygteKort()}${optaktKort()}</div>
       <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}${rygteKort()}${powerKort()}${ingenKommentarKort(tilfældig(stilleHold()))}${plakatKort()}</div>
-      ${PRESSE.length ? `<div style="margin-top:16px">${pkTeaser(PRESSE[0])}</div>` : ""}
+      ${presseListe().length ? `<div style="margin-top:16px">${pkTeaser(presseListe()[0])}</div>` : ""}
 
       ${nyhed ?`<h2>Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p><a href="#nyheder">Alle nyheder</a></p>` : ""}`;
   }
@@ -893,8 +893,13 @@
     if (valgt) return `
       <p class="kicker">Pressetribunen</p>
       ${tilbage}
+      ${(() => {
+        const o = /^svar:/.test(valgt.kamp || "") ? PRESSE.find((p) => p.id === valgt.kamp.slice(5)) : null;
+        return o ? `<p class="small">↩️ Genmæle til <a href="#presse/${encodeURIComponent(o.id)}">»${esc(bareTitel(o.titel))}«</a> <span class="muted">(${esc(o.hold)})</span></p>` : "";
+      })()}
       ${pressekonference(valgt)}
       ${fraSpike(valgt) && faneAfSpike(valgt) ? treSpørgsmålBoks(faneAfSpike(valgt)) : ""}
+      ${genmæleBoks(valgt)}
       ${tilbage}`;
     return `
       <p class="kicker">Pressetribunen</p>
@@ -902,20 +907,20 @@
       <p class="lead">Pressekonferencer, kampreferater og interviews fra ligaens hold. Tryk på en overskrift for at læse.</p>
       ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}"${/^#/.test(C.PRESSE_FORMULAR) ? "" : ' target="_blank" rel="noopener"'}>✍️ Indsend til pressetribunen</a> <a class="knap knap-link" href="#power">📊 Gunnars power ranking</a>${UR ? ` <a class="knap knap-link" href="#indsend/rygte">🐀 ${esc(UR.tip)}</a>` : ""}</p>` : ""}
       ${efterlysning()}
-      <div class="grid-2">${ugensRygteKort()}${optaktKort()}</div>
-      ${PRESSE.length ? `<div class="pk-liste">${PRESSE.map(pkLinje).join("")}</div>` : '<p class="muted">Ingen artikler endnu.</p>'}
+      <div class="grid">${ugensSpørgsmålKort()}${ugensRygteKort()}${optaktKort()}</div>
+      ${presseListe().length ? `<div class="pk-liste">${presseListe().map(pkLinje).join("")}</div>` : '<p class="muted">Ingen artikler endnu.</p>'}
       <p class="small muted">Satire. Skrevet af holdenes coaches eller ud fra deres indlæg.</p>`;
   }
 
   function holdLore(navn) {
     const egne = (H.holdCitater || []).filter((c) => c.hold === navn);
-    const kort = [ugensRygteKort(navn), stilleHold().includes(navn) ? ingenKommentarKort(navn) : "",
+    const kort = [nævntKort(navn), ugensRygteKort(navn), stilleHold().includes(navn) ? ingenKommentarKort(navn) : "",
       EF && navn === EF.hold ? pressechefKort(tilfældig(EF.linjer)) : "", egne.length ? holdCitatKort(tilfældig(egne)) : ""].filter(Boolean);
     return (kort.length ? `<div class="grid-2" style="margin-bottom:16px">${kort.join("")}</div>` : "") + holdLoreIndhold(navn);
   }
   function holdLoreIndhold(navn) {
     const L = LORE[navn];
-    const pk = PRESSE.filter((p) => p.hold === navn);
+    const pk = presseListe().filter((p) => p.hold === navn);
     if (!L) return pk.length ? `<h2>Presse</h2><div class="grid">${pk.map(pkTeaser).join("")}</div>` : "";
     return `
       <h2>Om holdet</h2>
@@ -1012,6 +1017,7 @@
       ...m.svar.map((x) => `• ${kampNavn(x.fane)}: mangler ${listeTekst(x.hold)}\n  ${rod}/#kamp/${encodeURIComponent(x.fane)}`));
     if (l.length === 1) l.push("", "Alle hold har svaret. Pressechefen er rørt og en smule mistænksom.");
     const ry = ugensRygte(), op = ugensOptakt();
+    if (US && ugensSpørgsmål()) l.push("", `❓ Ugens spørgsmål: ${ugensSpørgsmål()}`, `Ét svar på én linje er nok: ${rod}/#ugens`);
     if (ry) l.push("", `🗣️ Ugens rygte fra ${UR.reporter}: ${ry.tekst}`, `Bekræft, benægt eller overgå det: ${rod}/${indsendLink(ry.hold)}/Rygte`,
       `Har du selv hørt noget? ${UR.tip}: ${rod}/#indsend/rygte`);
     if (op) l.push("", `🔮 Optakt: ${kampHold(op).join(" mod ")}. Hvordan ender den?`, `Giv jeres bud: ${rod}/#kamp/${encodeURIComponent(op)}`);
@@ -1270,12 +1276,17 @@
     const hold = [...new Set([...Object.keys(puljeAf), ...alleHold()])].filter((h) => !/^#/.test(h)).sort((a, b) => a.localeCompare(b, "da"));
     const typer = ["Pressemeddelelse", "Kampreferat", "Interview", "Rygte", "Lore"];
     const [måde, a1, a2] = String(navn || "").split("/");
-    const valgtType = måde === "rygte" ? "Rygte" : måde === "hold" && typer.includes(a2) ? a2 : "";
+    const orig = GM && måde === "genmaele" && hold.includes(a2) ? PRESSE.find((p) => p.id === a1) : null;
+    const valgtType = orig ? "Genmæle" : måde === "rygte" ? "Rygte" : måde === "hold" && typer.includes(a2) ? a2 : "";
+    const ordet = orig ? `<aside class="card presse" style="margin-bottom:16px"><p class="kicker">Ret til genmæle</p>
+        <p class="presse-tekst">${esc(GM.intro.replace(/\{hold\}/g, a2).replace(/\{titel\}/g, bareTitel(orig.titel)))}</p>
+        <div class="small muted">${gunnar()}</div>
+        <p class="small" style="margin:8px 0 0"><a href="#presse/${encodeURIComponent(orig.id)}">Læs artiklen igen →</a></p></aside>` : "";
     const rasmus = UR && (måde === "rygte" || valgtType === "Rygte") ? `<aside class="card presse" style="margin-bottom:16px">
         <p class="kicker">${esc(UR.tip)}</p><p class="presse-tekst">${esc(UR.tipTekst)}</p>
         <div class="small muted">${figurBillede(UR.reporter)}${esc(UR.reporter)}${(FIGURER[UR.reporter] || {}).titel ? ", " + esc(FIGURER[UR.reporter].titel) : ""}</div></aside>` : "";
     // Ved et tip til Rygte Rasmus vælges intet hold på forhånd: rygtet kan handle om et hvilket som helst hold.
-    const valgt = måde === "rygte" ? "" : måde === "hold" && hold.includes(a1) ? a1 : gemt("bb-hold");
+    const valgt = orig ? a2 : måde === "rygte" ? "" : måde === "hold" && hold.includes(a1) ? a1 : gemt("bb-hold");
     const redaktør = `<details class="card" id="redaktoer"><summary>Redaktør (Peter og Mikkel)</summary>
         <p class="small muted">Skriv redaktør-koden for at skjule eller vise indlæg fra denne side.</p>
         <label>Redaktør-kode<input id="admin-kode" value="${esc(gemt("bb-admin"))}"></label>
@@ -1285,6 +1296,29 @@
         <textarea id="gunnar-besked" rows="9" readonly>${esc(gunnarBesked())}</textarea>
         <button class="knap" type="button" id="gunnar-kopi">Kopiér beskeden</button> <span class="small" id="gunnar-kopi-status" role="status"></span>
       </details>`;
+    // Svar på ugens spørgsmål: vælg hold og skriv én linje. Gemmes med kamp = "uge:<ugenummer>".
+    if (US && måde === "ugens" && ugensSpørgsmål()) {
+      const forvalgt = hold.includes(a1) ? a1 : gemt("bb-hold");
+      return `
+      <p class="kicker">Pressetribunen</p>
+      <p><a href="#ugens">← Tilbage til ugens spørgsmål</a></p>
+      <h1>Ugens spørgsmål</h1>
+      <p class="us-spm us-stor">${esc(ugensSpørgsmål())}</p>
+      <form id="indsend" class="card indsend" autocomplete="off" data-uge="${ugeNr()}">
+        <input type="hidden" name="type" value="Ugens spørgsmål">
+        <input type="hidden" name="kamp" value="uge:${ugeNr()}">
+        <input type="hidden" name="overskrift" value="${esc(("Ugens spørgsmål: " + ugensSpørgsmål()).slice(0, 150))}">
+        <label>Hold<select name="hold" required><option value="">Vælg hold</option>
+          ${hold.map((h) => `<option${forvalgt === h ? " selected" : ""}>${esc(h)}</option>`).join("")}</select></label>
+        <label>Holdets svar (én linje er nok)<textarea class="kort" name="svar" rows="2" maxlength="300" required></textarea></label>
+        <label>Hvem svarer? (valgfrit)<input name="navn" maxlength="60" placeholder="Coachens eller figurens navn" value="${esc(gemt("bb-navn"))}"></label>
+        <label>Liga-kode<input name="kode" required placeholder="Fås hos Peter eller Mikkel" value="${esc(gemt("bb-kode"))}"></label>
+        <input name="hjemmeside" tabindex="-1" aria-hidden="true" autocomplete="off" style="position:absolute;left:-9999px">
+        <button class="knap" type="submit">Send svaret til Gunnar</button>
+        <p class="small" id="indsend-status" role="status"></p>
+      </form>
+      ${redaktør}`;
+    }
     // Bud på en kommende kamp: to tal og en valgfri hilsen. Gemmes med kamp = "tip:<fane>".
     if (OP && måde === "tip" && alleFaner().includes(a1) && kampHold(a1).includes(a2)) {
       const [A, B] = kampHold(a1);
@@ -1343,12 +1377,13 @@
       <h1>Indsend til pressetribunen</h1>
       <p class="lead">Kampreferater, interviews, rygter og pressemeddelelser. Gerne med et billede, fx lavet med AI.
         Det kommer på siden med det samme, og pressechefen sætter det pænt op senere.</p>
-      ${rasmus}
+      ${ordet || rasmus}
       <form id="indsend" class="card indsend" autocomplete="off">
+        ${orig ? `<input type="hidden" name="kamp" value="${esc("svar:" + orig.id)}">` : ""}
         <label>Hold<select name="hold" required><option value="">Vælg hold</option>
           ${hold.map((h) => `<option${valgt === h ? " selected" : ""}>${esc(h)}</option>`).join("")}</select></label>
-        <label>Type<select name="type">${typer.map((t) => `<option${valgtType === t ? " selected" : ""}>${t}</option>`).join("")}</select></label>
-        <label>Overskrift<input name="overskrift" maxlength="150" required></label>
+        <label>Type<select name="type">${(orig ? ["Genmæle", ...typer] : typer).map((t) => `<option${valgtType === t ? " selected" : ""}>${t}</option>`).join("")}</select></label>
+        <label>Overskrift<input name="overskrift" maxlength="150" required value="${esc(orig ? ("Genmæle: " + bareTitel(orig.titel)).slice(0, 150) : "")}"></label>
         <label>Tekst<textarea name="tekst" rows="12" maxlength="20000" required placeholder="Sæt bare teksten ind. Også tekst fra ChatGPT."></textarea></label>
         <label>Billede (valgfrit)<input name="billede" type="file" accept="image/*"></label>
         <label>Dit navn (valgfrit)<input name="navn" maxlength="60" placeholder="Coachens eller figurens navn" value="${esc(gemt("bb-navn"))}"></label>
@@ -1379,6 +1414,12 @@
       const fil = form.billede && form.billede.files[0];
       knap.disabled = true; status.textContent = "Sender …";
       try {
+        if (form.dataset.uge) {
+          const a = String(fd.get("svar") || "").replace(/\s*\n+\s*/g, " ").trim();
+          if (!a) throw new Error("Skriv holdets svar.");
+          fd.delete("svar");
+          fd.set("tekst", `${H.pressechef.navn}: ${ugensSpørgsmål(+form.dataset.uge)}\n${talerAf(fd)}: ${a}`);
+        }
         if (form.dataset.tip) {
           const [A, B] = kampHold(form.dataset.tip);
           const m1 = parseInt(fd.get("maal1"), 10), m2 = parseInt(fd.get("maal2"), 10);
@@ -1416,7 +1457,7 @@
         status.textContent = "Tak! Indlægget er på siden.";
         await hentAlt();
         const kampEfter = form.dataset.svar || form.dataset.tip;
-        location.hash = kampEfter ? "#kamp/" + encodeURIComponent(kampEfter) : d.id ? "#presse/" + d.id : "#presse";
+        location.hash = form.dataset.uge ? "#ugens" : kampEfter ? "#kamp/" + encodeURIComponent(kampEfter) : d.id ? "#presse/" + d.id : "#presse";
       } catch (err) {
         status.textContent = err.message;
         knap.disabled = false;
@@ -1543,6 +1584,100 @@
       <p style="margin:10px 0 0"><a class="knap knap-link" href="#kamp/${encodeURIComponent(fane)}">🔮 Se optakten, og giv dit bud</a></p></aside>`;
   }
 
+  // ---------- Ret til genmæle og ugens spørgsmål (tekster i humor.js) ----------
+  const GM = H.genmaele, US = H.ugensSpoergsmaal;
+  // Overskrift uden de anførselstegn, den måske selv har, så den kan stå inde i »...«.
+  const bareTitel = (t) => String(t || "").replace(/^[»"“]\s*|\s*[«"”]$/g, "");
+  // Småsvar (bud på en kamp og svar på ugens spørgsmål) vises samlet på deres egne sider, ikke som artikler i listen.
+  const erSmåsvar = (p) => /^(tip|uge):/.test(p.kamp || "");
+  const presseListe = () => PRESSE.filter((p) => !erSmåsvar(p));
+  const talerAf = (fd) => {
+    const n = String(fd.get("navn") || "").trim();
+    return /^\p{L}[^:]{0,39}$/u.test(n) && n.split(/\s+/).length <= 4 && !/\d$/.test(n) ? n : "Coachen";
+  };
+
+  // Hvilke andre hold nævner artiklen? Pressechefens egne replikker tæller ikke (han nævner altid Gluttons).
+  const holdMønstre = () => alleHold().filter((h) => !/^#/.test(h)).map((h) => {
+    const navne = [h, ...((H.holdAlias || {})[h] || [])].map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    return { hold: h, re: new RegExp("(^|[^\\p{L}])(" + navne.join("|") + ")(?![\\p{L}])", "iu") };
+  });
+  function nævnteHold(pk) {
+    if (!GM || fraSpike(pk) || (pk.kamp && !/^svar:/.test(pk.kamp))) return [];
+    const tekst = [pk.titel, pk.sted, ...pk.replikker.filter((r) => !erGunnar(r.hvem)).map((r) => r.p || r.tekst || r.afsnit || r.scene || "")].join("\n");
+    return holdMønstre().filter((m) => m.hold !== pk.hold && m.re.test(tekst)).map((m) => m.hold).slice(0, 4);
+  }
+  const genmæleAf = (pk, hold) => PRESSE.find((p) => p.kamp === "svar:" + pk.id && p.hold === hold);
+  const genmæleLink = (pk, hold) => `#indsend/genmaele/${encodeURIComponent(pk.id)}/${encodeURIComponent(hold)}`;
+  // Boksen under en artikel: hvert nævnt hold får et tilbud om at svare, eller et link til det svar, holdet har givet.
+  function genmæleBoks(pk) {
+    const hold = nævnteHold(pk);
+    const flere = PRESSE.filter((p) => p.kamp === "svar:" + pk.id && !hold.includes(p.hold)).map((p) => p.hold);
+    const alle = [...hold, ...new Set(flere)];
+    if (!GM || !alle.length) return "";
+    const del = (h, nr) => {
+      const g = genmæleAf(pk, h);
+      return g ? `<div class="ts-hold"><h3>${holdLink(h)}</h3><p class="small muted" style="margin:0 0 6px">har taget til genmæle:</p>
+          <p style="margin:0"><a href="#presse/${encodeURIComponent(g.id)}">»${esc(bareTitel(g.titel))}« →</a></p></div>`
+        : `<div class="ts-hold"><h3>${holdLink(h)}</h3>
+          <p class="presse-tekst">»${esc(GM.tilbud[(hashTal(pk.id) + nr) % GM.tilbud.length].replace(/\{hold\}/g, h))}«</p>
+          <p style="margin:0"><a class="knap knap-link" href="${genmæleLink(pk, h)}">📢 Svar som ${esc(h)}</a></p></div>`;
+    };
+    return `<section class="card presse ts"><p class="kicker">Ret til genmæle</p>
+      <div class="grid-2">${alle.map(del).join("")}</div>
+      <div class="small muted" style="margin-top:10px">${gunnar()}</div></section>`;
+  }
+  // På holdsiden: artikler fra andre hold, der nævner holdet, og som holdet endnu ikke har svaret på.
+  function nævntKort(hold) {
+    if (!GM) return "";
+    const art = presseListe().filter((p) => p.hold !== hold && nævnteHold(p).includes(hold) && !genmæleAf(p, hold)).slice(0, 3);
+    return art.length ? `<aside class="card presse"><p class="kicker">Nævnt i pressen · ret til genmæle</p>
+      <ul class="ts-venter">${art.map((p) => `<li><a href="#presse/${encodeURIComponent(p.id)}">»${esc(bareTitel(p.titel))}«</a>
+        <span class="muted">· ${esc(p.hold)} ·</span> <a href="${genmæleLink(p, hold)}">Svar igen</a></li>`).join("")}</ul>
+      <div class="small muted" style="margin-top:10px">${gunnar()}</div></aside>` : "";
+  }
+
+  // Ugens spørgsmål: svarene gemmes som indlæg med kamp = "uge:<ugenummer>". Ugenummeret vises aldrig.
+  const ugensSpørgsmål = (u) => (US && US.spoergsmaal.length ? US.spoergsmaal[(u === undefined ? ugeNr() : u) % US.spoergsmaal.length] : "");
+  const ugeSvar = (u) => { const set = new Set(); return PRESSE.filter((p) => p.kamp === "uge:" + u && !set.has(p.hold) && set.add(p.hold)); };
+  const svarOrd = (p) => p.replikker.filter((r) => r.hvem && !erGunnar(r.hvem)).map((r) => r.tekst).join(" ");
+  const spmAf = (p) => (p.replikker.find((r) => erGunnar(r.hvem)) || {}).tekst || "";
+  function ugensSpørgsmålKort() {
+    if (!US || !ugensSpørgsmål()) return "";
+    const n = ugeSvar(ugeNr()).length;
+    return `<aside class="card presse"><p class="kicker">Ugens spørgsmål</p>
+      <p class="us-spm">${esc(ugensSpørgsmål())}</p>
+      <div class="small muted">${gunnar()}</div>
+      <p class="small muted" style="margin:8px 0 0">${n === 0 ? "Ingen har svaret endnu. Bliv det første hold." : n === 1 ? "1 hold har svaret." : `${n} hold har svaret.`}</p>
+      <p style="margin:10px 0 0"><a class="knap knap-link" href="#ugens">💬 Svar, og se de andres svar</a></p></aside>`;
+  }
+  function sideUgens(navn) {
+    if (!US) return '<h1>Ugens spørgsmål</h1><p class="muted">Der er ingen spørgsmål endnu.</p>';
+    const nu = ugeNr(), u = /^\d+$/.test(navn || "") ? +navn : nu;
+    const svar = ugeSvar(u);
+    const spm = u === nu ? ugensSpørgsmål() : (svar[0] && spmAf(svar[0])) || ugensSpørgsmål(u);
+    const mangler = u === nu ? alleHold().filter((h) => !/^#/.test(h) && !svar.some((s) => s.hold === h)) : [];
+    const gamle = [...new Set(PRESSE.map((p) => (/^uge:(\d+)$/.exec(p.kamp || "") || [])[1]).filter(Boolean).map(Number))]
+      .filter((x) => x !== u).sort((a, b) => b - a);
+    return `
+      <p class="kicker">Pressechefens hjørne</p>
+      <h1>Ugens spørgsmål</h1>
+      ${u !== nu ? '<p><a href="#ugens">← Til denne uges spørgsmål</a></p>' : ""}
+      <section class="card presse"><p class="us-spm us-stor">${esc(spm)}</p>
+        <div class="small muted">${gunnar()}</div>
+        ${u === nu ? `<p class="small muted" style="margin:8px 0 0">${esc(US.intro)}</p>
+        <p style="margin:10px 0 0"><a class="knap knap-link" href="#indsend/ugens">💬 Svar for dit hold</a></p>` : ""}</section>
+      <h2>Svarene</h2>
+      ${svar.length ? `<div class="grid">${svar.map((s) => `<div class="card"><h3>${holdLink(s.hold)}</h3>
+        <p class="presse-tekst">»${esc(svarOrd(s))}«</p><div class="small muted">${esc(s.indsendt || "")}</div></div>`).join("")}</div>`
+        : `<p class="muted">${u === nu ? "Ingen har svaret endnu. Bliv det første hold." : "Ingen svar."}</p>`}
+      ${mangler.length && svar.length ? `<p class="small muted efterlys-lbl">Pressechefen venter stadig på svar fra (tryk på dit hold):</p>
+        <p class="ik-hold">${mangler.map((h) => `<a class="knap knap-link" href="#indsend/ugens/${encodeURIComponent(h)}">${esc(h)}</a>`).join("")}</p>` : ""}
+      ${gamle.length ? `<h2>Tidligere spørgsmål</h2><ul class="ts-venter">${gamle.map((x) => {
+        const s = ugeSvar(x);
+        return `<li><a href="#ugens/${x}">${esc(spmAf(s[0]) || ugensSpørgsmål(x))}</a> <span class="muted">· ${s.length} svar</span></li>`;
+      }).join("")}</ul>` : ""}`;
+  }
+
   // ---------- Gunnars power ranking (tekster i humor.js -> powerRanking) ----------
   const PR = H.powerRanking;
   // Yndlingsholdet først. Resten efter RIGTIGE point; ved pointlighed vinder holdet med flest egne indlæg (pressebonus).
@@ -1625,9 +1760,9 @@
 
   // ---------- Router ----------
   const SIDER = { forside: sideForside, stilling: sideStilling, puljekampe: sidePuljekampe, regnbue: sideRegnbue,
-    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening, regler: sideRegler, kampdag: sideKampdag, skadestue: sideSkadestue, indsend: sideIndsend, power: sidePower };
-  const ALIAS = { kampe: "puljekampe", regel: "regler", guide: "regler", powerranking: "power", ranking: "power" }; // gamle og nemme links
-  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Presse", traening: "Off pitch training", regler: "Regler og guider", kampdag: "Kampdag", skadestue: "Skadestuen", indsend: "Indsend til pressetribunen", power: "Gunnars power ranking" };
+    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening, regler: sideRegler, kampdag: sideKampdag, skadestue: sideSkadestue, indsend: sideIndsend, power: sidePower, ugens: () => sideUgens("") };
+  const ALIAS = { kampe: "puljekampe", regel: "regler", guide: "regler", powerranking: "power", ranking: "power", ugensspoergsmaal: "ugens", spoergsmaal: "ugens" }; // gamle og nemme links
+  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Presse", traening: "Off pitch training", regler: "Regler og guider", kampdag: "Kampdag", skadestue: "Skadestuen", indsend: "Indsend til pressetribunen", power: "Gunnars power ranking", ugens: "Ugens spørgsmål" };
   let visNr = 0;
   async function vis() {
     const nr = ++visNr;
@@ -1636,10 +1771,10 @@
     const navn = rest.length ? decodeURIComponent(rest.join("/")) : "";
     const key = SIDER[side] ? side : "forside";
     const fane = key === "kamp" ? "puljekampe" : key;
-    document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("on", a.dataset.page === (fane === "indsend" || fane === "power" ? "presse" : fane)));
-    if (!navn || key === "presse" || key === "indsend") window.scrollTo(0, 0);
+    document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("on", a.dataset.page === (["indsend", "power", "ugens"].includes(fane) ? "presse" : fane)));
+    if (!navn || ["presse", "indsend", "ugens"].includes(key)) window.scrollTo(0, 0);
     const html = key === "hold" && navn ? await sideHold(navn) : key === "presse" && navn ? sidePresse(navn)
-      : key === "kamp" && navn ? await sideKamp(navn) : key === "indsend" ? sideIndsend(navn) : await SIDER[key]();
+      : key === "kamp" && navn ? await sideKamp(navn) : key === "indsend" ? sideIndsend(navn) : key === "ugens" ? sideUgens(navn) : await SIDER[key]();
     if (nr !== visNr) return; // brugeren har skiftet side imens
     $main.innerHTML = html;
     if (key === "indsend") indsendKlar();
@@ -1649,7 +1784,7 @@
       sek.classList.toggle("faerdig", alle.length > 0 && [...alle].every((x) => x.checked));
     });
     const pkTitel = key === "presse" && navn ? (PRESSE.find((p) => p.id === navn) || {}).titel : key === "kamp" && navn ? navn
-      : key === "indsend" ? SIDENAVN.indsend : "";
+      : key === "indsend" ? SIDENAVN.indsend : key === "ugens" ? SIDENAVN.ugens : "";
     document.title = (key === "forside" ? "" : (pkTitel || navn || SIDENAVN[key] || titel(key)) + " · ") + liga;
   }
 

@@ -367,3 +367,7 @@ img.figur-stor { width: 56px; height: 56px; margin: 0; border: 2px solid var(--g
 .tip-felter { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .kamp a.optakt-link { font-family: "Barlow", system-ui, sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); border-bottom: 0; }
 .rygte-knapper { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; }
+
+/* ---------- Ugens spørgsmål ---------- */
+.us-spm { font-family: "Bangers", Impact, sans-serif; font-size: 24px; letter-spacing: 1px; line-height: 1.15; color: var(--accent); margin: 4px 0 10px; }
+.us-stor { font-size: clamp(26px, 5vw, 38px); }

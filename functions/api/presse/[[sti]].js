@@ -9,7 +9,7 @@
 
 const MAX_TEKST = 20000;
 const MAX_BILLEDE = 4 * 1024 * 1024; // browseren skalerer ned til ca. 0,3-1 MB, før den sender
-const TYPER = ["Kampreferat", "Interview", "Pressemeddelelse", "Rygte", "Lore", "Forudsigelse"];
+const TYPER = ["Kampreferat", "Interview", "Pressemeddelelse", "Rygte", "Lore", "Forudsigelse", "Genmæle", "Ugens spørgsmål"];
 
 const svar = (data, status = 200) => new Response(JSON.stringify(data), {
   status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" }

@@ -156,7 +156,16 @@ som person; Gunnar lægger aldrig ord i munden på nogen; det er en invitation, 
   og resultatet i overskriften. Efter kampen fælder pressechefen dom (ramte plet / rigtig vinder / ved siden af).
   Forsiden og Presse viser én kommende kamp ad gangen (skifter ugentligt). Tekster i `humor.js` → optakt.
   Siden kender ikke kampenes rækkefølge eller datoer, så "ugens optakt" er en vilkårlig uspillet kamp.
-- Flere idéer fra samme snak (ikke bygget): ret til genmæle, ugens spørgsmål til alle, afstemning om ugens spiller.
+- **Ret til genmæle** (bygget 16. nov.): når en coachs artikel nævner et andet hold (navne og kortformer i `humor.js` → holdAlias;
+  pressechefens egne replikker tæller ikke), tilbyder en boks under artiklen holdet at svare: `#indsend/genmaele/<artikel-id>/<hold>`.
+  Svaret gemmes som type "Genmæle" med kamp = "svar:<artikel-id>" og linkes begge veje. Holdsiden viser "Nævnt i pressen".
+  Gælder ikke Spike!s kampreferater (dér er de tre spørgsmål).
+- **Ugens spørgsmål** (bygget 16. nov.): ét spørgsmål til alle hold, skifter hver mandag (`humor.js` → ugensSpoergsmaal, 12 stk.).
+  Siden `#ugens` samler svarene; `#indsend/ugens[/<hold>]` er svar-formularen. Gemmes som type "Ugens spørgsmål" med
+  kamp = "uge:<ugenummer>" (nummeret vises aldrig). Tidligere uger: `#ugens/<nummer>`.
+- **Småsvar** (bud på kampe "tip:" og svar på ugens spørgsmål "uge:") vises ikke som egne artikler i Presse-listen,
+  men tæller stadig som pressebonus og fjerner "Ingen kommentar".
+- Flere idéer fra samme snak (ikke bygget): afstemning om ugens spiller.
 
 ## Idéer til senere (parkeret 6. nov. 2026)
 Blood Bowl-idéer bor her, ikke i Peters Idébank i Todoist.

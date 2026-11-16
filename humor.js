@@ -222,6 +222,55 @@ window.HUMOR = {
     }
   },
 
+  // HOLDNAVNE I LØBENDE TEKST: sådan kan et hold blive omtalt i en artikel. Bruges til "ret til genmæle".
+  // Det fulde holdnavn genkendes altid; her står kun de korte former.
+  holdAlias: {
+    "The Eternal Sages": ["Eternal Sages", "Sages"],
+    "Elmtree Evaders": ["Elmtree", "Evaders"],
+    "The Maurading Ocras": ["Maurading Ocras", "Marauding Ocras", "Ocras", "Orcas"],
+    "Mörkley Crüe": ["Mörkley", "Morkley Crue"],
+    "Fright Night Fumblers": ["Fright Night", "Fumblers"],
+    "The Full Moon Foulers": ["Full Moon Foulers", "Foulers"],
+    "The FumbleBoyz": ["FumbleBoyz", "Fumble Boyz"],
+    "GutBuster Gluttons": ["Gutbusters", "Gluttons"],
+    "Return Of The Living Deadbeats": ["Living Deadbeats", "Deadbeats"],
+    "Da Demolitionaz": ["Demolitionaz"],
+    "Black Mountain Slavers": ["Black Mountain", "Slavers"],
+    "Bedstefars Besudlere": ["Besudlere", "Besudlerne"],
+    "Bros Being Bros": ["Bros"]
+  },
+
+  // RET TIL GENMÆLE (Peter 16. nov.): når en coachs artikel nævner et andet hold, tilbyder pressechefen det hold at svare.
+  // {hold} er det nævnte hold, {titel} artiklens overskrift.
+  genmaele: {
+    tilbud: [
+      "{hold} er nævnt i artiklen. Pressechefen tilbyder taletid. Brug den, før andre gør det.",
+      "{hold} bliver omtalt her. Pressechefen mener, at alle har ret til at svare igen. Helst højt.",
+      "Her tales der om {hold}. Pressechefen har lagt mikrofonen frem."
+    ],
+    intro: "Pressechefen giver ordet til {hold}. Svar på artiklen »{titel}«. Det må være så kort eller så langt, som du vil."
+  },
+
+  // UGENS SPØRGSMÅL (Peter 16. nov.): ét spørgsmål til alle hold, ét svar på én linje. Skifter hver mandag.
+  // Spørgsmålene skal handle om holdet og kunne besvares af alle. Hold dem under 120 tegn.
+  ugensSpoergsmaal: {
+    intro: "Ét spørgsmål til alle hold. Ét svar på én linje. Pressechefen samler svarene her.",
+    spoergsmaal: [
+      "Beskriv jeres værste spiller med tre ord.",
+      "Hvad står der på skiltet over døren til jeres omklædningsrum?",
+      "Hvad er holdets officielle undskyldning, hvis I taber næste kamp?",
+      "Hvilken spiller på holdet burde aldrig have fået en bold i hænderne?",
+      "Hvad er holdets hemmelige våben? Pressechefen siger det ikke til nogen.",
+      "Hvad serverer I for udeholdet?",
+      "Hvem på holdet ville I bytte for en tønde Bloodweiser?",
+      "Hvad er holdets motto, når pressen ikke lytter?",
+      "Hvilket hold i ligaen vil I nødigst møde i en mørk gyde?",
+      "Hvad har I lovet spillerne, hvis de vinder puljen?",
+      "Hvad er det dummeste, en af jeres spillere har gjort på banen?",
+      "Hvis jeres hold var en ret på menukortet, hvad var det så?"
+    ]
+  },
+
   // GUNNARS TRE SPØRGSMÅL (Peter 16. nov.): efter hver spillet kamp får begge hold de samme tre faste spørgsmål.
   // Coachen svarer med én linje pr. spørgsmål på kampsiden. Svarene er coachens egne ord og vises ordret.
   treSpoergsmaal: {
