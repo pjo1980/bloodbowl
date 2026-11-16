@@ -37,6 +37,9 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
 - `.nojekyll` – GitHub Pages skal servere filerne råt.
 
 ## Regler for arbejdet
+- **Sprogtjek før push** (Peter 16. nov.): Læs al ny dansk tekst mindst to gange. Er det tydeligt, hvem der gør hvad?
+  Giver sætningen mening, hvis den står alene (fx på et forsidekort)? Passer vittigheden med fakta og pointreglerne?
+  Prøv skabeloner med rigtige tal: 0, 1, flertal og holdnavne, der ender på s.
 - **Ingen datoer fra den virkelige verden på siden** (Peter 4. nov.). Vis datoer med `bbDato()` i app.js: Warhammers Imperial Calendar,
   samme dag, tilsvarende måned (Nachexen … Vorhexen), år + 500 + "IC". Datafiler må stadig gemme rigtige datoer (ÅÅÅÅ-MM-DD) til sortering.
 - Rør aldrig kommissærens ark uden Peters ja; læs det kun.
