@@ -419,7 +419,7 @@
       </div>
 
       <h2>Fra pressetribunen</h2>
-      <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}${rygteKort()}${ingenKommentarKort(tilfældig(stilleHold()))}${plakatKort()}</div>
+      <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}${rygteKort()}${powerKort()}${ingenKommentarKort(tilfældig(stilleHold()))}${plakatKort()}</div>
       ${PRESSE.length ? `<div style="margin-top:16px">${pkTeaser(PRESSE[0])}</div>` : ""}
 
       ${nyhed ?`<h2>Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p><a href="#nyheder">Alle nyheder</a></p>` : ""}`;
@@ -438,6 +438,7 @@
       <h1>Stilling</h1>
       ${s.ok && s.ok.regler ? `<p class="lead">${esc(s.ok.regler)}</p>` : ""}
       ${pressechefKort(pressechefAnalyse())}
+      <p><a class="knap knap-link" href="#power">📊 Gunnars power ranking</a></p>
       <h2>Samlet</h2>
       ${s.ok ? stillingTabel(s.ok.hold, true) : fejlboks(s.fejl)}
       <h2>Puljerne</h2>
@@ -808,6 +809,16 @@
   }
   const pkDato = (pk) => { const d = læsDato(pk.dato); return d ? bbDato(d) : pk.dato || ""; };
 
+  // Faste skribenter med ansigt (humor.js -> figurer), fx Rygte Rasmus.
+  const FIGURER = H.figurer || {};
+  const figurBillede = (navn, kl) => FIGURER[navn] ? `<img class="figur ${kl || ""}" src="${esc(FIGURER[navn].lille)}" alt="" loading="lazy" title="${esc(navn)}${FIGURER[navn].titel ? ", " + esc(FIGURER[navn].titel) : ""}">` : "";
+  const bylineFigur = (pk) => { const n = String(pk.indsendt || "").replace(/^Indsendt af\s+/, ""); return FIGURER[n] ? n : ""; };
+  // Skribentens portræt og titel under overskriften. Tryk på portrættet for at se hele billedet.
+  function forfatterBlok(pk) {
+    const n = bylineFigur(pk), f = FIGURER[n];
+    return f ? `<p class="forfatter"><a href="${esc(f.billede)}" target="_blank" rel="noopener">${figurBillede(n, "figur-stor")}</a>
+      <span><b>${esc(n)}</b><br><span class="small muted">${esc(f.titel || "")}</span></span></p>` : "";
+  }
   function pkLinjer(pk) {
     const set = new Set();
     const coachNavn = pk.coach || (LORE[pk.hold] || {}).coach;
@@ -818,7 +829,7 @@
       const rolle = r.rolle && !set.has(r.hvem) ? ` <span class="rolle">${esc(r.rolle)}</span>` : "";
       set.add(r.hvem);
       const kl = r.hvem === H.pressechef.navn ? " formand" : r.hvem === coachNavn ? " coach" : "";
-      return `<div class="replik${kl}"><div class="taler">${esc(r.hvem)}${rolle}${r.note ? ` <span class="note">(${esc(r.note)})</span>` : ""}</div>
+      return `<div class="replik${kl}"><div class="taler">${figurBillede(r.hvem)}${esc(r.hvem)}${rolle || (FIGURER[r.hvem] && !set.has("#" + r.hvem) && set.add("#" + r.hvem) ? ` <span class="rolle">${esc(FIGURER[r.hvem].titel || "")}</span>` : "")}${r.note ? ` <span class="note">(${esc(r.note)})</span>` : ""}</div>
         ${String(r.tekst || "").split("\n").map((t) => `<p>${esc(t)}</p>`).join("")}</div>`;
     }).join("");
   }
@@ -827,7 +838,8 @@
     return `<article class="card pk" id="pk-${esc(pk.id)}">
       <p class="kicker">${esc(pk.undertitel || "Pressekonference")} · ${esc(pkDato(pk))}</p>
       <h2 class="pk-titel">${esc(pk.titel)}</h2>
-      <p class="small muted">${holdLink(pk.hold)} ${chip(puljeAf[pk.hold])}${pk.sted ? ` · ${esc(pk.sted)}` : ""}${pk.indsendt ? ` · ${esc(pk.indsendt)}` : ""}</p>
+      <p class="small muted">${holdLink(pk.hold)} ${chip(puljeAf[pk.hold])}${pk.sted ? ` · ${esc(pk.sted)}` : ""}${pk.indsendt && !bylineFigur(pk) ? ` · ${esc(pk.indsendt)}` : ""}</p>
+      ${forfatterBlok(pk)}
       ${pk.forside ? `<a href="${esc(pk.forside)}" target="_blank" rel="noopener"><img class="pk-forside" src="${esc(pk.forside)}" alt="Forside til ${esc(pk.titel)}"></a>` : ""}
       <div class="pk-tekst">${linjer}</div></article>`;
   }
@@ -850,7 +862,7 @@
       <div>
         <p class="kicker">${esc(pk.undertitel || "Pressekonference")} · ${esc(pkDato(pk))}</p>
         <h3>${esc(pk.titel)}</h3>
-        <p class="small muted">${esc(pk.hold)}</p>
+        <p class="small muted">${esc(pk.hold)}${bylineFigur(pk) ? ` · ${figurBillede(bylineFigur(pk), "figur-byline")}${esc(bylineFigur(pk))}` : ""}</p>
         ${pk.citat ? `<p class="pk-linje-citat">»${esc(pk.citat.tekst)}«</p>` : ""}
       </div></a>`;
   }
@@ -868,7 +880,7 @@
       <p class="kicker">Pressetribunen</p>
       <h1>Presse</h1>
       <p class="lead">Pressekonferencer, kampreferater og interviews fra ligaens hold. Tryk på en overskrift for at læse.</p>
-      ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}"${/^#/.test(C.PRESSE_FORMULAR) ? "" : ' target="_blank" rel="noopener"'}>✍️ Indsend til pressetribunen</a></p>` : ""}
+      ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}"${/^#/.test(C.PRESSE_FORMULAR) ? "" : ' target="_blank" rel="noopener"'}>✍️ Indsend til pressetribunen</a> <a class="knap knap-link" href="#power">📊 Gunnars power ranking</a></p>` : ""}
       ${efterlysning()}
       ${PRESSE.length ? `<div class="pk-liste">${PRESSE.map(pkLinje).join("")}</div>` : '<p class="muted">Ingen artikler endnu.</p>'}
       <p class="small muted">Satire. Skrevet af eller ud fra holdenes egne coaches.</p>`;
@@ -1337,12 +1349,7 @@
         knap.disabled = false;
       }
     };
-    document.getElementById("gunnar-kopi").onclick = async () => {
-      const felt = document.getElementById("gunnar-besked"), st = document.getElementById("gunnar-kopi-status");
-      felt.select();
-      try { await navigator.clipboard.writeText(felt.value); st.textContent = "Kopieret. Sæt den ind i Messenger."; }
-      catch (e) { st.textContent = "Markér teksten, og kopiér den selv (Ctrl + C)."; }
-    };
+    kopiKnap();
     const adminKode = document.getElementById("admin-kode");
     const listeEl = document.getElementById("admin-liste");
     async function visListe() {
@@ -1367,11 +1374,89 @@
     };
   }
 
+  // ---------- Gunnars power ranking (tekster i humor.js -> powerRanking) ----------
+  const PR = H.powerRanking;
+  // Yndlingsholdet først. Resten efter RIGTIGE point; ved pointlighed vinder holdet med flest egne indlæg (pressebonus).
+  function powerRanking() {
+    const s = D.stilling.ok;
+    if (!PR || !s) return [];
+    const st = D.holdstats.ok || {}, Y = H.yndlingshold;
+    const flertal = (n, en, flere) => `${n} ${n === 1 ? en : flere}`;
+    const hold = s.hold.filter((h) => h.navn && !/^#/.test(h.navn)).map((h, i) => ({
+      ...h, i, rigtig: s.hold.findIndex((x) => x.p === h.p) + 1,
+      presse: PRESSE.filter((p) => !fraSpike(p) && p.hold === h.navn).length,
+      td: tal((st[h.navn] || {})["Touch Down"]), cas: tal((st[h.navn] || {})["Casualties"])
+    }));
+    hold.sort((a, b) => (b.navn === Y) - (a.navn === Y) || b.p - a.p || b.presse - a.presse || a.i - b.i);
+    const brugt = new Map(); // hvor mange hold har allerede fået en linje fra samme liste
+    return hold.map((h, nr) => {
+      const spillet = h.w + h.d + h.l;
+      const er = h.navn === Y ? "yndling" : EF && h.navn === EF.hold ? "familie" : "";
+      const form = !spillet ? "ikkeSpillet" : h.w && !h.l ? "ubesejret" : h.l && !h.w ? "sejrloes" : h.w && h.l ? "blandet" : "uafgjort";
+      const liste = er === "yndling" ? PR.yndling[!spillet ? "ikkeSpillet" : h.w ? "vinder" : h.l ? "taber" : "andet"]
+        : er === "familie" && spillet ? PR.familie : PR[form];
+      // Fast rækkefølge (ikke tilfældig ved hver visning), og naboer på listen får ikke samme linje.
+      const n = brugt.get(liste) || 0;
+      brugt.set(liste, n + 1);
+      let tekst = (liste && liste[n % liste.length]) || "";
+      if (!er && h.cas >= 2) tekst += " " + PR.cas; else if (!er && h.td >= 3) tekst += " " + PR.td;
+      tekst = tekst.replace(/\{hold\}/g, h.navn).replace(/\{p\}/g, h.p).replace(/\{td\}/g, h.td).replace(/\{cas\}/g, h.cas)
+        .replace(/\{yndling\}/g, Y).replace(/\{sejre\}/g, flertal(h.w, "sejr", "sejre")).replace(/\{nederlag\}/g, flertal(h.l, "nederlag", "nederlag"));
+      return { ...h, nr: nr + 1, er, tekst };
+    });
+  }
+  function sidePower() {
+    const liste = powerRanking();
+    if (!liste.length) return `<h1>Gunnars power ranking</h1>${fejlboks(D.stilling.fejl || "Stillingen kunne ikke hentes.")}`;
+    const kampe = liste.reduce((n, h) => n + h.w + h.d + h.l, 0) / 2;
+    return `
+      <p class="kicker">Pressechefens hjørne</p>
+      <h1>Gunnars power ranking</h1>
+      <p class="lead">${esc(PR.intro)}</p>
+      <p class="small muted">Opdateret efter ${kampe.toLocaleString("da-DK")} spillede kampe. Point og resultater er kommissærens egne tal. Rækkefølgen er Gunnars.</p>
+      <ol class="pr-liste">${liste.map((h) => `<li class="card pr-linje${h.er === "yndling" ? " pr-et" : ""}">
+        <div class="pr-nr">${h.nr}</div>
+        ${plakatSti(h.navn, true) ? `<a href="#hold/${encodeURIComponent(h.navn)}"><img src="${plakatSti(h.navn, true)}" alt="" loading="lazy"></a>` : "<span></span>"}
+        <div><h3>${holdLink(h.navn)} ${chip(puljeAf[h.navn])}</h3>
+          <p class="small muted pr-tal">${h.p} point · ${h.w}-${h.d}-${h.l} · nr. ${h.rigtig} i den rigtige stilling</p>
+          <p class="presse-tekst">»${esc(h.tekst)}«</p>
+          <p class="small pr-bund">${h.presse ? `🎤 ${esc(PR.bonus)}: ${h.presse} indlæg` : `<span class="muted">${esc(PR.ingenBonus)}</span>`}
+            · <a href="${indsendLink(h.navn)}">${h.presse ? "Uenig? Send et genmæle" : "Bryd tavsheden"}</a></p>
+        </div></li>`).join("")}</ol>
+      <p class="small muted">${gunnar()}. Satire: den rigtige stilling står under <a href="#stilling">Stilling</a>.</p>
+      <details class="card"><summary>Del ranglisten i Messenger</summary>
+        <textarea id="gunnar-besked" rows="12" readonly>${esc(powerBesked(liste))}</textarea>
+        <button class="knap" type="button" id="gunnar-kopi">Kopiér beskeden</button> <span class="small" id="gunnar-kopi-status" role="status"></span>
+      </details>`;
+  }
+  function powerBesked(liste) {
+    const rod = /^(localhost|127\.)/.test(location.hostname) ? "https://bloodbowl.pages.dev" : location.origin;
+    return [`📊 ${H.pressechef.navn.split(" ")[0]}s power ranking (100 % neutral)`, "",
+      ...liste.map((h) => `${h.nr}. ${h.navn}${h.nr <= 3 ? `: ${h.tekst}` : ""}`), "",
+      `Begrundelser og genmæle: ${rod}/#power`].join("\n");
+  }
+  function powerKort() {
+    const top = powerRanking().slice(0, 3);
+    return top.length ? `<a class="card presse pr-kort" href="#power"><p class="kicker">Gunnars power ranking</p>
+      <ol>${top.map((h) => `<li>${esc(h.navn)}</li>`).join("")}</ol>
+      <p class="presse-tekst">»${esc(top[0].tekst)}«</p><p class="small" style="margin:0">Se hele ranglisten →</p></a>` : "";
+  }
+  function kopiKnap() {
+    const k = document.getElementById("gunnar-kopi");
+    if (!k) return;
+    k.onclick = async () => {
+      const felt = document.getElementById("gunnar-besked"), st = document.getElementById("gunnar-kopi-status");
+      felt.select();
+      try { await navigator.clipboard.writeText(felt.value); st.textContent = "Kopieret. Sæt den ind i Messenger."; }
+      catch (e) { st.textContent = "Markér teksten, og kopiér den selv (Ctrl + C)."; }
+    };
+  }
+
   // ---------- Router ----------
   const SIDER = { forside: sideForside, stilling: sideStilling, puljekampe: sidePuljekampe, regnbue: sideRegnbue,
-    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening, regler: sideRegler, kampdag: sideKampdag, skadestue: sideSkadestue, indsend: sideIndsend };
-  const ALIAS = { kampe: "puljekampe", regel: "regler", guide: "regler" }; // gamle og nemme links
-  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Presse", traening: "Off pitch training", regler: "Regler og guider", kampdag: "Kampdag", skadestue: "Skadestuen", indsend: "Indsend til pressetribunen" };
+    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening, regler: sideRegler, kampdag: sideKampdag, skadestue: sideSkadestue, indsend: sideIndsend, power: sidePower };
+  const ALIAS = { kampe: "puljekampe", regel: "regler", guide: "regler", powerranking: "power", ranking: "power" }; // gamle og nemme links
+  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Presse", traening: "Off pitch training", regler: "Regler og guider", kampdag: "Kampdag", skadestue: "Skadestuen", indsend: "Indsend til pressetribunen", power: "Gunnars power ranking" };
   let visNr = 0;
   async function vis() {
     const nr = ++visNr;
@@ -1380,13 +1465,14 @@
     const navn = rest.length ? decodeURIComponent(rest.join("/")) : "";
     const key = SIDER[side] ? side : "forside";
     const fane = key === "kamp" ? "puljekampe" : key;
-    document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("on", a.dataset.page === (fane === "indsend" ? "presse" : fane)));
+    document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("on", a.dataset.page === (fane === "indsend" || fane === "power" ? "presse" : fane)));
     if (!navn || key === "presse" || key === "indsend") window.scrollTo(0, 0);
     const html = key === "hold" && navn ? await sideHold(navn) : key === "presse" && navn ? sidePresse(navn)
       : key === "kamp" && navn ? await sideKamp(navn) : key === "indsend" ? sideIndsend(navn) : await SIDER[key]();
     if (nr !== visNr) return; // brugeren har skiftet side imens
     $main.innerHTML = html;
     if (key === "indsend") indsendKlar();
+    if (key === "power") kopiKnap();
     $main.querySelectorAll(".tjek").forEach((sek) => {
       const alle = sek.querySelectorAll("input[type=checkbox]");
       sek.classList.toggle("faerdig", alle.length > 0 && [...alle].every((x) => x.checked));

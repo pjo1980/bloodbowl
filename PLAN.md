@@ -130,8 +130,14 @@ som person; Gunnar lægger aldrig ord i munden på nogen; det er en invitation, 
   `#indsend/svar/<fane>/<hold>` med ét felt pr. spørgsmål. Svaret gemmes som Interview med feltet `kamp` (fanenavnet)
   og vises ordret på kampsiden. En kamp regnes som spillet her, når Spike! har skrevet om den (id `spike-<slug af fane>`).
 - **Besked til Messenger**: under Redaktør på #indsend ligger en færdig efterlysning, som Peter kan poste som Gunnar.
+- **Gunnars power ranking** (`#power`, bygget 16. nov.): yndlingsholdet altid nr. 1. Resten efter RIGTIGE point fra arket;
+  ved pointlighed vinder holdet med flest egne indlæg (pressebonus), så det kan betale sig at tale med pressen.
+  Begrundelser i `humor.js` → powerRanking, valgt ud fra holdets rigtige tal. Viser også holdets plads i den rigtige stilling.
+  Opdaterer sig selv. Indgange: forsiden, Stilling og Presse. Færdig Messenger-besked nederst på siden.
+- **Rygte Rasmus har fået ansigt** (16. nov., billede fra Peter): `figurer/rygte-rasmus.jpg` (+ -lille). `humor.js` → figurer.
+  Vises som forfatter på hans artikler og i Presse-listen. Nye figurer tilføjes samme sted.
 - Flere idéer fra samme snak (ikke bygget): ugens rygte, optakt til kampen med forudsigelser, ret til genmæle,
-  Gunnars power ranking (Gluttons altid nr. 1), ugens spørgsmål til alle, afstemning om ugens spiller.
+  ugens spørgsmål til alle, afstemning om ugens spiller.
 
 ## Idéer til senere (parkeret 6. nov. 2026)
 Blood Bowl-idéer bor her, ikke i Peters Idébank i Todoist.

@@ -51,6 +51,67 @@ window.HUMOR = {
     }
   },
 
+  // FIGURER MED ANSIGT: pressetribunens faste skribenter. Billedet vises ved deres replikker og som byline.
+  // Nøglen er navnet, præcis som det står som taler eller i "Indsendt af ...". Billeder ligger i figurer/.
+  figurer: {
+    "Rygte Rasmus": { billede: "figurer/rygte-rasmus.jpg", lille: "figurer/rygte-rasmus-lille.jpg", titel: "Rygtereporter, Spike! Magazine" }
+  },
+
+  // GUNNARS POWER RANKING (Peter 16. nov.): pressechefens "helt neutrale" rangliste på #power.
+  // Yndlingsholdet er altid nummer et. Resten står efter deres RIGTIGE point fra kommissærens ark; står to hold lige,
+  // vinder det hold, der har sendt mest til pressetribunen (pressebonus). Begrundelserne bygger på de rigtige tal.
+  // Pladsholdere: {hold} {p} {sejre} {nederlag} {td} {cas} {yndling}. Samme regler som ovenfor: drilleri mod holdet, ikke coachen.
+  powerRanking: {
+    intro: "Ligaens eneste helt neutrale rangliste. Udregnet efter pressechefens hemmelige formel: resultater, udstråling, sovs og villighed til at tale med pressen.",
+    yndling: {
+      ikkeSpillet: [
+        "Har ikke spillet en eneste kamp. Formlen ser ingen grund til at vente på resultaterne.",
+        "Ubesejrede. Uprøvede. Uovertrufne. Formlen er kontrolregnet tre gange."
+      ],
+      vinder: [
+        "{sejre}. Pressechefen havde forudsagt det og vil gerne citeres for det.",
+        "Nummer et, og denne gang har de endda point til at bevise det."
+      ],
+      taber: [
+        "{nederlag}, som formlen har valgt at se stort på. Udstråling tæller dobbelt.",
+        "Resultaterne er midlertidige. Førstepladsen er permanent."
+      ],
+      andet: ["Nummer et. Formlen kan ikke forklares, kun beundres."]
+    },
+    familie: [
+      "Pressechefens egen familie. Det har naturligvis intet med placeringen at gøre.",
+      "{p} point og fornemme aner. Formlen tager kun hensyn til det første. Siger den."
+    ],
+    ikkeSpillet: [
+      "Har ikke spillet endnu. Ubesejrede, men også uprøvede.",
+      "Venter på første kamp. Formlen venter med.",
+      "Ingen kampe, ingen fejl. Pressechefen kalder det en fejlfri start.",
+      "Har endnu ikke rørt en bold. Formlen har noteret sig, at udstyret er i fin stand.",
+      "Nul kampe, nul skader. Apotekeren kalder det en drømmesæson.",
+      "Ingen ved, hvor gode de er. Det gør dem farlige, mener formlen.",
+      "Holder kortene tæt til kroppen. Så tæt, at formlen ikke kan se dem."
+    ],
+    ubesejret: [
+      "{sejre} og ingen nederlag. Ville ligge nummer et i enhver liga uden {yndling}.",
+      "Ubesejrede med {p} point. Formlen er imponeret, men ikke nok."
+    ],
+    sejrloes: [
+      "{nederlag} og ingen sejre endnu. Formlen tror stadig på dem. Det er dens job.",
+      "Ingen sejre endnu. Pressechefen minder om, at alle store hold har haft en dårlig start. Næsten alle.",
+      "{nederlag} indtil videre. Formlen noterer sig, at holdet mødte op. Det giver også point. Hos formlen.",
+      "Starten kunne have været bedre. Formlen kunne også have været venligere."
+    ],
+    blandet: [
+      "{sejre} og {nederlag}. Formlen kalder det karakteropbyggende.",
+      "{p} point efter lidt af hvert. Formlen kalder dem ligaens mest uforudsigelige hold."
+    ],
+    uafgjort: ["Kun uafgjorte indtil videre. Formlen kan heller ikke bestemme sig."],
+    cas: "{cas} casualties. Apotekerne sender en takkehilsen.",
+    td: "{td} touchdowns. Publikum fik noget for pengene.",
+    bonus: "Pressebonus",
+    ingenBonus: "Ingen pressebonus endnu. Formlen belønner hold, der taler med pressen."
+  },
+
   // GUNNARS TRE SPØRGSMÅL (Peter 16. nov.): efter hver spillet kamp får begge hold de samme tre faste spørgsmål.
   // Coachen svarer med én linje pr. spørgsmål på kampsiden. Svarene er coachens egne ord og vises ordret.
   treSpoergsmaal: {
