@@ -116,6 +116,102 @@ window.HUMOR = {
     ingenBonus: "Ingen pressebonus endnu. Formlen belønner hold, der taler med pressen."
   },
 
+  // UGENS RYGTE (Peter 16. nov.): hver uge bringer pressechefen ét opdigtet rygte om ét hold. Holdene skiftes i den
+  // rækkefølge, de står her; når alle har været igennem, tages næste rygte på hvert holds liste.
+  // Regler: Rygtet handler om HOLDET (navn, plakat, slogans), aldrig om coachen som person. Det skal være så
+  // åbenlyst fjollet, at ingen tror på det, og det skal give lyst til at svare. Ingen ord i munden på nogen.
+  ugensRygte: {
+    kilde: "Ubekræftet. Fra pressechefens mest upålidelige kilder.",
+    knap: "Bekræft, benægt eller overgå det",
+    hold: {
+      "The Eternal Sages": [
+        "Det forlyder, at The Eternal Sages har ansat en frisør til sidelinjen. Der må ikke sidde ét hår forkert, når der scores.",
+        "Rygtet siger, at The Eternal Sages træner foran spejle. Spejlene er begyndt at klage over arbejdstiden."
+      ],
+      "Elmtree Evaders": [
+        "Det forlyder, at Elmtree Evaders har meldt hele holdet til danseundervisning. Kilder kalder det taktik.",
+        "Rygtet siger, at Elmtree Evaders' omklædningsrum ligger oppe i et træ. Udeholdet får en stige. Den er kort."
+      ],
+      "The Maurading Ocras": [
+        "Det forlyder, at The Maurading Ocras finder deres spillernavne i en legetøjsbutik. Butikken har siden skiftet forsikringsselskab.",
+        "Rygtet siger, at vaskeriet har opgivet The Maurading Ocras. Trøjerne sælges nu som røde fra fabrikken."
+      ],
+      "Mörkley Crüe": [
+        "Det forlyder, at Mörkley Crüe har smadret tre omklædningsrum på turnéen. Det ene var deres eget.",
+        "Rygtet siger, at Mörkley Crüe kræver en skål med kun grønne bolsjer før hver kamp. Ingen tør spørge hvorfor."
+      ],
+      "Fright Night Fumblers": [
+        "Det forlyder, at Fright Night Fumblers kun træner efter midnat. Naboerne er flyttet.",
+        "Rygtet siger, at ingen nogensinde har set Fright Night Fumblers' nummer 13 blive skiftet ud. Han kommer bare tilbage hver gang."
+      ],
+      "The Full Moon Foulers": [
+        "Det forlyder, at The Full Moon Foulers har hængt en månekalender op i omklædningsrummet. Der er sat kryds ved alle kampdage, for en sikkerheds skyld.",
+        "Rygtet siger, at The Full Moon Foulers aldrig mangler reservespillere. De mangler højst reservedele."
+      ],
+      "The FumbleBoyz": [
+        "Det forlyder, at The FumbleBoyz har fået syet håndtag på bolden. Det er endnu ikke afprøvet i kamp.",
+        "Rygtet siger, at dværgene og menneskene hos The FumbleBoyz stadig diskuterer, hvem der skal bære bolden. Indtil videre ligger den i midten."
+      ],
+      "GutBuster Gluttons": [
+        "Det forlyder, at GutBuster Gluttons' holdbus er en grillvogn. Den kører kun, når der ligger noget på risten.",
+        "Rygtet siger, at en modstander er forsvundet nær The Gutpit. Officielt er det bare svinekød."
+      ],
+      "Return Of The Living Deadbeats": [
+        "Det forlyder, at Return Of The Living Deadbeats aldrig har betalt for holdbussen. Rykkerne sendes til kirkegården.",
+        "Rygtet siger, at Return Of The Living Deadbeats har sparet apotekeren væk. Spillerne er jo døde i forvejen."
+      ],
+      "Da Demolitionaz": [
+        "Det forlyder, at Da Demolitionaz har revet deres eget klubhus ned ved en fejl. Der er ingen planer om at bygge et nyt. Der er ingen planer overhovedet.",
+        "Rygtet siger, at Da Demolitionaz har meldt nedrivningskuglen til som spiller. Den står allerede for holdets fleste skader."
+      ],
+      "Black Mountain Slavers": [
+        "Det forlyder, at Black Mountain Slavers har indført fem minutters pause om året. Spillerne ved ikke, hvad de skal bruge den til.",
+        "Rygtet siger, at Black Mountain Slavers' fanklub er lænket til tribunen. Det kaldes et sæsonkort."
+      ],
+      "Bedstefars Besudlere": [
+        "Det forlyder, at Bedstefars Besudlere aldrig har vasket spilletøjet. Trøjerne går selv ud på banen.",
+        "Rygtet siger, at Bedstefars Besudleres omklædningsrum er udlagt som naturreservat. Der er fundet tre nye arter i bruseren."
+      ],
+      "Bros Being Bros": [
+        "Det forlyder, at Bros Being Bros har flyttet træningen ned i baren. Fremmødet er steget med 400 %.",
+        "Rygtet siger, at Bros Being Bros' taktikbog er skrevet bag på en pizzabakke. Side to mangler. Den blev spist."
+      ]
+    }
+  },
+
+  // OPTAKT TIL KAMPEN (Peter 16. nov.): før en puljekamp stiller pressechefen holdene op mod hinanden med de rigtige tal,
+  // og begge coaches kan give deres bud på resultatet. Efter kampen fælder pressechefen dom over buddene.
+  // Pladsholdere: {a} og {b} er de to hold, {favorit} og {underdog} holdene med flest og færrest point, {yndling} yndlingsholdet.
+  optakt: {
+    intro: "Skriv dit bud på resultatet. Pressechefen gemmer det og finder det frem igen efter kampen.",
+    ingenTal: [
+      "Ingen af holdene har spillet endnu. Pressechefen forventer alt og ved ingenting.",
+      "To uprøvede hold. Formlen trækker på skuldrene. Det bliver godt."
+    ],
+    lige: [
+      "{a} og {b} står helt lige. Pressechefen har slået plat og krone. Mønten landede på højkant.",
+      "Lige mange point til {a} og {b}. Noget må give sig. Formentlig en spiller."
+    ],
+    favorit: [
+      "{favorit} har flest point. {underdog} har mest at vinde. Pressechefen holder med frokosten.",
+      "På papiret er {favorit} favorit. Kampen spilles heldigvis på græs."
+    ],
+    yndling: [
+      "Pressechefen er 100 % neutral. Han har bare allerede bestilt sejrskagen til {yndling}.",
+      "{yndling} er på banen. Pressechefen har ryddet kalenderen og spændt servietten."
+    ],
+    familie: [
+      "Pressechefen holder med begge hold. Mest med sin familie.",
+      "Pressechefen er 100 % neutral, og 3 % af ham er meget spændt."
+    ],
+    venter: "{hold} har ikke givet sit bud endnu.",
+    dom: {
+      plet: "Ramte plet. Pressechefen mistænker tidsrejse eller bestikkelse.",
+      vinder: "Rigtig vinder, forkert resultat. Pressechefen kalder det en halv spådom.",
+      forkert: "Ved siden af. Pressechefen minder om, at Nuffle ikke læser forudsigelser."
+    }
+  },
+
   // GUNNARS TRE SPØRGSMÅL (Peter 16. nov.): efter hver spillet kamp får begge hold de samme tre faste spørgsmål.
   // Coachen svarer med én linje pr. spørgsmål på kampsiden. Svarene er coachens egne ord og vises ordret.
   treSpoergsmaal: {

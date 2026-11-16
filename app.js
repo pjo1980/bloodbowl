@@ -426,6 +426,7 @@
       </div>
 
       <h2>Fra pressetribunen</h2>
+      <div class="grid-2" style="margin-bottom:16px">${ugensRygteKort()}${optaktKort()}</div>
       <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}${rygteKort()}${powerKort()}${ingenKommentarKort(tilfældig(stilleHold()))}${plakatKort()}</div>
       ${PRESSE.length ? `<div style="margin-top:16px">${pkTeaser(PRESSE[0])}</div>` : ""}
 
@@ -510,7 +511,7 @@
       const v1 = k.spillet && tal(k.s1) > tal(k.s2), v2 = k.spillet && tal(k.s2) > tal(k.s1);
       return `<li class="kamp${k.spillet ? " spillet" : ""}">
         <span class="h${v1 ? " vinder" : ""}">${holdLink(k.hjemme)}</span>
-        ${k.spillet ? `<a class="score" href="#kamp/${encodeURIComponent(k.fane)}" title="Se kampen">${esc(k.s1)} – ${esc(k.s2)}</a>` : '<span class="score">–</span>'}
+        ${k.spillet ? `<a class="score" href="#kamp/${encodeURIComponent(k.fane)}" title="Se kampen">${esc(k.s1)} – ${esc(k.s2)}</a>` : `<a class="score optakt-link" href="#kamp/${encodeURIComponent(k.fane)}" title="Optakt og bud på resultatet">optakt</a>`}
         <span class="u${v2 ? " vinder" : ""}">${holdLink(k.ude)}</span></li>`;
     };
     // Pressechefen kommenterer yndlingsholdets puljekampe ud fra de rigtige resultater.
@@ -889,13 +890,14 @@
       <p class="lead">Pressekonferencer, kampreferater og interviews fra ligaens hold. Tryk på en overskrift for at læse.</p>
       ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}"${/^#/.test(C.PRESSE_FORMULAR) ? "" : ' target="_blank" rel="noopener"'}>✍️ Indsend til pressetribunen</a> <a class="knap knap-link" href="#power">📊 Gunnars power ranking</a></p>` : ""}
       ${efterlysning()}
+      <div class="grid-2">${ugensRygteKort()}${optaktKort()}</div>
       ${PRESSE.length ? `<div class="pk-liste">${PRESSE.map(pkLinje).join("")}</div>` : '<p class="muted">Ingen artikler endnu.</p>'}
       <p class="small muted">Satire. Skrevet af holdenes coaches eller ud fra deres indlæg.</p>`;
   }
 
   function holdLore(navn) {
     const egne = (H.holdCitater || []).filter((c) => c.hold === navn);
-    const kort = [stilleHold().includes(navn) ? ingenKommentarKort(navn) : "",
+    const kort = [ugensRygteKort(navn), stilleHold().includes(navn) ? ingenKommentarKort(navn) : "",
       EF && navn === EF.hold ? pressechefKort(tilfældig(EF.linjer)) : "", egne.length ? holdCitatKort(tilfældig(egne)) : ""].filter(Boolean);
     return (kort.length ? `<div class="grid-2" style="margin-bottom:16px">${kort.join("")}</div>` : "") + holdLoreIndhold(navn);
   }
@@ -997,6 +999,9 @@
     if (m.svar.length) l.push("", "🎤 Tre hurtige spørgsmål venter (én linje pr. svar er nok):",
       ...m.svar.map((x) => `• ${kampNavn(x.fane)}: mangler ${listeTekst(x.hold)}\n  ${rod}/#kamp/${encodeURIComponent(x.fane)}`));
     if (l.length === 1) l.push("", "Alle hold har svaret. Pressechefen er rørt og en smule mistænksom.");
+    const ry = ugensRygte(), op = ugensOptakt();
+    if (ry) l.push("", `🗣️ Ugens rygte: ${ry.tekst}`, `Bekræft, benægt eller overgå det: ${rod}/${indsendLink(ry.hold)}/Rygte`);
+    if (op) l.push("", `🔮 Optakt: ${kampHold(op).join(" mod ")}. Hvordan ender den?`, `Giv jeres bud: ${rod}/#kamp/${encodeURIComponent(op)}`);
     l.push("", `Hilsen ${H.pressechef.navn.split(" ")[0]} (100 % neutral)`);
     return l.join("\n");
   }
@@ -1076,7 +1081,7 @@
         <div class="stor-score">${k.spillet ? `${esc(k.s1)} – ${esc(k.s2)}` : "–"}</div>
         <div class="side u${k.spillet && b > a ? " vinder" : ""}">${holdLink(B)}<span class="small muted">Ude${k.coach[B] ? ` · Coach ${esc(k.coach[B])}` : ""}</span></div>
       </div>`;
-    if (!k.spillet) return hoved + '<p class="muted">Kampen er ikke spillet endnu.</p>';
+    if (!k.spillet) return hoved + optaktBoks(fane);
     const r = referat(k);
     const holdTabel = (h) => {
       const aktive = (k.spillere[h] || []).filter((p) => p.td || p.comp || p.int || p.foul || p.cas || p.mvp || p.mng);
@@ -1095,6 +1100,7 @@
         <p class="small muted" style="margin:0">Skrevet automatisk ud fra kommissærens kampskema.</p></article>
       ${pressechefKort(r.presse)}
       ${treSpørgsmålBoks(fane)}
+      ${tipFacit(fane, a, b)}
       <h2>Stats</h2><div class="grid-2">${holdTabel(A)}${holdTabel(B)}</div>`;
   }
 
@@ -1251,6 +1257,7 @@
     const hold = [...new Set([...Object.keys(puljeAf), ...alleHold()])].filter((h) => !/^#/.test(h)).sort((a, b) => a.localeCompare(b, "da"));
     const typer = ["Pressemeddelelse", "Kampreferat", "Interview", "Rygte", "Lore"];
     const [måde, a1, a2] = String(navn || "").split("/");
+    const valgtType = måde === "hold" && typer.includes(a2) ? a2 : "";
     const valgt = måde === "hold" && hold.includes(a1) ? a1 : gemt("bb-hold");
     const redaktør = `<details class="card" id="redaktoer"><summary>Redaktør (Peter og Mikkel)</summary>
         <p class="small muted">Skriv redaktør-koden for at skjule eller vise indlæg fra denne side.</p>
@@ -1261,6 +1268,35 @@
         <textarea id="gunnar-besked" rows="9" readonly>${esc(gunnarBesked())}</textarea>
         <button class="knap" type="button" id="gunnar-kopi">Kopiér beskeden</button> <span class="small" id="gunnar-kopi-status" role="status"></span>
       </details>`;
+    // Bud på en kommende kamp: to tal og en valgfri hilsen. Gemmes med kamp = "tip:<fane>".
+    if (OP && måde === "tip" && alleFaner().includes(a1) && kampHold(a1).includes(a2)) {
+      const [A, B] = kampHold(a1);
+      const tilbage = `<p><a href="#kamp/${encodeURIComponent(a1)}">← Tilbage til kampen</a></p>`;
+      if (spilledeFaner().includes(a1)) return `<p class="kicker">Pressetribunen</p>${tilbage}<h1>Giv dit bud</h1>
+        <p class="lead">Kampen er allerede spillet, så der kan ikke gives flere bud.</p>`;
+      return `
+      <p class="kicker">Pressetribunen</p>
+      ${tilbage}
+      <h1>Giv dit bud</h1>
+      <p class="lead">Bud fra ${esc(a2)} på ${esc(A)} mod ${esc(B)}. ${esc(OP.intro)}</p>
+      <form id="indsend" class="card indsend" autocomplete="off" data-tip="${esc(a1)}">
+        <input type="hidden" name="hold" value="${esc(a2)}">
+        <input type="hidden" name="type" value="Forudsigelse">
+        <input type="hidden" name="kamp" value="${esc("tip:" + a1)}">
+        <input type="hidden" name="overskrift" value="">
+        <div class="tip-felter">
+          <label>${esc(A)}<input name="maal1" type="number" inputmode="numeric" min="0" max="20" required></label>
+          <label>${esc(B)}<input name="maal2" type="number" inputmode="numeric" min="0" max="20" required></label>
+        </div>
+        <label>En hilsen til modstanderen (valgfrit)<textarea class="kort" name="hilsen" rows="2" maxlength="400"></textarea></label>
+        <label>Hvem giver buddet? (valgfrit)<input name="navn" maxlength="60" placeholder="Coachens eller figurens navn" value="${esc(gemt("bb-navn"))}"></label>
+        <label>Liga-kode<input name="kode" required placeholder="Fås hos Peter eller Mikkel" value="${esc(gemt("bb-kode"))}"></label>
+        <input name="hjemmeside" tabindex="-1" aria-hidden="true" autocomplete="off" style="position:absolute;left:-9999px">
+        <button class="knap" type="submit">Send buddet til Gunnar</button>
+        <p class="small" id="indsend-status" role="status"></p>
+      </form>
+      ${redaktør}`;
+    }
     // Svar på Gunnars tre spørgsmål: ét felt pr. spørgsmål. Hold, type, overskrift og kamp er givet på forhånd.
     if (TS && måde === "svar" && alleFaner().includes(a1) && kampHold(a1).includes(a2)) {
       const modstander = kampHold(a1).find((h) => h !== a2);
@@ -1293,7 +1329,7 @@
       <form id="indsend" class="card indsend" autocomplete="off">
         <label>Hold<select name="hold" required><option value="">Vælg hold</option>
           ${hold.map((h) => `<option${valgt === h ? " selected" : ""}>${esc(h)}</option>`).join("")}</select></label>
-        <label>Type<select name="type">${typer.map((t) => `<option>${t}</option>`).join("")}</select></label>
+        <label>Type<select name="type">${typer.map((t) => `<option${valgtType === t ? " selected" : ""}>${t}</option>`).join("")}</select></label>
         <label>Overskrift<input name="overskrift" maxlength="150" required></label>
         <label>Tekst<textarea name="tekst" rows="12" maxlength="20000" required placeholder="Sæt bare teksten ind. Også tekst fra ChatGPT."></textarea></label>
         <label>Billede (valgfrit)<input name="billede" type="file" accept="image/*"></label>
@@ -1325,6 +1361,18 @@
       const fil = form.billede && form.billede.files[0];
       knap.disabled = true; status.textContent = "Sender …";
       try {
+        if (form.dataset.tip) {
+          const [A, B] = kampHold(form.dataset.tip);
+          const m1 = parseInt(fd.get("maal1"), 10), m2 = parseInt(fd.get("maal2"), 10);
+          if (!(m1 >= 0 && m2 >= 0)) throw new Error("Skriv et tal for begge hold.");
+          const n = String(fd.get("navn") || "").trim();
+          const taler = /^\p{L}[^:]{0,39}$/u.test(n) && n.split(/\s+/).length <= 4 && !/\d$/.test(n) ? n : "Coachen";
+          const hilsen = String(fd.get("hilsen") || "").replace(/\s*\n+\s*/g, " ").trim();
+          const udfald = m1 === m2 ? "Uafgjort" : `Sejr til ${m1 > m2 ? A : B}`;
+          ["maal1", "maal2", "hilsen"].forEach((k) => fd.delete(k));
+          fd.set("overskrift", `Forudsigelse: ${A} ${m1}-${m2} ${B}`.slice(0, 150));
+          fd.set("tekst", `${H.pressechef.navn}: Hvordan ender ${A} mod ${B}?\n${taler}: ${m1}-${m2}. ${udfald}.${hilsen ? " " + hilsen : ""}`);
+        }
         if (form.dataset.svar) {
           // "Navn: tekst" bliver til replikker på siden. Et navn, der ikke kan stå foran et kolon, bliver til "Coachen".
           const n = String(fd.get("navn") || "").trim();
@@ -1349,7 +1397,8 @@
         gemt("bb-kode", fd.get("kode")); gemt("bb-navn", fd.get("navn")); gemt("bb-hold", fd.get("hold"));
         status.textContent = "Tak! Indlægget er på siden.";
         await hentAlt();
-        location.hash = form.dataset.svar ? "#kamp/" + encodeURIComponent(form.dataset.svar) : d.id ? "#presse/" + d.id : "#presse";
+        const kampEfter = form.dataset.svar || form.dataset.tip;
+        location.hash = kampEfter ? "#kamp/" + encodeURIComponent(kampEfter) : d.id ? "#presse/" + d.id : "#presse";
       } catch (err) {
         status.textContent = err.message;
         knap.disabled = false;
@@ -1378,6 +1427,99 @@
       if (!r.ok) { const d = await r.json().catch(() => ({})); alert(d.fejl || "Det gik galt."); }
       await visListe(); hentAlt();
     };
+  }
+
+  // ---------- Ugens rygte og optakt til kampen (tekster i humor.js) ----------
+  const UR = H.ugensRygte, OP = H.optakt;
+  // Ugenummer til rotation (uger siden 1970, skifter mandag). Vises aldrig på siden: ingen rigtige datoer.
+  const ugeNr = () => Math.floor((Date.now() / 864e5 + 3) / 7);
+  function ugensRygte() {
+    const hold = UR ? Object.keys(UR.hold || {}) : [];
+    if (!hold.length) return null;
+    const u = ugeNr(), h = hold[u % hold.length], liste = UR.hold[h];
+    return { hold: h, tekst: liste[Math.floor(u / hold.length) % liste.length] };
+  }
+  // kunHold: vis kun kortet, hvis ugens rygte handler om netop det hold (bruges på holdsiden).
+  function ugensRygteKort(kunHold) {
+    const r = ugensRygte();
+    if (!r || (kunHold && r.hold !== kunHold)) return "";
+    return `<aside class="card presse"><p class="kicker">Ugens rygte · ${esc(r.hold)}</p>
+      <p class="presse-tekst">»${esc(r.tekst)}«</p>
+      <div class="small muted">${gunnarAnsigt()}${esc(UR.kilde)}</div>
+      <p style="margin:10px 0 0"><a class="knap knap-link" href="${indsendLink(r.hold)}/Rygte">🗣️ ${esc(UR.knap)}</a></p></aside>`;
+  }
+
+  // Et bud på en kamp gemmes som et indlæg med kamp = "tip:<fanenavn>" og resultatet i overskriften ("... 2-1 ...").
+  const tipPå = (fane, hold) => PRESSE.find((p) => p.kamp === "tip:" + fane && p.hold === hold);
+  const tipLink = (fane, hold) => `#indsend/tip/${encodeURIComponent(fane)}/${encodeURIComponent(hold)}`;
+  const tipScore = (p) => { const m = String((p && p.titel) || "").match(/(\d+)\s*[-–]\s*(\d+)/); return m ? [+m[1], +m[2]] : null; };
+  // Coachens egne ord i buddet. Selve resultatet ("2-1.") står allerede med store tal og tages ikke med igen.
+  const tipOrd = (p) => p.replikker.filter((r) => r.hvem && r.hvem !== H.pressechef.navn).map((r) => r.tekst).join(" ").replace(/^\d+\s*[-–]\s*\d+\.\s*/, "");
+  const kommendeFaner = () => { const sp = new Set(spilledeFaner()); return alleFaner().filter((f) => !sp.has(f)); };
+  const ugensOptakt = () => { const k = kommendeFaner(); return k.length ? k[ugeNr() % k.length] : ""; };
+
+  function optaktTekst(A, B) {
+    if (!OP) return "";
+    const s = D.stilling.ok, Y = H.yndlingshold;
+    const a = s && s.hold.find((h) => h.navn === A), b = s && s.hold.find((h) => h.navn === B);
+    const spillet = (h) => (h ? h.w + h.d + h.l : 0);
+    const liste = [A, B].includes(Y) ? OP.yndling : EF && [A, B].includes(EF.hold) ? OP.familie
+      : !spillet(a) && !spillet(b) ? OP.ingenTal : a && b && a.p !== b.p ? OP.favorit : OP.lige;
+    const fav = a && b && b.p > a.p ? B : A, und = fav === A ? B : A;
+    return (liste[hashTal(A + B) % liste.length] || "").replace(/\{a\}/g, A).replace(/\{b\}/g, B)
+      .replace(/\{favorit\}/g, fav).replace(/\{underdog\}/g, und).replace(/\{yndling\}/g, Y);
+  }
+  // Før kampen: holdene stillet op mod hinanden med rigtige tal, pressechefens kommentar og coachernes bud.
+  function optaktBoks(fane) {
+    if (!OP || !alleFaner().includes(fane)) return '<p class="muted">Kampen er ikke spillet endnu.</p>';
+    const [A, B] = kampHold(fane);
+    const s = D.stilling.ok, st = D.holdstats.ok || {}, pr = powerRanking();
+    const tal_ = (h) => {
+      const r = s && s.hold.find((x) => x.navn === h), p = pr.find((x) => x.navn === h);
+      return { point: r ? r.p : "–", vut: r ? `${r.w}-${r.d}-${r.l}` : "–", td: (st[h] || {})["Touch Down"] || "0", cas: (st[h] || {})["Casualties"] || "0",
+        power: p ? `nr. ${p.nr}` : "–", slogan: PLAKATER[h] ? PLAKATER[h].slogans[0] : "" };
+    };
+    const a = tal_(A), b = tal_(B);
+    const række = (lbl, x, y) => `<tr><td class="num">${esc(x)}</td><th>${lbl}</th><td>${esc(y)}</td></tr>`;
+    const bud = (hold) => {
+      const t = tipPå(fane, hold), sc = tipScore(t);
+      return t ? `<div class="ts-hold"><h3>${holdLink(hold)}</h3>${sc ? `<p class="tip-score">${sc[0]} – ${sc[1]}</p>` : ""}
+          ${tipOrd(t) ? `<p class="presse-tekst">»${esc(tipOrd(t))}«</p>` : ""}<p class="small muted" style="margin:0">${esc(t.indsendt || "")}</p></div>`
+        : `<div class="ts-hold"><h3>${holdLink(hold)}</h3><p class="small muted">${esc(OP.venter.replace(/\{hold\}/g, hold))}</p>
+          <p style="margin:0"><a class="knap knap-link" href="${tipLink(fane, hold)}">🔮 Giv bud som ${esc(hold)}</a></p></div>`;
+    };
+    return `<section class="card optakt"><p class="kicker">Optakt</p>
+      <div class="tabel-wrap"><table class="optakt-tabel"><thead><tr><th class="num">${esc(A)}</th><th></th><th>${esc(B)}</th></tr></thead><tbody>
+        ${række("Point", a.point, b.point)}${række("V-U-T", a.vut, b.vut)}${række("Touchdowns", a.td, b.td)}
+        ${række("Casualties", a.cas, b.cas)}${række("Power ranking", a.power, b.power)}
+        ${a.slogan || b.slogan ? række("Slogan", a.slogan, b.slogan) : ""}</tbody></table></div></section>
+      ${pressechefKort(optaktTekst(A, B))}
+      <section class="card presse ts"><p class="kicker">Hvordan ender den?</p>
+        <p class="small muted" style="margin:0 0 12px">Hjemmeholdet står først i resultatet. Buddene gemmes, og pressechefen fælder dom efter kampen.</p>
+        <div class="grid-2">${bud(A)}${bud(B)}</div></section>`;
+  }
+  // Efter kampen: pressechefens dom over de bud, der blev givet. Vises kun, hvis nogen gav et bud.
+  function tipFacit(fane, s1, s2) {
+    if (!OP) return "";
+    const tips = kampHold(fane).map((h) => tipPå(fane, h)).filter(Boolean);
+    if (!tips.length) return "";
+    const tegn = (x, y) => Math.sign(x - y);
+    return `<section class="card presse ts"><p class="kicker">Forudsigelserne</p><div class="grid-2">${tips.map((t) => {
+      const sc = tipScore(t);
+      const dom = !sc ? "" : sc[0] === s1 && sc[1] === s2 ? OP.dom.plet : tegn(sc[0], sc[1]) === tegn(s1, s2) ? OP.dom.vinder : OP.dom.forkert;
+      return `<div class="ts-hold"><h3>${holdLink(t.hold)}</h3>${sc ? `<p class="tip-score">${sc[0]} – ${sc[1]}</p>` : ""}
+        ${tipOrd(t) ? `<p class="small muted">»${esc(tipOrd(t))}«</p>` : ""}${dom ? `<p class="presse-tekst">»${esc(dom)}«</p>` : ""}</div>`;
+    }).join("")}</div><div class="small muted" style="margin-top:10px">${gunnar()}</div></section>`;
+  }
+  // Kort til forsiden og Presse: én kommende kamp ad gangen, skifter hver uge.
+  function optaktKort() {
+    const fane = ugensOptakt();
+    if (!OP || !fane) return "";
+    const [A, B] = kampHold(fane);
+    return `<aside class="card presse"><p class="kicker">Optakt til kampen</p>
+      <h3 class="optakt-kamp">${esc(A)} <span class="muted">mod</span> ${esc(B)}</h3>
+      <p class="presse-tekst">»${esc(optaktTekst(A, B))}«</p><div class="small muted">${gunnar()}</div>
+      <p style="margin:10px 0 0"><a class="knap knap-link" href="#kamp/${encodeURIComponent(fane)}">🔮 Se optakten, og giv dit bud</a></p></aside>`;
   }
 
   // ---------- Gunnars power ranking (tekster i humor.js -> powerRanking) ----------

@@ -145,8 +145,15 @@ som person; Gunnar lægger aldrig ord i munden på nogen; det er en invitation, 
   alle hans kort, ved hans replikker og øverst på power rankingen. Billedprompten står i chatten fra 16. nov.
 - **Rygte Rasmus har fået ansigt** (16. nov., billede fra Peter): `figurer/rygte-rasmus.jpg` (+ -lille). `humor.js` → figurer.
   Vises som forfatter på hans artikler og i Presse-listen. Nye figurer tilføjes samme sted.
-- Flere idéer fra samme snak (ikke bygget): ugens rygte, optakt til kampen med forudsigelser, ret til genmæle,
-  ugens spørgsmål til alle, afstemning om ugens spiller.
+- **Ugens rygte** (bygget 16. nov.): ét opdigtet rygte om ét hold, skifter hver mandag (rotation efter ugenummer, som aldrig
+  vises). Tekster i `humor.js` → ugensRygte (2 pr. hold). Vises på forsiden, Presse og holdets side. Knappen åbner
+  `#indsend/hold/<hold>/Rygte` (type valgt på forhånd). Fortalt af pressechefen, ikke af Rygte Rasmus (han er en coachs figur).
+- **Optakt til kampen** (bygget 16. nov.): uspillede puljekampe viser holdene stillet op med rigtige tal, pressechefens
+  kommentar og coachernes bud (`#indsend/tip/<fane>/<hold>`). Et bud gemmes som type "Forudsigelse" med kamp = "tip:<fane>"
+  og resultatet i overskriften. Efter kampen fælder pressechefen dom (ramte plet / rigtig vinder / ved siden af).
+  Forsiden og Presse viser én kommende kamp ad gangen (skifter ugentligt). Tekster i `humor.js` → optakt.
+  Siden kender ikke kampenes rækkefølge eller datoer, så "ugens optakt" er en vilkårlig uspillet kamp.
+- Flere idéer fra samme snak (ikke bygget): ret til genmæle, ugens spørgsmål til alle, afstemning om ugens spiller.
 
 ## Idéer til senere (parkeret 6. nov. 2026)
 Blood Bowl-idéer bor her, ikke i Peters Idébank i Todoist.

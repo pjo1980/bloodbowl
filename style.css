@@ -356,3 +356,13 @@ a.pr-kort { display: block; color: inherit; text-decoration: none; }
 img.figur-stor { width: 56px; height: 56px; margin: 0; border: 2px solid var(--gold); }
 .forfatter a { line-height: 0; }
 .card.presse .small a img.figur, .pr-kort img.figur { width: 32px; height: 32px; }
+
+/* ---------- Ugens rygte og optakt til kampen ---------- */
+.optakt { margin-bottom: 16px; }
+.optakt-tabel th, .optakt-tabel td { width: 38%; white-space: normal; }
+.optakt-tabel tbody th { width: 24%; text-align: center; background: transparent; }
+.optakt-tabel thead th { font-size: 14px; color: var(--text); text-transform: none; letter-spacing: 0; }
+.optakt-kamp { margin: 2px 0 6px; }
+.tip-score { font-family: "Bangers", Impact, sans-serif; font-size: 34px; line-height: 1; margin: 0 0 8px; color: var(--accent); }
+.tip-felter { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.kamp a.optakt-link { font-family: "Barlow", system-ui, sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); border-bottom: 0; }

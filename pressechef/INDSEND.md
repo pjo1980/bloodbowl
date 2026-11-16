@@ -44,3 +44,6 @@ Gratis grænser: 100.000 læsninger og 1.000 skrivninger om dagen, 1 GB lager. L
 - `#indsend/svar/<fane>/<hold>` er svar-formularen til Gunnars tre spørgsmål efter en kamp. Den sender et Interview med
   det ekstra felt `kamp` (kampens fanenavn). Feltet skal følge med uændret i den pæne udgave i presse.js.
 - Under **Redaktør** ligger Gunnars efterlysning som færdig Messenger-besked.
+- `#indsend/hold/<hold>/<type>` vælger også typen på forhånd (bruges af Ugens rygte med typen Rygte).
+- `#indsend/tip/<fane>/<hold>` er bud på en kommende kamp: type "Forudsigelse", feltet `kamp` = "tip:<fanenavn>",
+  og overskriften "Forudsigelse: <hjemme> 2-1 <ude>". Siden læser resultatet ud af overskriften, så den må ikke ændres.
