@@ -158,12 +158,12 @@ window.HUMOR = {
   // Rygter om kommissæren og bestikkelse (Peter 9. nov.; bygger på Taskmaster Flemmings eget rygte).
   // Altid fortalt af pressechefen eller Spike!. Læg ALDRIG ord i munden på kommissæren: han er en rigtig person.
   kommissaerRygter: [
-    "Kampprogrammet er lagt helt neutralt. At Taskmaster Flemming fik begge elverhold, er ren tilfældighed og en meget stor kasse Bloodweiser.",
+    "Kampprogrammet er lagt helt neutralt. At Taskmaster Flemming skal møde begge elverhold, er ren tilfældighed. Det er den meget store kasse Bloodweiser på kommissærens kontor også.",
     "Ifølge rygterne tager kommissærens kontor imod bestikkelse i guld, øl og kage. Pressechefen har tilbudt sovs. Det blev afvist.",
-    "En anonym gnoblar har set kommissæren tælle guldmønter i stillingsarket. Ifølge kilden hed det »formler«.",
+    "En anonym gnoblar påstår, at der ligger guldmønter gemt i stillingsarket. Officielt hedder de »formler«.",
     "Kommissæren afviser alle rygter om bestikkelse. Det gør hans nye sommerresidens i Lustria også.",
     "Uofficiel prisliste fra kommissærens kontor: At flytte en kamp koster tre tønder Bugman's. At flytte den tilbage koster fire.",
-    "Pressechefen spurgte kommissæren om Taskmaster Flemmings tomme pengebælte. Han fik intet svar, men en mistænkeligt god plads ved næste kamp.",
+    "Pressechefen spurgte kommissæren om Taskmaster Flemmings tomme pengebælte. Der kom intet svar, men pressechefen fik en mistænkeligt god plads ved næste kamp.",
     "Kommissærens nye guldbelagte Bloodweiser-tønde er efter sigende en gave fra »en anonym elverelsker«. Elverne benægter. Flemming smiler."
   ],
 
