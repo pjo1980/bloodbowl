@@ -123,6 +123,9 @@ Andre idéer: laurbærkrans med S·F (latinsk/romersk), lykkehjul. Kopiér ikke 
 ## Gunnars stemme (Peter 16. nov. 2026)
 I faste noter og kort omtaler Gunnar sig selv som "Pressechefen", aldrig "jeg". Kun i replikker i interviews og
 pressekonferencer taler han i jeg-form. Sproglig gennemgang af alle hans faste tekster er lavet 16. nov.
+Samme dag: sproglig gennemgang af AL AI-skrevet tekst på siden (sidens faste tekster, humor.js, Spike!s referater,
+Gluttons' pressekonference og lore, regler.js, nyheder.csv). Coachernes egne indlæg er ikke rørt.
+Den daglige redaktør (SKILL.md) har fået et SPROG-punkt: klart dansk, danske ord, og jokes må ikke stride mod pointreglerne.
 
 ## Gunnar opsøger holdene (bygget 16. nov. 2026, Peters ønske)
 Mål: forstærke og opmuntre engagement på en humoristisk Blood Bowl-måde. Regler: drilleriet rammer HOLDET, aldrig coachen

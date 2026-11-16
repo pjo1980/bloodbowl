@@ -890,7 +890,7 @@
       ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}"${/^#/.test(C.PRESSE_FORMULAR) ? "" : ' target="_blank" rel="noopener"'}>✍️ Indsend til pressetribunen</a> <a class="knap knap-link" href="#power">📊 Gunnars power ranking</a></p>` : ""}
       ${efterlysning()}
       ${PRESSE.length ? `<div class="pk-liste">${PRESSE.map(pkLinje).join("")}</div>` : '<p class="muted">Ingen artikler endnu.</p>'}
-      <p class="small muted">Satire. Skrevet af eller ud fra holdenes egne coaches.</p>`;
+      <p class="small muted">Satire. Skrevet af holdenes coaches eller ud fra deres indlæg.</p>`;
   }
 
   function holdLore(navn) {
@@ -1171,7 +1171,7 @@
     const liste = (rækker) => `<ul class="top5">${rækker.join("")}</ul>`;
     const kortSyge = `<div class="card"><h2>🩹 Sygelisten</h2><p class="small muted">Spillere med Miss Next Game i holdarket.</p>
       ${syge.length ? liste(syge.map((s) => `<li><span><b>${esc(s.navn)}</b> <span class="muted small">${esc(s.pos || "")}</span></span><span>${holdLink(s.hold)}</span></li>`))
-        : tom("Ingen er på sygelisten. Enten er alle raske, eller også har ingen tastet det.")}
+        : tom("Ingen er på sygelisten. Enten er alle raske, eller også har ingen tastet skaderne ind.")}
       ${kampMng.length ? `<p class="small" style="margin-top:12px"><b>Fra kampskemaerne:</b></p>` + liste(kampMng.map((s) =>
         `<li><span><b>${esc(s.navn)}</b> ${holdLink(s.hold)}</span><span class="muted small">mod ${esc(s.mod)} · ${kampLink(s.fane)}</span></li>`)) : ""}
     </div>`;
@@ -1191,7 +1191,7 @@
       ? `${delt} spillere deler førstepladsen blandt slagterne med ${værst.cas} CAS hver. Pressechefen kalder det ›fysisk spil‹. Lægen kalder det overarbejde.`
       : `${værst.navn} fra ${værst.hold} topper listen over slagtere. Pressechefen kalder det ›fysisk spil‹. Lægen kalder det overarbejde.`;
     return hoved + pressechefKort(gunnar) + `<div class="grid-2" style="margin-top:16px">${kortSyge}${kortSlagtere}${kortNig}${kortHold}</div>
-      <p class="small muted">Skader kommer kun med, hvis de er tastet: Miss Next Game og Niggling i holdarket, CAS og Miss Next Game i kamparket.
+      <p class="small muted">Skader kommer kun med, hvis de er tastet ind: Miss Next Game og Niggling i holdarket, CAS og Miss Next Game i kamparket.
         Se <a href="#kampdag">Kampdag</a>.</p>`;
   }
 

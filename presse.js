@@ -10,7 +10,7 @@ window.LORE = {
     mottoDa: "At vinde er valgfrit. Frokost er obligatorisk.",
     afsnit: [
       { titel: "Fra slagter til sportsklub", tekst: "Før Blood Bowl drev Otto Overbelly en omrejsende slagterforretning, Overbelly's Prime Cuts. Den gik fallit. Otto så det ikke som en fiasko. Han omorganiserede bare: Ogrerne blev spillere, gnoblarerne blev personale, og slagtervognene blev holdets infrastruktur." },
-      { titel: "The Gutpit", tekst: "Hjemmebanen er bygget i resterne af en slagtergård, et fælleskøkken og en ogrelejr. Der er store jerngryder, huggeblokke, kødkroge og røg fra kogebål. Den er kaotisk, farlig og dårligt reguleret. Den er også hjemme." },
+      { titel: "The Gutpit", tekst: "Hjemmebanen er bygget i resterne af en slagtergård, et fælleskøkken og en ogrelejr. Der er store jerngryder, huggeblokke, kødkroge og røg fra kogebål. Den er kaotisk, farlig og dårligt reguleret. Den er også deres hjem." },
       { titel: "Runts", tekst: "Ogrerne er officielt holdet. Gnoblarerne, kaldet Runts, er i praksis embedsværket. De står for logistik, udstyr, forplejning, skadesrapporter og papirarbejde. Ingen lægger mærke til dem. Man opdager dem først, når de ikke er der, og hele klubben går i stå. Det forstår Otto aldrig helt." },
       { titel: "Navnetraditionen", tekst: "En gnoblar hos Gluttons får ikke et rigtigt navn. Den hedder Runt #7 eller Git #3. Et navn skal fortjenes, og grænsen er enkel: En gnoblar får et navn, når den lærer en skill. Det betragtes som helt normalt." },
       { titel: "Rygterne", tekst: "Modstandere har det med at forsvinde efter besøg i The Gutpit. Klubben afviser alle rygter. Hjelmene ved gryderne er et tilfælde, og kødet er officielt bare svinekød." }
@@ -598,7 +598,7 @@ window.PRESSE = [
     "indsendt": "Skrevet af Spike! Magazine ud fra kommissærens kampskema",
     "citat": {
       "hvem": "Spike!",
-      "tekst": "Tre skader til Ocras, ét touchdown. Tre skader giver altså ikke tre point, drenge – vi har tjekket regelbogen!"
+      "tekst": "Ocras uddelte tre skader, men scorede kun ét touchdown. Tre skader giver tre point, drenge. En sejr giver tredive – vi har tjekket regelbogen!"
     },
     "replikker": [
       {
@@ -608,10 +608,10 @@ window.PRESSE = [
         "p": "Manden i centrum: Golthorn IX! Begge Sages-touchdowns kom fra den elegante elvers fingerspidser. To scoringer, nul hårtotter i uorden. Bradur VI leverede kampens eneste completion, og hvis man kun har brug for én, hvorfor så spilde flere?"
       },
       {
-        "p": "Ocras gjorde, hvad Ocras gør: de slog! Snuggles, Sweetums og Peaches stod for én skade hver – et nydeligt hattrick af knusende omfavnelser fra spillere med navne som plyslegetøj. Tre skader til Ocras, ét touchdown. Tre skader giver altså ikke tre point, drenge – vi har tjekket regelbogen! Honeybun scorede Ocras’ eneste touchdown, og Dreamboat blev kåret som holdets MVP."
+        "p": "Ocras gjorde, hvad Ocras gør: De slog! Snuggles, Sweetums og Peaches stod for én skade hver – et nydeligt hattrick af knusende omfavnelser fra spillere med navne som plyslegetøj. Ocras uddelte tre skader, men scorede kun ét touchdown. Tre skader giver tre point, drenge. En sejr giver tredive – vi har tjekket regelbogen! Honeybun scorede Ocras’ eneste touchdown, og Dreamboat blev kåret som holdets MVP."
       },
       {
-        "p": "Hos Sages fik Ilthien III MVP-æren, mens Malth må tilbringe næste kamp i apothecariens telt med en kop urtete. Nuffle giver, Nuffle tager!"
+        "p": "Hos Sages fik Ilthien III MVP-æren, mens Malth må tilbringe næste kamp i apotekerens telt med en kop urtete. Nuffle giver, Nuffle tager!"
       },
       {
         "p": "Kassen: 70.000 guld til Eberhards Sages og 60.000 til GrimStones Ocras. Hvis Ocras investerer det i en regelbog, kan det blive farligt."
@@ -1116,13 +1116,13 @@ window.PRESSE = [
         "p": "Elverkrig i Sort Pulje! The Eternal Sages slog Elmtree Evaders 2-1. Begge hold var for fine til at svede. Kun det ene var fint nok til at vinde."
       },
       {
-        "p": "Ilthien III og Golthorn IX scorede for Sages. Golthorn IX har tidligere fortalt Spike!, at han scorer, fordi det er hurtigere. Vi kan bekræfte, at det var det."
+        "p": "Ilthien III og Golthorn IX scorede for Sages. Træner Raelth har tidligere fortalt Spike!, at Golthorn IX scorer, fordi det er hurtigere. Vi kan bekræfte, at det var det."
       },
       {
         "p": "Kampens eneste skade kom fra Taln, som også blev kåret som MVP. Spike! har engang kaldt ham en usædvanligt kulturel lineman. Kulturen har åbenbart knoer."
       },
       {
-        "p": "Evaders gav ikke op. Oakenfist scorede holdets touchdown, og Lily Sunflower kastede tre completions. Tre! Det er flere, end de fleste katapulter klarer på en hel sæson."
+        "p": "Evaders gav ikke op. Oakenfist scorede holdets touchdown, og Lily Sunflower kastede tre completions. Tre! Hos de fleste hold i ligaen hedder det en hel sæson."
       },
       {
         "p": "Kassen: 80.000 til Coach Eberhard og Sages, 70.000 til Coach Lasse og Evaders. Det rækker til mange fjer i hjelmene."
@@ -1152,16 +1152,16 @@ window.PRESSE = [
         "p": "Black Mountain Slavers vandt 1-0 over Bedstefars Besudlere i Gul pulje. Kampens eneste touchdown kom fra Igor Longblade. Det var præcis ét mere, end Besudlerne kunne klare."
       },
       {
-        "p": "Gert Galdespreder stod for kampens eneste skade. Han kalder det angiveligt kunst. Spike! kalder det et CAS, men vi anerkender penselstrøget."
+        "p": "Gert Galdespreder stod for kampens eneste skade. Han kalder det angiveligt kunst. Spike! kalder det en skade, men vi anerkender penselstrøget."
       },
       {
-        "p": "Arschhier noterede et foul for Slavers. Ifølge Besudlernes eget referat var dommeren ikke imponeret."
+        "p": "Arschhier fik noteret en foul for Slavers. Ifølge Besudlernes eget referat var dommeren ikke imponeret."
       },
       {
-        "p": "Ligaens husregel giver nye hold en ekstra MVP, så begge hold fik to. Razghul og Azathor for Slavers, Søren Svulmesæk og Finn Fluefjert for Besudlerne. Nuffle var gavmild. Apothecaryen var travl."
+        "p": "Ligaens husregel giver nye hold en ekstra MVP, så begge hold fik to. Razghul og Azathor for Slavers, Søren Svulmesæk og Finn Fluefjert for Besudlerne. Nuffle var gavmild. Apotekeren havde travlt."
       },
       {
-        "p": "Kassen: 40.000 til Coach Flemse og Slavers, 30.000 til Coach Svulst-Stank og Besudlerne. Det rækker til nye bandager. Eller én rigtig god flaske desinfektion."
+        "p": "Kassen: 40.000 til Coach Flemse og Slavers, 30.000 til Coach Svulst-Stank og Besudlerne. Det rækker til nye bandager. Eller én rigtig god flaske sprit."
       },
       {
         "p": "Læs også coachens eget referat på Presse-siden."
@@ -1676,7 +1676,7 @@ window.PRESSE = [
       { hvem: "Otto Overbelly", tekst: "Det plejer at ordne sig selv." },
       { hvem: "Cabalvision", tekst: "Sommerens store nyindkøb er Lugga Longkicker. Hans job er at sparke gnoblarer." },
       { hvem: "Otto Overbelly", tekst: "Sparke er ikke kaste. Så gælder klagen ikke." },
-      { hvem: "Cabalvision", tekst: "11 spillere, ingen apotekar og 0 guldstykker i kassen. Hvor er pengene blevet af?" },
+      { hvem: "Cabalvision", tekst: "11 spillere, ingen apoteker og 0 guldstykker i kassen. Hvor er pengene blevet af?" },
       { hvem: "Otto Overbelly", tekst: "Vi måtte prioritere morgenmaden." },
       { hvem: "Cabalvision", tekst: "Hele budgettet?" },
       { hvem: "Otto Overbelly", tekst: "Det var en stor morgenmad." },

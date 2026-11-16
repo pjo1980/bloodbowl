@@ -254,7 +254,7 @@ window.HUMOR = {
     "Holdets kok: »Jeg har aldrig set et hold tackle så godt efter dessert.«",
     "Ogre-eksperten om Gluttons' taktik: enkel, ærlig og ekstremt tung.",
     "Rygte: Gluttons har ansat en ernæringsekspert. Han er sidst set i nærheden af grillen.",
-    "Spike! afslører: Modstandere træner nu ekstra, alene ved synet af Gluttons' frokostmenu.",
+    "Spike! afslører: Modstandere taber modet alene ved synet af Gluttons' frokostmenu.",
     "OVERBELLY BENÆGTER KANNIBALISME FOR SJETTE SÆSON I TRÆK.",
     "RUNTS KRÆVER SIKRERE ARBEJDSPLADS. LEDELSEN BESTILLER NY KATAPULT.",
     "GLUTTONS PRÆSENTERER NYT TAKTISK SYSTEM. DET ER AT SLÅ.",

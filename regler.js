@@ -39,7 +39,7 @@ window.REGLER = {
         "De 14 hold spiller knockoutkampe, og 7 vindere går videre til kvartfinalerne.",
         { tekst: "Den sidste plads i kvartfinalen går til en Lucky Loser:",
           under: [
-            "Taber nr. 1 til Southland Stegadons, får nr. 1 Lucky Loser-pladsen.",
+            "Hvis nr. 1 taber til Southland Stegadons, får nr. 1 Lucky Loser-pladsen.",
             "Ellers trækkes der lod blandt taberne. Coach Lustrian er også med.",
             "Lodderne: I ottendedelsfinalerne krydser alle af på et skema ved hver turnover: hvor mange mulige aktiveringer de havde tilbage, og hvad der forårsagede turnoveren. Det giver et antal lodder.",
             "Går kampen i overtid, tæller de to halvlege, der giver flest lodder."
@@ -109,7 +109,7 @@ window.REGLER = {
       intro: "Sådan holder du dit holdark opdateret. Kommissærens guide har billeder.",
       punkter: [
         "Ny spiller: Find et tomt felt på din roster, vælg spilleren i rullemenuen, og giv den et navn. Træk prisen fra dit treasury.",
-        "Winnings fra kampene overføres også i treasury.",
+        "Winnings fra kampene overføres også til treasury.",
         "Miss Next Game: Begge coaches i en kamp hjælper hinanden med at huske det, hvis en casualty giver Miss Next Game. Holdets egen coach slår det fra igen, når næste kamp spilles.",
         "Skills: Skriv den nye skill i første tomme felt. Så skifter feltet farve, og spilleren skifter rank. Opdater selv, hvor mange SPP du har brugt, og hvor meget spillerens værdi stiger.",
         "Dedicated fans: Opdater dem selv efter hver kamp ud fra et d6-slag.",
