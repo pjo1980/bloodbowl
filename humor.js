@@ -290,6 +290,9 @@ window.HUMOR = {
   // Citater fra coachernes EGNE indlæg, ordret (kun forkortet). Vises skiftevis med Star Player-citaterne og på holdsiden.
   // Den daglige pressechef-opgave tilføjer 1-2 nye, når en coach skriver noget citatværdigt.
   holdCitater: [
+    { hold: "GutBuster Gluttons", hvem: "Coach Overbelly", tekst: "Hungren efter succes! Og frokost." },
+    { hold: "The Eternal Sages", hvem: "Raelth", tekst: "Vi er bedre end de andre. Og vi ved det!" },
+    { hold: "The Eternal Sages", hvem: "Raelth", tekst: "Vi glæder os til at vinde over de beskidte wood elves igen en anden gang." },
     { hold: "The Maurading Ocras", hvem: "GrimStone the Merciless", tekst: "Jeg vil hellere tabe en kamp med elleve modstandere på lazarettet end vinde en kamp, hvor alle elverne kan danse hjem til deres små silkepuder bagefter." },
     { hold: "The Maurading Ocras", hvem: "GrimStone the Merciless", tekst: "Sidste sæson kunne mine spillere ikke engang knække en tør kiks uden at få en forstuvning." },
     { hold: "The Full Moon Foulers", hvem: "Herr Doktor von Cünthenstien", tekst: "Etik?! HAHAHA! Jeg forsøgte etik én gang. Den nægtede at rejse sig fra operationsbordet." },

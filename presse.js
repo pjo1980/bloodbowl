@@ -27,6 +27,128 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "web-1794937978297",
+    "hold": "GutBuster Gluttons",
+    "type": "Ugens spørgsmål",
+    "dato": "2026-11-17",
+    "titel": "Ugens spørgsmål: Hvad er holdets hemmelige våben? Pressechefen siger det ikke til nogen.",
+    "undertitel": "Ugens spørgsmål",
+    "coach": "Coach Overbelly",
+    "indsendt": "Indsendt af Coach Overbelly",
+    "kamp": "uge:2968",
+    "citat": {
+      "hvem": "Coach Overbelly",
+      "tekst": "Hungren efter succes! Og frokost."
+    },
+    "replikker": [
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Hvad er holdets hemmelige våben? Pressechefen siger det ikke til nogen."
+      },
+      {
+        "hvem": "Coach Overbelly",
+        "rolle": "Coach, GutBuster Gluttons",
+        "tekst": "Hungren efter succes! Og frokost."
+      }
+    ]
+  },
+  {
+    "id": "web-1794913699291",
+    "hold": "The Eternal Sages",
+    "type": "Interview",
+    "dato": "2026-11-17",
+    "titel": "Tre hurtige: The Eternal Sages efter kampen mod Elmtree Evaders",
+    "undertitel": "Interview",
+    "coach": "Raelth",
+    "indsendt": "Indsendt af Raelth",
+    "kamp": "The Eternal Sages vs. Elmtree Evaders",
+    "citat": {
+      "hvem": "Raelth",
+      "tekst": "Golthorn IX med kun ét touchdown."
+    },
+    "replikker": [
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Hvem var jeres helt i kampen, og hvad er belønningen?"
+      },
+      {
+        "hvem": "Raelth",
+        "rolle": "Træner, The Eternal Sages",
+        "tekst": "Golthorn IX."
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "tekst": "Hvem skuffede mest, og hvad bliver straffen?"
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Golthorn IX med kun ét touchdown."
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "tekst": "Har I en hilsen til modstanderen, dommeren eller Nuffle?"
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "Vi glæder os til at vinde over de beskidte wood elves igen en anden gang."
+      }
+    ]
+  },
+  {
+    "id": "web-1794909229488",
+    "hold": "The Eternal Sages",
+    "type": "Ugens spørgsmål",
+    "dato": "2026-11-17",
+    "titel": "Ugens spørgsmål: Hvad er holdets hemmelige våben? Pressechefen siger det ikke til nogen.",
+    "undertitel": "Ugens spørgsmål",
+    "coach": "Raelth",
+    "indsendt": "Indsendt af Raelth",
+    "kamp": "uge:2968",
+    "citat": {
+      "hvem": "Raelth",
+      "tekst": "Vi er bedre end de andre. Og vi ved det!"
+    },
+    "replikker": [
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Hvad er holdets hemmelige våben? Pressechefen siger det ikke til nogen."
+      },
+      {
+        "hvem": "Raelth",
+        "rolle": "Træner, The Eternal Sages",
+        "tekst": "Vi er bedre end de andre. Og vi ved det!"
+      }
+    ]
+  },
+  {
+    "id": "web-1794905827253",
+    "hold": "Black Mountain Slavers",
+    "type": "Rygte",
+    "dato": "2026-11-17",
+    "titel": "En værdig hobgoblin fundet",
+    "undertitel": "Rygte",
+    "indsendt": "Indsendt af Rygte Rasmus",
+    "forside": "forsider/web-1794905827253.jpg",
+    "citat": {
+      "hvem": "Rygte Rasmus",
+      "tekst": "Glæden hos den pågældende goblin er tilsyneladende stor... men nok kortvarig."
+    },
+    "replikker": [
+      {
+        "p": "Succes!"
+      },
+      {
+        "p": "Det er endelig lykkedes for kaosdværgene at finde en goblin, som kunne knække en pind!"
+      },
+      {
+        "p": "Glæden hos den pågældende goblin er tilsyneladende stor... men nok kortvarig."
+      }
+    ]
+  },
+  {
     "id": "web-1794836275919",
     "hold": "Black Mountain Slavers",
     "type": "Rygte",
