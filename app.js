@@ -332,7 +332,7 @@
     const valg = [
       `Ja, ${fører.navn} fører med ${fører.p} point. Men lad os være ærlige: Alle taler om ${Y} på en ${delt ? "delt " : ""}${plads}.-plads. Det hedder at ligge på lur.`,
       `Tabellen lyver ikke. Den er bare ikke færdig med at fortælle, hvor gode ${Y} er.`,
-      `${fører.navn} fører. Pressechefen har bedt tabellen om en kommentar, men den henviser til ${Y}' imponerende appetit.`,
+      `${fører.navn} fører. Det er noteret. Pressechefen vil nu hellere tale om ${Y}' imponerende appetit.`,
       y.p > 0 ? `${y.p} point til ${Y}. Pressechefen understreger, at det er ${y.p} meget tunge point.`
         : `0 point til ${Y}. Pressechefen understreger, at det er ligaens tungeste 0 point.`
     ];
