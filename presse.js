@@ -27,6 +27,386 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "spike-morkley-crue-vs-the-maurading-ocras",
+    "hold": "The Maurading Ocras",
+    "type": "Kampreferat",
+    "dato": "2026-11-19",
+    "titel": "»Honeybun serverer to – Crüe går sultne hjem!«",
+    "undertitel": "Spike! kampreferat",
+    "sted": "Mörkley Crüe 0-2 The Maurading Ocras",
+    "indsendt": "Skrevet af Spike! Magazine ud fra kommissærens kampskema",
+    "citat": {
+      "hvem": "Spike!",
+      "tekst": "Tre completions i alt! Desværre giver completions ingen point i denne liga."
+    },
+    "replikker": [
+      {
+        "p": "DAMER OG HERRER, ORKER OG DET, DER ER VÆRRE! The Maurading Ocras har besøgt Mörkley Crüe og taget en 2-0-sejr med hjem!"
+      },
+      {
+        "p": "Kampens navn staves H-O-N-E-Y-B-U-N! Begge kampens touchdowns blev scoret af Honeybun. To scoringer af én spiller, nul af et helt hjemmehold. Det regnestykke kan selv en trold følge med i."
+      },
+      {
+        "p": "Mörkley Crüe prøvede ellers at spille bolden frem. Long Bomb Z'il-ver ramte en medspiller to gange, og Shark Bait gjorde det én gang. Tre completions i alt! Desværre giver completions ingen point i denne liga, og ingen af de tre afleveringer endte som et touchdown."
+      },
+      {
+        "p": "På skadesfronten endte det helt lige: Sweetums stod for én skade for Ocras, og Ralter Waaarghleigh svarede igen med én for Crüe. Én skade til hvert hold giver ét point til hvert hold. For Crüe blev det kampens eneste point. Ocras lægger sit oven på de 30 for sejren og de to for Honeybuns touchdowns."
+      },
+      {
+        "p": "Muffin blev kåret som MVP hos Ocras, og Rak Jak'em fik æren hos Crüe. Kassen: 65.000 guld til GrimStones Ocras og 45.000 til Krabsens Crüe. Nuffle giver, og denne gang gav han mest til holdet med kagenavnene!"
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Jeg er som altid 100 % neutral. Men to skader i en hel kamp? Jeg siger ikke, at GutBuster Gluttons ville have gjort det bedre. Jeg tænker det bare meget højt."
+      },
+      {
+        "p": "Læs også coachens eget referat på Presse-siden."
+      }
+    ]
+  },
+  {
+    "id": "web-1795099440701",
+    "hold": "Mörkley Crüe",
+    "type": "Pressemeddelelse",
+    "dato": "2026-11-19",
+    "titel": "KASKADER AF UFORLØST VOLD!",
+    "undertitel": "Pressemeddelelse",
+    "indsendt": "Indsendt af GrimStone",
+    "citat": {
+      "hvem": "Gunnar Grådig",
+      "tekst": "På et tidspunkt måtte man ligefrem stable de bevidstløse spillere oven på hinanden for at få plads til dem alle!"
+    },
+    "replikker": [
+      {
+        "p": "– En blodfattig affære, der efterlod Gunnar Grådig med en bitter smag i munden."
+      },
+      {
+        "p": "Af Gunnar Grådig – direkte fra presselogen"
+      },
+      {
+        "p": "Kære læsere!"
+      },
+      {
+        "p": "Man skulle jo tro, at når to så notorisk voldsparate mandskaber som Mörkley Crüe og Maurading Ocras tørner sammen, så var der garanti for blod, brækkede knogler og som minimum et par tilfældigt afrevne lemmer!"
+      },
+      {
+        "p": "Men NEJ!"
+      },
+      {
+        "p": "Hvad vi i stedet blev vidner til, var en skandaløs opvisning i kaskader af uforløst vold!"
+      },
+      {
+        "p": "Misforstå mig nu ikke. Der blev slået! Der blev trampet! Og der blev uddelt øretæver i et omfang, som ville få selv den mest hærdede værtshusdørmand til at nikke anerkendende."
+      },
+      {
+        "p": "Men hvor var skaderne?!"
+      },
+      {
+        "p": "Gang på gang sad undertegnede på kanten af stolen, klar med pen og notesblok, når en stakkels spiller fik serveret en ordentlig én på skrinet."
+      },
+      {
+        "p": "Og gang på gang endte det med det samme sørgelige resultat."
+      },
+      {
+        "p": "BEVIDSTLØSHED!"
+      },
+      {
+        "p": "På et tidspunkt måtte man ligefrem stable de bevidstløse spillere oven på hinanden for at få plads til dem alle!"
+      },
+      {
+        "p": "Et imponerende syn, bevares."
+      },
+      {
+        "p": "Men ikke så meget som en anstændig knogle stak ud nogen steder!"
+      },
+      {
+        "p": "Man skulle næsten tro, at spillerne holdt igen med vilje. En mistanke, som jeg personligt mener, at ligaens ledelse bør undersøge nærmere!"
+      },
+      {
+        "afsnit": "To ofre – og ikke engang en ordentlig begravelse!"
+      },
+      {
+        "p": "Kun den sagesløse goblin Mr. Gobbs og den slemt muterede Peaches formåede at pådrage sig noget, der krævede lægelig opmærksomhed."
+      },
+      {
+        "p": "Endelig! Tænkte jeg."
+      },
+      {
+        "p": "Men glæden var kortvarig."
+      },
+      {
+        "p": "Begge kunne efter sigende forlade behandlingen ved egen hjælp, og de forventes sågar at være klar til næste kamp!"
+      },
+      {
+        "p": "Det er jo direkte respektløst over for det betalende publikum!"
+      },
+      {
+        "afsnit": "Måske skulle man spørge en ekspert?"
+      },
+      {
+        "p": "Jeg vil på det kraftigste opfordre begge holds trænere til at tage en alvorlig snak med deres spillere."
+      },
+      {
+        "p": "Og skulle de mangle inspiration, kunne de passende opsøge den legendariske Otto Overbelly, manden bag de fantastiske GutBuster Gluttons."
+      },
+      {
+        "p": "Dér har man trods alt forstået, at Blood Bowl ikke blot handler om at få modstanderen ned at ligge."
+      },
+      {
+        "p": "Det handler om at sørge for, at vedkommende bliver liggende!"
+      },
+      {
+        "p": "Helst i flere uger."
+      },
+      {
+        "afsnit": "Nå ja... der blev vist også scoret!"
+      },
+      {
+        "p": "Midt i al denne skuffelse skal det dog nævnes, at Honeybun formåede at score hele to touchdowns!"
+      },
+      {
+        "p": "En ganske hæderlig præstation, som bør udløse et velfortjent klap på skulderen fra Coach GrimStone."
+      },
+      {
+        "p": "Naturligvis først når træneren er kommet sig over skuffelsen over den totale mangel på dødsfald."
+      },
+      {
+        "p": "Man har vel sine prioriteter."
+      },
+      {
+        "afsnit": "Tavshed fra trænerbænkene"
+      },
+      {
+        "p": "Coach Krabsen havde ved redaktionens afslutning ingen kommentarer til pressen."
+      },
+      {
+        "p": "Coach GrimStone var det heller ikke lykkedes undertegnede at opspore."
+      },
+      {
+        "p": "Om de to trænere gemmer sig af skam, eller blot er i gang med at forklare deres spillere forskellen på et slag og et ordentligt slag, skal jeg lade være usagt."
+      },
+      {
+        "p": "Men jeg håber inderligt, at de får styr på det inden næste kamp!"
+      },
+      {
+        "p": "Gunnar Grådig – Presselogen"
+      },
+      {
+        "p": "Vi bringer blodet. Når spillerne altså gider levere det."
+      }
+    ]
+  },
+  {
+    "id": "web-1795099272837",
+    "hold": "Mörkley Crüe",
+    "type": "Kampreferat",
+    "dato": "2026-11-19",
+    "titel": "KASKADER AF UFORLØST VOLD!",
+    "undertitel": "Kampreferat",
+    "indsendt": "Indsendt af GrimStone",
+    "citat": {
+      "hvem": "Gunnar Grådig",
+      "tekst": "På et tidspunkt måtte man ligefrem stable de bevidstløse spillere oven på hinanden for at få plads til dem alle!"
+    },
+    "replikker": [
+      {
+        "p": "– En blodfattig affære, der efterlod Gunnar Grådig med en bitter smag i munden."
+      },
+      {
+        "p": "Af Gunnar Grådig – direkte fra presselogen"
+      },
+      {
+        "p": "Kære læsere!"
+      },
+      {
+        "p": "Man skulle jo tro, at når to så notorisk voldsparate mandskaber som Mörkley Crüe og Maurading Ocras tørner sammen, så var der garanti for blod, brækkede knogler og som minimum et par tilfældigt afrevne lemmer!"
+      },
+      {
+        "p": "Men NEJ!"
+      },
+      {
+        "p": "Hvad vi i stedet blev vidner til, var en skandaløs opvisning i kaskader af uforløst vold!"
+      },
+      {
+        "p": "Misforstå mig nu ikke. Der blev slået! Der blev trampet! Og der blev uddelt øretæver i et omfang, som ville få selv den mest hærdede værtshusdørmand til at nikke anerkendende."
+      },
+      {
+        "p": "Men hvor var skaderne?!"
+      },
+      {
+        "p": "Gang på gang sad undertegnede på kanten af stolen, klar med pen og notesblok, når en stakkels spiller fik serveret en ordentlig én på skrinet."
+      },
+      {
+        "p": "Og gang på gang endte det med det samme sørgelige resultat."
+      },
+      {
+        "p": "BEVIDSTLØSHED!"
+      },
+      {
+        "p": "På et tidspunkt måtte man ligefrem stable de bevidstløse spillere oven på hinanden for at få plads til dem alle!"
+      },
+      {
+        "p": "Et imponerende syn, bevares."
+      },
+      {
+        "p": "Men ikke så meget som en anstændig knogle stak ud nogen steder!"
+      },
+      {
+        "p": "Man skulle næsten tro, at spillerne holdt igen med vilje. En mistanke, som jeg personligt mener, at ligaens ledelse bør undersøge nærmere!"
+      },
+      {
+        "afsnit": "To ofre – og ikke engang en ordentlig begravelse!"
+      },
+      {
+        "p": "Kun den sagesløse goblin Mr. Gobbs og den slemt muterede Peaches formåede at pådrage sig noget, der krævede lægelig opmærksomhed."
+      },
+      {
+        "p": "Endelig! Tænkte jeg."
+      },
+      {
+        "p": "Men glæden var kortvarig."
+      },
+      {
+        "p": "Begge kunne efter sigende forlade behandlingen ved egen hjælp, og de forventes sågar at være klar til næste kamp!"
+      },
+      {
+        "p": "Det er jo direkte respektløst over for det betalende publikum!"
+      },
+      {
+        "afsnit": "Måske skulle man spørge en ekspert?"
+      },
+      {
+        "p": "Jeg vil på det kraftigste opfordre begge holds trænere til at tage en alvorlig snak med deres spillere."
+      },
+      {
+        "p": "Og skulle de mangle inspiration, kunne de passende opsøge den legendariske Otto Overbelly, manden …"
+      }
+    ]
+  },
+  {
+    "id": "web-1795066819412",
+    "hold": "Mörkley Crüe",
+    "type": "Pressemeddelelse",
+    "dato": "2026-11-19",
+    "titel": "Gunnar Grådig på pletten – Blod, vold og forhåbentlig ingen gentagelse!",
+    "undertitel": "Pressemeddelelse",
+    "indsendt": "Indsendt af GrimStone",
+    "forside": "forsider/web-1795066819412.jpg",
+    "citat": {
+      "hvem": "GrimStone",
+      "tekst": "Om det skyldes tanken om GutBuster Gluttons eller en gammel hovedskade, har redaktionen endnu ikke kunnet fastslå."
+    },
+    "replikker": [
+      {
+        "p": "Så er opvarmningen i fuld gang til opgøret mellem Mörkley Crüe og The Maurading Ocras, og Gunnar Grådig er naturligvis på pletten!"
+      },
+      {
+        "p": "Gunnar håber på blod, vold og gerne et par spillere, der forlader banen i mindre dele, end de ankom i. På papiret burde begge hold kunne levere varen, dog næppe på samme niveau som de legendariske GutBuster Gluttons, hvis man spørger Gunnar."
+      },
+      {
+        "p": "Én ting er dog sikkert: Gunnar Orker simpelthen ikke endnu en lige så kedelig affære som sidste gang, de to hold tørnede sammen!"
+      },
+      {
+        "p": "Skulle kampen alligevel udvikle sig til endnu en søvndyssende omgang boldflytteri, har Gunnar heldigvis sin helt egen overlevelsesstrategi: HVGGG!"
+      },
+      {
+        "p": "Hvad Ville GutBuster Gluttons Gøre?"
+      },
+      {
+        "p": "Et spørgsmål, der straks sender Gunnar ind i en vidunderlig fantasiverden fyldt med knuste kranier, flyvende kropsdele og modstandere, der fortryder deres karrierevalg."
+      },
+      {
+        "p": "Og således sidder Gunnar pludselig med et tomt blik i øjnene, et saligt smil på læberne og en lille smule savl i mundvigen."
+      },
+      {
+        "p": "Om det skyldes tanken om GutBuster Gluttons eller en gammel hovedskade, har redaktionen endnu ikke kunnet fastslå."
+      },
+      {
+        "p": "Gunnar Grådig – altid på pletten, når der er udsigt til tæsk!"
+      }
+    ]
+  },
+  {
+    "id": "web-1794999789154",
+    "hold": "The Maurading Ocras",
+    "type": "Ugens spørgsmål",
+    "dato": "2026-11-18",
+    "titel": "Ugens spørgsmål: Hvad er holdets hemmelige våben? Pressechefen siger det ikke til nogen.",
+    "undertitel": "Ugens spørgsmål",
+    "coach": "GrimStone the Merciless",
+    "indsendt": "Indsendt af GrimStone",
+    "kamp": "uge:2968",
+    "citat": {
+      "hvem": "GrimStone the Merciless",
+      "tekst": "Vi kalder den Kenny."
+    },
+    "replikker": [
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Hvad er holdets hemmelige våben? Pressechefen siger det ikke til nogen."
+      },
+      {
+        "hvem": "GrimStone the Merciless",
+        "rolle": "Cheftræner, The Maurading Ocras",
+        "tekst": "En ny træningsdukke, der er et venligt bidrag fra Gunnar Grådig og redaktionen. Vi kalder den Kenny."
+      }
+    ]
+  },
+  {
+    "id": "web-1794999459038",
+    "hold": "Black Mountain Slavers",
+    "type": "Ugens spørgsmål",
+    "dato": "2026-11-18",
+    "titel": "Ugens spørgsmål: Hvad er holdets hemmelige våben? Pressechefen siger det ikke til nogen.",
+    "undertitel": "Ugens spørgsmål",
+    "coach": "Rygte-Rasmus",
+    "indsendt": "Indsendt af Rygte-Rasmus",
+    "kamp": "uge:2968",
+    "citat": {
+      "hvem": "Rygte-Rasmus",
+      "tekst": "Cheerleaders."
+    },
+    "replikker": [
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Hvad er holdets hemmelige våben? Pressechefen siger det ikke til nogen."
+      },
+      {
+        "hvem": "Rygte-Rasmus",
+        "rolle": "Black Mountain Slavers",
+        "tekst": "Cheerleaders."
+      }
+    ]
+  },
+  {
+    "id": "web-1794999238220",
+    "hold": "Black Mountain Slavers",
+    "type": "Rygte",
+    "dato": "2026-11-18",
+    "titel": "Black Mountain Slavers træner nyt hemmeligt våben – cheerleaders?!",
+    "undertitel": "Rygte",
+    "indsendt": "Indsendt af holdets coach",
+    "forside": "forsider/web-1794999238220.jpg",
+    "citat": {
+      "hvem": "Anonyme kilder",
+      "tekst": "Hvorvidt det er de synkroniserede dansetrin, de truende kampråb eller de usædvanligt store yvere, der skal gøre forskellen, er endnu uvist."
+    },
+    "replikker": [
+      {
+        "p": "Mystiske lyde fra Black Mountain Slavers' træningsfaciliteter har på det seneste vakt opsigt. Ifølge flere anonyme kilder er holdet nemlig i fuld gang med at træne en hemmelig trup af cheerleaders!"
+      },
+      {
+        "p": "Rygterne vil vide, at der er tale om et nyt taktisk våben, der skal distrahere modstanderne og løfte moralen på sidelinjen. Hvorvidt det er de synkroniserede dansetrin, de truende kampråb eller de usædvanligt store yvere, der skal gøre forskellen, er endnu uvist."
+      },
+      {
+        "p": "Klubbens ledelse har endnu ikke kommenteret rygterne, men en anonym kilde tæt på holdet har fået sneget et billede ud."
+      }
+    ]
+  },
+  {
     "id": "web-1794937978297",
     "hold": "GutBuster Gluttons",
     "type": "Ugens spørgsmål",
