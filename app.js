@@ -331,9 +331,10 @@
     ]);
     const valg = [
       `Ja, ${fører.navn} fører med ${fører.p} point. Men lad os være ærlige: Alle taler om ${Y} på en ${delt ? "delt " : ""}${plads}.-plads. Det hedder at ligge på lur.`,
-      `Tabellen lyver ikke. Den er bare ikke færdig med at fortælle, hvor gode ${Y} er.`,
+      `Tabellen lyver ikke. Den er bare ikke færdig endnu. Pressechefen venter roligt på, at ${Y} rykker op.`,
       `${fører.navn} fører. Det er noteret. Pressechefen vil nu hellere tale om ${Y}' imponerende appetit.`,
-      y.p > 0 ? `${y.p} point til ${Y}. Pressechefen understreger, at det er ${y.p} meget tunge point.`
+      y.p === 1 ? `1 point til ${Y}. Pressechefen understreger, at det er ligaens tungeste point.`
+        : y.p > 0 ? `${y.p} point til ${Y}. Pressechefen understreger, at det er ${y.p} meget tunge point.`
         : `0 point til ${Y}. Pressechefen understreger, at det er ligaens tungeste 0 point.`
     ];
     if (y.w + y.d + y.l === 0) valg.push(`${Y} har ikke tabt en eneste kamp i år. De har heller ikke spillet nogen, men det er en detalje.`);
