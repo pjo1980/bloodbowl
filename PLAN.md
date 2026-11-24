@@ -173,3 +173,9 @@ Blood Bowl-idéer bor her, ikke i Peters Idébank i Todoist.
   i udklipsholderen, som Peter poster som Gunnar. Lille indsats; kan bygges ind i den planlagte redaktør.
 - **Slutspilstræ**: visuelt slutspil med Southland Stegadons, Lucky Loser og Tabernes taber, opdateret fra Mikkels ark.
   Venter på Mikkels svar om antal kampe i slutspillet.
+
+## Nyheder på forsiden (24. nov. 2026)
+
+- `nyheder.csv` har en valgfri kolonne `billeder` (stier adskilt med semikolon); bruges til kampplakater i `kampplakater/`.
+- Den nyeste nyhed står øverst på forsiden i en uge, eller til en nyere nyhed kommer; derefter rykker den ned i bunden.
+- Idé fra Peter (ikke bygget): en fast mandagsnyhed med resultater og analyse fra ugens kampe ("Monday Blood Bowl results and analysis"), som overtager pladsen øverst.

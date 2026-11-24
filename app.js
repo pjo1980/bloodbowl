@@ -390,10 +390,12 @@
     const s = D.stilling.ok;
     const top = s ? s.hold.slice(0, 3) : [];
     const nyhed = nyheder()[0];
+    // Den nyeste nyhed står øverst på forsiden i en uge (eller til en nyere kommer); derefter rykker den ned i bunden.
+    const frisk = !!nyhed && !!nyhed.dato && !isNaN(nyhed.dato) && Date.now() - nyhed.dato.getTime() < 7 * 864e5;
     const td = førsteMed(D.spillerrang, "TOUCHDOWNS");
     const cas = førsteMed(D.spillerrang, "CASUALTIES");
     return `
-      ${nyhed ?`<h2 class="foerst">Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p style="margin-bottom:24px"><a href="#nyheder">Alle nyheder</a></p>` : ""}
+      ${frisk ?`<h2 class="foerst">Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p style="margin-bottom:24px"><a href="#nyheder">Alle nyheder</a></p>` : ""}
       <section class="hero">
         <img class="hero-billede" src="logo/semper-fortuna.jpg" width="1536" height="1024"
           alt="Odder Brætspilsklub Semper Fortuna – Blood Bowl Liga">
@@ -441,7 +443,9 @@
       <h2>Fra pressetribunen</h2>
       <div class="grid" style="margin-bottom:16px">${ugensSpørgsmålKort()}${ugensRygteKort()}${optaktKort()}</div>
       <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}${rygteKort()}${powerKort()}${ingenKommentarKort(tilfældig(stilleHold()))}${plakatKort()}</div>
-      ${presseListe().length ? `<div style="margin-top:16px">${pkTeaser(presseListe()[0])}</div>` : ""}`;
+      ${presseListe().length ? `<div style="margin-top:16px">${pkTeaser(presseListe()[0])}</div>` : ""}
+
+      ${nyhed && !frisk ?`<h2>Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p><a href="#nyheder">Alle nyheder</a></p>` : ""}`;
   }
 
   function førsteMed(d, kat) {
