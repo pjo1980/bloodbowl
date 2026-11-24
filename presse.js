@@ -27,6 +27,33 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "web-1795532360822",
+    "hold": "GutBuster Gluttons",
+    "type": "Ugens spørgsmål",
+    "dato": "2026-11-24",
+    "titel": "Ugens spørgsmål: Hvad serverer I for udeholdet?",
+    "undertitel": "Ugens spørgsmål",
+    "coach": "Coach Overbelly",
+    "indsendt": "Indsendt af Coach Overbelly",
+    "kamp": "uge:2969",
+    "citat": {
+      "hvem": "Coach Overbelly",
+      "tekst": "Bankekød."
+    },
+    "replikker": [
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Hvad serverer I for udeholdet?"
+      },
+      {
+        "hvem": "Coach Overbelly",
+        "rolle": "Coach, GutBuster Gluttons",
+        "tekst": "Bankekød."
+      }
+    ]
+  },
+  {
     "id": "spike-morkley-crue-vs-the-maurading-ocras",
     "hold": "The Maurading Ocras",
     "type": "Kampreferat",
