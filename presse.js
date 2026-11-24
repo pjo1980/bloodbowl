@@ -27,6 +27,33 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "web-1795538341714",
+    "hold": "Bedstefars Besudlere",
+    "type": "Ugens spørgsmål",
+    "dato": "2026-11-24",
+    "titel": "Ugens spørgsmål: Hvad serverer I for udeholdet?",
+    "undertitel": "Ugens spørgsmål",
+    "coach": "Steen Svulst-Stank",
+    "indsendt": "Indsendt af Steen Svulst-Stank",
+    "kamp": "uge:2969",
+    "citat": {
+      "hvem": "Steen Svulst-Stank",
+      "tekst": "Håndmadder, med sprødt sårpus."
+    },
+    "replikker": [
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Hvad serverer I for udeholdet?"
+      },
+      {
+        "hvem": "Steen Svulst-Stank",
+        "rolle": "Coach, Bedstefars Besudlere",
+        "tekst": "Håndmadder, med sprødt sårpus."
+      }
+    ]
+  },
+  {
     "id": "web-1795532360822",
     "hold": "GutBuster Gluttons",
     "type": "Ugens spørgsmål",
