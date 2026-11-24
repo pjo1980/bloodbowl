@@ -27,6 +27,49 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "gunnar-udvisning-overbelly",
+    "hold": "GutBuster Gluttons",
+    "type": "Pressemeddelelse",
+    "dato": "2026-11-24",
+    "titel": "SKANDALE! Dommeren udviste coach Overbelly",
+    "undertitel": "Pressemeddelelse",
+    "sted": "GutBuster Gluttons mod Da Demolitionaz",
+    "indsendt": "Indsendt af Gunnar Grådig",
+    "citat": {
+      "hvem": "Gunnar Grådig",
+      "tekst": "Denne meddelelse er ikke en klage. Den er en nekrolog over retfærdigheden."
+    },
+    "replikker": [
+      {
+        "p": "Pressekontoret må med dyb og fuldstændig neutral forargelse meddele, at dommeren i kampen mellem GutBuster Gluttons og Da Demolitionaz udviste Bomber Dribblesnot."
+      },
+      {
+        "p": "Pressechefen så episoden fra sin faste plads ved buffeten. Det var ikke en bombe. Det var en meget hurtig aflevering."
+      },
+      {
+        "p": "Coach Otto Overbelly gjorde derefter det, enhver ansvarlig coach ville gøre: Han forklarede dommeren reglerne. Højt. Flere gange."
+      },
+      {
+        "p": "Dommeren takkede for vejledningen ved også at udvise coach Overbelly. Ligaens klart bedste coach måtte forlade sidelinjen, mens hans hold stadig var på banen."
+      },
+      {
+        "afsnit": "Ikke en klage"
+      },
+      {
+        "p": "Pressechefen ved godt, at klager over dommeren ikke modtages efter kick-off. Denne meddelelse er derfor ikke en klage. Den er en nekrolog over retfærdigheden."
+      },
+      {
+        "p": "Pressechefen kræver ingenting. Han foreslår blot, at dommeren fremover udstyres med briller, en regelbog og en mindre fløjte."
+      },
+      {
+        "p": "Da Demolitionaz og dommeren har naturligvis ret til genmæle. Pressechefen læser det gerne, når han er færdig med at være rasende."
+      },
+      {
+        "p": "Pressechefen er fortsat 100 % neutral. Han har bare mistet appetitten. Det går over til frokost."
+      }
+    ]
+  },
+  {
     "id": "web-1795538341714",
     "hold": "Bedstefars Besudlere",
     "type": "Ugens spørgsmål",

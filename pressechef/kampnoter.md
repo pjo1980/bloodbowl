@@ -21,5 +21,7 @@ Fra Peter, samme aften:
 - Gluttons' coach, Otto Overbelly, skældte dommeren ud over udvisningen. Derefter blev Overbelly selv udvist af dommeren.
 - Peters egen dom: "SKANDALE! SKANDALE".
 
+Allerede brugt i: gunnar-udvisning-overbelly (Gunnars pressemeddelelse samme aften). Spike!-referatet af kampen skal stadig have udvisningerne med og må gerne henvise til pressemeddelelsen.
+
 Til redaktøren: Det er oplagt stof til Gunnar Grådig, som er 100 % neutral og derfor dybt forarget på Gluttons' vegne.
 Tjek i skemaet, hvilket hold Bomber Dribblesnot spillede for (Peters besked tyder på Gluttons), før det skrives.
