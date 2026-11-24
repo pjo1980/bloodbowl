@@ -150,6 +150,8 @@ td a:hover { color: var(--accent); }
 .nyhed { margin-bottom: 16px; }
 .nyhed .dato { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 .nyhed p { margin: 8px 0 0; white-space: pre-line; }
+.nyhed-billeder { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 14px; }
+.nyhed-billeder img { width: 100%; height: auto; display: block; border-radius: var(--radius); border: 1px solid var(--line); }
 
 /* Fejl */
 .fejl { background: #2c1311; border: 1px solid var(--blood); border-radius: var(--radius); padding: 12px 14px; color: #f6cfc9; }

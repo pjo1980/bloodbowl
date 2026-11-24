@@ -684,10 +684,12 @@
     if (h < 0) return [];
     const hr = rows[h].map((x) => x.toLowerCase());
     const i = (...n) => hr.findIndex((x) => n.includes(x));
-    const iD = i("dato"), iO = i("overskrift", "titel"), iT = i("tekst", "nyhed");
+    const iD = i("dato"), iO = i("overskrift", "titel"), iT = i("tekst", "nyhed"), iB = i("billeder", "billede");
     return rows.slice(h + 1).filter((r) => r[iO]).map((r) => {
       const dt = iD >= 0 ? læsDato(r[iD]) : null;
-      return { dato: dt, datoTekst: iD >= 0 ? r[iD] : "", overskrift: r[iO], tekst: iT >= 0 ? r[iT] : "", kilde };
+      // Billeder (kun i sidens egen nyheder.csv): stier adskilt med semikolon, fx "kampplakater/a.webp;kampplakater/b.webp".
+      const billeder = kilde === "redaktion" && iB >= 0 ? String(r[iB] || "").split(";").map((x) => x.trim()).filter((x) => /^[\w\-./]+\.(webp|jpg|jpeg|png)$/i.test(x)) : [];
+      return { dato: dt, datoTekst: iD >= 0 ? r[iD] : "", overskrift: r[iO], tekst: iT >= 0 ? r[iT] : "", kilde, billeder };
     });
   }
   function nyheder() {
@@ -699,7 +701,8 @@
   }
   function nyhedKort(n) {
     const dato = n.dato && !isNaN(n.dato) ? bbDato(n.dato) : n.datoTekst;
-    return `<article class="card nyhed"><div class="dato">${esc(dato)} · ${n.kilde === "kommissaer" ? `Kommissær ${esc(C.KOMMISSAER || "")} skriver` : "Redaktionen"}</div><h3>${esc(n.overskrift)}</h3><p>${esc(n.tekst)}</p></article>`;
+    return `<article class="card nyhed"><div class="dato">${esc(dato)} · ${n.kilde === "kommissaer" ? `Kommissær ${esc(C.KOMMISSAER || "")} skriver` : "Redaktionen"}</div><h3>${esc(n.overskrift)}</h3><p>${esc(n.tekst)}</p>${(n.billeder || []).length ? `<div class="nyhed-billeder">${n.billeder.map((b) =>
+      `<a href="${esc(b)}" target="_blank" rel="noopener" title="Se plakaten i fuld størrelse"><img src="${esc(b)}" alt="Plakat" loading="lazy"></a>`).join("")}</div>` : ""}</article>`;
   }
   function sideNyheder() {
     const liste = nyheder();
