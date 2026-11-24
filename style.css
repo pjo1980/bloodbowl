@@ -148,6 +148,7 @@ td a:hover { color: var(--accent); }
 
 /* Nyheder */
 .nyhed { margin-bottom: 16px; }
+h2.foerst { margin-top: 8px; }
 .nyhed .dato { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 .nyhed p { margin: 8px 0 0; white-space: pre-line; }
 .nyhed-billeder { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 14px; }
