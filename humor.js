@@ -290,6 +290,9 @@ window.HUMOR = {
   // Citater fra coachernes EGNE indlæg, ordret (kun forkortet). Vises skiftevis med Star Player-citaterne og på holdsiden.
   // Den daglige pressechef-opgave tilføjer 1-2 nye, når en coach skriver noget citatværdigt.
   holdCitater: [
+    { hold: "The Eternal Sages", hvem: "Raelth", tekst: "Vi skuffer ikke." },
+    { hold: "GutBuster Gluttons", hvem: "Coach Overbelly", tekst: "Dommeren er inviteret til frokost." },
+    { hold: "The Full Moon Foulers", hvem: "Cünthenstien", tekst: "Gullasch med gæt-selv-kød." },
     { hold: "Bedstefars Besudlere", hvem: "Coach Svulst-Stank", tekst: "Håndmadder, med sprødt sårpus." },
     { hold: "The Maurading Ocras", hvem: "GrimStone the Merciless", tekst: "En ny træningsdukke, der er et venligt bidrag fra Gunnar Grådig og redaktionen. Vi kalder den Kenny." },
     { hold: "GutBuster Gluttons", hvem: "Coach Overbelly", tekst: "Hungren efter succes! Og frokost." },

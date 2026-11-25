@@ -27,6 +27,227 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "spike-the-full-moon-foulers-vs-the-fumbleboyz",
+    "hold": "The Full Moon Foulers",
+    "type": "Kampreferat",
+    "dato": "2026-11-25",
+    "titel": "»Én til hver – men Roger Pifs tog resten!«",
+    "undertitel": "Spike! kampreferat",
+    "sted": "The Full Moon Foulers 1-1 The FumbleBoyz",
+    "indsendt": "Skrevet af Spike! Magazine ud fra kommissærens kampskema",
+    "citat": {
+      "hvem": "Spike!",
+      "tekst": "Ja, De læste rigtigt: En mand ved navn Fumbler ramte en medspiller."
+    },
+    "replikker": [
+      {
+        "p": "UAFGJORT, UAFGJORT, UAFGJORT! The Full Moon Foulers tog imod The FumbleBoyz, og ingen af de to hold ville tabe: 1-1!"
+      },
+      {
+        "p": "Tripsten scorede hjemmeholdets touchdown, og Roger Pifs scorede gæsternes. Et hold, der hedder FumbleBoyz, scorede altså præcis lige så mange touchdowns som modstanderen. Nuffle har humor."
+      },
+      {
+        "p": "Roger Pifs nøjedes ikke med det: Han stod også for en skade og blev kåret som MVP. Touchdown, skade og MVP i samme kamp! Fatti Grumball lagde endnu en skade oveni for FumbleBoyz. Foulers svarede med én skade, og den stod Stronk for."
+      },
+      {
+        "p": "Stan Fumbler leverede kampens eneste completion. Ja, De læste rigtigt: En mand ved navn Fumbler ramte en medspiller."
+      },
+      {
+        "p": "Regnskabet: Begge hold får 10 point for uafgjort og 1 for deres touchdown. FumbleBoyz får 2 for skaderne, og Foulers får 1. Det giver 13 point til Sir FitzBarrels FumbleBoyz og 12 til Eberhards Foulers. Hos Foulers blev Lyndan kåret som MVP hele to gange, og hos FumbleBoyz delte Roger Pifs og Bufferin æren. Begge hold tog 55.000 guld med hjem."
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Jeg er som altid 100 % neutral. Men 1-1 og tre skader i alt? Hos GutBuster Gluttons kalder man den slags en opvarmning før frokost."
+      }
+    ]
+  },
+  {
+    "id": "spike-gutbuster-gluttons-vs-da-demolitionaz",
+    "hold": "Da Demolitionaz",
+    "type": "Kampreferat",
+    "dato": "2026-11-25",
+    "titel": "»Wrench skruede sejren fast – dommeren smed Overbelly ud!«",
+    "undertitel": "Spike! kampreferat",
+    "sted": "GutBuster Gluttons 0-1 Da Demolitionaz",
+    "indsendt": "Skrevet af Spike! Magazine ud fra kommissærens kampskema",
+    "citat": {
+      "hvem": "Spike!",
+      "tekst": "To udvisninger til samme hold, og den ene var coachen!"
+    },
+    "replikker": [
+      {
+        "p": "SKANDALE! SKANDALE! Sådan lød dommen fra Spike!s øjenvidne, og vi forstår hvorfor: Da Demolitionaz vandt 1-0 ude over GutBuster Gluttons i en kamp, hvor dommeren uddelte to udvisninger!"
+      },
+      {
+        "p": "Først udviste dommeren Gluttons' Bomber Dribblesnot. Coach Otto Overbelly skældte dommeren ud over udvisningen, og så blev han selv udvist. To udvisninger til samme hold, og den ene var coachen! Gunnar Grådigs pressemeddelelse om sagen kan læses på Presse-siden."
+      },
+      {
+        "p": "Kampens eneste touchdown blev scoret af Wrench, og mere skulle der ikke til. Bogrod leverede kampens eneste completion, stod for en skade og blev kåret som MVP sammen med Bumper-Smasha."
+      },
+      {
+        "p": "Skaderne blev delt lige: Wrecking Ball og Bogrod stod for én hver hos Demolitionaz, og Lugga Longkicker og Bork Bellybuster svarede igen med én hver for Gluttons. Regningen kommer i næste runde: Porg Butterbelly fra Gluttons må sidde næste kamp over, og det samme må Iron Axle og Dent fra Demolitionaz."
+      },
+      {
+        "p": "Regnskabet: 30 point for sejren, 1 for touchdownet og 2 for skaderne giver 33 point til Foreman »Forklift« Rustys Demolitionaz. Gluttons får 2 point for deres to skader. Gromm Gravygut og Porg Butterbelly blev kåret som MVP'er hos Gluttons. Kassen: 70.000 guld til Demolitionaz og 60.000 til Gluttons."
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Jeg er 100 % neutral, og netop derfor er jeg rasende. Ligaens bedste coach blev sendt væk fra sin egen sidelinje! Jeg har mistet appetitten igen. Det går over til frokost."
+      }
+    ]
+  },
+  {
+    "id": "spike-bedstefars-besudlere-vs-bros-being-bros",
+    "hold": "Bros Being Bros",
+    "type": "Kampreferat",
+    "dato": "2026-11-25",
+    "titel": "»Brohemian Rhapsody blev et hit – Besudlerne slået af Broccoli!«",
+    "undertitel": "Spike! kampreferat",
+    "sted": "Bedstefars Besudlere 0-3 Bros Being Bros",
+    "indsendt": "Skrevet af Spike! Magazine ud fra kommissærens kampskema",
+    "citat": {
+      "hvem": "Spike!",
+      "tekst": "Ja, Besudlerne lukkede et touchdown ind til en grøntsag."
+    },
+    "replikker": [
+      {
+        "p": "TRE-NUL TIL GÆSTERNE! Bros Being Bros har besøgt Bedstefars Besudlere og vundet 3-0 på Besudlernes egen bane!"
+      },
+      {
+        "p": "Brohemian Rhapsody scorede to touchdowns og blev kåret som MVP. To touchdowns af én spiller mod nul af et helt hjemmehold: Det er, hvad Spike! kalder et hit!"
+      },
+      {
+        "p": "Broccoli scorede også et touchdown. Ja, Besudlerne lukkede et touchdown ind til en grøntsag. Broly blev kåret som den anden MVP hos Bros."
+      },
+      {
+        "p": "Besudlernes lyspunkt hedder Bo Bylde-bug: Han stod for kampens eneste skade, og den giver hjemmeholdets eneste point. Bent Betænt blev kåret som MVP to gange. To MVP-titler til samme mand i en kamp, som holdet tabte 0-3. Spike! tager hatten af og ryster på hovedet på samme tid."
+      },
+      {
+        "p": "Regnskabet: 30 point for sejren og 3 for de tre touchdowns giver 33 point til Jans Bros. Steen Svulst-Stanks Besudlere får 1 point. Kassen: 55.000 guld til Bros og 25.000 til Besudlerne."
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Jeg er som altid 100 % neutral. Men et hold, der bliver slået af Broccoli, burde spise noget mere kød. Jeg kender et hold, der gerne viser hvordan."
+      }
+    ]
+  },
+  {
+    "id": "web-1795606377188",
+    "hold": "The Eternal Sages",
+    "type": "Interview",
+    "dato": "2026-11-25",
+    "titel": "Tre hurtige: The Eternal Sages efter kampen mod The Maurading Ocras",
+    "undertitel": "Interview",
+    "coach": "Raelth",
+    "indsendt": "Indsendt af Raelth",
+    "kamp": "The Maurading Ocras vs. The Eternal Sages",
+    "citat": {
+      "hvem": "Raelth",
+      "tekst": "... vi skuffer ikke."
+    },
+    "replikker": [
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Hvem var jeres helt i kampen, og hvad er belønningen?"
+      },
+      {
+        "hvem": "Raelth",
+        "rolle": "Træner, The Eternal Sages",
+        "tekst": "Golthorn IX som altid!"
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "tekst": "Hvem skuffede mest, og hvad bliver straffen?"
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "... vi skuffer ikke."
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "tekst": "Har I en hilsen til modstanderen, dommeren eller Nuffle?"
+      },
+      {
+        "hvem": "Raelth",
+        "tekst": "God fornøjelse til Ocras med deres kamp mod Elmtree Evaders."
+      }
+    ]
+  },
+  {
+    "id": "web-1795606036750",
+    "hold": "The Full Moon Foulers",
+    "type": "Ugens spørgsmål",
+    "dato": "2026-11-25",
+    "titel": "Ugens spørgsmål: Hvad serverer I for udeholdet?",
+    "undertitel": "Ugens spørgsmål",
+    "coach": "Cünthenstien",
+    "indsendt": "Indsendt af Cünthenstien",
+    "kamp": "uge:2969",
+    "citat": {
+      "hvem": "Cünthenstien",
+      "tekst": "Gullasch med gæt-selv-kød."
+    },
+    "replikker": [
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Hvad serverer I for udeholdet?"
+      },
+      {
+        "hvem": "Cünthenstien",
+        "rolle": "Coach, The Full Moon Foulers",
+        "tekst": "Gullasch med gæt-selv-kød."
+      }
+    ]
+  },
+  {
+    "id": "web-1795559498131",
+    "hold": "GutBuster Gluttons",
+    "type": "Interview",
+    "dato": "2026-11-24",
+    "titel": "Tre hurtige: GutBuster Gluttons efter kampen mod Da Demolitionaz",
+    "undertitel": "Interview",
+    "coach": "Coach Overbelly",
+    "indsendt": "Indsendt af Coach Overbelly",
+    "kamp": "GutBuster Gluttons vs. Da Demolitionaz",
+    "citat": {
+      "hvem": "Coach Overbelly",
+      "tekst": "Dommeren er inviteret til frokost."
+    },
+    "replikker": [
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Hvem var jeres helt i kampen, og hvad er belønningen?"
+      },
+      {
+        "hvem": "Coach Overbelly",
+        "rolle": "Coach, GutBuster Gluttons",
+        "tekst": "Coach Overbelly som vanligt. Ekstra morgenmad!"
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "tekst": "Hvem skuffede mest, og hvad bliver straffen?"
+      },
+      {
+        "hvem": "Coach Overbelly",
+        "tekst": "Bomber Dribblesnots fusere ..."
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "tekst": "Har I en hilsen til modstanderen, dommeren eller Nuffle?"
+      },
+      {
+        "hvem": "Coach Overbelly",
+        "tekst": "Dommeren er inviteret til frokost."
+      }
+    ]
+  },
+  {
     "id": "gunnar-udvisning-overbelly",
     "hold": "GutBuster Gluttons",
     "type": "Pressemeddelelse",
