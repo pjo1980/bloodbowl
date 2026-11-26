@@ -676,7 +676,7 @@ window.PRESSE = [
         "p": "Kampens eneste touchdown blev scoret af Wrench, og mere skulle der ikke til. Bogrod leverede kampens eneste completion, stod for en skade og blev kåret som MVP sammen med Bumper-Smasha."
       },
       {
-        "p": "Skaderne blev delt lige: Wrecking Ball og Bogrod stod for én hver hos Demolitionaz, og Lugga Longkicker og Bork Bellybuster svarede igen med én hver for Gluttons. Regningen kommer i næste runde: Porg Butterbelly fra Gluttons må sidde næste kamp over, og det samme må Iron Axle og Dent fra Demolitionaz."
+        "p": "Skaderne blev delt lige: Wrecking Ball og Bogrod stod for én hver hos Demolitionaz, og Lugga Longkicker og Bork Bellybuster svarede igen med én hver for Gluttons. Værst gik det ud over Iron Axle, som Gluttons' lejr hårdnakket kalder Demolitionaz' kaptajn: Big Un-blockeren fik armen smadret, skaden er varig, og kastearmen bliver aldrig den samme (−1 PA). Regningen kommer også i næste runde: Porg Butterbelly fra Gluttons må sidde næste kamp over, og det samme må Iron Axle og Dent fra Demolitionaz."
       },
       {
         "p": "Regnskabet: 30 point for sejren, 1 for touchdownet og 2 for skaderne giver 33 point til Foreman »Forklift« Rustys Demolitionaz. Gluttons får 2 point for deres to skader. Gromm Gravygut og Porg Butterbelly blev kåret som MVP'er hos Gluttons. Kassen: 70.000 guld til Demolitionaz og 60.000 til Gluttons."
