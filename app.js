@@ -1978,6 +1978,13 @@
     const key = SIDER[side] ? side : "forside";
     const fane = key === "kamp" ? "puljekampe" : key;
     document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("on", a.dataset.page === (["indsend", "power", "ugens"].includes(fane) ? "presse" : fane)));
+    const $nav = document.getElementById("nav"), $mk = document.getElementById("menu-knap");
+    if ($mk) {
+      const aktiv = $nav.querySelector("a.on");
+      const skjult = aktiv && !aktiv.classList.contains("pri");
+      $nav.classList.remove("aaben"); $mk.setAttribute("aria-expanded", "false");
+      $mk.textContent = "☰ " + (skjult ? aktiv.textContent : "Menu"); $mk.classList.toggle("on", !!skjult);
+    }
     if (!navn || ["presse", "indsend", "ugens"].includes(key)) window.scrollTo(0, 0);
     const html = key === "hold" && navn ? await sideHold(navn) : key === "presse" && navn ? sidePresse(navn)
       : key === "kamp" && navn ? await sideKamp(navn) : key === "indsend" ? sideIndsend(navn) : key === "ugens" ? sideUgens(navn) : await SIDER[key]();
@@ -2032,6 +2039,12 @@
   document.getElementById("liganavn").textContent = liga;
   document.getElementById("saeson").textContent = C.KOMMISSAER ? "Kommissær: " + C.KOMMISSAER : "";
   window.addEventListener("hashchange", vis);
+  const $menuKnap = document.getElementById("menu-knap");
+  if ($menuKnap) $menuKnap.onclick = () => {
+    const nav = document.getElementById("nav"), åben = nav.classList.toggle("aaben");
+    $menuKnap.setAttribute("aria-expanded", åben ? "true" : "false");
+  };
+  document.getElementById("nav").addEventListener("click", (e) => { if (e.target.closest("a")) document.getElementById("nav").classList.remove("aaben"); });
   window.addEventListener("scroll", () => {
     const b = document.body.classList, y = window.scrollY;
     if (y > 200 && !b.contains("rullet")) b.add("rullet"); else if (y < 40 && b.contains("rullet")) b.remove("rullet");

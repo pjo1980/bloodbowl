@@ -461,3 +461,19 @@ td.skadet { color: var(--blood); font-weight: 700; white-space: nowrap; }
   table.roster td:nth-child(14) { grid-column: 1 / -1; grid-row: 6; margin-top: 4px; }
   table.roster td:nth-child(14):empty, table.roster td:nth-child(9):empty { display: none; }
 }
+
+/* ---------- Mobilmenu: fire faste punkter og knappen Menu, der folder resten ud ---------- */
+.menu-knap { display: none; }
+@media (max-width: 720px) {
+  .tabs { overflow: visible; align-items: center; gap: 2px; }
+  .tabs a:not(.pri) { display: none; }
+  .tabs a { padding: 7px 8px; font-size: 14px; }
+  .menu-knap { display: block; margin-left: auto; flex: 0 1 auto; min-width: 0; font: inherit; font-weight: 600; font-size: 14px; color: var(--text);
+    background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; cursor: pointer;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .menu-knap.on { color: #1a120d; background: var(--accent); border-color: var(--accent); }
+  .tabs.aaben { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .tabs.aaben a, .tabs.aaben a:not(.pri) { display: block; text-align: center; background: var(--panel-2); padding: 9px 4px; font-size: 14px; }
+  .tabs.aaben a.on { background: var(--accent); }
+  .tabs.aaben .menu-knap { grid-column: 1 / -1; grid-row: 1; margin: 0; max-width: none; justify-self: end; }
+}
