@@ -281,7 +281,11 @@ a.score:hover { color: var(--accent); }
 
 /* ---------- Nyt logo på forsiden (4. nov.) ---------- */
 .hero { display: block; padding: 0; overflow: hidden; }
-.hero-billede { display: block; width: 100%; height: auto; max-height: 520px; object-fit: contain; background: #000; }
+.hero-billede { display: block; width: 100%; height: auto; max-height: 220px; object-fit: contain; background: #000; }
+@media (min-width: 800px) {
+  .hero { display: grid; grid-template-columns: 330px 1fr; align-items: center; }
+  .hero-billede { max-height: none; }
+}
 .hero-tekst { padding: 20px; }
 @media (max-width: 640px) { .hero { text-align: left; } .hero-tekst { padding: 16px; } }
 

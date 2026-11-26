@@ -441,11 +441,17 @@
       </div>
 
       <h2>Fra pressetribunen</h2>
-      <div class="grid" style="margin-bottom:16px">${ugensSpørgsmålKort()}${ugensRygteKort()}${optaktKort()}</div>
-      <div class="grid">${spikeKort()}${citatKort()}${pressechefKort(pressechefAnalyse())}${rygteKort()}${powerKort()}${ingenKommentarKort(tilfældig(stilleHold()))}${plakatKort()}</div>
+      <div class="grid">${ugensSpørgsmålKort()}${optaktKort()}${tilfældig(tribuneKort()) || ""}</div>
       ${presseListe().length ? `<div style="margin-top:16px">${pkTeaser(presseListe()[0])}</div>` : ""}
+      <p style="margin-top:12px"><a href="#presse">Mere fra pressetribunen</a></p>
 
       ${nyhed && !frisk ?`<h2>Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p><a href="#nyheder">Alle nyheder</a></p>` : ""}`;
+  }
+
+  // De skiftende kort fra pressetribunen. Forsiden viser ét tilfældigt; Presse-siden viser dem alle.
+  function tribuneKort() {
+    return [ugensRygteKort(), spikeKort(), citatKort(), pressechefKort(pressechefAnalyse()), rygteKort(), powerKort(),
+      ingenKommentarKort(tilfældig(stilleHold())), plakatKort()].filter(Boolean);
   }
 
   function førsteMed(d, kat) {
@@ -622,6 +628,11 @@
     let r;
     try { r = læsRoster(await hent("hold", fane), fane); }
     catch (e) { return hoved + fejlboks(e.message); }
+    // Varige mén (Lasting injury) står i kampskemaerne, ikke i holdarket. Runts hedder det samme, så nøglen er nummer + navn.
+    const men = {};
+    const egneKampe = (C.PULJEKAMPE || []).flatMap((pu) => pu.faner.filter((x) => x.split(/\s+vs[.,]\s*/i).map((y) => y.trim()).includes(navn)).map((x) => [pu.ark, x]));
+    (await Promise.all(egneKampe.map(([ark, x]) => hent(ark, x).then((rk) => læsKamp(rk, x)).catch(() => null)))).forEach((k) =>
+      ((k && k.spillet && k.spillere[navn]) || []).forEach((sp) => { if (sp.men.length) (men[sp.nr + "|" + sp.navn] = men[sp.nr + "|" + sp.navn] || []).push(...sp.men); }));
     const f = (lbl, val) => val ? `<div class="card"><div class="lbl">${lbl}</div><div class="val">${esc(val)}</div></div>` : "";
     return `${hoved}
       ${navn === H.yndlingshold ? `<div class="spike-bane">${spikeKort("Pressens yndlinge")}</div>` : ""}
@@ -642,7 +653,7 @@
           <td>${esc(s.pos)}</td><td class="num">${esc(s.MA)}</td><td class="num">${esc(s.ST)}</td><td class="num">${esc(s.AG)}</td>
           <td class="num">${esc(s.PA)}</td><td class="num">${esc(s.AV)}</td><td class="wrap-ok">${esc(s.skills === "None" && s.nye.length ? "" : s.skills)}${s.nye.length ? `${s.skills && s.skills !== "None" ? ", " : ""}<span class="ny" title="Ny skill fra level-up">${s.nye.map(esc).join(", ")}</span>` : ""}</td>
           <td class="num">${esc(s.spp)}</td><td class="num">${esc(s.td)}</td><td class="num">${esc(s.cas)}</td><td class="num">${esc(s.mvp)}</td>
-          <td>${s.mng === "Y" ? '<span class="mng">Misser næste kamp</span>' : ""}${tal(s.nig) > 0 ? ` <span class="mng">Niggling ×${esc(s.nig)}</span>` : ""}</td>
+          <td>${s.mng === "Y" ? '<span class="mng">Misser næste kamp</span>' : ""}${tal(s.nig) > 0 ? ` <span class="mng">Niggling ×${esc(s.nig)}</span>` : ""}${(men[s.nr + "|" + s.navn] || []).map((m) => ` <span class="mng">${esc(m)}</span>`).join("")}</td>
         </tr>`).join("") || '<tr><td colspan="14" class="muted">Ingen spillere på holdlisten endnu.</td></tr>'}</tbody></table></div>
       ${holdLore(navn)}`;
   }
@@ -920,8 +931,10 @@
       <p class="lead">Pressekonferencer, kampreferater og interviews fra ligaens hold. Tryk på en overskrift for at læse.</p>
       ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}"${/^#/.test(C.PRESSE_FORMULAR) ? "" : ' target="_blank" rel="noopener"'}>✍️ Indsend til pressetribunen</a> <a class="knap knap-link" href="#power">📊 Gunnars power ranking</a>${UR ? ` <a class="knap knap-link" href="#indsend/rygte">🐀 ${esc(UR.tip)}</a>` : ""}</p>` : ""}
       ${efterlysning()}
-      <div class="grid">${ugensSpørgsmålKort()}${ugensRygteKort()}${optaktKort()}</div>
+      <div class="grid">${ugensSpørgsmålKort()}${optaktKort()}</div>
       ${presseListe().length ? `<div class="pk-liste">${presseListe().map(pkLinje).join("")}</div>` : '<p class="muted">Ingen artikler endnu.</p>'}
+      <h2>Mere fra tribunen</h2>
+      <div class="grid">${tribuneKort().join("")}</div>
       <p class="small muted">Satire. Skrevet af holdenes coaches eller ud fra deres indlæg.</p>`;
   }
 
