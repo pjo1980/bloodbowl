@@ -42,6 +42,9 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
   Prøv skabeloner med rigtige tal: 0, 1, flertal og holdnavne, der ender på s.
 - **Ingen datoer fra den virkelige verden på siden** (Peter 4. nov.). Vis datoer med `bbDato()` i app.js: Warhammers Imperial Calendar,
   samme dag, tilsvarende måned (Nachexen … Vorhexen), år + 500 + "IC". Datafiler må stadig gemme rigtige datoer (ÅÅÅÅ-MM-DD) til sortering.
+- **Ingen kildenoter til coaches** (Peter 26. nov.): Skriv ikke på siden, hvilket ark, hvilken fane eller hvilken kolonne
+  et tal kommer fra ("Fra fanen Døde spillere i holdarket"). Coaches er ligeglade. Den slags hører hjemme i kodekommentarer
+  og DATAKORT.md. Undtagelser: guiderne under Regler/Kampdag, fejlbeskeder og mærkningen af automatisk skrevne referater.
 - **Patchnotes ved hver udgivelse** (Peter 26. nov.): Ændrer en udgivelse noget, coaches kan se eller mærke, så skriv det i
   `nyheder.csv` som en række med type `patch` (vises nederst på Nyheder, aldrig på forsiden). Én note pr. dag: findes der
   allerede en med dagens dato, så tilføj en linje dér. Én linje pr. ændring, begynd med sidens navn ("Skadestuen: ...").

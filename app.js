@@ -593,7 +593,7 @@
         <p class="small muted" style="margin:0 0 8px">${spillet} af ${p.kampe.length} kampe spillet</p>
         <ul class="kampe">${[...p.kampe.filter((k) => k.spillet), ...p.kampe.filter((k) => !k.spillet)].map(kort).join("")}</ul></div>`;
     }).join("")}</div>
-      <p class="small muted">Hjemmeholdet står til venstre. Resultater hentes fra kommissærens kampskemaer.</p>`;
+      <p class="small muted">Hjemmeholdet står til venstre.</p>`;
   }
 
   function sideRegnbue() {
@@ -688,12 +688,12 @@
           <td>${esc(s.pos)}</td>${["MA", "ST", "AG", "PA", "AV"].map((k) => {
             // Varige mén fra kampskemaerne: tallet er holdarkets, den røde pil viser, at spilleren har fået −1 på den egenskab.
             const m = (men[s.nr + "|" + s.navn] || []).filter((x) => x.split(" ")[1] === k);
-            return m.length ? `<td class="num skadet" title="Varig skade fra kampskemaet: ${esc(m.join(", "))}">${esc(s[k])} <span class="small">▼</span></td>` : `<td class="num">${esc(s[k])}</td>`;
+            return m.length ? `<td class="num skadet" title="Varig skade: ${esc(m.join(", "))}">${esc(s[k])} <span class="small">▼</span></td>` : `<td class="num">${esc(s[k])}</td>`;
           }).join("")}<td class="wrap-ok">${esc(s.skills === "None" && s.nye.length ? "" : s.skills)}${s.nye.length ? `${s.skills && s.skills !== "None" ? ", " : ""}<span class="ny" title="Ny skill fra level-up">${s.nye.map(esc).join(", ")}</span>` : ""}</td>
           <td class="num">${esc(s.spp)}</td><td class="num">${esc(s.td)}</td><td class="num">${esc(s.cas)}</td><td class="num">${esc(s.mvp)}</td>
           <td>${s.mng === "Y" ? '<span class="mng">Misser næste kamp</span>' : ""}${tal(s.nig) > 0 ? ` <span class="mng">Niggling ×${esc(s.nig)}</span>` : ""}${(men[s.nr + "|" + s.navn] || []).map((m) => ` <span class="mng">${esc(m)}</span>`).join("")}</td>
         </tr>`).join("") || '<tr><td colspan="14" class="muted">Ingen spillere på holdlisten endnu.</td></tr>'}</tbody></table></div>
-      ${Object.keys(men).length ? '<p class="small muted"><span class="mng">▼</span> = varig skade fra et kampskema. Tallet i tabellen er holdarkets og er måske ikke rettet endnu.</p>' : ""}
+      ${Object.keys(men).length ? '<p class="small muted"><span class="mng">▼</span> = varig skade, som måske ikke er trukket fra tallet endnu.</p>' : ""}
       ${holdLore(navn)}`;
   }
 
@@ -1301,13 +1301,13 @@
     const kampLink = (f) => `<a href="#kamp/${encodeURIComponent(f)}">kampen</a>`;
     const tom = (t) => `<p class="muted">${esc(t)}</p>`;
     const liste = (rækker) => `<ul class="top5">${rækker.join("")}</ul>`;
-    const kortSyge = `<div class="card"><h2>🩹 Sygelisten</h2><p class="small muted">Spillere med Miss Next Game i holdarket.</p>
+    const kortSyge = `<div class="card"><h2>🩹 Sygelisten</h2><p class="small muted">Spillere, der misser næste kamp.</p>
       ${syge.length ? liste(syge.map((s) => `<li><span><b>${esc(s.navn)}</b> <span class="muted small">${esc(s.pos || "")}</span></span><span>${holdLink(s.hold)}</span></li>`))
         : tom("Ingen er på sygelisten. Enten er alle raske, eller også har ingen tastet skaderne ind.")}
-      ${kampMng.length ? `<p class="small" style="margin-top:12px"><b>Fra kampskemaerne:</b></p>` + liste(kampMng.map((s) =>
+      ${kampMng.length ? `<p class="small" style="margin-top:12px"><b>Skadet i de seneste kampe:</b></p>` + liste(kampMng.map((s) =>
         `<li><span><b>${esc(s.navn)}</b> ${holdLink(s.hold)}</span><span class="muted small">mod ${esc(s.mod)} · ${kampLink(s.fane)}</span></li>`)) : ""}
     </div>`;
-    const kortNig = `<div class="card"><h2>🦴 Varige mén</h2><p class="small muted">Lasting injuries fra kampskemaerne og Niggling Injuries i holdarket.</p>
+    const kortNig = `<div class="card"><h2>🦴 Varige mén</h2><p class="small muted">Skader, der ikke går væk igen.</p>
       ${kampMen.length ? liste(kampMen.map((s) => `<li><span><b>${esc(s.navn)}</b> ${holdLink(s.hold)} <span class="muted small">mod ${esc(s.mod)} · ${kampLink(s.fane)}</span></span><span class="v">${esc(s.men)}</span></li>`)) : ""}
       ${nig.length ? liste(nig.map((s) => `<li><span><b>${esc(s.navn)}</b> ${holdLink(s.hold)}</span><span class="v">Niggling ×${esc(s.nig)}</span></li>`)) : ""}
       ${kampMen.length || nig.length ? "" : tom("Ingen varige mén endnu. Sæsonen er ung.")}</div>`;
@@ -1318,7 +1318,7 @@
     const kortHold = `<div class="card"><h2>🏥 Mest voldelige hold</h2><p class="small muted">CAS påført i puljekampene.</p>
       ${casListe.length ? liste(casListe.map(([h, n], i) => `<li><span><span class="nr">${i + 1}.</span>${holdLink(h)}</span><span class="v">${n}</span></li>`))
         : tom("Ingen endnu.")}</div>`;
-    const kortDøde = `<div class="card"><h2>⚰️ Kirkegården</h2><p class="small muted">Spillere, der er døde på banen. Fra fanen Døde spillere i holdarket.</p>
+    const kortDøde = `<div class="card"><h2>⚰️ Kirkegården</h2><p class="small muted">Spillere, der er døde på banen.</p>
       ${døde.length ? liste(døde.map((s) => {
         const N = H.nekrologer || [];
         const ord = (H.mindeord || {})[s.navn] ? H.mindeord[s.navn] : N.length ? N[hashTal(s.navn + s.hold) % N.length].replace(/\{navn\}/g, s.navn).replace(/\{hold\}/g, s.hold || "holdet") : "";
@@ -1331,7 +1331,7 @@
       ? `${delt} spillere deler førstepladsen blandt slagterne med ${værst.cas} CAS hver. Pressechefen kalder det ›fysisk spil‹. Lægen kalder det overarbejde.`
       : `${værst.navn} fra ${værst.hold} topper listen over slagtere. Pressechefen kalder det ›fysisk spil‹. Lægen kalder det overarbejde.`;
     return hoved + pressechefKort(gunnarTekst) + `<div class="grid-2" style="margin-top:16px">${kortSyge}${kortSlagtere}${kortNig}${kortHold}${kortDøde}</div>
-      <p class="small muted">Skader kommer kun med, hvis de er tastet ind: Miss Next Game og Niggling i holdarket, CAS, Miss Next Game og Lasting injury i kamparket, døde spillere i holdarkets fane Døde spillere.
+      <p class="small muted">Mangler der en skade? Så er den ikke tastet ind endnu.
         Se <a href="#kampdag">Kampdag</a>.</p>`;
   }
 
@@ -1671,7 +1671,7 @@
         ${række("Casualties", a.cas, b.cas)}${række("Power ranking", a.power, b.power)}
         ${syge ? række("På sygelisten", syge[A].join(", ") || "Ingen", syge[B].join(", ") || "Ingen") : ""}
         ${a.slogan || b.slogan ? række("Slogan", a.slogan, b.slogan) : ""}</tbody></table></div>
-        ${syge ? '<p class="small muted" style="margin:8px 0 0">På sygelisten = Miss Next Game i holdarket lige nu.</p>' : ""}</section>
+        ${syge ? '<p class="small muted" style="margin:8px 0 0">På sygelisten = misser næste kamp.</p>' : ""}</section>
       ${pressechefKort(optaktTekst(A, B))}
       <section class="card presse ts"><p class="kicker">Hvordan ender den?</p>
         <p class="small muted" style="margin:0 0 12px">Hjemmeholdet står først i resultatet. Buddene gemmes, og pressechefen fælder dom efter kampen.</p>
