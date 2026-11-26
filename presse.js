@@ -27,6 +27,314 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "web-1795713682326",
+    "hold": "The Maurading Ocras",
+    "type": "Ugens spørgsmål",
+    "dato": "2026-11-26",
+    "titel": "Ugens spørgsmål: Hvad serverer I for udeholdet?",
+    "undertitel": "Ugens spørgsmål",
+    "coach": "GrimStone",
+    "indsendt": "Indsendt af GrimStone",
+    "kamp": "uge:2969",
+    "citat": {
+      "hvem": "GrimStone",
+      "tekst": "Kenny Clickbait."
+    },
+    "replikker": [
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Hvad serverer I for udeholdet?"
+      },
+      {
+        "hvem": "GrimStone",
+        "rolle": "Coach, The Maurading Ocras",
+        "tekst": "Kenny Clickbait."
+      }
+    ]
+  },
+  {
+    "id": "web-1795713204942",
+    "hold": "Bedstefars Besudlere",
+    "type": "Kampreferat",
+    "dato": "2026-11-26",
+    "titel": "Bedstefars Besudlere 0-3 Bros being Bros",
+    "undertitel": "Kampreferat",
+    "coach": "Coach Svulst-Stank",
+    "indsendt": "Indsendt af Steen Svulst-Stank",
+    "forside": "forsider/web-1795713204942.jpg",
+    "citat": {
+      "hvem": "Coach Svulst-Stank",
+      "tekst": "Det var ikke tacklinger – det var frivillige jordbegravelser!"
+    },
+    "replikker": [
+      {
+        "p": "Regn, råd og rendyrket inkompetence – en katastrofe i Bedstefars navn."
+      },
+      {
+        "p": "Det blev en særdeles mørk dag for Bedstefars Besudlere, da de i silende regn måtte se sig besejret med hele 0-3 af Bros being Bros."
+      },
+      {
+        "p": "Hvad der skulle have været en storslået demonstration af Bedstefar Nurgles velsignelser, udviklede sig i stedet til en tragikomisk forestilling af fejlslagne boldopsamlinger, ynkelige tacklinger og pestbefængte spillere, der tilbragte mere tid i mudderet end på benene."
+      },
+      {
+        "p": "Klumme Kent har efter kampen opsøgt Coach Svulst-Stank til en samtale om den sportslige katastrofe."
+      },
+      {
+        "p": "Træneren blev fundet siddende i omklædningsrummet, hvor han tavst stirrede ned i en spand med ukendt indhold."
+      },
+      {
+        "afsnit": "»Ingen gjorde, hvad de skulle, når de skulle det!«"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Coach Svulst-Stank, 0-3 mod Bros being Bros. Hvor skal vi overhovedet begynde?",
+        "rolle": "Pressen"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Ved afslutningen, Kent! For det var kampens absolutte højdepunkt! Det øjeblik, hvor dommeren fløjtede af, og jeg ikke længere var tvunget til at overvære den vederstyggelighed, mine spillere forsøgte at kalde Blood Bowl!",
+        "rolle": "Cheftræner, Bedstefars Besudlere"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Det virkede ellers, som om I havde en plan inden kampen?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "EN FREMRAGENDE PLAN! Problemet var bare, at ingen gjorde, hvad de skulle, når de skulle det! Når de skulle samle bolden op, tabte de den. Når de skulle tackle, faldt de selv. Når de skulle stå i vejen, stod de i vejen for hinanden! Jeg har set en flok nyfødte Nurglings koordinere et angreb på et møddingshul bedre end det her!"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Så der var ikke meget af den sædvanlige, frygtindgydende tilstedeværelse, som Besudlerne bryster sig af?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Åh, vi var skam til stede! Det kunne man lugte. Men derudover kunne vi lige så godt have sendt elleve sække kompost på banen!"
+      },
+      {
+        "afsnit": "»Endelig en spiller, vi kunne bruge – og så overlever han!«"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "En enkelt spiller skilte sig dog positivt ud. Bo Bylde-bug sendte Bro McBroface på lazarettet med en ganske eftertrykkelig tackling."
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "JA! Velsignede Bo! Et kortvarigt glimt af, hvad Blood Bowl egentlig handler om! I et vidunderligt øjeblik troede jeg faktisk, at mindst én af mine spillere havde forstået, hvorfor vi var mødt op."
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Men Bro McBroface overlevede."
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Ja, desværre. Det var ellers en fremragende mulighed for at styrke truppen. Jeg havde allerede bedt vores materielmand finde en passende hjelm og en nogenlunde rådden spilledragt frem til ham."
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Havde I tænkt jer at rekruttere ham?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Naturligvis! Han så jo ud til faktisk at kunne spille Blood Bowl! En egenskab, vi tilsyneladende er i akut underskud af. Med lidt af Bedstefars kærlighed og en passende portion Nurgles Rot kunne han være blevet en glimrende tilføjelse til holdet."
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Jeg må desværre informere dig om, at de seneste meldinger fra Bros' lazaret peger på, at Bro McBroface allerede er klar til næste kamp."
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "HVAD?!"
+      },
+      {
+        "scene": "Træneren stirrer vantro på Klumme Kent. En flue kravler uforstyrret hen over hans venstre øje."
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Ikke engang en lille varig mén? En betændelse? En begyndende vævsdød? Bare ET ELLER ANDET?! Hvad er det dog for noget sjusket arbejde, Bo!?"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Trods alt var Bo vel kampens bedste Besudler?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Ja, og det fortæller dig alt, hvad du behøver at vide om resten af holdet."
+      },
+      {
+        "afsnit": "»Vores hænder var ikke designet til boldspil i regnvejr!«"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Lad os tale om jeres to Pestigors, Bent Betændt og Hans Hæmoridehorn. Det virkede nærmest umuligt for dem at samle bolden op i regnen."
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Det skyldes en ganske uheldig reaktion mellem regnvandet og de særligt fremavlede betændelsesflader på deres hænder."
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Fremavlede betændelsesflader?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Ja! Du tror vel ikke, at den slags bylder bare kommer af sig selv? Der ligger måneders omhyggelig pleje bag de hænder! Hver eneste pustel, hver eneste væskende revne og hver eneste betændte kno er nøje kultiveret med henblik på at sprede Bedstefars velsignelser, når der uddeles slag."
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Men det gjorde det vanskeligt at holde på bolden?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "VANSKELIGT?! Da regnen begyndte at trænge ind mellem bylderne, blev deres hænder glattere end en Nurgling smurt ind i svinefedt! Bolden fór ud mellem fingrene på dem, som om den var besat af Tzeentch selv!"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Kunne man forestille sig, at spillerne fremover fik lov til at tørre hænderne inden en boldopsamling?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Og risikere at fjerne det beskyttende lag af betændelse?! Er du fuldstændig vanvittig, Kent? Vi er et Blood Bowl-hold, ikke en flok hygiejnefanatikere fra et Sigmar-tempel!"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Men det ville måske hjælpe jer med at score?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Der er grænser for, hvilke principper man bør ofre for en sejr."
+      },
+      {
+        "afsnit": "»Det var ikke tacklinger – det var frivillige jordbegravelser!«"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Det var imidlertid ikke kun boldspillet, der voldte problemer. Selv de mest simple tacklinger endte ofte med, at Besudlernes egne spillere lå i mudderet, mens Bros stadig stod oprejst."
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "JA! Og det er dét, der gør mig allermest rasende! Jeg forventer ikke, at mine spillere kan kaste bolden som en forbandet elver eller løbe som en skaven med ild i halen. Men jeg forventer FANDEME, at de kan slå nogen omkuld!"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Flere gange så det nærmest ud, som om Bros slet ikke behøvede at slå igen."
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Præcis! Mine spillere klarede selv den del! De tog tilløb, ramte modstanderen og lagde sig derefter frivilligt ned i mudderet. Det var ikke tacklinger – det var frivillige jordbegravelser!"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Måske følte de sig bare hjemme i det fugtige og sumpede miljø?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Så kan de søge arbejde som bundslam i en septiktank! Her spiller vi Blood Bowl!"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Hvad mente Gert Galdespreder om kampens fysiske niveau? Efter hans nærmest kunstneriske tackling af Harkhier i den tidligere kamp havde man vel forventet mere?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Hvis Gerts tackling af Harkhier var kunst, så var dagens forestilling en flok Nurglings, der havde dyppet bagdelen i maling og slæbt sig hen over et lærred."
+      },
+      {
+        "afsnit": "»Inkubationstiden er længere end en Blood Bowl-kamp!«"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Tre scoringer imod jer, ingen scoringer til jer og ingen nævneværdige varige skader hos modstanderen. Er der overhovedet noget positivt at tage med fra kampen?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Du tænker for kortsigtet, Kent. Ligesom alle andre, der ikke har forstået Bedstefars storhed."
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Hvordan det?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "En Blood Bowl-kamp varer seksten ture. En god pest kan vare i ugevis!"
+      },
+      {
+        "scene": "For første gang under interviewet breder der sig et oprigtigt smil på trænerens betændte ansigt."
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Man kan jo håbe, at vi har inficeret nogle af de selvtilfredse Bros med en af Bedstefars mere tålmodige velsignelser. Noget med en dejlig lang inkubationstid. Noget, der langsomt folder sig ud i deres indvolde, mens de går rundt og tror, at de er sluppet uskadt fra kampen."
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Så nederlaget kan i virkeligheden være en slags forsinket sejr?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "NETOP! Forestil dig glæden i deres omklædningsrum lige nu. Tre scoringer! En overbevisende sejr! Alle mand i godt humør! Og om nogle uger begynder en af dem måske at undre sig over, hvorfor hans navle har fået tænder! HAHAHAHAHA!"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Det bliver interessant at følge Bros' skadesliste i de kommende spillerunder."
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Skadeslisten? Jeg følger personligt dødsannoncerne! HAHAHAHA!"
+      },
+      {
+        "afsnit": "»Ære forgår, betændelse består!«"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Afslutningsvis, Coach. Har du en besked til de Besudlere-fans, der trods regnen og den manglende sportslige præstation blev på tribunerne til sidste fløjt?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Ja. Først og fremmest tak til jer, der blev. Om det skyldtes loyalitet, eller at jeres åbne sår var vokset fast til bænkene, er mig underordnet."
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Og hvad kan fansene forvente i næste kamp?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Vi skal tilbage til det grundlæggende. Vi skal kunne stå oprejst. Vi skal kunne samle en bold op. Og vi skal kunne slå en modstander ihjel, uden at vedkommende møder frisk og veludhvilet op til næste spillerunde!"
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Er det ikke forholdsvis beskedne ambitioner for et Blood Bowl-hold?"
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Efter dagens kamp, Kent, ville jeg betragte det som en mindre revolution."
+      },
+      {
+        "hvem": "Klumme Kent",
+        "tekst": "Tak for din tid, Coach Svulst-Stank."
+      },
+      {
+        "hvem": "Coach Svulst-Stank",
+        "tekst": "Husk vores motto, Kent! Resultater bliver glemt. Pokaler ruster. Helte dør. Men Bedstefars velsignelser lever videre!\nÆRE FORGÅR – BETÆNDELSE BESTÅR!"
+      },
+      {
+        "p": "Redaktionens efterbemærkning: Klumme Kent forsøgte efter interviewet at få en kommentar fra Bent Betændt og Hans Hæmoridehorn. Begge var angiveligt optaget af boldopsamlingstræning i omklædningsrummet. Efter adskillige mislykkede forsøg valgte bolden tilsyneladende selv at trille ud af lokalet."
+      },
+      {
+        "p": "Bros' spillere ønskes tillykke med sejren og en forhåbentlig lang, symptomfri inkubationstid."
+      },
+      {
+        "p": "Slutresultat: Bedstefars Besudlere 0 – 3 Bros being Bros."
+      },
+      {
+        "p": "Tre touchdowns til Bros. Antallet af infektioner afventer fortsat laboratoriets svar."
+      },
+      {
+        "p": "PRAISE NURGLE!"
+      }
+    ]
+  },
+  {
     "id": "web-1795686689492",
     "hold": "Bedstefars Besudlere",
     "type": "Kampreferat",
