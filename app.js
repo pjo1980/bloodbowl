@@ -671,10 +671,34 @@
           : '<p class="muted small" style="margin:0">Ingen endnu.</p>'}</div>`;
     }).join("")}</div>`;
   }
+  // Pokalræset: de fem spillerpokaler fra regler.js (Præmier og titler) med top 3 fra kommissærens fane "Spiller ranglister".
+  const POKALER = [
+    { kat: "TOUCHDOWNS", navn: "Chimichangor-pokalen", hvad: "Flest touchdowns", ikon: "🏈" },
+    { kat: "CASUALTIES", navn: "Razguhl-pokalen", hvad: "Flest casualties", ikon: "🩸" },
+    { kat: "COMPLETIONS", navn: "Baradur VI-pokalen", hvad: "Flest completions", ikon: "🎯" },
+    { kat: "MVP", navn: "MVP-pokalen", hvad: "Flest MVP'er", ikon: "⭐" },
+    { kat: "FOULS", navn: "Foul-pokalen", hvad: "Flest vellykkede fouls", ikon: "🥾" }
+  ];
+  function pokalræs() {
+    const kat = D.spillerrang.ok || [];
+    const kort = POKALER.map((p) => {
+      const k = kat.find((x) => x.navn === p.kat);
+      const liste = (k ? k.liste : []).filter((e) => tal(e.v) > 0).sort((a, b) => tal(b.v) - tal(a.v));
+      // Top 3, men står flere lige på 3.-pladsen, kommer de alle med (højst 6). Lige mange = samme medalje.
+      const grænse = liste.length >= 3 ? tal(liste[2].v) : 0;
+      const vist = liste.filter((e, i) => i < 3 || tal(e.v) === grænse).slice(0, 6);
+      const plads = (e) => liste.findIndex((x) => tal(x.v) === tal(e.v));
+      return `<div class="card pokal"><h3>${p.ikon} ${esc(p.navn)}</h3><p class="small muted" style="margin:0 0 6px">${esc(p.hvad)}</p>
+        ${vist.length ? `<ol class="top5">${vist.map((e) => `<li><span>${["🥇", "🥈", "🥉"][plads(e)] || "🥉"} ${esc(e.navn)}</span><span class="v">${esc(e.v)}</span></li>`).join("")}</ol>`
+          : '<p class="muted small" style="margin:0">Ingen endnu. Pokalen samler støv.</p>'}</div>`;
+    }).join("");
+    return `<h2>🏆 Pokalræset</h2><p class="small muted">Spillerpokalerne, der uddeles efter ligaen. Se alle præmier under <a href="#regler">Regler</a>.</p><div class="grid">${kort}</div>`;
+  }
   function sideRanglister() {
     return `
       <p class="kicker">Helte og skurke</p>
       <h1>Ranglister</h1>
+      ${D.spillerrang.ok ? pokalræs() : ""}
       <h2>Spillere</h2>${D.spillerrang.ok ? rangKort(D.spillerrang.ok, true) : fejlboks(D.spillerrang.fejl)}
       <h2>Hold</h2>${D.holdrang.ok ? rangKort(D.holdrang.ok, false) : fejlboks(D.holdrang.fejl)}
       <p class="small muted">Top 5 pr. kategori. Nuller vises ikke.</p>
