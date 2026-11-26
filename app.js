@@ -389,7 +389,7 @@
   function sideForside() {
     const s = D.stilling.ok;
     const top = s ? s.hold.slice(0, 3) : [];
-    const nyhed = nyheder()[0];
+    const nyhed = nyheder().filter((n) => !n.patch)[0];
     // Den nyeste nyhed står øverst på forsiden i en uge (eller til en nyere kommer); derefter rykker den ned i bunden.
     const frisk = !!nyhed && !!nyhed.dato && !isNaN(nyhed.dato) && Date.now() - nyhed.dato.getTime() < 7 * 864e5;
     const td = førsteMed(D.spillerrang, "TOUCHDOWNS");
@@ -728,12 +728,14 @@
     if (h < 0) return [];
     const hr = rows[h].map((x) => x.toLowerCase());
     const i = (...n) => hr.findIndex((x) => n.includes(x));
-    const iD = i("dato"), iO = i("overskrift", "titel"), iT = i("tekst", "nyhed"), iB = i("billeder", "billede");
+    const iD = i("dato"), iO = i("overskrift", "titel"), iT = i("tekst", "nyhed"), iB = i("billeder", "billede"), iP = i("type");
     return rows.slice(h + 1).filter((r) => r[iO]).map((r) => {
       const dt = iD >= 0 ? læsDato(r[iD]) : null;
       // Billeder (kun i sidens egen nyheder.csv): stier adskilt med semikolon, fx "kampplakater/a.webp;kampplakater/b.webp".
       const billeder = kilde === "redaktion" && iB >= 0 ? String(r[iB] || "").split(";").map((x) => x.trim()).filter((x) => /^[\w\-./]+\.(webp|jpg|jpeg|png)$/i.test(x)) : [];
-      return { dato: dt, datoTekst: iD >= 0 ? r[iD] : "", overskrift: r[iO], tekst: iT >= 0 ? r[iT] : "", kilde, billeder };
+      return { dato: dt, datoTekst: iD >= 0 ? r[iD] : "", overskrift: r[iO], tekst: iT >= 0 ? r[iT] : "", kilde, billeder,
+        // type "patch" (kun nyheder.csv): patchnotes. De står nederst på Nyheder-siden og kommer aldrig på forsiden.
+        patch: kilde === "redaktion" && iP >= 0 && /^patch/i.test(String(r[iP] || "").trim()) };
     });
   }
   function nyheder() {
@@ -749,14 +751,17 @@
       `<a href="${esc(b)}" target="_blank" rel="noopener" title="Se plakaten i fuld størrelse"><img src="${esc(b)}" alt="Plakat" loading="lazy"></a>`).join("")}</div>` : ""}</article>`;
   }
   function sideNyheder() {
-    const liste = nyheder();
+    const alle = nyheder();
+    const liste = alle.filter((n) => !n.patch), patch = alle.filter((n) => n.patch);
     const s = D.stilling.ok;
     return `
       <p class="kicker">Fra kommissærens skrivebord</p>
       <h1>Nyheder og regler</h1>
       ${liste.length ? liste.map(nyhedKort).join("") : '<p class="muted">Ingen nyheder endnu.</p>'}
       <h2>Pointregler</h2>
-      <div class="card">${s && s.regler ? esc(s.regler) : '<span class="muted">Kunne ikke hente reglerne fra arket.</span>'}</div>`;
+      <div class="card">${s && s.regler ? esc(s.regler) : '<span class="muted">Kunne ikke hente reglerne fra arket.</span>'}</div>
+      ${patch.length ? `<h2>Patchnotes</h2><p class="small muted">Hvad der er ændret på siden.</p>${patch.map((n) =>
+        `<details class="card nyhed patch"><summary><span class="dato">${esc(n.dato && !isNaN(n.dato) ? bbDato(n.dato) : n.datoTekst)}</span> · <b>${esc(n.overskrift)}</b></summary><p>${esc(n.tekst)}</p></details>`).join("")}` : ""}`;
   }
 
   // ---------- Presse og holdlore (indholdet står i presse.js) ----------
@@ -1213,7 +1218,7 @@
   // Skadestuen: hvem er ude (holdarkene: Miss Next Game, Niggling) og hvem har gjort skade (kampskemaerne: CAS, MNG).
   async function sideSkadestue() {
     const hoved = `<p class="kicker">Lægen er ikke uddannet</p><h1>Skadestuen</h1>
-      <p class="lead">Hvem er på sygelisten, hvem har varige mén, og hvem har sendt flest modstandere på bænken.</p>`;
+      <p class="lead">Hvem er på sygelisten, hvem har varige mén, hvem er døde, og hvem har sendt flest modstandere på bænken.</p>`;
     $main.innerHTML = hoved + '<p class="loading">Lægen kigger på patienterne …</p>';
     const hold = alleHold();
     const rostre = (await Promise.all(hold.map((n) => {
@@ -1222,6 +1227,12 @@
     }))).filter(Boolean);
     const kampe = (await Promise.all((C.PULJEKAMPE || []).flatMap((p) => p.faner.map((f) =>
       hent(p.ark, f).then((r) => læsKamp(r, f)).catch(() => null))))).filter((k) => k && k.spillet);
+
+    // Døde spillere: Mikkels fane i holdarket (Døde spillere | Position | Hold). Forkert fanenavn giver første fane, så overskriften tjekkes.
+    const døde = !C.FANER.doede ? [] : await hent("hold", C.FANER.doede).then((r) => {
+      const h = r.findIndex((x) => /^Døde spillere/i.test((x[0] || "").trim()));
+      return h < 0 ? [] : r.slice(h + 1).filter((x) => (x[0] || "").trim()).map((x) => ({ navn: x[0].trim(), pos: (x[1] || "").trim(), hold: (x[2] || "").trim() }));
+    }).catch(() => []);
 
     const syge = [], nig = [];
     rostre.forEach((r) => r.spillere.forEach((s) => {
@@ -1262,13 +1273,16 @@
     const kortHold = `<div class="card"><h2>🏥 Mest voldelige hold</h2><p class="small muted">CAS påført i puljekampene.</p>
       ${casListe.length ? liste(casListe.map(([h, n], i) => `<li><span><span class="nr">${i + 1}.</span>${holdLink(h)}</span><span class="v">${n}</span></li>`))
         : tom("Ingen endnu.")}</div>`;
+    const kortDøde = `<div class="card"><h2>⚰️ Kirkegården</h2><p class="small muted">Spillere, der er døde på banen. Fra fanen Døde spillere i holdarket.</p>
+      ${døde.length ? liste(døde.map((s) => `<li><span><b>${esc(s.navn)}</b> <span class="muted small">${esc(s.pos)}</span></span><span>${hold.includes(s.hold) ? holdLink(s.hold) : esc(s.hold)}</span></li>`))
+        : tom("Ingen døde endnu. Graveren keder sig.")}</div>`;
     const værst = slagtere[0];
     const delt = slagtere.filter((s) => værst && s.cas === værst.cas).length;
     const gunnar = !værst ? "Skadestuen er tom. Pressechefen er skuffet. Han havde købt popcorn." : delt > 1
       ? `${delt} spillere deler førstepladsen blandt slagterne med ${værst.cas} CAS hver. Pressechefen kalder det ›fysisk spil‹. Lægen kalder det overarbejde.`
       : `${værst.navn} fra ${værst.hold} topper listen over slagtere. Pressechefen kalder det ›fysisk spil‹. Lægen kalder det overarbejde.`;
-    return hoved + pressechefKort(gunnar) + `<div class="grid-2" style="margin-top:16px">${kortSyge}${kortSlagtere}${kortNig}${kortHold}</div>
-      <p class="small muted">Skader kommer kun med, hvis de er tastet ind: Miss Next Game og Niggling i holdarket, CAS, Miss Next Game og Lasting injury i kamparket.
+    return hoved + pressechefKort(gunnar) + `<div class="grid-2" style="margin-top:16px">${kortSyge}${kortSlagtere}${kortNig}${kortHold}${kortDøde}</div>
+      <p class="small muted">Skader kommer kun med, hvis de er tastet ind: Miss Next Game og Niggling i holdarket, CAS, Miss Next Game og Lasting injury i kamparket, døde spillere i holdarkets fane Døde spillere.
         Se <a href="#kampdag">Kampdag</a>.</p>`;
   }
 

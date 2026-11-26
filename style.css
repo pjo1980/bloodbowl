@@ -396,3 +396,7 @@ img.figur-stor { width: 56px; height: 56px; margin: 0; border: 2px solid var(--g
   .hero .lead { display: none; }
   .hero h1 { font-size: 30px; }
 }
+
+/* Patchnotes nederst på Nyheder-siden: lukkede som standard, så de ikke fylder. */
+.nyhed.patch { padding: 10px 14px; margin-bottom: 8px; }
+.nyhed.patch summary { cursor: pointer; }

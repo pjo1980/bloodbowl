@@ -29,6 +29,7 @@ window.CONFIG = {
     holdrang: "Holdranglister",
     spillerrang: "Spiller ranglister",
     holdstats: "Holdstats ud",
+    doede: "Døde spillere",     // fane i hold-arket: Døde spillere | Position | Hold
     nyheder: "Nyheder",         // valgfri fane i turneringsarket: Dato | Overskrift | Tekst
     presseUdgivet: "Form Responses 1" // svar-fanen: Timestamp | Hold | Type | Overskrift | Tekst | Dit navn (+ Skjul)
   },

@@ -27,6 +27,7 @@ Puljeturnering, 13 hold, 4 puljer (Sort 4 hold, Rød 3, Gul 3, Blå 3). Point: *
   Række 2–17 = spillerplads 1–16 (tomme pladser har tomt navn). Derunder holdinfo (Re-Rolls, Dedicated Fans,
   Assistant Coaches …) i faste celler; Team Name/Coach/Race ser tomme ud i CSV (sandsynligvis sammenflettede celler).
 - **Holdstats ud**: spiller-tal (A–H) og holdtal (J–S: TD, Comp, Int, Foul, Cas, TV increase, CAS balance, gns.).
+- **Døde spillere**: tre kolonner (Døde spillere | Position | Hold), én række pr. død spiller. Vises som "Kirkegården" på Skadestuen.
 - **TeamData**: officielle holdtyper med positioner, priser og skills (opslagsdata, ikke ligadata).
 - Øvrige faner (HOW TO USE, Master, Passing Calculator, Injury Tables …) er værktøjer. Ignorér.
 
