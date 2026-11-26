@@ -416,3 +416,48 @@ td.skadet { color: var(--blood); font-weight: 700; white-space: nowrap; }
 .sidensidst li { font-size: 14px; padding: 5px 0; }
 .sidensidst li.dato { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; border-bottom: 0; padding: 8px 0 0; }
 .sidensidst li.dato:first-child { padding-top: 2px; }
+
+/* ---------- Mobil: tal uden sidelæns swipe, lavere top, Presse-filter ---------- */
+.presse-filter { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
+.knap.pf { font-size: 14px; padding: 4px 12px; }
+.knap.pf.on { color: #1a120d; background: var(--accent); border-color: var(--accent); }
+@media (max-width: 720px) {
+  /* Når man har rullet lidt ned, er kun menuen tilbage i toppen. */
+  body.rullet .brand, body.rullet .sponsorbar { display: none; }
+  body.rullet .top-inner { padding-top: 6px; padding-bottom: 6px; }
+}
+@media (max-width: 560px) {
+  /* Stilling: smallere celler, og holdnavnet må stå på to linjer, så point altid kan ses. */
+  table.stilling th, table.stilling td { padding: 8px 6px; }
+  table.stilling td:nth-child(2) { white-space: normal; }
+  table.stilling td:nth-child(2) .chip { display: flex; width: max-content; margin-top: 3px; font-size: 10px; }
+  /* Faktabokse på holdsiden: tre i bredden. */
+  .fakta { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .fakta .card { padding: 8px; }
+  .fakta .lbl { font-size: 10px; letter-spacing: .5px; }
+  .fakta .val { font-size: 16px; }
+  /* Holdlisten: hver spiller er et lille kort med alle tal synlige. */
+  .roster-wrap { overflow: visible; border: 0; background: transparent; }
+  table.roster, table.roster tbody { display: block; }
+  table.roster thead { display: none; }
+  table.roster tr { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px 6px; padding: 10px 12px; margin-bottom: 8px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); }
+  table.roster td { border: 0; padding: 0; white-space: normal; text-align: left; min-width: 0; font-size: 14px; }
+  table.roster td:nth-child(1) { grid-column: 1 / 2; grid-row: 1; color: var(--muted); width: auto; }
+  table.roster td:nth-child(1)::before { content: "#"; }
+  table.roster td:nth-child(2) { grid-column: 2 / -1; grid-row: 1; font-size: 16px; }
+  table.roster td:nth-child(3) { grid-column: 2 / -1; grid-row: 2; color: var(--muted); margin-bottom: 4px; }
+  table.roster td:nth-child(n+4):nth-child(-n+8), table.roster td:nth-child(n+10):nth-child(-n+13) { font-weight: 700; }
+  table.roster td:nth-child(n+4):nth-child(-n+8)::before, table.roster td:nth-child(n+10):nth-child(-n+13)::before {
+    display: block; font-size: 10px; font-weight: 400; letter-spacing: 1px; color: var(--muted); }
+  table.roster td:nth-child(4)::before { content: "MA"; } table.roster td:nth-child(5)::before { content: "ST"; }
+  table.roster td:nth-child(6)::before { content: "AG"; } table.roster td:nth-child(7)::before { content: "PA"; }
+  table.roster td:nth-child(8)::before { content: "AV"; }
+  table.roster td:nth-child(n+4):nth-child(-n+8) { grid-row: 3; }
+  table.roster td:nth-child(n+10):nth-child(-n+13) { grid-row: 4; margin-top: 4px; }
+  table.roster td:nth-child(10)::before { content: "SPP"; } table.roster td:nth-child(11)::before { content: "TD"; }
+  table.roster td:nth-child(12)::before { content: "CAS"; } table.roster td:nth-child(13)::before { content: "MVP"; }
+  table.roster td:nth-child(9) { grid-column: 1 / -1; grid-row: 5; margin-top: 6px; font-size: 13px; }
+  table.roster td:nth-child(14) { grid-column: 1 / -1; grid-row: 6; margin-top: 4px; }
+  table.roster td:nth-child(14):empty, table.roster td:nth-child(9):empty { display: none; }
+}

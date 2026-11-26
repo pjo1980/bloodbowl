@@ -308,7 +308,7 @@
         ${h.kampe !== null && !medPulje ? `<td class="num">${h.kampe}</td>` : ""}<td class="num pts">${h.p}</td></tr>`;
     }).join("");
     const kampeKol = !medPulje && hold.some((h) => h.kampe !== null);
-    return `<div class="tabel-wrap"><table><thead><tr><th>#</th><th>Hold</th>
+    return `<div class="tabel-wrap"><table class="stilling"><thead><tr><th>#</th><th>Hold</th>
       <th class="num" title="Sejre">V</th><th class="num" title="Uafgjorte">U</th><th class="num" title="Nederlag">T</th>
       ${kampeKol ? '<th class="num" title="Kampe spillet">K</th>' : ""}<th class="num">Point</th></tr></thead><tbody>${rækker}</tbody></table></div>`;
   }
@@ -723,7 +723,6 @@
     const f = (lbl, val) => val ? `<div class="card"><div class="lbl">${lbl}</div><div class="val">${esc(val)}</div></div>` : "";
     return `${hoved}
       ${navn === H.yndlingshold ? `<div class="spike-bane">${spikeKort("Pressens yndlinge")}</div>` : ""}
-      ${plakatBlok(navn)}
       ${r.race || r.liga ? `<p class="lead">${esc([r.race, r.liga].filter(Boolean).join(" · "))}</p>` : ""}
       <div class="fakta">
         ${p ? f("Point", String(p.p)) + f("V-U-T", `${p.w}-${p.d}-${p.l}`) : ""}
@@ -732,7 +731,7 @@
         ${f("Touchdowns", st["Touch Down"])}${f("Casualties", st["Casualties"])}
       </div>
       ${r.regler ? `<p class="small muted">Særregler: ${esc(r.regler)}</p>` : ""}
-      <div class="tabel-wrap"><table><thead><tr><th>#</th><th>Navn</th><th>Position</th>
+      <div class="tabel-wrap roster-wrap"><table class="roster"><thead><tr><th>#</th><th>Navn</th><th>Position</th>
         <th class="num">MA</th><th class="num">ST</th><th class="num">AG</th><th class="num">PA</th><th class="num">AV</th>
         <th>Skills</th><th class="num">SPP</th><th class="num">TD</th><th class="num">CAS</th><th class="num">MVP</th><th>Skader</th></tr></thead>
         <tbody>${r.spillere.map((s) => `<tr>
@@ -749,6 +748,7 @@
       ${r.spillere.some((x) => x && stig(x) != null && stig(x) >= -1) ? '<p class="small muted"><span class="stig">▲</span> = har SPP nok til en ny skill. (−1) = mangler 1 SPP.</p>' : ""}
       ${journal.length ? `<h2>🩺 Lægejournal</h2><div class="card"><ul class="top5">${journal.map((j) =>
         `<li><span><b>${esc(j.navn)}</b>${j.mod ? ` <span class="muted small">mod ${esc(j.mod)} · <a href="#kamp/${encodeURIComponent(j.fane)}">kampen</a></span>` : ""}</span><span class="mng">${esc(j.tekst)}</span></li>`).join("")}</ul></div>` : ""}
+      ${plakatBlok(navn)}
       ${holdLore(navn)}`;
   }
 
@@ -1059,12 +1059,33 @@
       <h1>Presse</h1>
       <p class="lead">Pressekonferencer, kampreferater og interviews fra ligaens hold. Tryk på en overskrift for at læse.</p>
       ${C.PRESSE_FORMULAR ? `<p><a class="knap" style="display:inline-block;text-decoration:none" href="${esc(C.PRESSE_FORMULAR)}"${/^#/.test(C.PRESSE_FORMULAR) ? "" : ' target="_blank" rel="noopener"'}>✍️ Indsend til pressetribunen</a> <a class="knap knap-link" href="#power">📊 Gunnars power ranking</a>${UR ? ` <a class="knap knap-link" href="#indsend/rygte">🐀 ${esc(UR.tip)}</a>` : ""}</p>` : ""}
+      ${presseOversigt()}
       ${efterlysning()}
-      <div class="grid">${ugensSpørgsmålKort()}${optaktKort()}</div>
-      ${presseListe().length ? `<div class="pk-liste">${presseListe().map(pkLinje).join("")}</div>` : '<p class="muted">Ingen artikler endnu.</p>'}
+      <div class="grid" style="margin-top:16px">${ugensSpørgsmålKort()}${optaktKort()}</div>
       <h2>Mere fra tribunen</h2>
       <div class="grid">${tribuneKort().join("")}</div>
       <p class="small muted">Satire. Skrevet af holdenes coaches eller ud fra deres indlæg.</p>`;
+  }
+
+  // Artikellisten på Presse: filter på type og kun de 10 nyeste, til man beder om resten. Valget huskes, mens siden er åben.
+  let presseType = "", presseAlle = false;
+  function presseOversigt() {
+    const alle = presseListe();
+    if (!alle.length) return '<p class="muted">Ingen artikler endnu.</p>';
+    const typer = [...new Set(alle.map((p) => p.type).filter(Boolean))];
+    if (!typer.includes(presseType)) presseType = "";
+    const valgt = presseType ? alle.filter((p) => p.type === presseType) : alle;
+    const vist = presseAlle ? valgt : valgt.slice(0, 10);
+    const knap = (t, lbl) => `<button type="button" class="knap pf${presseType === t ? " on" : ""}" data-pf="${esc(t)}">${esc(lbl)}</button>`;
+    return `<div class="presse-filter">${knap("", "Alle")}${typer.map((t) => knap(t, t)).join("")}</div>
+      <div class="pk-liste">${vist.map(pkLinje).join("")}</div>
+      ${valgt.length > vist.length ? `<p><button type="button" class="knap" id="presse-flere">Vis alle ${valgt.length}</button></p>` : ""}`;
+  }
+  function presseKlar() {
+    const igen = () => { const y = window.scrollY; vis().then(() => window.scrollTo(0, y)); };
+    $main.querySelectorAll(".pf").forEach((b) => { b.onclick = () => { presseType = b.dataset.pf; presseAlle = false; igen(); }; });
+    const flere = document.getElementById("presse-flere");
+    if (flere) flere.onclick = () => { presseAlle = true; igen(); };
   }
 
   function holdLore(navn) {
@@ -1965,6 +1986,7 @@
     if (key === "indsend") indsendKlar();
     if (key === "power") kopiKnap();
     if (key === "forside") mitHoldKlar();
+    if (key === "presse" && !navn) presseKlar();
     $main.querySelectorAll(".tjek").forEach((sek) => {
       const alle = sek.querySelectorAll("input[type=checkbox]");
       sek.classList.toggle("faerdig", alle.length > 0 && [...alle].every((x) => x.checked));
@@ -2010,6 +2032,10 @@
   document.getElementById("liganavn").textContent = liga;
   document.getElementById("saeson").textContent = C.KOMMISSAER ? "Kommissær: " + C.KOMMISSAER : "";
   window.addEventListener("hashchange", vis);
+  window.addEventListener("scroll", () => {
+    const b = document.body.classList, y = window.scrollY;
+    if (y > 200 && !b.contains("rullet")) b.add("rullet"); else if (y < 40 && b.contains("rullet")) b.remove("rullet");
+  }, { passive: true });
   visSponsor();
   setInterval(visSponsor, 12000);
   const $beta = document.getElementById("beta");
