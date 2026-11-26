@@ -497,12 +497,18 @@
     blokke.slice(0, 2).forEach((h, b) => {
       const iN = rows[h].indexOf("Player");
       const c = (n) => iN + { "Miss Next Game": 1, TD: 2, Completion: 3, Interception: 4, Foul: 5, Casualties: 6, MVP: 7 }[n];
+      // Varige mén (Lasting injury): kolonnerne "- ST", "-AG", "-PA", "-AV" til højre i skemaet (Niggling tælles i holdarket).
+      // Kolonnen lige før "- ST" er MA (Google mister overskriften). Coachen taster −1 i den rigtige kolonne.
+      const iST = rows[h].findIndex((t) => /^-\s*ST$/i.test(t || ""));
+      const hk = (re) => rows[h].findIndex((t) => re.test(t || ""));
+      const skadeKol = iST < 0 ? {} : { MA: iST - 1, ST: iST, AG: hk(/^-\s*AG$/i), PA: hk(/^-\s*PA$/i), AV: hk(/^-\s*AV$/i) };
       const liste = [];
       for (let k = h + 1; k < rows.length && /^\d+$/.test(rows[k][0] || ""); k++) {
         const x = rows[k];
         if (!x[iN]) continue;
         const v = (j) => (j >= 0 ? tal(x[j]) : 0);
-        liste.push({ nr: x[0], navn: x[iN], td: v(c("TD")), comp: v(c("Completion")), int: v(c("Interception")), foul: v(c("Foul")),
+        const men = Object.entries(skadeKol).filter(([, j]) => j >= 0 && tal(x[j]) < 0).map(([stat, j]) => `−${Math.abs(tal(x[j]))} ${stat}`);
+        liste.push({ men, nr: x[0], navn: x[iN], td: v(c("TD")), comp: v(c("Completion")), int: v(c("Interception")), foul: v(c("Foul")),
           cas: v(c("Casualties")), mvp: v(c("MVP")), mng: x[c("Miss Next Game")] === "Y" });
       }
       spillere[b === 0 ? hold1 : hold2] = liste;
@@ -1185,12 +1191,13 @@
       if (/^y/i.test(s.mng || "")) syge.push({ ...s, hold: r.hold });
       if (tal(s.nig) > 0) nig.push({ ...s, hold: r.hold });
     }));
-    const slagtere = [], kampMng = [];
+    const slagtere = [], kampMng = [], kampMen = [];
     kampe.forEach((k) => Object.entries(k.spillere).forEach(([h, liste]) => {
       const mod = h === k.hjemme ? k.ude : k.hjemme;
       liste.forEach((s) => {
         if (s.cas > 0) slagtere.push({ navn: s.navn, hold: h, cas: s.cas, mod, fane: k.fane });
         if (s.mng) kampMng.push({ navn: s.navn, hold: h, mod, fane: k.fane });
+        if (s.men.length) kampMen.push({ navn: s.navn, hold: h, mod, fane: k.fane, men: s.men.join(", ") });
       });
     }));
     slagtere.sort((a, b) => b.cas - a.cas);
@@ -1207,9 +1214,10 @@
       ${kampMng.length ? `<p class="small" style="margin-top:12px"><b>Fra kampskemaerne:</b></p>` + liste(kampMng.map((s) =>
         `<li><span><b>${esc(s.navn)}</b> ${holdLink(s.hold)}</span><span class="muted small">mod ${esc(s.mod)} · ${kampLink(s.fane)}</span></li>`)) : ""}
     </div>`;
-    const kortNig = `<div class="card"><h2>🦴 Varige mén</h2><p class="small muted">Niggling Injuries i holdarket.</p>
-      ${nig.length ? liste(nig.map((s) => `<li><span><b>${esc(s.navn)}</b> ${holdLink(s.hold)}</span><span class="v">${esc(s.nig)}</span></li>`))
-        : tom("Ingen varige mén endnu. Sæsonen er ung.")}</div>`;
+    const kortNig = `<div class="card"><h2>🦴 Varige mén</h2><p class="small muted">Lasting injuries fra kampskemaerne og Niggling Injuries i holdarket.</p>
+      ${kampMen.length ? liste(kampMen.map((s) => `<li><span><b>${esc(s.navn)}</b> ${holdLink(s.hold)} <span class="muted small">mod ${esc(s.mod)} · ${kampLink(s.fane)}</span></span><span class="v">${esc(s.men)}</span></li>`)) : ""}
+      ${nig.length ? liste(nig.map((s) => `<li><span><b>${esc(s.navn)}</b> ${holdLink(s.hold)}</span><span class="v">Niggling ×${esc(s.nig)}</span></li>`)) : ""}
+      ${kampMen.length || nig.length ? "" : tom("Ingen varige mén endnu. Sæsonen er ung.")}</div>`;
     const kortSlagtere = `<div class="card"><h2>🪓 Slagterne</h2><p class="small muted">Spillere, der har påført skader (CAS) i puljekampene.</p>
       ${slagtere.length ? liste(slagtere.slice(0, 10).map((s) =>
         `<li><span><b>${esc(s.navn)}</b> ${holdLink(s.hold)} <span class="muted small">mod ${esc(s.mod)} · ${kampLink(s.fane)}</span></span><span class="v">${s.cas}</span></li>`))
@@ -1223,7 +1231,7 @@
       ? `${delt} spillere deler førstepladsen blandt slagterne med ${værst.cas} CAS hver. Pressechefen kalder det ›fysisk spil‹. Lægen kalder det overarbejde.`
       : `${værst.navn} fra ${værst.hold} topper listen over slagtere. Pressechefen kalder det ›fysisk spil‹. Lægen kalder det overarbejde.`;
     return hoved + pressechefKort(gunnar) + `<div class="grid-2" style="margin-top:16px">${kortSyge}${kortSlagtere}${kortNig}${kortHold}</div>
-      <p class="small muted">Skader kommer kun med, hvis de er tastet ind: Miss Next Game og Niggling i holdarket, CAS og Miss Next Game i kamparket.
+      <p class="small muted">Skader kommer kun med, hvis de er tastet ind: Miss Next Game og Niggling i holdarket, CAS, Miss Next Game og Lasting injury i kamparket.
         Se <a href="#kampdag">Kampdag</a>.</p>`;
   }
 
