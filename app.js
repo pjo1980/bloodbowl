@@ -543,13 +543,14 @@
       const iST = rows[h].findIndex((t) => /^-\s*ST$/i.test(t || ""));
       const hk = (re) => rows[h].findIndex((t) => re.test(t || ""));
       const skadeKol = iST < 0 ? {} : { MA: iST - 1, ST: iST, AG: hk(/^-\s*AG$/i), PA: hk(/^-\s*PA$/i), AV: hk(/^-\s*AV$/i) };
+      const iD16 = rows[h].findIndex((t) => /^D\s*16$/i.test((t || "").trim()));
       const liste = [];
       for (let k = h + 1; k < rows.length && /^\d+$/.test(rows[k][0] || ""); k++) {
         const x = rows[k];
         if (!x[iN]) continue;
         const v = (j) => (j >= 0 ? tal(x[j]) : 0);
         const men = Object.entries(skadeKol).filter(([, j]) => j >= 0 && tal(x[j]) < 0).map(([stat, j]) => `−${Math.abs(tal(x[j]))} ${stat}`);
-        liste.push({ men, nr: x[0], navn: x[iN], td: v(c("TD")), comp: v(c("Completion")), int: v(c("Interception")), foul: v(c("Foul")),
+        liste.push({ men, skadet: iD16 >= 0 && tal(x[iD16]) > 0, nr: x[0], navn: x[iN], td: v(c("TD")), comp: v(c("Completion")), int: v(c("Interception")), foul: v(c("Foul")),
           cas: v(c("Casualties")), mvp: v(c("MVP")), mng: x[c("Miss Next Game")] === "Y" });
       }
       spillere[b === 0 ? hold1 : hold2] = liste;
@@ -666,8 +667,18 @@
     // Varige mén (Lasting injury) står i kampskemaerne, ikke i holdarket. Runts hedder det samme, så nøglen er nummer + navn.
     const men = {};
     const egneKampe = (C.PULJEKAMPE || []).flatMap((pu) => pu.faner.filter((x) => x.split(/\s+vs[.,]\s*/i).map((y) => y.trim()).includes(navn)).map((x) => [pu.ark, x]));
-    (await Promise.all(egneKampe.map(([ark, x]) => hent(ark, x).then((rk) => læsKamp(rk, x)).catch(() => null)))).forEach((k) =>
-      ((k && k.spillet && k.spillere[navn]) || []).forEach((sp) => { if (sp.men.length) (men[sp.nr + "|" + sp.navn] = men[sp.nr + "|" + sp.navn] || []).push(...sp.men); }));
+    // Lægejournal: én linje pr. gang en spiller er kommet til skade i en kamp, plus holdets døde.
+    const journal = [];
+    const [egne, døde, pris] = await Promise.all([
+      Promise.all(egneKampe.map(([ark, x]) => hent(ark, x).then((rk) => læsKamp(rk, x)).catch(() => null))), hentDøde(), hentLevelPriser()]);
+    egne.forEach((k) => ((k && k.spillet && k.spillere[navn]) || []).forEach((sp) => {
+      if (sp.men.length) (men[sp.nr + "|" + sp.navn] = men[sp.nr + "|" + sp.navn] || []).push(...sp.men);
+      if (sp.skadet || sp.mng || sp.men.length) journal.push({ navn: sp.navn === "Runt" ? "Runt #" + sp.nr : sp.navn, mod: k.hjemme === navn ? k.ude : k.hjemme, fane: k.fane,
+        tekst: (sp.men.length ? `Varig skade (${sp.men.join(", ")})` : sp.mng ? "Skadet" : "Slået ud") + (sp.mng ? ", misser næste kamp" : sp.men.length ? "" : ", men klar igen") });
+    }));
+    døde.filter((d) => d.hold === navn).forEach((d) => journal.push({ navn: d.navn, tekst: "Død" }));
+    // Pil ved SPP: spilleren har SPP nok til den billigste stigning (tilfældig Primary skill) efter ligaens tabel.
+    const stig = (sp) => { const p = pris[NIVEAUER.indexOf((sp.niveau || "").trim())]; return p ? tal(sp.spp) - p : null; };
     const f = (lbl, val) => val ? `<div class="card"><div class="lbl">${lbl}</div><div class="val">${esc(val)}</div></div>` : "";
     return `${hoved}
       ${navn === H.yndlingshold ? `<div class="spike-bane">${spikeKort("Pressens yndlinge")}</div>` : ""}
@@ -690,10 +701,13 @@
             const m = (men[s.nr + "|" + s.navn] || []).filter((x) => x.split(" ")[1] === k);
             return m.length ? `<td class="num skadet" title="Varig skade: ${esc(m.join(", "))}">${esc(s[k])} <span class="small">▼</span></td>` : `<td class="num">${esc(s[k])}</td>`;
           }).join("")}<td class="wrap-ok">${esc(s.skills === "None" && s.nye.length ? "" : s.skills)}${s.nye.length ? `${s.skills && s.skills !== "None" ? ", " : ""}<span class="ny" title="Ny skill fra level-up">${s.nye.map(esc).join(", ")}</span>` : ""}</td>
-          <td class="num">${esc(s.spp)}</td><td class="num">${esc(s.td)}</td><td class="num">${esc(s.cas)}</td><td class="num">${esc(s.mvp)}</td>
+          <td class="num">${esc(s.spp)}${stig(s) != null && stig(s) >= 0 ? ' <span class="stig" title="Har SPP nok til en ny skill">▲</span>' : stig(s) === -1 ? ' <span class="muted small" title="Mangler 1 SPP til en ny skill">(−1)</span>' : ""}</td><td class="num">${esc(s.td)}</td><td class="num">${esc(s.cas)}</td><td class="num">${esc(s.mvp)}</td>
           <td>${s.mng === "Y" ? '<span class="mng">Misser næste kamp</span>' : ""}${tal(s.nig) > 0 ? ` <span class="mng">Niggling ×${esc(s.nig)}</span>` : ""}${(men[s.nr + "|" + s.navn] || []).map((m) => ` <span class="mng">${esc(m)}</span>`).join("")}</td>
         </tr>`).join("") || '<tr><td colspan="14" class="muted">Ingen spillere på holdlisten endnu.</td></tr>'}</tbody></table></div>
       ${Object.keys(men).length ? '<p class="small muted"><span class="mng">▼</span> = varig skade, som måske ikke er trukket fra tallet endnu.</p>' : ""}
+      ${r.spillere.some((x) => x && stig(x) != null && stig(x) >= -1) ? '<p class="small muted"><span class="stig">▲</span> = har SPP nok til en ny skill. (−1) = mangler 1 SPP.</p>' : ""}
+      ${journal.length ? `<h2>🩺 Lægejournal</h2><div class="card"><ul class="top5">${journal.map((j) =>
+        `<li><span><b>${esc(j.navn)}</b>${j.mod ? ` <span class="muted small">mod ${esc(j.mod)} · <a href="#kamp/${encodeURIComponent(j.fane)}">kampen</a></span>` : ""}</span><span class="mng">${esc(j.tekst)}</span></li>`).join("")}</ul></div>` : ""}
       ${holdLore(navn)}`;
   }
 
@@ -1260,6 +1274,22 @@
       <p class="small muted">Kilde: ${ext(R.docs.regler, "Kommissærens regeldokument")} · ${ext(R.docs.cheatsheet, "Cheat sheet til kampen")}</p>`;
   }
 
+  // Døde spillere: Mikkels fane i holdarket (Døde spillere | Position | Hold). Fejl giver en tom liste.
+  function hentDøde() {
+    return !C.FANER.doede ? Promise.resolve([]) : hent("hold", C.FANER.doede).then((r) => {
+      const h = r.findIndex((x) => /^Døde spillere/i.test((x[0] || "").trim()));
+      return h < 0 ? [] : r.slice(h + 1).filter((x) => (x[0] || "").trim()).map((x) => ({ navn: x[0].trim(), pos: (x[1] || "").trim(), hold: (x[2] || "").trim() }));
+    }).catch(() => []);
+  }
+  // Ligaens level-tabel (Mikkels fane med "ADVANCEMENTS TABLE"): pris i SPP for den billigste stigning (tilfældig Primary skill)
+  // fra hvert niveau. pris[0] = fra Rookie, pris[1] = fra Experienced osv. Fejl giver en tom liste (så vises ingen pile).
+  const NIVEAUER = ["Rookie", "Experienced", "Veteran", "Emerging Star", "Star", "Super Star", "Legend"];
+  function hentLevelPriser() {
+    return !C.FANER.level ? Promise.resolve([]) : hent("hold", C.FANER.level).then((r) =>
+      NIVEAUER.slice(1).map((n) => { const x = r.find((y) => (y[0] || "").trim().toLowerCase().startsWith(n.toLowerCase() + " (")); const m = x && /^(\d+)\s*SPP/i.exec((x[2] || "").trim()); return m ? +m[1] : null; })
+    ).catch(() => []);
+  }
+
   // Skadestuen: hvem er ude (holdarkene: Miss Next Game, Niggling) og hvem har gjort skade (kampskemaerne: CAS, MNG).
   async function sideSkadestue() {
     const hoved = `<p class="kicker">Lægen er ikke uddannet</p><h1>Skadestuen</h1>
@@ -1274,10 +1304,7 @@
       hent(p.ark, f).then((r) => læsKamp(r, f)).catch(() => null))))).filter((k) => k && k.spillet);
 
     // Døde spillere: Mikkels fane i holdarket (Døde spillere | Position | Hold). Forkert fanenavn giver første fane, så overskriften tjekkes.
-    const døde = !C.FANER.doede ? [] : await hent("hold", C.FANER.doede).then((r) => {
-      const h = r.findIndex((x) => /^Døde spillere/i.test((x[0] || "").trim()));
-      return h < 0 ? [] : r.slice(h + 1).filter((x) => (x[0] || "").trim()).map((x) => ({ navn: x[0].trim(), pos: (x[1] || "").trim(), hold: (x[2] || "").trim() }));
-    }).catch(() => []);
+    const døde = await hentDøde();
 
     const syge = [], nig = [];
     rostre.forEach((r) => r.spillere.forEach((s) => {

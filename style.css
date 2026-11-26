@@ -409,3 +409,6 @@ td.skadet { color: var(--blood); font-weight: 700; white-space: nowrap; }
 .mithold-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .mithold-top .kicker { margin: 0; }
 .mithold select { background: #1f1815; color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 5px 8px; font: inherit; font-size: 14px; max-width: 100%; }
+
+/* Holdsiden: pil ved SPP, når spilleren har råd til en ny skill */
+.stig { color: var(--gold); font-weight: 700; }
