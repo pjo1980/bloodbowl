@@ -173,6 +173,9 @@ Blood Bowl-idéer bor her, ikke i Peters Idébank i Todoist.
   i udklipsholderen, som Peter poster som Gunnar. Lille indsats; kan bygges ind i den planlagte redaktør.
 - **Slutspilstræ**: visuelt slutspil med Southland Stegadons, Lucky Loser og Tabernes taber, opdateret fra Mikkels ark.
   Venter på Mikkels svar om antal kampe i slutspillet.
+- **Coachens egen nekrolog** (Peter 26. nov., kun idé): coachen skriver selv et lille mindeord til sin døde spiller, fx via
+  indsend-siden. I dag skriver Gunnar dem (skabeloner i humor.js → `nekrologer`, egne tekster i `mindeord`).
+- **Returkampens hukommelse** (26. nov., kun idé): optakten til returkampen viser, hvad der skete i første kamp (resultat, målscorere, skader).
 
 ## Nyheder på forsiden (24. nov. 2026)
 
