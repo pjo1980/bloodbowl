@@ -378,3 +378,21 @@ img.figur-stor { width: 56px; height: 56px; margin: 0; border: 2px solid var(--g
 /* ---------- Ugens spørgsmål ---------- */
 .us-spm { font-family: "Bangers", Impact, sans-serif; font-size: 24px; letter-spacing: 1px; line-height: 1.15; color: var(--accent); margin: 4px 0 10px; }
 .us-stor { font-size: clamp(26px, 5vw, 38px); }
+
+/* ---------- Kortere forside på mobil ---------- */
+@media (max-width: 560px) {
+  /* Nyhedsbilleder står ved siden af hinanden som små billeder (tryk for fuld størrelse). */
+  .nyhed-billeder { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; }
+  /* Toppen af tabellen: én linje pr. hold i stedet for tre høje kort. */
+  .podie { gap: 8px; }
+  .podie .card { display: grid; grid-template-columns: 34px 1fr auto; column-gap: 10px; align-items: center; text-align: left; padding: 10px 14px; }
+  .podie .plads { grid-column: 1; grid-row: 1 / 3; font-size: 34px; text-align: center; }
+  .podie .navn { grid-column: 2; grid-row: 1; margin: 0; font-size: 16px; }
+  .podie .card > :nth-child(3) { grid-column: 2; grid-row: 2; justify-self: start; }
+  .podie .stor { grid-column: 3; grid-row: 1; font-size: 22px; text-align: right; }
+  .podie .card > :nth-child(5) { grid-column: 3; grid-row: 2; text-align: right; }
+  /* Velkomsten: mindre logo, ingen brødtekst. */
+  .hero-billede { max-height: 150px; }
+  .hero .lead { display: none; }
+  .hero h1 { font-size: 30px; }
+}
