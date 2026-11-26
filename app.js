@@ -1321,7 +1321,7 @@
     const kortDøde = `<div class="card"><h2>⚰️ Kirkegården</h2><p class="small muted">Spillere, der er døde på banen. Fra fanen Døde spillere i holdarket.</p>
       ${døde.length ? liste(døde.map((s) => {
         const N = H.nekrologer || [];
-        const ord = N.length ? N[hashTal(s.navn + s.hold) % N.length].replace(/\{navn\}/g, s.navn).replace(/\{hold\}/g, s.hold || "holdet") : "";
+        const ord = (H.mindeord || {})[s.navn] ? H.mindeord[s.navn] : N.length ? N[hashTal(s.navn + s.hold) % N.length].replace(/\{navn\}/g, s.navn).replace(/\{hold\}/g, s.hold || "holdet") : "";
         return `<li><span><b>${esc(s.navn)}</b> <span class="muted small">${esc(s.pos)}</span>${ord ? `<br><span class="mindeord">»${esc(ord)}«</span>` : ""}</span><span>${hold.includes(s.hold) ? holdLink(s.hold) : esc(s.hold)}</span></li>`;
       })) + ((H.nekrologer || []).length ? `<div class="small muted" style="margin-top:10px">Mindeord: ${gunnar()}</div>` : "")
         : tom("Ingen døde endnu. Graveren keder sig.")}</div>`;

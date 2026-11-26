@@ -388,6 +388,12 @@ window.HUMOR = {
     "{navn} blev båret ud til stående bifald. Tilskuerne klappede ad tacklingen."
   ],
 
+  // Egne mindeord til bestemte spillere (spillernavn -> tekst). De går forud for skabelonerne ovenfor.
+  // Kun ting, der faktisk skete i kampen (Peter 26. nov.: Muffilust endte i Foulers' stuvning).
+  mindeord: {
+    "Muffilust": "Muffilust gav alt for The FumbleBoyz. Bogstaveligt talt. Resten endte i The Full Moon Foulers' stuvning. En krank skæbne for en håbefuld halfling."
+  },
+
   // BETA-undskyldninger: vises ved BETA-stemplet og på forsiden.
   beta: [
     "Fejl på siden skyldes Nuffle.",
