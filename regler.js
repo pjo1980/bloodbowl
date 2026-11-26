@@ -62,8 +62,18 @@ window.REGLER = {
     {
       titel: "Præmier og titler",
       punkter: [
-        "Klubmester: trofæ og vandrepokal.",
-        "Tabernes taber: trøstepræmie og måske en træske."
+        { tekst: "Til trænerne:", under: [
+          "Klubmester: trofæ og vandrepokal.",
+          "Sølv- og bronzepræmie til nr. 2 og 3.",
+          "Tabernes taber: trøstepræmie og måske en træske."
+        ] },
+        { tekst: "Til spillerne:", under: [
+          "Chimichangor-pokalen: flest touchdowns i ligaen. Opkaldt efter sidste ligas topscorer.",
+          "Razguhl-pokalen: flest casualties i ligaen. Opkaldt efter sidste ligas vinder af flest casualties.",
+          "Baradur VI-pokalen: flest completions i ligaen. Opkaldt efter sidste ligas vinder af flest completions.",
+          "MVP-pokalen: spilleren med flest MVP'er.",
+          "Foul-pokalen: spilleren med flest vellykkede fouls i ligaen."
+        ] }
       ]
     },
     {
