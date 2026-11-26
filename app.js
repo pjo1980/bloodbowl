@@ -395,6 +395,7 @@
     const td = førsteMed(D.spillerrang, "TOUCHDOWNS");
     const cas = førsteMed(D.spillerrang, "CASUALTIES");
     return `
+      ${mitHoldKort()}
       ${frisk ?`<h2 class="foerst">Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p style="margin-bottom:24px"><a href="#nyheder">Alle nyheder</a></p>` : ""}
       <section class="hero">
         <img class="hero-billede" src="logo/semper-fortuna.jpg" width="1536" height="1024"
@@ -446,6 +447,40 @@
       <p style="margin-top:12px"><a href="#presse">Mere fra pressetribunen</a></p>
 
       ${nyhed && !frisk ?`<h2>Seneste fra kontoret</h2>${nyhedKort(nyhed)}<p><a href="#nyheder">Alle nyheder</a></p>` : ""}`;
+  }
+
+  // Mit hold: coachen vælger sit hold én gang (gemmes kun i browseren). Forsiden viser så placering, resterende puljekampe og sygeliste øverst.
+  const MITHOLD = "bb-mithold";
+  const mitHold = () => { let n = ""; try { n = localStorage.getItem(MITHOLD) || ""; } catch (e) {} return alleHold().includes(n) ? n : ""; };
+  function mitHoldKort() {
+    const hold = alleHold().slice().sort((a, b) => a.localeCompare(b, "da")), n = mitHold();
+    if (!hold.length) return "";
+    const vælger = `<select id="mithold-valg" aria-label="Vælg dit hold"><option value="">${n ? "Intet hold" : "Vælg dit hold …"}</option>${hold.map((h) => `<option${h === n ? " selected" : ""}>${esc(h)}</option>`).join("")}</select>`;
+    if (!n) return `<div class="mithold tom"><span>Coach? Få dit eget hold øverst på forsiden:</span> ${vælger}</div>`;
+    const s = D.stilling.ok, i = s ? s.hold.findIndex((h) => h.navn === n) : -1, r = i >= 0 ? s.hold[i] : null;
+    const pn = puljeAf[n], pf = pn ? C.FANER.puljer.find((p) => titel(p) === titel(pn)) : "", pd = pf ? (D["pulje:" + pf] || {}).ok : null;
+    const pi = pd ? pd.hold.findIndex((h) => h.navn === n) : -1;
+    return `<section class="card mithold pulje ${puljeKl(pn)}"><div class="mithold-top"><p class="kicker">Mit hold</p>${vælger}</div>
+      <h2 style="margin:0 0 6px">${holdLink(n)}</h2>
+      <p style="margin:0 0 8px">${r ? `Nr. ${i + 1} samlet med <b>${esc(r.p)} point</b> (${r.w}-${r.d}-${r.l})` : "Ikke i stillingen endnu"}${pi >= 0 ? `. Nr. ${pi + 1} i ${esc(titel(pn))}` : ""}.</p>
+      <div id="mithold-mere" class="small muted">Henter kampe og sygeliste …</div></section>`;
+  }
+  async function mitHoldKlar() {
+    const valg = document.getElementById("mithold-valg");
+    if (valg) valg.onchange = () => { try { localStorage.setItem(MITHOLD, valg.value); } catch (e) {} vis(); };
+    const n = mitHold(), nr = visNr;
+    if (!n || !document.getElementById("mithold-mere")) return;
+    const egne = (C.PULJEKAMPE || []).flatMap((p) => p.faner.filter((f) => kampHold(f).includes(n)).map((f) => [p.ark, f]));
+    const [kampe, syge] = await Promise.all([
+      Promise.all(egne.map(([ark, f]) => hent(ark, f).then((r) => læsKamp(r, f)).catch(() => null))), sygeliste(n)]);
+    const el = document.getElementById("mithold-mere");
+    if (nr !== visNr || !el) return; // brugeren har skiftet side imens
+    const rest = kampe.filter((k) => k && !k.spillet);
+    const fejl = kampe.some((k) => !k);
+    el.classList.remove("muted");
+    el.innerHTML = `<p style="margin:0 0 4px"><b>Puljekampe tilbage:</b> ${fejl && !rest.length ? "kunne ikke hentes." : rest.length ? rest.map((k) =>
+        `<a href="#kamp/${encodeURIComponent(k.fane)}">${k.hjemme === n ? "hjemme mod " + esc(k.ude) : "ude mod " + esc(k.hjemme)}</a>`).join(", ") + "." : "ingen. Puljespillet er færdigt for jer."}</p>
+      <p style="margin:0"><b>Sygelisten:</b> ${syge == null ? "kunne ikke hentes." : syge.length ? syge.map(esc).join(", ") + "." : "tom. Alle er klar."}</p>`;
   }
 
   // De skiftende kort fra pressetribunen. Forsiden viser ét tilfældigt; Presse-siden viser dem alle.
@@ -650,12 +685,22 @@
         <th>Skills</th><th class="num">SPP</th><th class="num">TD</th><th class="num">CAS</th><th class="num">MVP</th><th>Skader</th></tr></thead>
         <tbody>${r.spillere.map((s) => `<tr>
           <td class="rank">${esc(s.nr)}</td><td><b>${esc(s.navn === "Runt" ? "Runt #" + s.nr : s.navn)}</b>${s.niveau && s.niveau !== "Rookie" ? ` <span class="chip">${esc(s.niveau)}</span>` : ""}</td>
-          <td>${esc(s.pos)}</td><td class="num">${esc(s.MA)}</td><td class="num">${esc(s.ST)}</td><td class="num">${esc(s.AG)}</td>
-          <td class="num">${esc(s.PA)}</td><td class="num">${esc(s.AV)}</td><td class="wrap-ok">${esc(s.skills === "None" && s.nye.length ? "" : s.skills)}${s.nye.length ? `${s.skills && s.skills !== "None" ? ", " : ""}<span class="ny" title="Ny skill fra level-up">${s.nye.map(esc).join(", ")}</span>` : ""}</td>
+          <td>${esc(s.pos)}</td>${["MA", "ST", "AG", "PA", "AV"].map((k) => {
+            // Varige mén fra kampskemaerne: tallet er holdarkets, den røde pil viser, at spilleren har fået −1 på den egenskab.
+            const m = (men[s.nr + "|" + s.navn] || []).filter((x) => x.split(" ")[1] === k);
+            return m.length ? `<td class="num skadet" title="Varig skade fra kampskemaet: ${esc(m.join(", "))}">${esc(s[k])} <span class="small">▼</span></td>` : `<td class="num">${esc(s[k])}</td>`;
+          }).join("")}<td class="wrap-ok">${esc(s.skills === "None" && s.nye.length ? "" : s.skills)}${s.nye.length ? `${s.skills && s.skills !== "None" ? ", " : ""}<span class="ny" title="Ny skill fra level-up">${s.nye.map(esc).join(", ")}</span>` : ""}</td>
           <td class="num">${esc(s.spp)}</td><td class="num">${esc(s.td)}</td><td class="num">${esc(s.cas)}</td><td class="num">${esc(s.mvp)}</td>
           <td>${s.mng === "Y" ? '<span class="mng">Misser næste kamp</span>' : ""}${tal(s.nig) > 0 ? ` <span class="mng">Niggling ×${esc(s.nig)}</span>` : ""}${(men[s.nr + "|" + s.navn] || []).map((m) => ` <span class="mng">${esc(m)}</span>`).join("")}</td>
         </tr>`).join("") || '<tr><td colspan="14" class="muted">Ingen spillere på holdlisten endnu.</td></tr>'}</tbody></table></div>
+      ${Object.keys(men).length ? '<p class="small muted"><span class="mng">▼</span> = varig skade fra et kampskema. Tallet i tabellen er holdarkets og er måske ikke rettet endnu.</p>' : ""}
       ${holdLore(navn)}`;
+  }
+
+  // Spillere med Miss Next Game i holdarket. Bruges i optakten og i Mit hold. Fejl giver null (så vises linjen ikke).
+  function sygeliste(navn) {
+    const fane = (C.ROSTER_FANE || {})[navn] || navn;
+    return hent("hold", fane).then((r) => læsRoster(r, fane).spillere.filter((s) => s && /^y/i.test(s.mng || "")).map((s) => (s.navn === "Runt" ? "Runt #" + s.nr : s.navn))).catch(() => null);
   }
 
   const KAT = {
@@ -1155,7 +1200,7 @@
         <div class="stor-score">${k.spillet ? `${esc(k.s1)} – ${esc(k.s2)}` : "–"}</div>
         <div class="side u${k.spillet && b > a ? " vinder" : ""}">${holdLink(B)}<span class="small muted">Ude${k.coach[B] ? ` · Coach ${esc(k.coach[B])}` : ""}</span></div>
       </div>`;
-    if (!k.spillet) return hoved + optaktBoks(fane);
+    if (!k.spillet) { const [sa, sb] = await Promise.all([sygeliste(A), sygeliste(B)]); return hoved + optaktBoks(fane, sa && sb ? { [A]: sa, [B]: sb } : null); }
     const r = referat(k);
     const holdTabel = (h) => {
       const aktive = (k.spillere[h] || []).filter((p) => p.td || p.comp || p.int || p.foul || p.cas || p.mvp || p.mng);
@@ -1274,14 +1319,18 @@
       ${casListe.length ? liste(casListe.map(([h, n], i) => `<li><span><span class="nr">${i + 1}.</span>${holdLink(h)}</span><span class="v">${n}</span></li>`))
         : tom("Ingen endnu.")}</div>`;
     const kortDøde = `<div class="card"><h2>⚰️ Kirkegården</h2><p class="small muted">Spillere, der er døde på banen. Fra fanen Døde spillere i holdarket.</p>
-      ${døde.length ? liste(døde.map((s) => `<li><span><b>${esc(s.navn)}</b> <span class="muted small">${esc(s.pos)}</span></span><span>${hold.includes(s.hold) ? holdLink(s.hold) : esc(s.hold)}</span></li>`))
+      ${døde.length ? liste(døde.map((s) => {
+        const N = H.nekrologer || [];
+        const ord = N.length ? N[hashTal(s.navn + s.hold) % N.length].replace(/\{navn\}/g, s.navn).replace(/\{hold\}/g, s.hold || "holdet") : "";
+        return `<li><span><b>${esc(s.navn)}</b> <span class="muted small">${esc(s.pos)}</span>${ord ? `<br><span class="mindeord">»${esc(ord)}«</span>` : ""}</span><span>${hold.includes(s.hold) ? holdLink(s.hold) : esc(s.hold)}</span></li>`;
+      })) + ((H.nekrologer || []).length ? `<div class="small muted" style="margin-top:10px">Mindeord: ${gunnar()}</div>` : "")
         : tom("Ingen døde endnu. Graveren keder sig.")}</div>`;
     const værst = slagtere[0];
     const delt = slagtere.filter((s) => værst && s.cas === værst.cas).length;
-    const gunnar = !værst ? "Skadestuen er tom. Pressechefen er skuffet. Han havde købt popcorn." : delt > 1
+    const gunnarTekst = !værst ? "Skadestuen er tom. Pressechefen er skuffet. Han havde købt popcorn." : delt > 1
       ? `${delt} spillere deler førstepladsen blandt slagterne med ${værst.cas} CAS hver. Pressechefen kalder det ›fysisk spil‹. Lægen kalder det overarbejde.`
       : `${værst.navn} fra ${værst.hold} topper listen over slagtere. Pressechefen kalder det ›fysisk spil‹. Lægen kalder det overarbejde.`;
-    return hoved + pressechefKort(gunnar) + `<div class="grid-2" style="margin-top:16px">${kortSyge}${kortSlagtere}${kortNig}${kortHold}${kortDøde}</div>
+    return hoved + pressechefKort(gunnarTekst) + `<div class="grid-2" style="margin-top:16px">${kortSyge}${kortSlagtere}${kortNig}${kortHold}${kortDøde}</div>
       <p class="small muted">Skader kommer kun med, hvis de er tastet ind: Miss Next Game og Niggling i holdarket, CAS, Miss Next Game og Lasting injury i kamparket, døde spillere i holdarkets fane Døde spillere.
         Se <a href="#kampdag">Kampdag</a>.</p>`;
   }
@@ -1598,7 +1647,7 @@
       .replace(/\{favorit\}/g, fav).replace(/\{underdog\}/g, und).replace(/\{yndling\}/g, Y);
   }
   // Før kampen: holdene stillet op mod hinanden med rigtige tal, pressechefens kommentar og coachernes bud.
-  function optaktBoks(fane) {
+  function optaktBoks(fane, syge) {
     if (!OP || !alleFaner().includes(fane)) return '<p class="muted">Kampen er ikke spillet endnu.</p>';
     const [A, B] = kampHold(fane);
     const s = D.stilling.ok, st = D.holdstats.ok || {}, pr = powerRanking();
@@ -1620,7 +1669,9 @@
       <div class="tabel-wrap"><table class="optakt-tabel"><thead><tr><th class="num">${esc(A)}</th><th></th><th>${esc(B)}</th></tr></thead><tbody>
         ${række("Point", a.point, b.point)}${række("V-U-T", a.vut, b.vut)}${række("Touchdowns", a.td, b.td)}
         ${række("Casualties", a.cas, b.cas)}${række("Power ranking", a.power, b.power)}
-        ${a.slogan || b.slogan ? række("Slogan", a.slogan, b.slogan) : ""}</tbody></table></div></section>
+        ${syge ? række("På sygelisten", syge[A].join(", ") || "Ingen", syge[B].join(", ") || "Ingen") : ""}
+        ${a.slogan || b.slogan ? række("Slogan", a.slogan, b.slogan) : ""}</tbody></table></div>
+        ${syge ? '<p class="small muted" style="margin:8px 0 0">På sygelisten = Miss Next Game i holdarket lige nu.</p>' : ""}</section>
       ${pressechefKort(optaktTekst(A, B))}
       <section class="card presse ts"><p class="kicker">Hvordan ender den?</p>
         <p class="small muted" style="margin:0 0 12px">Hjemmeholdet står først i resultatet. Buddene gemmes, og pressechefen fælder dom efter kampen.</p>
@@ -1845,6 +1896,7 @@
     $main.innerHTML = html;
     if (key === "indsend") indsendKlar();
     if (key === "power") kopiKnap();
+    if (key === "forside") mitHoldKlar();
     $main.querySelectorAll(".tjek").forEach((sek) => {
       const alle = sek.querySelectorAll("input[type=checkbox]");
       sek.classList.toggle("faerdig", alle.length > 0 && [...alle].every((x) => x.checked));

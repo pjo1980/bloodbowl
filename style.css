@@ -400,3 +400,12 @@ img.figur-stor { width: 56px; height: 56px; margin: 0; border: 2px solid var(--g
 /* Patchnotes nederst på Nyheder-siden: lukkede som standard, så de ikke fylder. */
 .nyhed.patch { padding: 10px 14px; margin-bottom: 8px; }
 .nyhed.patch summary { cursor: pointer; }
+
+/* Varig skade på holdsiden, mindeord på Kirkegården og Mit hold på forsiden */
+td.skadet { color: var(--blood); font-weight: 700; white-space: nowrap; }
+.mindeord { font-style: italic; font-size: 14px; color: var(--muted); }
+.mithold { margin-bottom: 24px; }
+.mithold.tom { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: 14px; color: var(--muted); }
+.mithold-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.mithold-top .kicker { margin: 0; }
+.mithold select { background: #1f1815; color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 5px 8px; font: inherit; font-size: 14px; max-width: 100%; }

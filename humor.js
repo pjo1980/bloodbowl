@@ -376,6 +376,18 @@ window.HUMOR = {
     { navn: "Golthorns Slægtsforskning", tekst: "Vi finder elverblod i alle, der betaler. Spørg pressechefen." }
   ],
 
+  // Mindeord på Skadestuens kirkegård: én fast linje pr. død spiller (vælges ud fra navnet, så den ikke skifter).
+  // {navn} = spilleren, {hold} = holdet. Handler kun om spilleren, aldrig om coachen.
+  nekrologer: [
+    "{navn} gav alt for {hold}. Bogstaveligt talt.",
+    "{navn} forlod banen på en båre og kom aldrig tilbage efter sin vandflaske.",
+    "{navn} efterlader sig en hjelm, en tom plads på holdlisten og en regning fra apotekeren.",
+    "{hold} har mistet {navn}. Ligaen har mistet en spiller. Graveren har fået en kunde.",
+    "{navn} spillede sin sidste kamp uden at vide det. Det er nok den bedste måde at gøre det på.",
+    "Pressechefen nåede aldrig at interviewe {navn}. Nu er det for sent, og det er han næsten ked af.",
+    "{navn} blev båret ud til stående bifald. Tilskuerne klappede ad tacklingen."
+  ],
+
   // BETA-undskyldninger: vises ved BETA-stemplet og på forsiden.
   beta: [
     "Fejl på siden skyldes Nuffle.",

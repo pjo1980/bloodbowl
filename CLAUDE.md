@@ -42,6 +42,13 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
   Prøv skabeloner med rigtige tal: 0, 1, flertal og holdnavne, der ender på s.
 - **Ingen datoer fra den virkelige verden på siden** (Peter 4. nov.). Vis datoer med `bbDato()` i app.js: Warhammers Imperial Calendar,
   samme dag, tilsvarende måned (Nachexen … Vorhexen), år + 500 + "IC". Datafiler må stadig gemme rigtige datoer (ÅÅÅÅ-MM-DD) til sortering.
+- **Patchnotes ved hver udgivelse** (Peter 26. nov.): Ændrer en udgivelse noget, coaches kan se eller mærke, så skriv det i
+  `nyheder.csv` som en række med type `patch` (vises nederst på Nyheder, aldrig på forsiden). Én note pr. dag: findes der
+  allerede en med dagens dato, så tilføj en linje dér. Én linje pr. ændring, begynd med sidens navn ("Skadestuen: ...").
+  Skriv ikke om rettede stavefejl, intern oprydning eller nye presseindlæg.
+- **Tjek den anden tråd før udgivelse:** flere tråde arbejder i denne mappe. Kør `git fetch` og `git status`, og udgiv kun egne ændringer.
+- **Fane-vagten:** `python vagt/tjek_faner.py` sammenligner fanerne i Mikkels ark med config.js og `vagt/kendte_faner.json`
+  (planlagt opgave bloodbowl-fanevagt, dagligt). Nye kampfaner skal ind i PULJEKAMPE i config.js.
 - Rør aldrig kommissærens ark uden Peters ja; læs det kun.
 - Alt brugerdata fra arket HTML-escapes før visning.
 - Google sender den FØRSTE fane, hvis et fanenavn er forkert. Hver læser i app.js tjekker derfor fanens form.

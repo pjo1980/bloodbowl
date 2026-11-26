@@ -1,0 +1,57 @@
+{
+ "turnering": [
+  "Turneringsstilling",
+  "Spiller ranglister",
+  "Holdranglister",
+  "Sort Pulje",
+  "Rød pulje",
+  "Blå pulje",
+  "Gul pulje",
+  "Kampprogram Regnbuepiljen",
+  "Data Spillerranglister",
+  "Data Holdranglister"
+ ],
+ "hold": [
+  "HOW TO USE",
+  "11s Roster Sheet Master",
+  "Living Deadbeats",
+  "Black Mountain Slavers",
+  "Da Demolitionaz",
+  "Elmtree Evaders",
+  "Fright Night Fumblers",
+  "The FumbleBoyz",
+  "Mörkley Crüe",
+  "Bros Being Bros",
+  "GutBuster Gluttons",
+  "Bedstefars Besudlere",
+  "The Full Moon Foulers",
+  "The Eternal Sages",
+  "The Maurading Ocras",
+  "Døde spillere",
+  "Holddata",
+  "Holddata ind",
+  "Holdstats ud",
+  "Sample Duplicated Master",
+  "Passing Calculator",
+  "Skills+Levelling",
+  "Injury Tables",
+  "Leap Table",
+  "TeamData"
+ ],
+ "puljeGul": [
+  "Stilling Gul Pulje",
+  "Holddata"
+ ],
+ "puljeBlaa": [
+  "Stilling Blå Pulje",
+  "Holddata"
+ ],
+ "puljeRoed": [
+  "Stilling Rød Pulje",
+  "Holddata"
+ ],
+ "puljeSort": [
+  "Stilling Sort Pulje",
+  "Holddata"
+ ]
+}
