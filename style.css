@@ -412,3 +412,7 @@ td.skadet { color: var(--blood); font-weight: 700; white-space: nowrap; }
 
 /* Holdsiden: pil ved SPP, når spilleren har råd til en ny skill */
 .stig { color: var(--gold); font-weight: 700; }
+/* Siden sidst: kompakt hændelsesliste med datolinjer */
+.sidensidst li { font-size: 14px; padding: 5px 0; }
+.sidensidst li.dato { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; border-bottom: 0; padding: 8px 0 0; }
+.sidensidst li.dato:first-child { padding-top: 2px; }

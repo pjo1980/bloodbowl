@@ -67,3 +67,12 @@ Miss Next Game, TD, Completion, Interception, Foul, Casualties, MVP (Google mist
 Kolonnen to pladser efter MVP er spillerens SPP. Første blok hører til holdet i række 2 kolonne C (normalt det første hold
 i fanenavnet), og det hold ejer også venstre scorecelle og venstre "Winnings". Coaches står i række 1 kolonne C og D.
 Bemærk: Bedstefars–Slavers har 4 MVP'er (2 pr. hold). Siden viser, hvad skemaet siger.
+
+## Siden sidst: daglige øjebliksbilleder (26. nov. 2026)
+`vagt/snapshot.py` læser (kun læsning) alle holdfaner, `Døde spillere`, `Turneringsstilling` og alle kampfaner i PULJEKAMPE og gemmer
+`vagt/snapshots/ÅÅÅÅ-MM-DD.json`: pr. spiller (nøgle nummer|navn, fordi alle Runts hedder "Runt") position, niveau, level-up-skills,
+SPP, Miss Next Game og Niggling; pr. kamp score, spillet ja/nej og varige mén; stillingen som hold + point.
+Forskellen til forrige dags billede bliver til hændelser i `data/siden-sidst.json` (felter: dato, type og typens egne felter).
+Typer: `kamp`, `doed`, `men`, `syg`, `rask`, `skill` (ny level-up-skill og/eller nyt niveau), `ny` (ny spiller), `op` (rykket op med flere point).
+Fejler en fane, genbruges forrige billedes tal for den fane, så en fejl aldrig bliver til en hændelse. En spiller, der kun har skiftet
+navn (samme nummer, position, SPP og skills), meldes ikke som ny. Spillere, der forlader et hold uden at dø, meldes ikke.

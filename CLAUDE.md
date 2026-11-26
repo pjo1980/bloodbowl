@@ -52,6 +52,9 @@ han fører allerede ligaen i sine egne Google Sheets, og det skal han blive ved 
 - **Tjek den anden tråd før udgivelse:** flere tråde arbejder i denne mappe. Kør `git fetch` og `git status`, og udgiv kun egne ændringer.
 - **Fane-vagten:** `python vagt/tjek_faner.py` sammenligner fanerne i Mikkels ark med config.js og `vagt/kendte_faner.json`
   (planlagt opgave bloodbowl-fanevagt, dagligt). Nye kampfaner skal ind i PULJEKAMPE i config.js.
+- **Siden sidst:** `python vagt/snapshot.py` (samme planlagte opgave, efter fane-tjekket) gemmer et dagligt øjebliksbillede af
+  holdlister, døde, stilling og kampskemaer i `vagt/snapshots/` (de seneste 14) og skriver forskellene til `data/siden-sidst.json`.
+  Forsiden viser de 5 nyeste hændelser, #sidensidst viser alle. Sætningerne står i `SS_TYPER` i app.js: kun fakta fra arkene.
 - Rør aldrig kommissærens ark uden Peters ja; læs det kun.
 - Alt brugerdata fra arket HTML-escapes før visning.
 - Google sender den FØRSTE fane, hvis et fanenavn er forkert. Hver læser i app.js tjekker derfor fanens form.

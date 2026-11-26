@@ -265,7 +265,9 @@
       nyhedsfane: hent("turnering", F.nyheder), // valgfri: Mikkels fane "Nyheder" i turneringsarket
       pressemail: C.ARK.presse || C.BRUG_LOKALE_DATA ? hent("presse", F.presseUdgivet || "Udgivet") : Promise.resolve([]),
       // Indlæg fra sidens egen indsend-side (Cloudflare, functions/api/presse). Lokalt findes den ikke -> tom liste.
-      webpresse: fetch("/api/presse", { cache: "no-store" }).then((r) => r.ok ? r.json() : []).catch(() => [])
+      webpresse: fetch("/api/presse", { cache: "no-store" }).then((r) => r.ok ? r.json() : []).catch(() => []),
+      // Siden sidst: hændelser fundet af vagt/snapshot.py (daglig sammenligning af arkene). Mangler filen, vises intet.
+      sidensidst: fetch("data/siden-sidst.json", { cache: "no-store" }).then((r) => r.ok ? r.json() : null).catch(() => null)
     };
     F.puljer.forEach((p) => { job["pulje:" + p] = hent("turnering", p).then((r) => læsStilling(r, p)); });
     const navne = Object.keys(job);
@@ -410,6 +412,7 @@
         </div>
       </section>
 
+      ${sidenSidstKort()}
       <h2>Toppen af tabellen</h2>
       ${s ? `<div class="podie">${top.map((h, i) => `
         <a class="card" href="#hold/${encodeURIComponent(h.navn)}">
@@ -481,6 +484,44 @@
     el.innerHTML = `<p style="margin:0 0 4px"><b>Puljekampe tilbage:</b> ${fejl && !rest.length ? "kunne ikke hentes." : rest.length ? rest.map((k) =>
         `<a href="#kamp/${encodeURIComponent(k.fane)}">${k.hjemme === n ? "hjemme mod " + esc(k.ude) : "ude mod " + esc(k.hjemme)}</a>`).join(", ") + "." : "ingen. Puljespillet er færdigt for jer."}</p>
       <p style="margin:0"><b>Sygelisten:</b> ${syge == null ? "kunne ikke hentes." : syge.length ? syge.map(esc).join(", ") + "." : "tom. Alle er klar."}</p>`;
+  }
+
+  // Siden sidst: hvad der er sket i arkene fra dag til dag. Hændelserne kommer fra data/siden-sidst.json (vagt/snapshot.py).
+  // Kun fakta fra arkene: sætningerne her må ikke digte noget til eller lægge ord i munden på coaches.
+  const SS_TYPER = {
+    kamp: (e) => `🏈 Kamp spillet: <a href="#kamp/${encodeURIComponent(e.fane)}">${esc(e.hjemme)} ${esc(e.s1)}-${esc(e.s2)} ${esc(e.ude)}</a>`,
+    doed: (e) => `⚰️ <b>${esc(e.spiller)}</b> fra ${holdLink(e.hold)} er død.`,
+    men: (e) => `🦴 <b>${esc(e.spiller)}</b> fra ${holdLink(e.hold)} har fået en varig skade: ${esc(e.men)}.`,
+    syg: (e) => `🩹 <b>${esc(e.spiller)}</b> fra ${holdLink(e.hold)} misser næste kamp.`,
+    rask: (e) => `💪 <b>${esc(e.spiller)}</b> fra ${holdLink(e.hold)} er ikke længere på sygelisten.`,
+    skill: (e) => { const sk = (e.skills || []).length ? "har fået " + esc(listeTekst(e.skills)) : "";
+      return `⭐ <b>${esc(e.spiller)}</b> fra ${holdLink(e.hold)} ${e.niveau ? "er nu " + esc(e.niveau) + (sk ? " og " : "") : ""}${sk}.`; },
+    ny: (e) => `🆕 ${holdLink(e.hold)} har fået en ny spiller: <b>${esc(e.spiller)}</b>${e.pos ? ` (${esc(e.pos)})` : ""}.`,
+    op: (e) => `📈 ${holdLink(e.hold)} er rykket op fra nr. ${esc(e.fra)} til nr. ${esc(e.til)} i stillingen.`
+  };
+  const sidenSidst = () => { const l = D.sidensidst && D.sidensidst.ok && D.sidensidst.ok.haendelser;
+    return Array.isArray(l) ? l.filter((e) => e && SS_TYPER[e.type] && e.hold !== "" && (e.type !== "skill" || e.niveau || (e.skills || []).length)) : []; };
+  // Listen med en lille datolinje, hver gang dagen skifter.
+  function sidenSidstListe(liste) {
+    let sidst = "";
+    return `<ul class="top5 sidensidst">${liste.map((e) => {
+      const d = læsDato(e.dato), ny = e.dato !== sidst;
+      sidst = e.dato;
+      return `${ny ? `<li class="dato">${esc(d ? bbDato(d) : "")}</li>` : ""}<li><span>${SS_TYPER[e.type](e)}</span></li>`;
+    }).join("")}</ul>`;
+  }
+  function sidenSidstKort() {
+    const l = sidenSidst();
+    if (!l.length) return "";
+    return `<section class="card" style="margin-top:24px"><p class="kicker">Siden sidst</p>${sidenSidstListe(l.slice(0, 5))}
+      ${l.length > 5 ? `<p class="small" style="margin:8px 0 0"><a href="#sidensidst">Se alle ${l.length} hændelser</a></p>` : ""}</section>`;
+  }
+  function sideSidenSidst() {
+    const l = sidenSidst();
+    return `<p class="kicker">Kontoret holder øje</p><h1>Siden sidst</h1>
+      <p class="lead">Hvad der er sket i ligaen de seneste to uger: spillede kampe, nye skills, skader og nye spillere.</p>
+      ${l.length ? `<div class="card">${sidenSidstListe(l)}</div>` : '<p class="muted">Der er ikke sket noget nyt de seneste to uger.</p>'}
+      <p class="small muted">Listen opdateres én gang om dagen.</p>`;
   }
 
   // De skiftende kort fra pressetribunen. Forsiden viser ét tilfældigt; Presse-siden viser dem alle.
@@ -1904,9 +1945,9 @@
 
   // ---------- Router ----------
   const SIDER = { forside: sideForside, stilling: sideStilling, puljekampe: sidePuljekampe, regnbue: sideRegnbue,
-    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening, regler: sideRegler, kampdag: sideKampdag, skadestue: sideSkadestue, indsend: sideIndsend, power: sidePower, ugens: () => sideUgens("") };
-  const ALIAS = { kampe: "puljekampe", regel: "regler", guide: "regler", powerranking: "power", ranking: "power", ugensspoergsmaal: "ugens", spoergsmaal: "ugens" }; // gamle og nemme links
-  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Presse", traening: "Off pitch training", regler: "Regler og guider", kampdag: "Kampdag", skadestue: "Skadestuen", indsend: "Indsend til pressetribunen", power: "Gunnars power ranking", ugens: "Ugens spørgsmål" };
+    hold: sideHoldListe, ranglister: sideRanglister, presse: () => sidePresse(""), nyheder: sideNyheder, kamp: sidePuljekampe, traening: sideTraening, regler: sideRegler, kampdag: sideKampdag, skadestue: sideSkadestue, indsend: sideIndsend, power: sidePower, ugens: () => sideUgens(""), sidensidst: sideSidenSidst };
+  const ALIAS = { kampe: "puljekampe", regel: "regler", guide: "regler", powerranking: "power", ranking: "power", ugensspoergsmaal: "ugens", spoergsmaal: "ugens", "siden-sidst": "sidensidst" }; // gamle og nemme links
+  const SIDENAVN = { puljekampe: "Puljekampe", regnbue: "Regnbuepuljen", presse: "Presse", traening: "Off pitch training", regler: "Regler og guider", kampdag: "Kampdag", skadestue: "Skadestuen", indsend: "Indsend til pressetribunen", power: "Gunnars power ranking", ugens: "Ugens spørgsmål", sidensidst: "Siden sidst" };
   let visNr = 0;
   async function vis() {
     const nr = ++visNr;
