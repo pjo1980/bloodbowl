@@ -465,11 +465,11 @@ td.skadet { color: var(--blood); font-weight: 700; white-space: nowrap; }
 /* ---------- Mobilmenu: fire faste punkter og knappen Menu, der folder resten ud ---------- */
 .menu-knap { display: none; }
 @media (max-width: 720px) {
-  .tabs { overflow: visible; align-items: center; gap: 2px; }
+  .tabs { overflow: visible; align-items: center; gap: 0; }
   .tabs a:not(.pri) { display: none; }
-  .tabs a { padding: 7px 8px; font-size: 14px; }
+  .tabs a { padding: 7px 6px; font-size: 14px; }
   .menu-knap { display: block; margin-left: auto; flex: 0 1 auto; min-width: 0; font: inherit; font-weight: 600; font-size: 14px; color: var(--text);
-    background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; cursor: pointer;
+    background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px; padding: 6px 8px; cursor: pointer;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .menu-knap.on { color: #1a120d; background: var(--accent); border-color: var(--accent); }
   .tabs.aaben { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
