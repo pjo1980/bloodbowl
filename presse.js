@@ -27,6 +27,28 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "web-1795772963166",
+    "hold": "The Full Moon Foulers",
+    "type": "Rygte",
+    "dato": "2026-11-27",
+    "titel": "Uimodståelig gullasch?!",
+    "undertitel": "Rygte",
+    "indsendt": "Indsendt af Rygte Rasmus",
+    "forside": "forsider/web-1795772963166.jpg",
+    "citat": {
+      "hvem": "Rygte Rasmus",
+      "tekst": "Det må have været én med en kæmpe appetit ..."
+    },
+    "replikker": [
+      {
+        "p": "Nogen har været forbi The Full Moon Foulers og spist al deres gullasch!"
+      },
+      {
+        "p": "Cünthenstien bemærkede, at jorden rystede lidt mere, end hvis hans Golems havde været i gryden, så det må have været én med en kæmpe appetit ..."
+      }
+    ]
+  },
+  {
     "id": "web-1795713682326",
     "hold": "The Maurading Ocras",
     "type": "Ugens spørgsmål",
