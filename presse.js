@@ -46,7 +46,18 @@ window.PRESSE = [
         "p": "Familiens advokat oplyser, at de efterladte tæller 43 søskende, og at alle kræver erstatning for tort, svie og tabt arveret til Muffilusts frokostpakke."
       },
       {
-        "p": "Foulers har endnu ikke kommenteret sagen. Spike! erfarer dog, at holdet anser stuvningen for fortæret i god tro."
+        "p": "Sagen er dog blevet sværere. Ifølge Rygte Rasmus har nogen været forbi The Full Moon Foulers og spist al deres gullasch. De jordiske rester er dermed ikke længere at finde på stadion."
+      },
+      {
+        "p": "Gryden er der stadig. Den er bare tom. Familiens advokat overvejer at udvide stævningen, så den også omfatter »én med en kæmpe appetit«. Det kræver blot, at nogen tør sige, hvem det er."
+      },
+      {
+        "p": "Foulers har ikke kommenteret stævningen. Spike! erfarer dog, at holdet nu ser sig selv som den forurettede part: Det var trods alt deres gullasch."
+      },
+      {
+        "hvem": "Gunnar Grådig",
+        "rolle": "Ligaens pressechef",
+        "tekst": "Pressechefen afviser på det bestemteste, at GutBuster Gluttons har noget med sagen at gøre. Ingen har spurgt, men han afviser det alligevel."
       },
       {
         "p": "Sagen ventes afgjort, når retten har fundet en dommer, der ikke er bestukket."
