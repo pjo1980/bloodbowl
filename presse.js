@@ -27,6 +27,33 @@ window.LORE = {
 
 window.PRESSE = [
   {
+    "id": "spike-muffilust-staevning",
+    "hold": "The FumbleBoyz",
+    "type": "Rygte",
+    "dato": "2026-11-28",
+    "titel": "»HVOR ER RESTEN AF MUFFILUST?« Halfling-familie stævner Full Moon Foulers",
+    "undertitel": "Spike! Magazine",
+    "indsendt": "Skrevet af Spike! Magazine. Satire.",
+    "citat": {
+      "hvem": "Familiens advokat",
+      "tekst": "Vi kræver de jordiske rester udleveret, eller i det mindste gryden."
+    },
+    "replikker": [
+      {
+        "p": "Familien til afdøde Muffilust fra The FumbleBoyz har indgivet stævning mod The Full Moon Foulers. Kravet lyder på udlevering af de jordiske rester, »eller i det mindste gryden«."
+      },
+      {
+        "p": "Familiens advokat oplyser, at de efterladte tæller 43 søskende, og at alle kræver erstatning for tort, svie og tabt arveret til Muffilusts frokostpakke."
+      },
+      {
+        "p": "Foulers har endnu ikke kommenteret sagen. Spike! erfarer dog, at holdet anser stuvningen for fortæret i god tro."
+      },
+      {
+        "p": "Sagen ventes afgjort, når retten har fundet en dommer, der ikke er bestukket."
+      }
+    ]
+  },
+  {
     "id": "web-1795772963166",
     "hold": "The Full Moon Foulers",
     "type": "Rygte",
